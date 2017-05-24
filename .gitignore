@@ -18,3 +18,12 @@
 /lts1303sim/Output
 /Objects
 /nrf52832demo/peripheral/saadc/pca10040/arm5/_build
+/lts1303m_nrf52832/lts1303mLib/lts1303mLib.uvguix.jiangs
+/lts1303m_nrf52832/lts1303mLib/lts1303mLib.uvoptx
+/lts1303m_nrf52832/lts1303mLib/Objects
+/lts1303m_nrf52832/lts1303mLib/Listings
+/lts1303m_nrf52832/lts1303mMain/project/arm5/_build
+/lts1303m_nrf52832/lts1303mMain/project/arm5/JLinkLog.txt
+/lts1303m_nrf52832/lts1303mMain/project/arm5/JLinkSettings.ini
+/lts1303m_nrf52832/lts1303mMain/project/arm5/lts1303m_nrf52832.uvguix.jiangs
+/lts1303m_nrf52832/lts1303mMain/project/arm5/lts1303m_nrf52832.uvoptx

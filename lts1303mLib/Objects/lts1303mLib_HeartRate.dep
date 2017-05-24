@@ -1,17 +1,0 @@
-Dependencies for Project 'lts1303mLib', Target 'HeartRate': (DO NOT MODIFY !)
-F (.\Lts1303m.c)(0x5924D515)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I..\lts1303mLib-I E:\projects\heartpluse_lts1303m\lts1303mLib\RTE-I d:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.13.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DNRF52-o .\objects\lts1303m.o --omf_browse .\objects\lts1303m.crf --depend .\objects\lts1303m.d)
-I (lts1303m.h)(0x5924D51F)
-I (d:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.13.0\Device\Include\nrf.h)(0x58D4B53C)
-I (d:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.13.0\Device\Include\nrf52.h)(0x58D4B53E)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm4.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm4_simd.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.13.0\Device\Include\system_nrf52.h)(0x58D4B53C)
-I (d:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.13.0\Device\Include\nrf52_bitfields.h)(0x58D4B53E)
-I (d:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.13.0\Device\Include\nrf51_to_nrf52.h)(0x58D4B53C)
-I (d:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.13.0\Device\Include\nrf52_name_change.h)(0x58D4B53C)
-I (d:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.13.0\Device\Include\compiler_abstraction.h)(0x58D4B53C)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\string.h)(0x55DB2B78)
