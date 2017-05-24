@@ -36,6 +36,7 @@
 #include "app_util_platform.h"
 #include <string.h>
 #include "Lts1303m.h"
+#include "sample.h"
 
 
 #define UART_TX_BUF_SIZE 256 /**< UART TX buffer size. */
@@ -45,16 +46,34 @@
 #define NRF_APP_PRIORITY_HIGH 1
 #endif
 
-#define SAMPLES_IN_BUFFER 2
+#define SAMPLES_IN_BUFFER 1
 volatile uint8_t state = 1;
 
 static const nrf_drv_timer_t   m_timer = NRF_DRV_TIMER_INSTANCE(0);
 static nrf_saadc_value_t       m_buffer_pool[2][SAMPLES_IN_BUFFER];
 static nrf_ppi_channel_t       m_ppi_channel;
 static uint32_t                m_adc_evt_counter;
-static uint16_t                adc_datas[4000];
+//static uint16_t                adc_datas[4000];
 static uint32_t  j=0;
 
+const HEART_RATE_PARAM_T HeartRateParamInit = 
+{
+		
+	WaveSlopeRange,		  /**< 锯齿波判断标准初始为200 > */
+	HeartRateMAX,			 /**<   心率最大值 初始为160    > */
+	HeartRateMIN,				 /**<   心率最小值 初始为40    > */
+	SampleRate,				 /**<   采样率 默认为2ms    > */	
+	SamplePointTotal,			 /**<   所有的采样点 60*1000/2 > */	
+	TriggerPeriodPoint,			 /**<  波形窗口采样 10> */	
+	SamplePointMax,		 /**<  心率采样最大值默认4000点> */	
+	SmoothMax,			 /**<  平整度最大值 默认为200> */	
+	WaveSampleMax,			 /**<  取多少点进行算法> */	
+	WaveArrayMax,		 /**<  取多少个波形进行计算    默认3个> */	
+	RecDetectData,		 /**<  平整度超过多少判断为方波默认10个> */	
+	PeriodMax,	 /**<最大周期数 (60000/HeartRateMAX)/SampleRate> */		
+	PeriodMin,	 /**<最小周期数 (60000/HeartRateMIN)/SampleRate> */		
+  PeakBottomStand,	 /**< 有效波峰直接的间值    > */		
+};
 
 
 
@@ -108,7 +127,7 @@ void saadc_sampling_event_init(void)
     APP_ERROR_CHECK(err_code);
 
     /* setup m_timer for compare event every 400ms */
-    uint32_t ticks = nrf_drv_timer_ms_to_ticks(&m_timer, 1);
+    uint32_t ticks = nrf_drv_timer_ms_to_ticks(&m_timer, 2);
 	//  printf("ticks = %d\r\n",ticks);
 	//  ticks = 6400;
     nrf_drv_timer_extended_compare(&m_timer, NRF_TIMER_CC_CHANNEL0, ticks, NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK, false);
@@ -133,6 +152,7 @@ void saadc_sampling_event_enable(void)
 
 void saadc_callback(nrf_drv_saadc_evt_t const * p_event)
 {
+ HRState bpmState;
 		int sample;
     if (p_event->type == NRF_DRV_SAADC_EVT_DONE)
     {
@@ -140,32 +160,50 @@ void saadc_callback(nrf_drv_saadc_evt_t const * p_event)
      
         err_code = nrf_drv_saadc_buffer_convert(p_event->data.done.p_buffer, SAMPLES_IN_BUFFER);
         APP_ERROR_CHECK(err_code);
-		nrf_gpio_pin_toggle(27);
+	//	nrf_gpio_pin_toggle(27);
         int i;
      //   printf("ADC event number: %d\r\n",(int)m_adc_evt_counter);
 				sample = 0;
         for (i = 0; i < SAMPLES_IN_BUFFER; i++)
         {
         //  printf("%d\r\n", p_event->data.done.p_buffer[i]);
-					adc_datas[i] = p_event->data.done.p_buffer[i];
+				//	adc_datas[i] = p_event->data.done.p_buffer[i];
 					sample +=p_event->data.done.p_buffer[i];
         }
-			  sample = sample/SAMPLES_IN_BUFFER;
-			  if(sample<0){
-			  	sample = 0;
-			  	}
+		sample = sample/SAMPLES_IN_BUFFER;
+		if(sample<0){
+		  	sample = 0;
+		  }
+		
+		// printf("s[%d] = %d ",pointCount,sample);		  
+		 bpmState = 	 getHeartRateWaves(sample);  
+		
+		if(bpmState==HRFinish){
+			
+		heartRate =	getHeartRateFilter();
+		 printf("heartRate = %d\r\n",heartRate);		
+		heartRateInit();
+		
+		//
+		}
+		if(bpmState==HRPointMax){
+			 printf("HRPointMax = %d\r\n",heartRate);		
+		heartRateInit();
+			}
+		if(bpmState==HRLineOut){
+		 printf("lineout = %d\r\n",smoothValue);	
+		heartRateInit();
+			}
 				if(j<8000){
 		//		adc_datas[j]=sample;
-				if(j%16 == 0){
-					 printf("\r\n");
+				if(j%24 == 0){
+				//	 printf("\r\n");
 				}
 					
 			
-			     printf("%d,", sample);
+			  //   printf("%d,", sample);
 				
 				}
-			
-				
 				j++;
         m_adc_evt_counter++;
 			
@@ -215,19 +253,22 @@ void heartRateSubroutine(){
 		
 		for(i=0;i<8000;i++){
 		
-		bpmState = 	 heartRateWaveDetect(adc_datas[i]);  
+		bpmState = 	 getHeartRateWaves(wave_sample1[i]);  
 			
 		if(bpmState==HRFinish){
-		heartRate =	getHeartRateFilter();
 			
-		heartRateInit();
+		heartRate =	getHeartRateFilter();
+		 printf("heartRate = %d\r\n",heartRate);		
+		heartRateClrRam();
 		
 		//
 		}
 		if(bpmState==HRPointMax){
+			 printf("HRPointMax = %d\r\n",heartRate);		
 		heartRateInit();
 			}
 		if(bpmState==HRLineOut){
+		 printf("lineout = %d\r\n",smoothValue);	
 		heartRateClrRam();
 			}
 		
@@ -244,12 +285,17 @@ int main(void)
     uart_config();
 
     printf("\n\rlts1303m Heart Rate  example.\r\n");
+
+	heartRateParamSetup(HeartRateParamInit);
+	clrHeartRateStack();
+	heartRateInit();
     saadc_sampling_event_init();
     saadc_init();
     saadc_sampling_event_enable();
-	heartRateParamSetup(HeartRateParamInit);
-
-	clrHeartRateStack();
+	
+	
+//	heartRateSubroutine();
+	
     while(1)
     {
         __WFE();

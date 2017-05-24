@@ -17,7 +17,7 @@
 #include "lts1303m.h"
 #include<stdio.h>
 #include<string.h>
-
+#include "nrf_gpio.h"
 /* const define ------------------------------------------------------------------*/
 
 
@@ -48,12 +48,6 @@ uint16_t lastHeartRate;
 
 
 
-//uint16_t up=0,down=0,waveUp,waveDown;
-
-//uint16_t adSample[AD_SAMPLE_MAX];
-uint16_t waveSample[WAVE_SAMPLE_MAX];
-uint16_t wavePoint[WAVE_SAMPLE_MAX];
-uint8_t sampleGet;
 
 uint16_t heartRateStack[RATE_NUM_MAX];
 uint16_t heartRateTemp[RATE_NUM_MAX];
@@ -66,8 +60,8 @@ uint16_t pointValueCurrent;
 uint16_t pointValueLast;
 
 uint16_t pointCount;
-uint16_t evenness;
-uint16_t evennessValue;
+uint16_t smooth;
+uint16_t smoothValue;
 
 SlopeDirection  direction;
 uint8_t  upDirect,downDirect;
@@ -93,7 +87,6 @@ HEART_RATE_WAVE_T currentWave;
 uint16_t waveIndex;
 uint8_t trig;
 
-uint16_t MaxValue,MinValue;
 
 static HEART_RATE_PARAM_T HeartRateParam;
 
@@ -280,7 +273,7 @@ void heartRateClrRam(void){
 
 	trigPeriodStart = 0;
     trigPeriodPoint = 0;
-	evenness = 0;
+	smooth = 0;
 	direction = SlopeDown;
 	waveDirection = 0;
 	waveStart = 0;
@@ -290,8 +283,6 @@ void heartRateClrRam(void){
 	trig = 0;
 	bottomLength = 0;
 	topLength = 0;
-	memset(waveSample,0,WAVE_SAMPLE_MAX);
-	memset(wavePoint,0,WAVE_SAMPLE_MAX);
 	
 }
 
@@ -300,8 +291,7 @@ void clrHeartRateStack(){
 
 	lastHeartRate = 0;
 	heartRateIndex = 0;
-	MaxValue = 0;
-	MinValue = 65535;
+
 	clrArrayData(heartRateStack,RATE_NUM_MAX);
 	
 }
@@ -322,8 +312,12 @@ uint16_t getHeartRateFilter(){
 	int peaks[WAVE_INDEX_MAX];
 	uint16_t hearts[WAVE_INDEX_MAX];
 	SLOPE_T slopeObj;
+	int count =0;
+	
+	
 	for(;i<waveIndex;i++){
 		currentWave = waves[i];
+		
 		if(waves[i].waveType==1){
 			if((waves[i].topIndex-(waves[i].topLength/2))>0){
 				
@@ -335,14 +329,21 @@ uint16_t getHeartRateFilter(){
 		}else {
 				peaks[i] = waves[i].topIndex;
 		}
+		// printf(" peaks[%d]= %d\r\n",i,peaks[i] );
 	}
 	
 	for(i=0;i<(waveIndex-1);i++){
-		hearts[i] = HeartRateParam.samplePointTotal/ (peaks[i+1]-peaks[i]);
+		heartRate = HeartRateParam.samplePointTotal/ (peaks[i+1]-peaks[i]);
+		if(heartRate<=HeartRateParam.heartRateMAX&&heartRate>=HeartRateParam.heartRateMIN){
+			hearts[count++]=heartRate;
+		
+			}
+			 printf(" heart [%d]= %d\r\n",i,heartRate );
+		
 		
 	}
-	heartRate =	getArrayAverage(hearts,waveIndex-1);
- 
+	heartRate =	getArrayAverage(hearts,count);
+	 printf(" heart = %d\r\n",heartRate );
 	//for(;i<waveIndex;i++){
 	//	pushArrayData(heartRateTemp,waveIndex,waves[i].heartRate);
 	//	}
@@ -388,11 +389,12 @@ uint16_t getHeartRateFilter(){
 }
 
 
-HRState heartRateWaveDetect(uint16_t adData)   {   
+
+HRState getHeartRateWaves(uint16_t adData)   {   
  	
 	HRState state;
 	SLOPE_T slopeObj;
-	uint16_t peakBottomValue;
+
 	
 	
 	
@@ -403,8 +405,8 @@ HRState heartRateWaveDetect(uint16_t adData)   {
 	slopeObj = getSlopeObj(pointValueCurrent,pointValueLast);
 	
 	if(slopeObj.smooth!=0) {				// 数据波动较小
-		evenness++;
-		evennessValue = pointValueCurrent;
+		smooth++;
+		smoothValue = pointValueCurrent;
 		if(lastSlopeDirection==1){
 			bottomLength++;
 			downDirect++;
@@ -412,113 +414,58 @@ HRState heartRateWaveDetect(uint16_t adData)   {
 			upDirect++;
 			topLength++;
 			}
-		if(evenness>HeartRateParam.recDetectData){
+		if(smooth>HeartRateParam.recDetectData){
 			currentWave.waveType = 1;
-			if(evenness>HeartRateParam.evennessMax){
+			if(smooth>HeartRateParam.evennessMax){
 				state = HRLineOut;
-				if(pointValueCurrent>MaxValue){
-					MaxValue = pointValueCurrent;
-					}
-				if(pointValueCurrent<MinValue){
-					MinValue = pointValueCurrent;
-					}
+			
 				}
 			}
 		}else {
 		
 		
 		lastSlopeDirection = slopeObj.direction;
-		evenness=0;
+		smooth=0;
 		
 		}
 	
 	
 	if(lastSlopeDirection==SlopeDown){					//当前点的斜率方向向下
+	
+		nrf_gpio_pin_clear(27);
 
-
-		if(direction==SlopeUp){						//当前趋势是向上
-
-			if(downDirect==0){
-			
-				if(pointCount!=0){
-					topTempValue = pointValueLast;
-					topTempIndex = pointCount-1;
-					}else {
-					topTempValue = pointValueCurrent;
-					topTempIndex = 0;
-						}
-		
-			trig=0;
-				}
-			if(downDirect>HeartRateParam.triggerPeriodPoint&&trig==0){
-				direction =SlopeDown;
-				currentWave.topValue = topTempValue;
-				currentWave.topIndex = topTempIndex;
-				currentWave.risingEdge = upDirect;
-				currentWave.topLength = topLength;
-				
-			
-				topLength = 0;
-				upDirect = 0;
-				trig = 1;
-				}
-			}else {								//当前趋势是向下
-			
+		if(direction==SlopeUp){						//前面向上 --|__
+	
+			direction = SlopeDown;
+			downDirect = 0;
+				topTempIndex = pointCount;
+			}else {								
+				downDirect++;	
 				}
 		
 		
-		downDirect++;	
+	
 		
 		
-		}
-		else {									//当前点的斜率方向向上
-
+		}else {	
+		
+		nrf_gpio_pin_set(27);
 			
-		if(direction==SlopeDown){						//当前趋势是向下
-		
-			if(upDirect==0){					
-
-				if(pointCount!=0){		//首次翻转
-					bottomTempValue = pointValueLast;
-			bottomTempIndex = pointCount-1;
-					}else{
-					bottomTempValue = pointValueCurrent;
+		if(direction==SlopeDown){			//前面向下		 __|--
+			printf(" dir[%d] u=%d d=%d\r\n",pointCount,upDirect,downDirect);
+			upDirect =0;
+			direction = SlopeUp;
+			
 			bottomTempIndex = pointCount;
-						}
 			
-			trig=0;
-			}
-			if(upDirect>HeartRateParam.triggerPeriodPoint&&trig==0){
-			direction =SlopeUp;
-			currentWave.bottomValue = bottomTempValue;
-			currentWave.bottomIndex = bottomTempIndex;	
-			currentWave.fallingEdge= downDirect;
-			currentWave.bottomLength= bottomLength;
-			currentWave.peakBottomValue = currentWave.bottomIndex-currentWave.topIndex;
-			peakBottomValue = currentWave.bottomIndex-currentWave.topIndex;
-			if(peakBottomValue>HeartRateParam.peakBottomStand){
-				if(currentWave.topValue!=0){
-				pushWaveArray();
-				clrCurrentWave();
-					
-				if(waveIndex>HeartRateParam.waveArrayMax){
-					state=HRFinish;
-					}
-				}
-			}else {
-				clrCurrentWave();	
-			}
-			
-			
-			bottomLength = 0;	
-			downDirect  = 0;
-			trig = 1;
-			}
-		}
 		
-		
-		
+		}else {
 		upDirect++;		
+			}
+		
+		
+		
+		
 		
 		
 		}
@@ -532,6 +479,5 @@ HRState heartRateWaveDetect(uint16_t adData)   {
 	return state;
 	
 } 
-
 
 

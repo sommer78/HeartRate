@@ -94,14 +94,14 @@ typedef struct SLOPE
 	uint8_t smooth;
 } SLOPE_T, *SLOPE_INDEX;
 
-#define  WaveSlopeRange 25		  /**< 锯齿波判断标准初始为200 > */
+#define  WaveSlopeRange 30		  /**< 锯齿波判断标准初始为25 > */
 #define  HeartRateMAX	160			 /**<   心率最大值 初始为160    > */
 #define  HeartRateMIN   40			 /**<   心率最小值 初始为40    > */
 #define  SampleRate     2				 /**<   采样率 默认为2ms    > */	
 #define  SamplePointTotal 30000		 /**<   所有的采样点 60*1000/SampleRate > */	
 #define  TriggerPeriodPoint 10				 /**<  波形窗口采样 10> */	
-#define  SamplePointMax     3500				 /**<  心率采样最大值默认4000点> */	
-#define  EvennessMax 		200		 /**<  平整度最大值 默认为200> */	
+#define  SamplePointMax     8000				 /**<  心率采样最大值默认4000点> */	
+#define  SmoothMax 		800		 /**<  平整度最大值 默认为600> */	
 #define  WaveSampleMax 		4000			 /**<  取多少点进行算法> */	
 #define  WaveArrayMax		3		 /**<  取多少个波形进行计算> */	
 #define  RecDetectData		10		 /**<  平整度超过多少判断为方波> */	
@@ -109,29 +109,12 @@ typedef struct SLOPE
 #define  PeriodMin			750			/**< 最小周期数> */	
 #define  PeakBottomStand	100		/**<   峰值间值          > */	
 
+
 /* ram define ------------------------------------------------------------------*/
 
-
-const HEART_RATE_PARAM_T HeartRateParamInit = 
-{
-		
-	WaveSlopeRange,		  /**< 锯齿波判断标准初始为200 > */
-	160,			 /**<   心率最大值 初始为160    > */
-	40,				 /**<   心率最小值 初始为40    > */
-	2,				 /**<   采样率 默认为2ms    > */	
-	30000,			 /**<   所有的采样点 60*1000/2 > */	
-	10,			 /**<  波形窗口采样 10> */	
-	3500,		 /**<  心率采样最大值默认4000点> */	
-	200,			 /**<  平整度最大值 默认为200> */	
-	4000,			 /**<  取多少点进行算法> */	
-	3,		 /**<  取多少个波形进行计算    默认3个> */	
-	10,		 /**<  平整度超过多少判断为方波默认10个> */	
-	188,	 /**<最大周期数 (60000/HeartRateMAX)/SampleRate> */		
-	750,	 /**<最小周期数 (60000/HeartRateMIN)/SampleRate> */		
-  100,	 /**< 有效波峰直接的间值    > */		
-};
-
-
+extern uint16_t smoothValue;
+extern uint16_t heartRate;   
+extern uint16_t pointCount;
 /*
  * common funcation subroutine
  * 
@@ -155,7 +138,7 @@ uint16_t getArrayAverageWithoutPeak(uint16_t * array,int length);
  */
 
 
-HRState heartRateWaveDetect(uint16_t adData) ;
+HRState getHeartRateWaves(uint16_t adData) ;
 
 
 
