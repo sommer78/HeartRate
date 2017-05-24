@@ -1,0 +1,196 @@
+Realtek Semiconductor Corp.Inc.
+
+RTL8762A Bluetooth Low Energy SWDTool.
+Release Notes
+
+Version 2.0.1
+Feb 08, 2017.
+
+Notice:
+    NULL.
+
+Changes and Enhancements:
+    1.Delete the function that limit > 100K image's downloading.
+
+Bug Fixs:
+    NULL.
+
+Known Issues:
+    NULL.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+Version 2.0.0
+Aug 19, 2016.
+
+Notice:
+    NULL.
+
+Changes and Enhancements:
+    1.Update firmware programming.
+
+Bug Fixs:
+    NULL.
+
+Known Issues:
+    NULL.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+Version 1.0.8
+June 13, 2016.
+
+Notice:
+    NULL.
+
+Changes and Enhancements:
+    1.Add OTA Indicator Light setting item on Config.
+
+Bug Fixs:
+    NULL.
+
+Known Issues:
+    NULL.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+Version 1.0.7
+April 28, 2016.
+
+Notice:
+    NULL.
+
+Changes and Enhancements:
+    1.Support to download patch extension Image.
+
+Bug Fixs:
+    NULL.
+
+Known Issues:
+    NULL.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+Version 1.0.6 alpha
+April 19, 2016.
+
+Notice:
+    NULL.
+
+Changes and Enhancements:
+    1.Add GATT Service Num item on Config settings.
+
+Bug Fixs:
+    NULL.
+
+Known Issues:
+    NULL.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+Version 1.0.5 beta
+
+Notice:
+    NULL.
+
+Changes and Enhancements:
+    1.Support to download image which size is greater than 100K.
+    2.Add ACI config function.
+
+Bug Fixs:
+    NULL.
+
+Known Issues:
+    NULL.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+Version 1.0.4 alpha
+
+Notice:
+    NULL.
+
+Changes and Enhancements:
+    1.Add save and load Config settings function.
+    2.Add Config Notice dialog.
+    3.Add frequency offset in config setting.
+
+Bug Fixs:
+    1.Fix the read back error when the config flash has been erased. 
+
+Known Issues:
+    NULL.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+Version 1.0.3
+
+Notice:
+    NULL.
+
+Changes and Enhancements:
+    1.Add Image path save function.
+    2.Add EM Dongle selection in config setting.  
+    3.Generate and Save Config file in Download operation instead of Comfirm button.
+    4.Add CPU CLK selection in config setting.
+    5.Adjust Heap Size's content.
+
+Bug Fixs:
+    NULL.
+
+Known Issues:
+    NULL.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+Version 1.0.2
+
+Notice:
+    NULL.
+
+Changes and Enhancements:
+    1.Add Debug Log Function to set upper stack's log status.
+    2.Add burnning status'timestamp.
+    3.Add illegal character check function.
+    4.Add Config setting status' reading back.
+
+Bug Fixs:
+    1.Fix bug which progress bar could not show normal when burnning failed.
+
+Known Issues:
+    NULL.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+Version 1.0.1
+
+Notice:
+    NULL.
+
+Changes and Enhancements:
+    1.Add progress bar to show the status of burnning.
+    2.Add Reset button to restet the congfig information.
+    3.Add function to save config settings as bin file.
+
+Bug Fixs:
+    4.Fix the bug which the BD Address has not be show correctly when it increases Automatically. 
+    5.Fix the bug which the icon isn't correctly  when the program is locked in the task bar.
+
+Known Issues:
+    NULL.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+Version 1.0.0
+
+Notice:
+    First Release.
+
+Changes and Enhancements:
+    NULL.
+
+Bug Fixs:
+    NULL.
+
+Known Issues:
+    NULL.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------

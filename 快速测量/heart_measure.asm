@@ -1,0 +1,1173 @@
+include  ET08PXX.inc 
+include  heart_measure.inc
+ 
+   ORG 000H
+RESET:
+     NOP
+    GOTO START
+ 
+	org			004H
+
+INT_SERVER:
+;    BTFSC INTF, e0if ;判断外部中断 0 标志
+;     GOTO EX0_INT
+    BTFSC INTF, e0if ;判断外部中断 1 标志
+     GOTO EX0_INT
+    BTFSC INTF, t0if ;判断定时器 0 溢出中断标志
+     GOTO T0_INT
+    BTFSC INTF, t1if ;判断定时器 1 溢出中断标志
+     GOTO T1_INT
+;    BTFSC INTF, adif ;判断 ADC 结束中断标志
+;     GOTO ADC_INT
+  	 CLRF INTF
+	 RETFIE
+       
+
+
+
+
+
+;include  LED_DISPLAY.ASM   
+
+include  INT_PRO.ASM   
+
+include  FUN.ASM   
+include  DATA_TAB.ASM   
+
+
+;==============================   
+START:   
+   ; OSCM LVD未设置
+   ;   BSF 2AH,7
+     NOP
+START1: 
+     CLRF STATUS
+     MOVLW 00000000B ;10B ;MCLK/4
+	 MOVWF MCK
+     BCF INTE,GIE ;禁止中断
+
+WDT_SET:
+     MOVLW 10000111b ;111B
+	 MOVWF WDTCTR
+
+
+
+
+
+
+IO_SET:
+;I2C 口设置
+PT1_SET:
+		MOVLW 00000001B 
+		MOVWF PT1EN
+		MOVLW 11111111B 
+		MOVWF PT1PU
+;		MOVLW 11111111B
+		MOVWF PT1
+PT2_SET:
+		MOVLW 10010100B 
+		MOVWF PT2EN
+		MOVLW 10101011B 
+		MOVWF PT2PU
+		MOVLW 01111111B
+		MOVWF PT2
+PT3_SET:
+		MOVLW 00000000B 
+		MOVWF PT3EN
+		MOVLW 11111111B 
+		MOVWF PT3PU
+		MOVWF PT3
+	
+	    ;MOVFW STATUS
+		;ANDLW 11000000B
+		;XORLW 0
+		;BTFSC STATUS,Z
+		;GOTO TIM0_SET
+		;BCF STATUS,7
+		;BCF STATUS,6
+		;GOTO MAIN
+
+TIM0_SET: ;4MS
+;     CLRF T0LOADH
+;     MOVLW 249  ;溢出标志 T0IF
+;     MOVWF T0LOADL
+;     MOVLW 11000000B ;1/16M/16=1uS  1*16*250=4000uS
+;     MOVWF T0CTR ;
+;	 BSF INTE,T0IE  
+
+     CALL RAM_INI
+
+
+
+PT1_INT_SET: ;PT1.3作为外部中断口
+     MOVLW 00000000B
+     MOVWF INTSEL
+     MOVLW 11110111B
+     MOVWF PT1MR
+ ;    BSF INTE,E1IE
+
+
+
+SEL_CHECK: ;I2C UART通讯方式检测
+        MOVFW PT1
+		ANDLW 00100000B
+		MOVWF DB1
+		MOVLW 200
+		CALL DLY
+		MOVFW PT1
+		ANDLW 00100000B
+		XORWF DB1,W
+		BTFSS STATUS,Z
+		GOTO SEL_CHECK
+        BCF FLAG,F_SEL
+		BTFSC DB1,5
+        BSF FLAG,F_SEL
+
+
+
+      BTFSC FLAG,F_SEL
+	  GOTO STOP_MODE
+      BCF INTE,E0IE
+;PT1_SET:
+     MOVLW 11111111B
+     MOVWF PT1MR
+
+		MOVLW 00001000B 
+		MOVWF PT1EN
+		MOVLW 11111111B 
+		MOVWF PT1PU
+		MOVWF PT1
+        CALL SEN_ON
+	  GOTO AD_SET
+
+;-------
+STOP_MODE:
+      CALL  SEN_OFF
+      BSF INTE,E0IE
+      BCF  ADCTR,ADEN
+	  BCF  T1CTR,T1EN
+      NOP
+	  NOP
+	  NOP
+	  SLEEP
+	  NOP
+	  NOP
+
+POWON_CHECK: ;检测上电命令
+       BCF INTF,E0IF
+	   BCF INTE,E0IE
+       CLRWDT
+;	   MOVWF W_BAK
+;	   MOVFW STATUS
+;	   MOVWF STATUS_BAK
+
+REC_START_CHK:
+;      BTFSC PT1,SDA
+      BTFSS PT1,SCL
+       GOTO  ERR_CHK    
+       MOVLW 08
+	   MOVWF RECEIVE_COUNT
+	    MOVLW 10
+	    MOVWF RECEIVE_DAT 
+	    CLRF RECEIVE_ERR
+       BTFSC PT1,SDA
+       GOTO  ERR_CHK    
+
+REC_START_LOOP:;等待scl有高电平转为低电平	   
+       DECFSZ RECEIVE_ERR,F;//
+	   GOTO REC_START_LOOP1            ;//
+	   CLRWDT
+	   DECFSZ RECEIVE_DAT,F
+	   GOTO REC_START_LOOP1            ;//
+       GOTO  ERR_CHK    
+REC_START_LOOP1:	       
+	   BTFSC PT1,SCL
+	   GOTO REC_START_LOOP
+
+REC_START_END:
+       BCF FLAG,F_SCL
+;       BTFSC PT1,SCL
+;	   BSF FLAG,F_SCL
+	    CLRF RECEIVE_DAT 
+	    CLRF RECEIVE_ERR 
+		 clrwdt
+
+REC_LOOP:
+       DECFSZ RECEIVE_ERR,F
+	   GOTO $+2
+       GOTO  ERR_CHK    
+	   BTFSC PT1,SCL
+        GOTO REC_SDA
+	     BCF FLAG,F_SCL
+	;	 clrwdt
+	    GOTO REC_LOOP
+REC_SDA:
+       BTFSC FLAG,F_SCL   ;SCL上升沿读入信号
+       GOTO REC_LOOP
+	   BSF FLAG,F_SCL
+	   CLRF RECEIVE_ERR  ;有数据读到，错误计数器清零
+	   BCF STATUS,C
+	   BTFSC PT1,SDA
+	   BSF STATUS,C
+	   RLF RECEIVE_DAT,F
+	   DECFSZ RECEIVE_COUNT,F
+	   GOTO REC_LOOP
+
+	   MOVFW RECEIVE_DAT
+	   XORLW SLAVE_ADDR
+	   BTFSC STATUS,Z
+	   GOTO POW_ON
+POWON_CHECK_RST:     
+    ;   GOTO START
+
+ERR_CHK:
+	  BTFSS FLAG,F_STOP
+	  GOTO START1
+
+
+POW_ON:
+      CALL SEN_ON
+      
+
+
+AD_SET:
+    BSF FLAG,F_STOP
+
+    MOVLW  01000000B ;   P0.0=ADC0 P0.1=ADC1 P0.3=ADC3 P0.4=ADC4  
+    MOVWF  PT2SEL
+     MOVLW 01101011B   ;01101111 EQU 00111011B ;电位器 MCUCLK/2  vref=vdd 
+     MOVWF ADSET    ; 
+	 MOVLW 00110000B ;12位精度 允许选择模拟通道
+     MOVWF ADCTR
+     BSF  ADCTR,ADEN
+     BSF  ADCTR,ADSTR
+
+TIM1_SET:
+     MOVLW 249
+	 MOVWF T1LOAD
+     MOVLW 11010000B
+     MOVWF T1CTR ;TIM1 CLOSED
+	 BSF INTE,T1IE  
+
+      BSF INTE,E0IE
+   ;   BCF INTE,E0IE ;仿真时取消i2c中断
+	 BSF INTE,GIE 
+
+
+ERR_RET:
+     NOP
+     CALL RAM_INI
+     BSF FLAG,F_STOP
+
+
+       MOVLW AD_NUM ;10
+       MOVWF AD_JS
+	  MOVLW 0FFH
+	  MOVWF VOL_L    
+     
+      MOVLW 0FFH
+	  MOVWF SEND_NUMBER
+      MOVWF RESULT_BAK
+      BSF FG,F_POW
+      BSF FG,F_MBOT 
+	  BCF FG,F_MTOP
+
+
+MAIN:
+      CLRWDT
+	  BTFSS FLAG,F_STOP
+	  GOTO START
+	  
+      BTFSC FG,F_1S
+	  ;CALL HEAT_MATCH 
+	  GOTO HEAT_MATCH 
+	   
+MATCH_R:
+      BTFSS FLAG,F_MS
+      GOTO MAIN
+
+	  BCF FLAG,F_MS  
+;	  CALL DISPLAY
+HEART_MEASURE:    
+      CLRWDT 
+       CALL AD_PRO
+      BTFSS FLAG,F_ADDATA
+       GOTO HEART_MEASURE 
+      
+      movfw 7eh
+	  movwf 7fh
+	  movfw 7dh
+	  movwf 7eh
+	  movfw 7ch
+	  movwf 7dh
+	  movfw 7bh
+	  movwf 7ch
+	  movfw 7ah
+	  movwf 7bh
+	  movfw 79h
+	  movwf 7ah
+	  movfw 78h
+	  movwf 79h
+	  movfw voltage_dat
+	  movwf 78h
+     ; MOVWF TEMPL
+     ; GOTO VOL_MATCH
+
+	  clrf templ ;连续采到的8个数据做平均
+	  clrf temph
+      movlw 8
+	  movwf db0
+	  movlw 78h
+	  movwf frs0
+add_l:
+      movfw ind0
+	  addwf templ,f
+	  movlw 0
+	  addwfc temph,f 
+      incf frs0,f
+	  decfsz db0,f
+	  goto add_l
+
+      bcf status,c
+	  rrf temph,f
+	  rrf templ,f
+      bcf status,c
+	  rrf temph,f
+	  rrf templ,f
+      bcf status,c
+	  rrf temph,f
+	  rrf templ,f
+
+
+VOL_MATCH: ;电压周期采集计算
+VOL_ML:
+      CALL SEARCH_BOT       
+      BTFSS FLAG,F_MIN
+	  GOTO VOL_MH
+	  CALL BOT_FX
+	  BTFSC FLAG,F_ERR
+	  GOTO DATA_DEL
+VOL_MH:
+      CALL SEARCH_TOP       
+	  BTFSS FLAG,F_MAX
+	  GOTO VOL_MATCH_RET
+	  CALL TOP_FX
+	  BTFSC FLAG,F_ERR
+	  GOTO DATA_DEL_H
+;求高低电平差值<70mv认为未佩戴
+	  CALL VOL_ABS
+	  BTFSS FG,F_YC 
+	  GOTO VOL_ABS_END
+    ;  INCF FF_JS,F
+	;  MOVLW 50 ;125 ;125
+	;  SUBWF FF_JS,W
+	;  BTFSS STATUS,C
+	;  GOTO MAIN
+      
+	 ; MOVLW 245
+	 ; SUBWF VOL_H,W
+	;  BTFSC STATUS,C
+	;  NOP ;GOTO RESULT_ERR_DD
+
+
+	  MOVLW ERR_WD
+	  MOVWF ERR_BH
+     
+     
+     
+	  GOTO RESULT_ERR
+
+
+VOL_ABS_END:
+ ;     CLRF FF_JS
+      MOVLW 0FFH
+      MOVWF VOL_L
+	  CLRF VOL_H
+
+      MOVFW TH0_L
+	  MOVWF TH1_L
+	  MOVFW TH0_H
+	  MOVWF TH1_H
+
+      MOVFW TH_L
+	  MOVWF TH0_L
+	  MOVFW TH_H
+	  MOVWF TH0_H
+      MOVFW TH1_H
+	  XORLW 0
+	  BTFSS STATUS,Z
+	  GOTO HEART_MATCH
+      MOVFW TH1_L
+	  XORLW 0
+	  BTFSS STATUS,Z
+	  GOTO HEART_MATCH
+VOL_MATCH_RET:
+	  GOTO MAIN
+;---
+DATA_DEL_H:
+	  CALL VOL_ABS
+    BTFSC FG,F_YC 
+     GOTO DATA_DEL
+    MOVLW ERR_DD
+    MOVWF ERR_BH
+
+DATA_DEL: ;采集出错，存储数据初始化，重新计算
+     CLRF TH0_L
+     CLRF TH0_H
+     CLRF TH1_L
+     CLRF TH1_H
+	 CLRF VOL_H
+    MOVLW 0FFH
+	MOVWF VOL_L
+     GOTO RESULT_ERR ;_DD
+
+HEART_MATCH: ;心率计算
+     MOVFW TH0_L
+	 MOVWF TEMPL
+	 MOVFW TH0_H
+	 MOVWF TEMPH
+	 MOVFW TH1_L
+	 SUBWF TEMPL,F
+	 MOVFW TH1_H
+	 SUBWFC TEMPH,F
+	 BTFSS STATUS,C
+	 GOTO MAIN
+
+
+;求出次数/分钟
+RESULT_SET:
+      MOVLW TAB_NUM_MIN ;0 
+	  MOVWF TMP
+	  CALL NUMBER_H1
+	  MOVWF DB1
+      MOVFW TMP
+	  CALL NUMBER_L1
+	  MOVWF DB0
+	  MOVFW DB0
+	  SUBWF TEMPL,W
+	  MOVFW DB1
+	  SUBWFC TEMPH,W
+	  BTFSC STATUS,C
+	  GOTO RESULT_ERR_DD ;次数小于40次
+	  
+      MOVLW TAB_NUM_MAX ;59
+	  MOVWF TMP
+	  CALL NUMBER_H2
+	  MOVWF DB1
+      MOVFW TMP
+	  CALL NUMBER_L2
+	  MOVWF DB0
+	  MOVFW DB0
+	  SUBWF TEMPL,W
+	  MOVFW DB1
+	  SUBWFC TEMPH,W
+	  BTFSS STATUS,C
+	  GOTO RESULT_ERR_DD ;次数大于200次 16/04/16 改为160上限
+
+      MOVLW 99  ;判别采用哪张表格数据
+	  CALL NUMBER_H1
+	  MOVWF DB1
+      MOVLW 99
+	  CALL NUMBER_L1
+	  MOVWF DB0
+	  MOVFW DB0
+	  SUBWF TEMPL,W
+	  MOVFW DB1
+	  SUBWFC TEMPH,W
+	  BTFSS STATUS,C
+	  GOTO SEARCH_TAB2
+SEARCH_TAB1: ;搜索第1张表格数据
+      MOVLW 0FFH
+	  MOVWF TMP
+SEARCH_TAB1_L:
+      INCF TMP,F
+	  MOVFW TMP
+	  CALL NUMBER_H1
+	  MOVWF DB1
+      MOVFW TMP
+	  CALL NUMBER_L1
+	  MOVWF DB0
+	  MOVFW DB0
+	  SUBWF TEMPL,W
+	  MOVFW DB1
+	  SUBWFC TEMPH,W
+	  BTFSS STATUS,C
+      GOTO SEARCH_TAB1_L      
+TAB1_REAULT:
+      DECF TMP,F
+	  MOVLW 40
+	  ADDWF TMP,F
+	  GOTO RESULT_OUT
+
+SEARCH_TAB2: ;搜索第2张表格数据
+      MOVLW 0FFH
+	  MOVWF TMP
+SEARCH_TAB2_L:
+      INCF TMP,F
+	  MOVFW TMP
+	  CALL NUMBER_H2
+	  MOVWF DB1
+      MOVFW TMP
+	  CALL NUMBER_L2
+	  MOVWF DB0
+	  MOVFW DB0
+	  SUBWF TEMPL,W
+	  MOVFW DB1
+	  SUBWFC TEMPH,W
+	  BTFSS STATUS,C
+      GOTO SEARCH_TAB2_L      
+TAB2_REAULT:
+      DECF TMP,F
+	  MOVLW 140
+	  ADDWF TMP,F
+RESULT_OUT:
+      MOVFW TMP
+     GOTO HEART_LB
+RESULT_ERR_DD:
+	 MOVLW ERR_DD
+	 MOVWF ERR_BH
+RESULT_ERR:
+;	 MOVFW ERR_BH
+;     MOVWF H_NUMBER
+     GOTO MAIN
+;***********************************
+;以上根据采到的电压值求出当前心率
+;下面主要做心率数据的平滑处理
+;***********************************
+HEART_LB: ;心跳数据输出滤波
+      MOVLW ERR_ZC
+      MOVWF ERR_BH
+
+
+;--测量的真实数据保存，在一定偏差范围内作为准确数据刷新其它数据 
+;并快速显示    
+      MOVFW NUM_2L
+	  MOVWF NUM_3L
+      MOVFW NUM_1L
+	  MOVWF NUM_2L
+      MOVFW NUM_0L
+	  MOVWF NUM_1L
+	  MOVFW TMP
+	  MOVWF NUM_0L
+      MOVFW NUM_3L
+	  XORLW 0
+	  BTFSC STATUS,Z
+	  GOTO  DATA_PH
+	;  GOTO  DATA_PH
+
+D_PXS:
+      MOVFW NUM_0L
+	  MOVWF NUM_L0
+      MOVFW NUM_1L
+	  MOVWF NUM_L1
+      MOVFW NUM_2L
+	  MOVWF NUM_L2
+      MOVFW NUM_3L
+	  MOVWF NUM_L3
+ 
+D_PX:
+       MOVLW 3 
+	   MOVWF TEMPH
+D_PX0:
+       
+       MOVFW NUM_L0
+	   SUBWF NUM_L1,W
+	   BTFSS STATUS,C
+       GOTO D_PX1
+       MOVFW NUM_L0
+	   MOVWF TEMPL
+       MOVFW NUM_L1
+	   MOVWF NUM_L0
+	   MOVFW TEMPL
+	   MOVWF NUM_L1
+D_PX1:
+       MOVFW NUM_L1
+	   SUBWF NUM_L2,W
+	   BTFSS STATUS,C
+       GOTO D_PX2
+       MOVFW NUM_L1
+	   MOVWF TEMPL
+       MOVFW NUM_L2
+	   MOVWF NUM_L1
+	   MOVFW TEMPL
+	   MOVWF NUM_L2
+D_PX2:
+       MOVFW NUM_L2
+	   SUBWF NUM_L3,W
+	   BTFSS STATUS,C
+       GOTO D_PX3
+       MOVFW NUM_L2
+	   MOVWF TEMPL
+       MOVFW NUM_L3
+	   MOVWF NUM_L2
+	   MOVFW TEMPL
+	   MOVWF NUM_L3
+D_PX3:
+       DECFSZ TEMPH,F
+	   GOTO D_PX0
+       MOVFW NUM_L3
+	   SUBWF NUM_L0,F
+	   MOVLW 6
+	   SUBWF NUM_L0,W
+	   BTFSC STATUS,C
+	   GOTO DATA_PH
+       MOVFW NUM_L1
+	   ADDWF NUM_L2,F
+	   RRF NUM_L2,F
+
+
+
+	    MOVFW NUM_L2
+		SUBWF HEART_C,W
+		BTFSS STATUS,C
+		GOTO DATA_PH
+		MOVFW NUM_L2
+		MOVWF HEART_C
+		MOVWF H_NUMBER 
+        MOVWF SEND_NUMBER
+		MOVWF NUM_0
+        MOVWF NUM_0_BAK
+        MOVWF NUM_0
+        MOVWF NUM_1
+        MOVWF NUM_2
+        MOVWF NUM_3
+        MOVWF NUM_4
+        MOVWF NUM_5
+        MOVWF NUM_6
+        MOVWF NUM_7
+		GOTO RESULT_S1
+;------------------------------
+DATA_PH: ;数据平滑
+      MOVFW NUM_1L
+	  XORLW 0
+	  BTFSC STATUS,Z
+	  GOTO TB_CHK
+
+
+	  MOVFW NUM_0L ;开机后检测到了两次数据
+	  SUBWF NUM_1L,W
+	  BTFSS STATUS,C
+      XORLW 0FFH
+	  MOVWF TEMPL
+	  MOVLW 10 ;15   
+	  SUBWF TEMPL,W
+      BTFSC STATUS,C
+	  GOTO RESULT_ERR_DD  ;前后两次差值大于15，做抖动处理
+      CLRF TEMPH
+	  MOVFW NUM_0L
+	  MOVWF TEMPL
+	  MOVFW NUM_1L
+	  ADDWF TEMPL,F
+	  MOVLW 0
+	  ADDWFC TEMPH,F
+	  BCF STATUS,C
+	  RRF TEMPH,F
+	  RRF TEMPL,F
+	  MOVFW TEMPL
+	  MOVWF TMP  ;把当次和上次的平均数输出处理
+
+      
+
+TB_CHK: ;突变数据检测
+      MOVFW NUM_0_BAK ;上次输入数据的备份
+	  XORLW 0
+	  BTFSC STATUS,Z
+	  GOTO TB_CHK_END
+
+	  MOVFW NUM_0_BAK
+	  SUBWF TMP,W
+	  BTFSS STATUS,C
+      XORLW 0FFH
+	  MOVWF TEMPL
+	  MOVLW 6 ;10 ;15 
+	  SUBWF TEMPL,W
+      BTFSS STATUS,C
+	  GOTO TB_CHK_END
+
+
+	  MOVFW NUM_0_BAK ;上次与这次的测量偏差大于6，
+	                  ;在原来基础上+2 -2
+	  SUBWF TMP,W
+	  BTFSS STATUS,C
+      GOTO XZ5
+
+     BSF FG,F_QS ;当前数据很大于上次数据
+     MOVFW TMP
+	 MOVWF NUM_0_BAK
+	 MOVLW 2 ;3 ;5   
+	 ADDWF NUM_0,W
+	 MOVWF TMP
+	 MOVLW 160    ;防止数据溢出
+	 SUBWF TMP,W
+     BTFSS STATUS,C
+      GOTO NOR_DATA
+     MOVLW 160
+	 MOVWF TMP
+      GOTO NOR_DATA
+	   
+XZ5:
+
+     BCF FG,F_QS ;当前数据很小于上次数据
+     MOVFW TMP
+	 MOVWF NUM_0_BAK
+     MOVLW 2 ;3 ;5     
+	 SUBWF NUM_0,W
+	 MOVWF TMP
+	 MOVLW 40     ;防止数据溢出
+	 SUBWF TMP,W
+	 BTFSC STATUS,C
+     GOTO NOR_DATA
+	 MOVLW 40
+	 MOVWF TMP
+	 GOTO NOR_DATA
+
+	        
+TB_CHK_END:
+     MOVFW TMP
+	 MOVWF NUM_0_BAK          
+
+NOR_DATA: ;正常数据
+      MOVFW NUM_6
+	  MOVWF NUM_7
+      MOVFW NUM_5
+	  MOVWF NUM_6
+      MOVFW NUM_4
+	  MOVWF NUM_5
+      MOVFW NUM_3
+	  MOVWF NUM_4
+
+      MOVFW NUM_2
+	  MOVWF NUM_3
+      MOVFW NUM_1
+	  MOVWF NUM_2
+      MOVFW NUM_0
+	  MOVWF NUM_1
+      MOVFW TMP
+	  MOVWF NUM_0
+
+	  MOVFW NUM_3
+	  XORLW 0
+	  BTFSC STATUS,Z
+	  GOTO MAIN
+      
+NUMPX_S:
+      MOVFW NUM_0
+	  MOVWF NUM_L0
+      MOVFW NUM_1
+	  MOVWF NUM_L1
+      MOVFW NUM_2
+	  MOVWF NUM_L2
+      MOVFW NUM_3
+	  MOVWF NUM_L3
+      MOVFW NUM_4
+	  MOVWF NUM_L4
+      MOVFW NUM_5
+	  MOVWF NUM_L5
+      MOVFW NUM_6
+	  MOVWF NUM_L6
+      MOVFW NUM_7
+	  MOVWF NUM_L7
+
+ 
+NUM_PX:
+       MOVLW 7 ;3 
+	   MOVWF TMP
+NUM_PX0:
+       MOVFW NUM_L0
+	   SUBWF NUM_L1,W
+	   BTFSS STATUS,C
+       GOTO NUM_PX1
+       MOVFW NUM_L0
+	   MOVWF TEMPL
+       MOVFW NUM_L1
+	   MOVWF NUM_L0
+	   MOVFW TEMPL
+	   MOVWF NUM_L1
+NUM_PX1:
+       MOVFW NUM_L1
+	   SUBWF NUM_L2,W
+	   BTFSS STATUS,C
+       GOTO NUM_PX2
+       MOVFW NUM_L1
+	   MOVWF TEMPL
+       MOVFW NUM_L2
+	   MOVWF NUM_L1
+	   MOVFW TEMPL
+	   MOVWF NUM_L2
+NUM_PX2:
+       MOVFW NUM_L2
+	   SUBWF NUM_L3,W
+	   BTFSS STATUS,C
+       GOTO NUM_PX3
+       MOVFW NUM_L2
+	   MOVWF TEMPL
+       MOVFW NUM_L3
+	   MOVWF NUM_L2
+	   MOVFW TEMPL
+	   MOVWF NUM_L3
+NUM_PX3:
+;       DECFSZ TMP,F
+;	   GOTO NUM_PX0
+       MOVFW NUM_L3
+	   SUBWF NUM_L4,W
+	   BTFSS STATUS,C
+       GOTO NUM_PX4
+       MOVFW NUM_L3
+	   MOVWF TEMPL
+       MOVFW NUM_L4
+	   MOVWF NUM_L3
+	   MOVFW TEMPL
+	   MOVWF NUM_L4
+NUM_PX4:
+       MOVFW NUM_L4
+	   SUBWF NUM_L5,W
+	   BTFSS STATUS,C
+       GOTO NUM_PX5
+       MOVFW NUM_L4
+	   MOVWF TEMPL
+       MOVFW NUM_L5
+	   MOVWF NUM_L4
+	   MOVFW TEMPL
+	   MOVWF NUM_L5
+NUM_PX5:
+       MOVFW NUM_L5
+	   SUBWF NUM_L6,W
+	   BTFSS STATUS,C
+       GOTO NUM_PX6
+       MOVFW NUM_L5
+	   MOVWF TEMPL
+       MOVFW NUM_L6
+	   MOVWF NUM_L5
+	   MOVFW TEMPL
+	   MOVWF NUM_L6
+NUM_PX6:
+       MOVFW NUM_L6
+	   SUBWF NUM_L7,W
+	   BTFSS STATUS,C
+       GOTO NUM_PX7
+       MOVFW NUM_L6
+	   MOVWF TEMPL
+       MOVFW NUM_L7
+	   MOVWF NUM_L6
+	   MOVFW TEMPL
+	   MOVWF NUM_L7
+NUM_PX7:
+       DECFSZ TMP,F
+	   GOTO NUM_PX0
+ 
+
+;      MOVFW NUM_L0
+;	  XORLW 0
+;	  BTFSC STATUS,Z
+;	  GOTO MAIN      
+;      MOVFW NUM_L1
+;	  XORLW 0
+;	  BTFSC STATUS,Z
+;	  GOTO MAIN ;NUM_R1      
+
+;      MOVFW NUM_L2
+;	  XORLW 0
+;	  BTFSC STATUS,Z
+;	  GOTO NUM_R2      
+	  
+      MOVFW NUM_L3
+	  XORLW 0
+	  BTFSC STATUS,Z
+	  GOTO MAIN ;NUM_DATA4      
+
+      MOVFW NUM_L4
+	  XORLW 0
+	  BTFSC STATUS,Z
+	  GOTO NUM_DATA4      
+
+      MOVFW NUM_L5
+	  XORLW 0
+	  BTFSC STATUS,Z
+	  GOTO NUM_DATA5
+	        
+      MOVFW NUM_L6
+	  XORLW 0
+	  BTFSC STATUS,Z
+	  GOTO NUM_DATA6
+
+
+      MOVFW NUM_L7
+	  XORLW 0
+	  BTFSS STATUS,Z
+	  GOTO NUM_DATA8 ;4      
+	  GOTO NUM_DATA7      
+
+;NUM_R3:
+;      MOVFW NUM_L1
+;	  MOVWF TEMPL
+;	  GOTO RESULT_S
+;NUM_R1:
+;      MOVFW NUM_L0
+;	  MOVWF TEMPL
+;	  GOTO RESULT_S
+;NUM_R2:
+;      CLRF TEMPL
+;	  CLRF TEMPH
+;	  MOVFW NUM_L0
+;	  ADDWF TEMPL,F
+;	  MOVLW 0
+;	  ADDWFC TEMPH,F
+;	  MOVFW NUM_L1
+;	  ADDWF TEMPL,F
+;	  MOVLW 0
+;	  ADDWFC TEMPH,F
+;      BCF STATUS,C
+;	  RRF TEMPH,F
+;      RRF TEMPL,F 
+;     GOTO RESULT_S
+	   
+
+
+NUM_DATA4: ;4个数据处理，取中间2数据平均
+      BCF FG,F_POW
+      CLRF TEMPL
+	  CLRF TEMPH
+	  MOVFW NUM_L1
+	  ADDWF TEMPL,F
+	  MOVLW 0
+	  ADDWFC TEMPH,F
+	  MOVFW NUM_L2
+	  ADDWF TEMPL,F
+	  MOVLW 0
+	  ADDWFC TEMPH,F
+      BCF STATUS,C
+	  RRF TEMPH,F
+      RRF TEMPL,F 
+;次4组数据为初次测量，强制限定数据范围在60-99
+      MOVLW 100
+      SUBWF TEMPL,W
+	  BTFSC STATUS,C
+	  GOTO SET_99
+      MOVLW 60
+      SUBWF TEMPL,W
+	  BTFSS STATUS,C
+	  GOTO SET_60
+     MOVFW TEMPL
+	 GOTO NUM_SET 
+SET_60:
+     MOVLW 60
+	 GOTO SET_99
+SET_99:
+     MOVLW 99
+NUM_SET:
+     MOVWF NUM_0   
+     MOVWF NUM_1   
+     MOVWF NUM_2   
+     MOVWF NUM_3   
+     GOTO RESULT_S
+
+NUM_DATA5: 
+	  MOVFW NUM_L2
+	  MOVWF TEMPL
+     GOTO RESULT_S
+
+NUM_DATA6: ;6个数据处理，取中间2数据平均
+      BCF FG,F_POW
+      CLRF TEMPL
+	  CLRF TEMPH
+	  MOVFW NUM_L2
+	  ADDWF TEMPL,F
+	  MOVLW 0
+	  ADDWFC TEMPH,F
+	  MOVFW NUM_L3
+	  ADDWF TEMPL,F
+	  MOVLW 0
+	  ADDWFC TEMPH,F
+      BCF STATUS,C
+	  RRF TEMPH,F
+      RRF TEMPL,F 
+     GOTO RESULT_S
+
+NUM_DATA7: 
+	  MOVFW NUM_L3
+	  MOVWF TEMPL
+     GOTO RESULT_S
+NUM_DATA8: ;8个数据处理，取中间4数据平均
+      BCF FG,F_POW
+      CLRF TEMPL
+	  CLRF TEMPH
+	  MOVFW NUM_L2
+	  ADDWF TEMPL,F
+	  MOVLW 0
+	  ADDWFC TEMPH,F
+	  MOVFW NUM_L3
+	  ADDWF TEMPL,F
+	  MOVLW 0
+	  ADDWFC TEMPH,F
+
+	  MOVFW NUM_L4
+	  ADDWF TEMPL,F
+	  MOVLW 0
+	  ADDWFC TEMPH,F
+	  MOVFW NUM_L5
+	  ADDWF TEMPL,F
+	  MOVLW 0
+	  ADDWFC TEMPH,F
+
+
+      BCF STATUS,C
+	  RRF TEMPH,F
+      RRF TEMPL,F 
+      BCF STATUS,C
+	  RRF TEMPH,F
+      RRF TEMPL,F 
+     GOTO RESULT_S
+
+
+
+
+
+RESULT_S:
+      MOVFW TEMPL
+      MOVWF HEART_C 
+RESULT_S1:
+     GOTO MAIN
+
+;==============================
+HEAT_MATCH:
+      BCF FG,F_1S
+      BTFSS FG,F_255
+	  GOTO H_MATCH
+	  MOVLW 5
+	  SUBWF COUNT_5S,W
+	  BTFSS STATUS,C
+	  GOTO SEND_255
+	  BCF FG,F_255
+
+H_MATCH:
+      MOVFW ERR_BH
+	  XORLW ERR_WD
+	  BTFSS STATUS,Z
+	  GOTO ERR_DDCL
+ERR_WDCL: ;未戴判别处理
+	  BSF FG,F_POW
+	  INCF WD_COUNT,F
+	  MOVLW 10 ;5
+	  SUBWF WD_COUNT,W
+	  BTFSS STATUS,C
+	  GOTO MAT_END ;U_SEND 
+SEND_255:
+	  CLRF HEART_C
+      BSF FG,F_POW
+      GOTO MAT_END ;U_SEND
+ERR_DDCL: ;抖动判断处理
+      CLRF WD_COUNT
+      MOVFW ERR_BH
+	  XORLW ERR_DD
+	  BTFSS STATUS,Z
+	  GOTO ZC_DATA
+
+;      BTFSS COUNT_1S,0
+;      GOTO MAT_END
+      MOVLW 4
+	  SUBWF COUNT_5S,W
+	  BTFSS STATUS,C
+	  GOTO MAT_END
+	  CLRF COUNT_5S
+
+
+	  INCF DD_COUNT,F
+      MOVLW 0 ;2 ;4
+	  SUBWF DD_COUNT,W
+	  BTFSS STATUS,C
+      GOTO MAT_END ;ZC_DATA1 
+;抖动处理，默认向上+2，-1 数据不大于121
+      BTFSS DD_COUNT,0
+	  GOTO $+4 
+	  INCF H_NUMBER,F
+	  INCF H_NUMBER,F
+	  INCF H_NUMBER,F
+	  DECF H_NUMBER,F
+      MOVLW 122
+      SUBWF H_NUMBER,W
+	  BTFSS STATUS,C
+      GOTO MAT_END 
+      MOVLW 3
+	  SUBWF H_NUMBER,F
+
+      GOTO MAT_END 
+ZC_DATA:
+      CLRF DD_COUNT
+ZC_DATA1:
+      MOVLW 40
+      SUBWF H_NUMBER,W ;MOVFW H_NUMBER
+	  BTFSC STATUS,C
+	  GOTO $+4
+	  MOVFW HEART_C
+	  MOVWF H_NUMBER
+	   GOTO MAT_END  ;RETURN ;当前显示0返回
+
+	  MOVFW H_NUMBER
+	  SUBWF HEART_C,W
+	  BTFSC STATUS,Z
+	  GOTO MAT_END ;RETURN
+      BTFSS STATUS,C
+	  GOTO MAT_S
+MAT_B: ;当前值大于显示值+1
+      ;MOVWF TMP
+	  ;MOVLW 3
+	  ;SUBWF TMP,W
+	  ;BTFSS STATUS,C
+	  ;GOTO $+3
+	  ;BTFSC FG,F_QS 
+      ;INCF H_NUMBER,F
+      INCF H_NUMBER,F
+      GOTO MAT_END
+     
+MAT_S:	  
+      DECF H_NUMBER,F
+      MOVFW HEART_C
+	  SUBWF H_NUMBER,W
+	  SUBLW 4
+      BTFSC STATUS,C
+      GOTO MAT_END
+      BTFSS FG,F_QS
+      DECF H_NUMBER,F
+      DECF H_NUMBER,F
+MAT_END:
+      MOVFW HEART_C
+	  XORLW 0
+	  BTFSC STATUS,Z
+	   CLRF H_NUMBER
+      MOVFW H_NUMBER
+	  MOVWF SEND_NUMBER
+
+	
+U_SEND:
+      MOVFW SEND_NUMBER
+	  XORLW 0
+	  BTFSC STATUS,Z
+	  DECF SEND_NUMBER,F
+      MOVLW 255
+	  XORWF SEND_NUMBER,W
+      BTFSC STATUS,Z
+	  GOTO U_SEND1
+      MOVLW 161
+	  SUBWF SEND_NUMBER,W
+      BTFSC STATUS,C
+	  GOTO ERR_GO  ;ERR_RET ;POW_ON
+	  MOVLW 40
+	  SUBWF SEND_NUMBER,W
+	  BTFSS STATUS,C
+	  GOTO ERR_GO ;ERR_RET ;POW_ON
+
+U_SEND1:
+     BCF FG,F_SERR
+     MOVFW SEND_NUMBER
+	 MOVWF RESULT_BAK
+U_SEND2:
+	  BTFSS FLAG,F_SEL
+	  GOTO  UART_SEND
+	;  BTFSC FG,F_SERR
+	  GOTO MATCH_R ;RETURN
+ERR_GO:
+      BSF FG,F_SERR
+	 MOVFW RESULT_BAK
+     MOVWF SEND_NUMBER
+     GOTO U_SEND2
+  END

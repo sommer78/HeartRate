@@ -1,0 +1,17 @@
+Version 1.0.2:
+1.Add Debug Log Function to set upper stack's log status.
+2.Fix bug which progress bar could not show normal when burnning failed. 
+3.Add burnning status'timestamp.
+4.Add illegal character check function.
+5.Add Config setting status' reading back.
+
+Version 1.0.1:
+1. Add progress bar to show the status of burnning.
+2. Add Reset button to restet the congfig information.
+3. Add function to save config settings as bin file.
+4. Fix the bug which the BD Address has not be show correctly when it increases Automatically. 
+5. Fix the bug which the icon isn't correctly  when the program is locked in the task bar.
+
+Version 1.0.0:
+First Release.
+

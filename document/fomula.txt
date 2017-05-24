@@ -1,0 +1,1 @@
+=INDEX(A:P,INT(ROW(A16)/16),MOD(ROW(A1)-1,16)+1)&""
