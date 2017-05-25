@@ -23,11 +23,11 @@
 
 
 #define RATE_NUM_MAX                        16
-#define WAVE_SAMPLE_MAX					16
+#define PLUSE_SAMPLE_MAX					16
 #define WAVE_INDEX_MAX					16
 
 
-const HEART_RATE_WAVE_T HeartRateWaveInit = 
+const HEART_RATE_PULSE_T HeartRatePulseInit = 
 {
 	0,      /**< wave type . Like sine, squre sawtooth... */
     0,	    /**< peak index */
@@ -60,6 +60,7 @@ uint16_t pointValueCurrent;
 uint16_t pointValueLast;
 
 uint16_t pointCount;
+
 uint16_t smooth;
 uint16_t smoothValue;
 
@@ -74,18 +75,18 @@ uint16_t upTrendCount,bottomTrendCount;
 
 uint16_t topLength,bottomLength;
 
-uint8_t	 waveDirection = 0;
+uint8_t	 pluseDirection = 0;
 uint8_t  waveStart;
 
-uint8_t trigPeriodStart;
-uint8_t trigPeriodPoint;
+uint16_t period;
+uint8_t firstPeriod;
 
 SlopeDirection lastSlopeDirection;
 
-HEART_RATE_WAVE_T waves[16];
-HEART_RATE_WAVE_T currentWave;
-uint16_t waveIndex;
-uint8_t trig;
+HEART_RATE_PULSE_T pulseStacks[PLUSE_SAMPLE_MAX];
+HEART_RATE_PULSE_T currentPulse;
+uint8_t pulseIndex;
+
 
 
 static HEART_RATE_PARAM_T HeartRateParam;
@@ -245,44 +246,49 @@ SLOPE_T getSlopeObj(uint16_t before,uint16_t after){
 
 
 
-void pushWaveArray(){
-	currentWave.waveIndex=waveIndex;
-	memcpy(&waves[waveIndex],&currentWave,sizeof(currentWave));
-	waveIndex++;
+void pushPulseStack(){
+	currentPulse.index=pulseIndex;
+	memcpy(&pulseStacks[pulseIndex],&currentPulse,sizeof(currentPulse));
+	pulseIndex++;
 	
 }
+void  clrPulseStack(){
+	int i = 0;
+	for(;i<PLUSE_SAMPLE_MAX;i++)
+	memcpy(&pulseStacks[i],&HeartRatePulseInit,sizeof(currentPulse));
 
+}
 
-void clrCurrentWave(){
+void clrCurrentPulse(){
 
-	memcpy(&currentWave,&HeartRateWaveInit,sizeof(currentWave));
+	memcpy(&currentPulse,&HeartRatePulseInit,sizeof(currentPulse));
 
 }
 
 
 
 void heartRateInit(void){
+	printf(" heartRateInit \r\n" );
 	pointCount = 0;
 	heartRateClrRam();
-	
+}
+void printCurrentPluse(){
+	printf(" cp[%d] t=%d s=%d e=%d p=%d u=%d d=%d tl=%d bl=%d ti=%d\r\n",currentPulse.index,currentPulse.type,currentPulse.startPointIndex,currentPulse.endPointIndex,currentPulse.period,
+		currentPulse.upTime,currentPulse.downTime,currentPulse.topLength,currentPulse.bottomLength,currentPulse.topIndex);
 }
 
-
 void heartRateClrRam(void){
-	pointValueLast = 0;
-
-	trigPeriodStart = 0;
-    trigPeriodPoint = 0;
+	
+	pointValueLast = 0;	
 	smooth = 0;
-	direction = SlopeDown;
-	waveDirection = 0;
+	pluseDirection = 0;
 	waveStart = 0;
-	waveIndex = 0;
+	pulseIndex = 0;
 	upDirect =0;
 	downDirect = 0;
-	trig = 0;
 	bottomLength = 0;
 	topLength = 0;
+	firstPeriod = 0;
 	
 }
 
@@ -300,7 +306,9 @@ void clrHeartRateStack(){
 void heartRateParamSetup(HEART_RATE_PARAM_T _heartRateParam){
 
 	memcpy(&HeartRateParam,&_heartRateParam,sizeof(_heartRateParam));
-	
+	HeartRateParam.oneMinutePoint = 60000/HeartRateParam.sampleRate;
+	HeartRateParam.periodMax = HeartRateParam.oneMinutePoint/HeartRateParam.heartRateMIN;
+	HeartRateParam.periodMin = HeartRateParam.oneMinutePoint/HeartRateParam.heartRateMAX;
 }
 
 
@@ -315,75 +323,94 @@ uint16_t getHeartRateFilter(){
 	int count =0;
 	
 	
-	for(;i<waveIndex;i++){
-		currentWave = waves[i];
-		
-		if(waves[i].waveType==1){
-			if((waves[i].topIndex-(waves[i].topLength/2))>0){
+	for(;i<pulseIndex;i++){
+		currentPulse = pulseStacks[i];
+	//	printCurrentPluse();
+		if(pulseStacks[i].type==1){
+			if((pulseStacks[i].topIndex-(pulseStacks[i].topLength/2))>0){
 				
-				peaks[i] = waves[i].topIndex-(waves[i].topLength/2);
+				peaks[i] = pulseStacks[i].topIndex-(pulseStacks[i].topLength/2);
 			}else {
-				peaks[i] = waves[i].topIndex;
+				peaks[i] = pulseStacks[i].topIndex;
 			}
 		
 		}else {
-				peaks[i] = waves[i].topIndex;
+				peaks[i] = pulseStacks[i].topIndex;
 		}
 		// printf(" peaks[%d]= %d\r\n",i,peaks[i] );
 	}
 	
-	for(i=0;i<(waveIndex-1);i++){
-		heartRate = HeartRateParam.samplePointTotal/ (peaks[i+1]-peaks[i]);
+	for(i=0;i<(pulseIndex-1);i++){
+		heartRate = HeartRateParam.oneMinutePoint/ (peaks[i+1]-peaks[i]);
 		if(heartRate<=HeartRateParam.heartRateMAX&&heartRate>=HeartRateParam.heartRateMIN){
 			hearts[count++]=heartRate;
 		
 			}
-			 printf(" heart [%d]= %d\r\n",i,heartRate );
+		//	 printf(" heart [%d]= %d\r\n",i,heartRate );
 		
 		
 	}
+	if(count!=0){
 	heartRate =	getArrayAverage(hearts,count);
-	 printf(" heart = %d\r\n",heartRate );
-	//for(;i<waveIndex;i++){
-	//	pushArrayData(heartRateTemp,waveIndex,waves[i].heartRate);
+	 printf(" heart first = %d\r\n",heartRate );
+	}else {
+	heartRate = lastHeartRate;
+		}
+	
+	//for(;i<pulseIndex;i++){
+	//	pushArrayData(heartRateTemp,pulseIndex,pulseStacks[i].heartRate);
 	//	}
-//	heartRate = getArrayAverage(heartRateTemp,waveIndex);
+//	heartRate = getArrayAverage(heartRateTemp,pulseIndex);
 	
 	if(heartRate>HeartRateParam.heartRateMAX){
 		
 		if(lastHeartRate>0){
 			heartRate = lastHeartRate;
-			return lastHeartRate;
+			return heartRate;
 			}else {
 			heartRate= HeartRateParam.heartRateMAX;
-			return lastHeartRate;
+			lastHeartRate = heartRate;
+			return heartRate;
 			}
 		}
 	
 	if(heartRate<HeartRateParam.heartRateMIN){
 		if(lastHeartRate>0){
 			heartRate = lastHeartRate;
-			return lastHeartRate;
+			return heartRate;
 			}else {
 			heartRate= HeartRateParam.heartRateMIN;
-			return lastHeartRate;
+			lastHeartRate = heartRate;
+			return heartRate;
 				}
 		}
 	if(lastHeartRate!=0){
 		
-		slopeObj = getSlopeObj(pointValueCurrent,pointValueLast);
+		slopeObj = getSlopeObj(heartRate,lastHeartRate);
 		if(slopeObj.smooth<10){
+				
 			heartRate = (heartRate+lastHeartRate)/2;
+			
+			 printf(" little change heart = %d\r\n",heartRate );
 		}else {
 			if(slopeObj.direction>0){
 				heartRate = lastHeartRate-1;
+				heartRateIndex = 0;
 				
 			}else {
 				heartRate = lastHeartRate+1;
 			}
+			heartRateStack[heartRateIndex]=heartRate;
+			heartRateIndex++;
+			if(heartRateIndex>8){
+				heartRate = getArrayAverageWithoutPeak(heartRateStack,8);
+				}
+			
+		
+			
 		}
 	}
-		lastHeartRate = heartRate;
+	lastHeartRate = heartRate;	
 		return heartRate;
 	
 }
@@ -407,18 +434,24 @@ HRState getHeartRateWaves(uint16_t adData)   {
 	if(slopeObj.smooth!=0) {				// 数据波动较小
 		smooth++;
 		smoothValue = pointValueCurrent;
-		if(lastSlopeDirection==1){
-			bottomLength++;
+		if(lastSlopeDirection==SlopeDown){
+			
 			downDirect++;
+			bottomLength++;
 			}else {
 			upDirect++;
 			topLength++;
 			}
 		if(smooth>HeartRateParam.recDetectData){
-			currentWave.waveType = 1;
-			if(smooth>HeartRateParam.evennessMax){
-				state = HRLineOut;
+			currentPulse.type= 1;
 			
+			}
+		if(smooth>HeartRateParam.evennessMax){
+				state = HRLineOut;
+				if(smoothValue<50){
+				direction = SlopeDown;
+				}else if(smoothValue>1000){
+				 	direction = SlopeUp;
 				}
 			}
 		}else {
@@ -438,10 +471,11 @@ HRState getHeartRateWaves(uint16_t adData)   {
 	
 			direction = SlopeDown;
 			downDirect = 0;
-				topTempIndex = pointCount;
-			}else {								
-				downDirect++;	
-				}
+			topTempIndex = pointCount;
+			topTempValue = pointValueCurrent;
+			}							
+			downDirect++;	
+			
 		
 		
 	
@@ -452,16 +486,48 @@ HRState getHeartRateWaves(uint16_t adData)   {
 		nrf_gpio_pin_set(27);
 			
 		if(direction==SlopeDown){			//前面向下		 __|--
-			printf(" dir[%d] u=%d d=%d\r\n",pointCount,upDirect,downDirect);
-			upDirect =0;
-			direction = SlopeUp;
-			
-			bottomTempIndex = pointCount;
 			
 		
-		}else {
+			bottomTempIndex = pointCount;
+			period = upDirect+downDirect;
+		//	printf(" p[%d] u=%d d=%d p=%d\r\n",pointCount,upDirect,downDirect,period);
+		if(period<HeartRateParam.evennessMax&&period>HeartRateParam.periodMin){
+				
+				if(firstPeriod==0){
+					currentPulse.startPointIndex=pointCount;
+					firstPeriod = 1;
+					}else {
+					currentPulse.endPointIndex=pointCount;
+					currentPulse.upTime = upDirect;
+				    currentPulse.downTime = downDirect;
+					currentPulse.bottomLength =bottomLength;
+					currentPulse.topLength=topLength;
+					currentPulse.topIndex = topTempIndex;
+					currentPulse.period = period;
+					pushPulseStack();
+					printCurrentPluse();
+					clrCurrentPulse();
+					currentPulse.startPointIndex=pointCount;
+					if(pulseIndex>HeartRateParam.waveArrayMax){
+					//	clrPulseStack();
+						state = HRFinish;
+						}
+					}
+				upDirect = 0;
+				downDirect = 0;
+				bottomLength = 0;
+				topLength = 0;
+					
+				
+				}
+				else if(upDirect<10) {
+
+				}
+			upDirect = 0;
+			direction = SlopeUp;
+		}
 		upDirect++;		
-			}
+			
 		
 		
 		

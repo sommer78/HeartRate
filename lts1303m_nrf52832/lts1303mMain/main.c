@@ -46,6 +46,9 @@
 #define NRF_APP_PRIORITY_HIGH 1
 #endif
 
+
+
+#define TEST_PORT 27
 #define SAMPLES_IN_BUFFER 1
 volatile uint8_t state = 1;
 
@@ -54,7 +57,7 @@ static nrf_saadc_value_t       m_buffer_pool[2][SAMPLES_IN_BUFFER];
 static nrf_ppi_channel_t       m_ppi_channel;
 static uint32_t                m_adc_evt_counter;
 //static uint16_t                adc_datas[4000];
-static uint32_t  j=0;
+//static uint32_t  j=0;
 
 const HEART_RATE_PARAM_T HeartRateParamInit = 
 {
@@ -66,8 +69,7 @@ const HEART_RATE_PARAM_T HeartRateParamInit =
 	SamplePointTotal,			 /**<   所有的采样点 60*1000/2 > */	
 	TriggerPeriodPoint,			 /**<  波形窗口采样 10> */	
 	SamplePointMax,		 /**<  心率采样最大值默认4000点> */	
-	SmoothMax,			 /**<  平整度最大值 默认为200> */	
-	WaveSampleMax,			 /**<  取多少点进行算法> */	
+	SmoothMax,			 /**<  平整度最大值 默认为600> */	
 	WaveArrayMax,		 /**<  取多少个波形进行计算    默认3个> */	
 	RecDetectData,		 /**<  平整度超过多少判断为方波默认10个> */	
 	PeriodMax,	 /**<最大周期数 (60000/HeartRateMAX)/SampleRate> */		
@@ -191,20 +193,16 @@ void saadc_callback(nrf_drv_saadc_evt_t const * p_event)
 		heartRateInit();
 			}
 		if(bpmState==HRLineOut){
-		 printf("lineout = %d\r\n",smoothValue);	
+			if(smoothValue<50){
+				 printf("leave low !\r\n");	
+				}else if(smoothValue>1000){
+				 printf("leave high !\r\n");	
+					}else {
+					 printf("leave error !\r\n");	
+						}
+		
 		heartRateInit();
 			}
-				if(j<8000){
-		//		adc_datas[j]=sample;
-				if(j%24 == 0){
-				//	 printf("\r\n");
-				}
-					
-			
-			  //   printf("%d,", sample);
-				
-				}
-				j++;
         m_adc_evt_counter++;
 			
     }
@@ -240,41 +238,11 @@ void saadc_init(void)
     
   //  err_code = nrf_drv_saadc_buffer_convert(m_buffer_pool[1],SAMPLES_IN_BUFFER);
   //  APP_ERROR_CHECK(err_code);
-	nrf_gpio_cfg_output(27);
+	nrf_gpio_cfg_output(TEST_PORT);
+  	nrf_gpio_pin_clear(TEST_PORT);
 }
 
-void heartRateSubroutine(){
-		int i = 0;	
-	    HRState bpmState;
-		uint16_t heartRate = 40;
 
-		heartRateInit();
-	
-		
-		for(i=0;i<8000;i++){
-		
-		bpmState = 	 getHeartRateWaves(wave_sample1[i]);  
-			
-		if(bpmState==HRFinish){
-			
-		heartRate =	getHeartRateFilter();
-		 printf("heartRate = %d\r\n",heartRate);		
-		heartRateClrRam();
-		
-		//
-		}
-		if(bpmState==HRPointMax){
-			 printf("HRPointMax = %d\r\n",heartRate);		
-		heartRateInit();
-			}
-		if(bpmState==HRLineOut){
-		 printf("lineout = %d\r\n",smoothValue);	
-		heartRateClrRam();
-			}
-		
-	}
-
-}
 
 
 /**
