@@ -116,13 +116,6 @@ typedef struct SLOPE
 
 
 
-typedef struct BLOOD_PRESS
-{
-	
-    uint16_t  	high;    
-	uint16_t  	low;   
-	
-} BLOOD_PRESS_T, *BLOOD_PRESS_INDEX;
 
 
 
@@ -185,7 +178,7 @@ uint16_t getHeartRateFilter(void);
 void heartRateInit(void);
 
 
-uint16_t getBloodPress(uint16_t heartRate, int hour,int age,BLOOD_PRESS_T* bloodPress);
+
 #ifdef __cplusplus
 }
 #endif

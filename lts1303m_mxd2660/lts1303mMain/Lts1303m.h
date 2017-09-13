@@ -24,13 +24,13 @@
 
 
 
-#define  WaveSlopeRange 30		  /**< 锯齿波判断标准初始为25 > */
+#define  WaveSlopeRange 100		  /**< 锯齿波判断标准初始为25 > */
 #define  HeartRateMAX	160			 /**<   心率最大值 初始为160    > */
 #define  HeartRateMIN   40			 /**<   心率最小值 初始为40    > */
-#define  SampleRate     2				 /**<   采样率 默认为2ms    > */	
-#define  SamplePointTotal 30000		 /**<   所有的采样点 60*1000/SampleRate > */	
+#define  SampleRate     10				 /**<   采样率 默认为2ms    > */	
+#define  SamplePointTotal 15000		 /**<   所有的采样点 60*1000/SampleRate > */	
 #define  TriggerPeriodPoint 10				 /**<  波形窗口采样 10> */	
-#define  SamplePointMax     8000				 /**<  心率采样最大值默认4000点> */	
+#define  SamplePointMax     10000				 /**<  心率采样最大值默认4000点> */	
 #define  SmoothMax 		800		 /**<  平整度最大值 默认为600> */	
 #define  WaveSampleMax 		4000			 /**<  取多少点进行算法> */	
 #define  WaveArrayMax		3		 /**<  取多少个波形进行计算> */	
@@ -51,44 +51,10 @@ typedef enum
 {
     HRInit = 0,   /*BPM init */
     HRFinish = 1,	 /*BPM finish */		
-    HRPointMax = 2,	 /**<   心率采样最大值出错   > */
-    HRLineOut = 3    /**<  采样数据太平整退出  > */
+    HRError = 2	 /**<  采样数据错误 > */
 } HRState;
 
-
-typedef enum
-{
-    SlopeUp= 0,   
-    SlopeDown = 1,	
-    SlopeSmooth = 2,	 
-} SlopeDirection;
-
-
-/**
- * @brief BPM wave define key definition.
- *
- * Each key definition will contains BPM wave type/ period / rising time / falling time 
- * key address/ key value.
- */
-typedef struct HEART_RATE_PULSE
-{
-	uint8_t		index;			 /**<  第几个波形  > */
-    uint8_t     type;        /**< wave type . Like sine, squre sawtooth... */
-    uint16_t  	topIndex;    /**< top index */
-	uint16_t  	topValue;    /**< top value */
-	uint16_t  	topLength;    /**< top length */
-	uint16_t  	bottomIndex;    /**< bottom index */
-	uint16_t  	bottomValue;    /**< bottom value */
-	uint16_t  	bottomLength;    /**< bottom length */
-    uint16_t    upTime; 		/*   rising edge time   */
-    uint16_t    downTime;      /*   falling edge time   */
-	uint16_t	startPointIndex;	 /**<    起始点  > */
-	uint16_t	endPointIndex;		 /**<   结束点   > */		
-	uint8_t		peakBottomValue;			 /**<  峰值间隔   > */
-	uint16_t	period;
-} HEART_RATE_PULSE_T, *HEART_RATE_PULSE_INDEX;
-
-
+#if 0
 typedef struct HEART_RATE_PARAM
 {
 	uint16_t waveSlopeRange;		  /**< 锯齿波判断标准初始为200 > */
@@ -106,68 +72,23 @@ typedef struct HEART_RATE_PARAM
 	uint16_t peakBottomStand;			/**<   峰值间值          > */	
 } HEART_RATE_PARAM_T, *HEART_RATE_PARAM_INDEX;
 
-
-typedef struct SLOPE
-{
-	uint16_t value;		
-	SlopeDirection  direction;			
-	uint8_t smooth;
-} SLOPE_T, *SLOPE_INDEX;
+#endif
 
 
-
-typedef struct BLOOD_PRESS
-{
-	
-    uint16_t  	high;    
-	uint16_t  	low;   
-	
-} BLOOD_PRESS_T, *BLOOD_PRESS_INDEX;
 
 
 
 /* ram define ------------------------------------------------------------------*/
 
-extern uint16_t smoothValue;
+
 extern uint16_t heartRate;   
-extern uint16_t pointCount;
+
 /*
  * common funcation subroutine
  * 
  */
-void pushArrayData(uint16_t *array,int length,uint16_t data);
 
 
-
-
-void clrHeartRateStack(void);
-
-void heartRateClrRam(void);
-
-
-uint16_t getArrayAverageWithoutPeak(uint16_t * array,int length);
-
-
-/*
- * heart rate calculation main subroutine
- * 
- */
-
-
-HRState getHeartRateWaves(uint16_t adData) ;
-
-
-
-
-
-
-
-/*
- * heartRateParamSetup
- * param: _waveSlopeStandard  
- * _sampleRate 1 = 1ms 30 = 30ms
- */
-void heartRateParamSetup(HEART_RATE_PARAM_T heartRateParam);
 
 
 /*
@@ -175,7 +96,7 @@ void heartRateParamSetup(HEART_RATE_PARAM_T heartRateParam);
  * param:
  * return: heartRate
  */
-uint16_t getHeartRateFilter(void);
+uint16_t getHeartRateDetection(void);
 
 /*
  * 每次开始测试必须要调用此初始化
@@ -185,7 +106,12 @@ uint16_t getHeartRateFilter(void);
 void heartRateInit(void);
 
 
-uint16_t getBloodPress(uint16_t heartRate, int hour,int age,BLOOD_PRESS_T* bloodPress);
+HRState getHeartRateWaveInfo(uint16_t adData,int count);
+
+uint16_t getHeartRateSmooth(uint16_t tmpHeartRate);
+
+
+
 #ifdef __cplusplus
 }
 #endif

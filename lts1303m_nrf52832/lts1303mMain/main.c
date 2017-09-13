@@ -37,7 +37,7 @@
 #include <string.h>
 #include "Lts1303m.h"
 #include "sample.h"
-
+#include <stdlib.h>
 
 #define UART_TX_BUF_SIZE 256 /**< UART TX buffer size. */
 #define UART_RX_BUF_SIZE 1   /**< UART RX buffer size. */
@@ -250,23 +250,36 @@ void saadc_init(void)
  */
 int main(void)
 {
+	int rate,hour,age;
+	BLOOD_PRESS_T bloodPress;
     uart_config();
 
     printf("\n\rlts1303m Heart Rate  example.\r\n");
-
+	
 	heartRateParamSetup(HeartRateParamInit);
 	clrHeartRateStack();
 	heartRateInit();
-    saadc_sampling_event_init();
+   saadc_sampling_event_init();
     saadc_init();
-    saadc_sampling_event_enable();
+   saadc_sampling_event_enable();
 	
 	
 //	heartRateSubroutine();
-	
+	  hour = (int) (24.0 * rand() / (24000.0)) ;
+	rate= (int) (100.0 * rand() / (RAND_MAX + 1.0)) ;
+	rate = 50+rate;
+	rate= 70;
+	age = 50;
+ 	 printf("\n\r rate = %d, hour= %d \r\n",rate,hour);
     while(1)
     {
+  
+	
+	getBloodPress(rate,hour,age,&bloodPress);
+	 printf("high = %d, low= %d \r\n",bloodPress.high,bloodPress.low);
+	 nrf_delay_ms(1000);
         __WFE();
+		
     }
 }
 

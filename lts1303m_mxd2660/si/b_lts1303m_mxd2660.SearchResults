@@ -1,0 +1,6 @@
+---- heartRateIndex Matches (2 in 1 files) ----
+Lts1303m.c:uint8_t  heartRateIndex  =0;
+Lts1303m.c:	heartRateIndex
+---- heartRateIndex Search Errors Encountered (1) ----
+The following 1 files could not be processed:
+E:\projects\HeartRate\lts1303m_mxd2660\lts1303mMain\project\arm5\JLinkLog.txt : File could not be opened.
