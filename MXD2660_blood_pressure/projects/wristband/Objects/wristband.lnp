@@ -1,0 +1,26 @@
+--cpu Cortex-M0+
+".\objects\cm0plus_startup.o"
+".\objects\sys.o"
+"..\..\lib\symbol.lib"
+"..\..\lib\peripheral_lib.lib"
+".\objects\calendar.o"
+".\objects\utility.o"
+".\objects\debug.o"
+".\objects\err_debug.o"
+".\objects\ancs_service.o"
+".\objects\wristband_service.o"
+".\objects\lcm_00930.o"
+".\objects\lis3dh_driver.o"
+".\objects\zx_7816.o"
+".\objects\wristband_application.o"
+".\objects\led.o"
+".\objects\app_task.o"
+".\objects\app_ble.o"
+".\objects\app_main.o"
+".\objects\app_ota.o"
+".\objects\lts1303m.o"
+".\objects\simpress.o"
+--library_type=microlib --strict --scatter "..\..\scatterfile\wristband.sct"
+--entry=reset_handler --keep=*_header --keep=*_startup.o --keep=*_task.o --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\wristband.map" -o .\Objects\wristband.axf

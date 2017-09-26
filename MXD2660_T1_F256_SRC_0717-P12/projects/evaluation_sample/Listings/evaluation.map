@@ -1,0 +1,1976 @@
+Component: ARM Compiler 5.06 update 1 (build 61) Tool: armlink [4d35a8]
+
+==============================================================================
+
+Section Cross References
+
+    cm0plus_startup.o(RESET) refers to cm0plus_startup.o(.text) for reset_handler
+    cm0plus_startup.o(RESET) refers to mxd2660_uart1.o(i.UART1_int_IRQHandler) for UART1_int_IRQHandler
+    cm0plus_startup.o(RESET) refers to mxd2660_gpio.o(i.GPIO_0_int_IRQHandler) for GPIO_0_int_IRQHandler
+    cm0plus_startup.o(RESET) refers to mxd2660_gpio.o(i.GPIO_1_int_IRQHandler) for GPIO_1_int_IRQHandler
+    cm0plus_startup.o(RESET) refers to mxd2660_gpio.o(i.GPIO_2_int_IRQHandler) for GPIO_2_int_IRQHandler
+    cm0plus_startup.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    sys.o(i.system_pins_wakeup_disable) refers to mxd2660_gpio.o(i.gpio_wakeup_disable_gpios) for gpio_wakeup_disable_gpios
+    sys.o(i.system_pins_wakeup_disable) refers to utility.o(i.dly_us) for dly_us
+    sys.o(i.system_pins_wakeup_enable) refers to mxd2660_gpio.o(i.gpio_wakeup_enable_gpios) for gpio_wakeup_enable_gpios
+    sys.o(i.system_pins_wakeup_enable) refers to utility.o(i.dly_us) for dly_us
+    sys.o(i.user_call_back_register) refers to err_debug.o(i.system_assert_debug) for system_assert_debug
+    sys.o(i.user_call_back_register) refers to app_main.o(i.main_process) for main_process
+    sys.o(i.user_call_back_register) refers to err_debug.o(i.os_stack_overflow) for os_stack_overflow
+    sys.o(i.user_call_back_register) refers to app_main.o(i.save_info_before_sleep_cb) for save_info_before_sleep_cb
+    sys.o(i.user_call_back_register) refers to app_main.o(i.recover_info_after_wakeup_cb) for recover_info_after_wakeup_cb
+    sys.o(i.user_call_back_register) refers to debug.o(i.is_log_canbe_sleep) for is_log_canbe_sleep
+    sys.o(i.user_call_back_register) refers to debug.o(i.uart1_Log_output) for uart1_Log_output
+    sys.o(i.user_irq_register) refers to err_debug.o(i.HardFault_IRQ_Handler) for HardFault_IRQ_Handler
+    sys.o(i.user_irq_register) refers to cm0plus_startup.o(.text) for UART0_int_IRQHandler
+    sys.o(i.user_irq_register) refers to mxd2660_uart1.o(i.UART1_int_IRQHandler) for UART1_int_IRQHandler
+    sys.o(i.user_irq_register) refers to mxd2660_gpio.o(i.GPIO_0_int_IRQHandler) for GPIO_0_int_IRQHandler
+    sys.o(i.user_irq_register) refers to mxd2660_gpio.o(i.GPIO_1_int_IRQHandler) for GPIO_1_int_IRQHandler
+    sys.o(i.user_irq_register) refers to mxd2660_gpio.o(i.GPIO_2_int_IRQHandler) for GPIO_2_int_IRQHandler
+    mxd_trx_service.o(i.trx_get_attrLenCB) refers to mxd_trx_service.o(.data) for .data
+    mxd_trx_service.o(i.trx_init_service) refers to mxd_trx_service.o(.data) for .data
+    mxd_trx_service.o(i.trx_read_attrCB) refers to mxd_trx_service.o(.data) for .data
+    mxd_trx_service.o(i.trx_write_attrCB) refers to mxd_trx_service.o(.data) for .data
+    mxd_trx_service.o(i.txrx_server_transfer) refers to mxd_trx_service.o(.data) for .data
+    mxd_trx_service.o(.data) refers to mxd_trx_service.o(i.trx_get_attrLenCB) for trx_get_attrLenCB
+    mxd_trx_service.o(.data) refers to mxd_trx_service.o(i.trx_read_attrCB) for trx_read_attrCB
+    mxd_trx_service.o(.data) refers to mxd_trx_service.o(i.trx_write_attrCB) for trx_write_attrCB
+    ancs_service.o(i.ancs_all_characteristic_found_handler) refers to ancs_service.o(i.ancs_discover_svc_by_uuid) for ancs_discover_svc_by_uuid
+    ancs_service.o(i.ancs_all_characteristic_found_handler) refers to app_ble.o(.data) for ancs_discover_flag
+    ancs_service.o(i.ancs_source_ntf_handler) refers to utility.o(i.little_endian_read_32bit) for little_endian_read_32bit
+    ancs_service.o(i.ancs_source_ntf_handler) refers to ancs_service.o(i.ancs_write_get_data_ntf) for ancs_write_get_data_ntf
+    ancs_service.o(i.ancs_write_get_data_ntf) refers to ancs_service.o(.data) for .data
+    calendar.o(i.calc_new_date) refers to uidiv.o(.text) for __aeabi_uidivmod
+    calendar.o(i.calc_new_date) refers to calendar.o(i.year_is_leap_year) for year_is_leap_year
+    calendar.o(i.calendar_date_compare) refers to calendar.o(i.get_date_second) for get_date_second
+    calendar.o(i.calendar_init) refers to calendar.o(i.update_system_date) for update_system_date
+    calendar.o(i.get_date_second) refers to calendar.o(i.year_is_leap_year) for year_is_leap_year
+    calendar.o(i.get_system_date) refers to calendar.o(i.get_system_on_timer) for get_system_on_timer
+    calendar.o(i.get_system_date) refers to memcpya.o(.text) for __aeabi_memcpy
+    calendar.o(i.get_system_date) refers to calendar.o(i.calc_new_date) for calc_new_date
+    calendar.o(i.get_system_date) refers to calendar.o(.data) for .data
+    calendar.o(i.get_system_date_sec) refers to calendar.o(i.get_system_date) for get_system_date
+    calendar.o(i.get_system_date_sec) refers to calendar.o(i.get_date_second) for get_date_second
+    calendar.o(i.get_system_on_timer) refers to uidiv.o(.text) for __aeabi_uidivmod
+    calendar.o(i.update_system_date) refers to calendar.o(i.get_system_on_timer) for get_system_on_timer
+    calendar.o(i.update_system_date) refers to calendar.o(i.get_date_second) for get_date_second
+    calendar.o(i.update_system_date) refers to calendar.o(.data) for .data
+    calendar.o(i.update_system_date_sec) refers to calendar.o(i.calc_new_date) for calc_new_date
+    calendar.o(i.update_system_date_sec) refers to calendar.o(i.update_system_date) for update_system_date
+    calendar.o(i.year_is_leap_year) refers to uidiv.o(.text) for __aeabi_uidivmod
+    utility.o(i.dly_us) refers to utility.o(i.dly_cycles) for dly_cycles
+    utility.o(i.little_endian_read_32bit) refers to uread4.o(.text) for __aeabi_uread4
+    debug.o(i.is_log_canbe_sleep) refers to debug.o(.data) for .data
+    debug.o(i.sys_debug_en) refers to debug.o(.data) for .data
+    debug.o(i.sys_debug_init) refers to debug.o(.data) for .data
+    debug.o(i.uart1_Log_output) refers to debug.o(.data) for .data
+    debug.o(i.uart1_Log_output) refers to debug.o(.bss) for .bss
+    debug.o(i.uart1_Log_print) refers to debug.o(.data) for .data
+    debug.o(i.uart1_Log_print) refers to debug.o(.bss) for .bss
+    err_debug.o(i.HardFault_IRQ_Handler) refers to mxd2660_flash.o(i.user_flash_nvr_read) for user_flash_nvr_read
+    err_debug.o(i.os_stack_overflow) refers to mxd2660_flash.o(i.user_flash_nvr_read) for user_flash_nvr_read
+    led.o(i.led_init) refers to mxd2660_gpio.o(i.gpio_init_output) for gpio_init_output
+    led.o(i.led_off) refers to mxd2660_gpio.o(i.gpio_set_bit) for gpio_set_bit
+    led.o(i.led_on) refers to mxd2660_gpio.o(i.gpio_clear_bit) for gpio_clear_bit
+    app_ble.o(i.ancs_timeout_handler) refers to app_ble.o(.data) for .data
+    app_ble.o(i.ancs_timeout_handler) refers to app_ble.o(.bss) for .bss
+    app_ble.o(i.ble_app_default_init) refers to memcpya.o(.text) for __aeabi_memcpy
+    app_ble.o(i.ble_app_default_init) refers to app_ble.o(.data) for .data
+    app_ble.o(i.ble_app_init) refers to memcpya.o(.text) for __aeabi_memcpy4
+    app_ble.o(i.ble_app_init) refers to app_ble.o(i.ble_app_default_init) for ble_app_default_init
+    app_ble.o(i.ble_app_init) refers to app_ble.o(.constdata) for .constdata
+    app_ble.o(i.ble_app_init) refers to app_ble.o(.data) for .data
+    app_ble.o(i.ble_app_init) refers to app_ble.o(i.ancs_timeout_handler) for ancs_timeout_handler
+    app_ble.o(i.ble_app_init) refers to app_ble.o(.bss) for .bss
+    app_ble.o(i.ble_msg_proc) refers to ancs_service.o(i.ancs_discover_svc_by_uuid) for ancs_discover_svc_by_uuid
+    app_ble.o(i.ble_msg_proc) refers to ancs_service.o(i.ancs_source_ntf_handler) for ancs_source_ntf_handler
+    app_ble.o(i.ble_msg_proc) refers to app_ble.o(i.le_bond_device_db_find_info) for le_bond_device_db_find_info
+    app_ble.o(i.ble_msg_proc) refers to ancs_service.o(i.ancs_init) for ancs_init
+    app_ble.o(i.ble_msg_proc) refers to ancs_service.o(i.ancs_data_ntf_handler) for ancs_data_ntf_handler
+    app_ble.o(i.ble_msg_proc) refers to ancs_service.o(i.ancs_all_characteristic_found_handler) for ancs_all_characteristic_found_handler
+    app_ble.o(i.ble_msg_proc) refers to ancs_service.o(i.ancs_server_config_notify) for ancs_server_config_notify
+    app_ble.o(i.ble_msg_proc) refers to app_ble.o(i.le_bond_device_db_add) for le_bond_device_db_add
+    app_ble.o(i.ble_msg_proc) refers to app_ble.o(.data) for .data
+    app_ble.o(i.ble_msg_proc) refers to app_ble.o(.bss) for .bss
+    app_ble.o(i.ble_peri_sendMsgToApp) refers to app_task.o(.data) for app_msg_pool_id
+    app_ble.o(i.le_bond_device_db_add) refers to memcpya.o(.text) for __aeabi_memcpy
+    app_ble.o(i.le_bond_device_db_add) refers to app_ble.o(.bss) for .bss
+    app_ble.o(i.le_bond_device_db_clear_all) refers to app_ble.o(i.le_bond_device_db_remove) for le_bond_device_db_remove
+    app_ble.o(i.le_bond_device_db_count) refers to app_ble.o(.bss) for .bss
+    app_ble.o(i.le_bond_device_db_find_info) refers to app_ble.o(.bss) for .bss
+    app_ble.o(i.le_bond_device_db_load_from_flash) refers to mxd2660_flash.o(i.user_flash_read) for user_flash_read
+    app_ble.o(i.le_bond_device_db_load_from_flash) refers to app_ble.o(.bss) for .bss
+    app_ble.o(i.le_bond_device_db_remove) refers to app_ble.o(.bss) for .bss
+    app_ble.o(i.le_bond_device_db_save_to_flash_when_change) refers to mxd2660_flash.o(i.user_flash_sector_erase) for user_flash_sector_erase
+    app_ble.o(i.le_bond_device_db_save_to_flash_when_change) refers to mxd2660_flash.o(i.user_flash_write) for user_flash_write
+    app_ble.o(i.le_bond_device_db_save_to_flash_when_change) refers to app_ble.o(.data) for .data
+    app_ble.o(i.le_bond_device_db_save_to_flash_when_change) refers to app_ble.o(.bss) for .bss
+    app_main.o(.ARM.__at_0x2B100) refers to utility.o(i.dly_us) for dly_us
+    app_main.o(.ARM.__at_0x2B100) refers to app_main.o(i.power_manage_init) for power_manage_init
+    app_main.o(.ARM.__at_0x2B100) refers to app_main.o(i.peripheral_init) for peripheral_init
+    app_main.o(.ARM.__at_0x2B100) refers to app_main.o(i.app_irq_init) for app_irq_init
+    app_main.o(.ARM.__at_0x2B100) refers to app_task.o(i.app_task_init) for app_task_init
+    app_main.o(.ARM.__at_0x2B100) refers to app_main.o(i.ble_profile_init) for ble_profile_init
+    app_main.o(.ARM.__at_0x2B100) refers to app_ble.o(i.ble_app_init) for ble_app_init
+    app_main.o(i.app_irq_init) refers to app_main.o(i.NVIC_ClearPendingIRQ) for NVIC_ClearPendingIRQ
+    app_main.o(i.app_irq_init) refers to app_main.o(i.NVIC_SetPriority) for NVIC_SetPriority
+    app_main.o(i.app_irq_init) refers to app_main.o(i.NVIC_EnableIRQ) for NVIC_EnableIRQ
+    app_main.o(i.ble_profile_init) refers to mxd_trx_service.o(i.trx_init_service) for trx_init_service
+    app_main.o(i.ble_profile_init) refers to app_ota.o(i.ota_init) for ota_init
+    app_main.o(i.main_process) refers to debug.o(i.uart1_Log_print) for uart1_Log_print
+    app_main.o(i.main_process) refers to mxd2660_watch_dog.o(i.watch_dog_feed) for watch_dog_feed
+    app_main.o(i.peripheral_init) refers to sys.o(i.user_irq_register) for user_irq_register
+    app_main.o(i.peripheral_init) refers to sys.o(i.user_call_back_register) for user_call_back_register
+    app_main.o(i.peripheral_init) refers to mxd2660_gpio.o(i.gpio_init_function) for gpio_init_function
+    app_main.o(i.peripheral_init) refers to mxd2660_uart1.o(i.uart1_init) for uart1_init
+    app_main.o(i.peripheral_init) refers to debug.o(i.sys_debug_init) for sys_debug_init
+    app_main.o(i.peripheral_init) refers to debug.o(i.sys_debug_en) for sys_debug_en
+    app_main.o(i.power_manage_init) refers to sys.o(i.system_pins_wakeup_enable) for system_pins_wakeup_enable
+    app_main.o(i.recover_info_after_wakeup_cb) refers to mxd2660_gpio.o(i.gpio_init_function) for gpio_init_function
+    app_main.o(i.save_info_before_sleep_cb) refers to mxd2660_gpio.o(i.gpio_read_input_bit) for gpio_read_input_bit
+    app_main.o(i.save_info_before_sleep_cb) refers to mxd2660_gpio.o(i.gpio_init_function) for gpio_init_function
+    app_main.o(i.save_info_before_sleep_cb) refers to mxd2660_gpio.o(i.gpio_init_input) for gpio_init_input
+    app_task.o(i.app_task) refers to app_ble.o(i.ble_msg_proc) for ble_msg_proc
+    app_task.o(i.app_task_init) refers to app_task.o(.constdata) for .constdata
+    app_task.o(i.app_task_init) refers to app_task.o(.data) for .data
+    app_task.o(.constdata) refers to app_task.o(i.app_task) for app_task
+    app_task.o(.constdata) refers to app_task.o(.bss) for os_pool_m_app_msg_pool
+    mxd2660_gpio.o(i.GPIO_0_int_IRQHandler) refers to mxd2660_gpio.o(.bss) for .bss
+    mxd2660_gpio.o(i.GPIO_1_int_IRQHandler) refers to mxd2660_gpio.o(.bss) for .bss
+    mxd2660_gpio.o(i.GPIO_2_int_IRQHandler) refers to mxd2660_gpio.o(.bss) for .bss
+    mxd2660_gpio.o(i.gpio_config_weakup_pin) refers to mxd2660_gpio.o(i.gpio_init_input) for gpio_init_input
+    mxd2660_gpio.o(i.gpio_deinit_interrupt) refers to mxd2660_gpio.o(.bss) for .bss
+    mxd2660_gpio.o(i.gpio_init_interrupt) refers to mxd2660_gpio.o(.bss) for .bss
+    mxd2660_gpio.o(i.gpio_wakeup_enable_gpios) refers to mxd2660_gpio.o(i.gpio_config_hw_type) for gpio_config_hw_type
+    mxd2660_gpio.o(i.gpio_wakeup_enable_gpios) refers to mxd2660_gpio.o(i.gpio_init_input) for gpio_init_input
+    mxd2660_watch_dog.o(i.watch_dog_init) refers to uidiv.o(.text) for __aeabi_uidivmod
+    mxd2660_watch_dog.o(i.watch_dog_init) refers to dfltui.o(.text) for __aeabi_ui2d
+    mxd2660_watch_dog.o(i.watch_dog_init) refers to dadd.o(.text) for __aeabi_dadd
+    mxd2660_watch_dog.o(i.watch_dog_init) refers to dfixui.o(.text) for __aeabi_d2uiz
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000D) for __rt_final_cpp
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$0000000F) for __rt_final_exit
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry8b.o(.ARM.Collect$$$$0000000A) for _main_cpp_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry9a.o(.ARM.Collect$$$$0000000B) for _main_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry5.o(.ARM.Collect$$$$00000004) for _main_scatterload
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry2.o(.ARM.Collect$$$$00000001) for _main_stk
+    dadd.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    dadd.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    dadd.o(.text) refers to llsshr.o(.text) for __aeabi_lasr
+    dadd.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    dfltui.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    dfltui.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    dfixui.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    dfixui.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    entry2.o(.ARM.Collect$$$$00000001) refers to entry2.o(.ARM.Collect$$$$00002712) for __lit__00000000
+    entry2.o(__vectab_stack_and_reset_area) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    entry5.o(.ARM.Collect$$$$00000004) refers to init.o(.text) for __scatterload
+    entry9a.o(.ARM.Collect$$$$0000000B) refers to sys.o(i.main) for main
+    entry9b.o(.ARM.Collect$$$$0000000C) refers to sys.o(i.main) for main
+    depilogue.o(.text) refers to depilogue.o(i.__ARM_clz) for __ARM_clz
+    depilogue.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    depilogue.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    init.o(.text) refers to entry5.o(.ARM.Collect$$$$00000004) for __main_after_scatterload
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing sys.o(.rev16_text), (4 bytes).
+    Removing sys.o(.revsh_text), (4 bytes).
+    Removing sys.o(i.system_pins_wakeup_disable), (14 bytes).
+    Removing mxd_trx_service.o(.rev16_text), (4 bytes).
+    Removing mxd_trx_service.o(.revsh_text), (4 bytes).
+    Removing mxd_trx_service.o(i.txrx_server_receive), (4 bytes).
+    Removing mxd_trx_service.o(i.txrx_server_transfer), (44 bytes).
+    Removing ancs_service.o(.rev16_text), (4 bytes).
+    Removing ancs_service.o(.revsh_text), (4 bytes).
+    Removing calendar.o(.rev16_text), (4 bytes).
+    Removing calendar.o(.revsh_text), (4 bytes).
+    Removing calendar.o(i.calc_new_date), (308 bytes).
+    Removing calendar.o(i.calendar_date_compare), (62 bytes).
+    Removing calendar.o(i.calendar_init), (28 bytes).
+    Removing calendar.o(i.get_date_second), (148 bytes).
+    Removing calendar.o(i.get_system_date), (48 bytes).
+    Removing calendar.o(i.get_system_date_sec), (24 bytes).
+    Removing calendar.o(i.get_system_on_timer), (42 bytes).
+    Removing calendar.o(i.update_system_date), (72 bytes).
+    Removing calendar.o(i.update_system_date_sec), (20 bytes).
+    Removing calendar.o(i.year_is_leap_year), (42 bytes).
+    Removing calendar.o(.data), (24 bytes).
+    Removing calendar.o(.data), (8 bytes).
+    Removing utility.o(.rev16_text), (4 bytes).
+    Removing utility.o(.revsh_text), (4 bytes).
+    Removing utility.o(i.hex2str), (64 bytes).
+    Removing debug.o(.rev16_text), (4 bytes).
+    Removing debug.o(.revsh_text), (4 bytes).
+    Removing err_debug.o(.rev16_text), (4 bytes).
+    Removing err_debug.o(.revsh_text), (4 bytes).
+    Removing hci_cmd.o(.rev16_text), (4 bytes).
+    Removing hci_cmd.o(.revsh_text), (4 bytes).
+    Removing hci_msg_api.o(.rev16_text), (4 bytes).
+    Removing hci_msg_api.o(.revsh_text), (4 bytes).
+    Removing hci_api.o(.rev16_text), (4 bytes).
+    Removing hci_api.o(.revsh_text), (4 bytes).
+    Removing hci_event.o(.rev16_text), (4 bytes).
+    Removing hci_event.o(.revsh_text), (4 bytes).
+    Removing led.o(.rev16_text), (4 bytes).
+    Removing led.o(.revsh_text), (4 bytes).
+    Removing led.o(i.led_init), (34 bytes).
+    Removing led.o(i.led_off), (8 bytes).
+    Removing led.o(i.led_on), (8 bytes).
+    Removing app_ble.o(.rev16_text), (4 bytes).
+    Removing app_ble.o(.revsh_text), (4 bytes).
+    Removing app_ble.o(i.ble_peri_sendMsgToApp), (76 bytes).
+    Removing app_ble.o(i.le_bond_device_db_clear_all), (18 bytes).
+    Removing app_ble.o(i.le_bond_device_db_count), (32 bytes).
+    Removing app_ble.o(i.le_bond_device_db_load_from_flash), (24 bytes).
+    Removing app_ble.o(i.le_bond_device_db_remove), (16 bytes).
+    Removing app_ble.o(i.le_bond_device_db_save_to_flash_when_change), (64 bytes).
+    Removing app_ble.o(i.le_bond_device_load_from_flash), (2 bytes).
+    Removing app_ble.o(i.le_bond_device_save_to_flash), (2 bytes).
+    Removing app_main.o(.rev16_text), (4 bytes).
+    Removing app_main.o(.revsh_text), (4 bytes).
+    Removing app_ota.o(.rev16_text), (4 bytes).
+    Removing app_ota.o(.revsh_text), (4 bytes).
+    Removing app_ota.o(i.ota_image_decrypt), (34 bytes).
+    Removing mxd2660_gpio.o(.rev16_text), (4 bytes).
+    Removing mxd2660_gpio.o(.revsh_text), (4 bytes).
+    Removing mxd2660_gpio.o(i.gpio_clear_bit), (12 bytes).
+    Removing mxd2660_gpio.o(i.gpio_clear_data), (12 bytes).
+    Removing mxd2660_gpio.o(i.gpio_config_drive_strength), (60 bytes).
+    Removing mxd2660_gpio.o(i.gpio_config_pupd), (104 bytes).
+    Removing mxd2660_gpio.o(i.gpio_config_slew_rate), (60 bytes).
+    Removing mxd2660_gpio.o(i.gpio_config_weakup_pin), (56 bytes).
+    Removing mxd2660_gpio.o(i.gpio_deinit_interrupt), (24 bytes).
+    Removing mxd2660_gpio.o(i.gpio_disable_interrupt), (16 bytes).
+    Removing mxd2660_gpio.o(i.gpio_enable_interrupt), (16 bytes).
+    Removing mxd2660_gpio.o(i.gpio_init), (36 bytes).
+    Removing mxd2660_gpio.o(i.gpio_init_high_impedance), (40 bytes).
+    Removing mxd2660_gpio.o(i.gpio_init_interrupt), (148 bytes).
+    Removing mxd2660_gpio.o(i.gpio_init_output), (68 bytes).
+    Removing mxd2660_gpio.o(i.gpio_out), (16 bytes).
+    Removing mxd2660_gpio.o(i.gpio_pin_out), (20 bytes).
+    Removing mxd2660_gpio.o(i.gpio_read_input), (12 bytes).
+    Removing mxd2660_gpio.o(i.gpio_read_output), (12 bytes).
+    Removing mxd2660_gpio.o(i.gpio_read_output_bit), (20 bytes).
+    Removing mxd2660_gpio.o(i.gpio_set_bit), (12 bytes).
+    Removing mxd2660_gpio.o(i.gpio_set_data), (12 bytes).
+    Removing mxd2660_gpio.o(i.gpio_wakeup_disable_gpios), (24 bytes).
+    Removing mxd2660_gpio.o(i.gpio_wakeup_interrupt_clear), (12 bytes).
+    Removing mxd2660_watch_dog.o(.rev16_text), (4 bytes).
+    Removing mxd2660_watch_dog.o(.revsh_text), (4 bytes).
+    Removing mxd2660_watch_dog.o(i.watch_dog_enable), (16 bytes).
+    Removing mxd2660_watch_dog.o(i.watch_dog_init), (60 bytes).
+    Removing mxd2660_flash.o(.rev16_text), (4 bytes).
+    Removing mxd2660_flash.o(.revsh_text), (4 bytes).
+    Removing mxd2660_flash.o(i.user_flash_read), (60 bytes).
+    Removing mxd2660_flash.o(i.user_flash_sector_erase), (56 bytes).
+    Removing mxd2660_flash.o(i.user_flash_write), (72 bytes).
+    Removing mxd2660_uart1.o(.rev16_text), (4 bytes).
+    Removing mxd2660_uart1.o(.revsh_text), (4 bytes).
+    Removing mxd2660_uart1.o(i.uart1_get), (28 bytes).
+    Removing mxd2660_uart1.o(i.uart1_get_rfifo_cnt), (16 bytes).
+    Removing mxd2660_uart1.o(i.uart1_get_tfifo_cnt), (16 bytes).
+    Removing mxd2660_uart1.o(i.uart1_put), (28 bytes).
+    Removing mxd2660_uart1.o(i.uart1_send), (32 bytes).
+    Removing mxd2660_uart1.o(i.uart1_set_config), (12 bytes).
+    Removing mxd2660_uart1.o(i.uart1_set_mask), (12 bytes).
+    Removing dadd.o(.text), (356 bytes).
+    Removing dfltui.o(.text), (28 bytes).
+    Removing dfixui.o(.text), (60 bytes).
+    Removing depilogue.o(.text), (190 bytes).
+    Removing mxd2660_gpio.o(i.__ARM_common_switch8), (26 bytes).
+    Removing depilogue.o(i.__ARM_clz), (46 bytes).
+
+106 unused section(s) (total 3328 bytes) removed from the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
+    ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
+    ../clib/microlib/unhosted.c              0x00000000   Number         0  uread4.o ABSOLUTE
+    ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
+    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
+    ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixui.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  dfltui.o ABSOLUTE
+    ..\..\src\application\common\app_ota.c   0x00000000   Number         0  app_ota.o ABSOLUTE
+    ..\..\src\application\common\debug.c     0x00000000   Number         0  debug.o ABSOLUTE
+    ..\..\src\application\common\utility.c   0x00000000   Number         0  utility.o ABSOLUTE
+    ..\..\src\application\evaluation_sample\app_ble.c 0x00000000   Number         0  app_ble.o ABSOLUTE
+    ..\..\src\application\evaluation_sample\app_main.c 0x00000000   Number         0  app_main.o ABSOLUTE
+    ..\..\src\application\evaluation_sample\app_task.c 0x00000000   Number         0  app_task.o ABSOLUTE
+    ..\..\src\application\evaluation_sample\led.c 0x00000000   Number         0  led.o ABSOLUTE
+    ..\..\src\common\calendar.c              0x00000000   Number         0  calendar.o ABSOLUTE
+    ..\..\src\common\err_debug.c             0x00000000   Number         0  err_debug.o ABSOLUTE
+    ..\..\src\common\startup\cm0plus_startup.s 0x00000000   Number         0  cm0plus_startup.o ABSOLUTE
+    ..\..\src\common\startup\sys.c           0x00000000   Number         0  sys.o ABSOLUTE
+    ..\..\src\hci_app\hci_api.c              0x00000000   Number         0  hci_api.o ABSOLUTE
+    ..\..\src\hci_app\hci_cmd.c              0x00000000   Number         0  hci_cmd.o ABSOLUTE
+    ..\..\src\hci_app\hci_event.c            0x00000000   Number         0  hci_event.o ABSOLUTE
+    ..\..\src\hci_app\hci_msg_api.c          0x00000000   Number         0  hci_msg_api.o ABSOLUTE
+    ..\..\src\profiles\ancs_service.c        0x00000000   Number         0  ancs_service.o ABSOLUTE
+    ..\..\src\profiles\mxd_trx_service.c     0x00000000   Number         0  mxd_trx_service.o ABSOLUTE
+    ..\\..\\src\\application\\common\\app_ota.c 0x00000000   Number         0  app_ota.o ABSOLUTE
+    ..\\..\\src\\application\\common\\debug.c 0x00000000   Number         0  debug.o ABSOLUTE
+    ..\\..\\src\\application\\common\\utility.c 0x00000000   Number         0  utility.o ABSOLUTE
+    ..\\..\\src\\application\\evaluation_sample\\app_ble.c 0x00000000   Number         0  app_ble.o ABSOLUTE
+    ..\\..\\src\\application\\evaluation_sample\\app_main.c 0x00000000   Number         0  app_main.o ABSOLUTE
+    ..\\..\\src\\application\\evaluation_sample\\app_task.c 0x00000000   Number         0  app_task.o ABSOLUTE
+    ..\\..\\src\\application\\evaluation_sample\\led.c 0x00000000   Number         0  led.o ABSOLUTE
+    ..\\..\\src\\common\\calendar.c          0x00000000   Number         0  calendar.o ABSOLUTE
+    ..\\..\\src\\common\\err_debug.c         0x00000000   Number         0  err_debug.o ABSOLUTE
+    ..\\..\\src\\common\\startup\\sys.c      0x00000000   Number         0  sys.o ABSOLUTE
+    ..\\..\\src\\hci_app\\hci_api.c          0x00000000   Number         0  hci_api.o ABSOLUTE
+    ..\\..\\src\\hci_app\\hci_cmd.c          0x00000000   Number         0  hci_cmd.o ABSOLUTE
+    ..\\..\\src\\hci_app\\hci_event.c        0x00000000   Number         0  hci_event.o ABSOLUTE
+    ..\\..\\src\\hci_app\\hci_msg_api.c      0x00000000   Number         0  hci_msg_api.o ABSOLUTE
+    ..\\..\\src\\profiles\\ancs_service.c    0x00000000   Number         0  ancs_service.o ABSOLUTE
+    ..\\..\\src\\profiles\\mxd_trx_service.c 0x00000000   Number         0  mxd_trx_service.o ABSOLUTE
+    ..\\peripheral\\mxd2660_flash.c          0x00000000   Number         0  mxd2660_flash.o ABSOLUTE
+    ..\\peripheral\\mxd2660_gpio.c           0x00000000   Number         0  mxd2660_gpio.o ABSOLUTE
+    ..\\peripheral\\mxd2660_uart1.c          0x00000000   Number         0  mxd2660_uart1.o ABSOLUTE
+    ..\\peripheral\\mxd2660_watch_dog.c      0x00000000   Number         0  mxd2660_watch_dog.o ABSOLUTE
+    ..\peripheral\mxd2660_flash.c            0x00000000   Number         0  mxd2660_flash.o ABSOLUTE
+    ..\peripheral\mxd2660_gpio.c             0x00000000   Number         0  mxd2660_gpio.o ABSOLUTE
+    ..\peripheral\mxd2660_uart1.c            0x00000000   Number         0  mxd2660_uart1.o ABSOLUTE
+    ..\peripheral\mxd2660_watch_dog.c        0x00000000   Number         0  mxd2660_watch_dog.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    handlers.s                               0x00000000   Number         0  handlers.o ABSOLUTE
+    init.s                                   0x00000000   Number         0  init.o ABSOLUTE
+    .user.app.header                         0x0002aff0   Section       16  app_main.o(.user.app.header)
+    .text                                    0x0002b000   Section       12  cm0plus_startup.o(.text)
+    .text                                    0x0002b00c   Section        0  memcpya.o(.text)
+    .text                                    0x0002b030   Section        0  uread4.o(.text)
+    .text                                    0x0002b044   Section       36  init.o(.text)
+    .ARM.__at_0x2B100                        0x0002b100   Section        0  app_main.o(.ARM.__at_0x2B100)
+    RESET                                    0x0002b130   Section      192  cm0plus_startup.o(RESET)
+    .ARM.Collect$$$$00000000                 0x0002b1f0   Section        0  entry.o(.ARM.Collect$$$$00000000)
+    .ARM.Collect$$$$00000001                 0x0002b1f0   Section        4  entry2.o(.ARM.Collect$$$$00000001)
+    .ARM.Collect$$$$00000004                 0x0002b1f4   Section        4  entry5.o(.ARM.Collect$$$$00000004)
+    .ARM.Collect$$$$00000008                 0x0002b1f8   Section        0  entry7b.o(.ARM.Collect$$$$00000008)
+    .ARM.Collect$$$$0000000A                 0x0002b1f8   Section        0  entry8b.o(.ARM.Collect$$$$0000000A)
+    .ARM.Collect$$$$0000000B                 0x0002b1f8   Section        8  entry9a.o(.ARM.Collect$$$$0000000B)
+    .ARM.Collect$$$$0000000D                 0x0002b200   Section        0  entry10a.o(.ARM.Collect$$$$0000000D)
+    .ARM.Collect$$$$0000000F                 0x0002b200   Section        0  entry11a.o(.ARM.Collect$$$$0000000F)
+    .ARM.Collect$$$$00002712                 0x0002b200   Section        4  entry2.o(.ARM.Collect$$$$00002712)
+    __lit__00000000                          0x0002b200   Data           4  entry2.o(.ARM.Collect$$$$00002712)
+    .rev16_text                              0x0002b204   Section        4  app_task.o(.rev16_text)
+    .revsh_text                              0x0002b208   Section        4  app_task.o(.revsh_text)
+    i.GPIO_0_int_IRQHandler                  0x0002b20c   Section        0  mxd2660_gpio.o(i.GPIO_0_int_IRQHandler)
+    i.GPIO_1_int_IRQHandler                  0x0002b240   Section        0  mxd2660_gpio.o(i.GPIO_1_int_IRQHandler)
+    i.GPIO_2_int_IRQHandler                  0x0002b274   Section        0  mxd2660_gpio.o(i.GPIO_2_int_IRQHandler)
+    i.HardFault_IRQ_Handler                  0x0002b2a8   Section        0  err_debug.o(i.HardFault_IRQ_Handler)
+    i.NVIC_ClearPendingIRQ                   0x0002b2b8   Section        0  app_main.o(i.NVIC_ClearPendingIRQ)
+    NVIC_ClearPendingIRQ                     0x0002b2b9   Thumb Code    14  app_main.o(i.NVIC_ClearPendingIRQ)
+    i.NVIC_EnableIRQ                         0x0002b2cc   Section        0  app_main.o(i.NVIC_EnableIRQ)
+    NVIC_EnableIRQ                           0x0002b2cd   Thumb Code    14  app_main.o(i.NVIC_EnableIRQ)
+    i.NVIC_SetPriority                       0x0002b2e0   Section        0  app_main.o(i.NVIC_SetPriority)
+    NVIC_SetPriority                         0x0002b2e1   Thumb Code    60  app_main.o(i.NVIC_SetPriority)
+    i.UART1_int_IRQHandler                   0x0002b324   Section        0  mxd2660_uart1.o(i.UART1_int_IRQHandler)
+    i.__scatterload_copy                     0x0002b354   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x0002b362   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x0002b364   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.ancs_all_characteristic_found_handler  0x0002b374   Section        0  ancs_service.o(i.ancs_all_characteristic_found_handler)
+    i.ancs_data_ntf_handler                  0x0002b398   Section        0  ancs_service.o(i.ancs_data_ntf_handler)
+    i.ancs_discover_svc_by_uuid              0x0002b39a   Section        0  ancs_service.o(i.ancs_discover_svc_by_uuid)
+    i.ancs_init                              0x0002b3a2   Section        0  ancs_service.o(i.ancs_init)
+    i.ancs_server_config_notify              0x0002b3aa   Section        0  ancs_service.o(i.ancs_server_config_notify)
+    i.ancs_source_ntf_handler                0x0002b3b2   Section        0  ancs_service.o(i.ancs_source_ntf_handler)
+    i.ancs_timeout_handler                   0x0002b3c0   Section        0  app_ble.o(i.ancs_timeout_handler)
+    i.ancs_write_get_data_ntf                0x0002b3ec   Section        0  ancs_service.o(i.ancs_write_get_data_ntf)
+    i.app_irq_init                           0x0002b400   Section        0  app_main.o(i.app_irq_init)
+    i.app_task                               0x0002b468   Section        0  app_task.o(i.app_task)
+    i.app_task_init                          0x0002b4b8   Section        0  app_task.o(i.app_task_init)
+    i.ble_app_default_init                   0x0002b4dc   Section        0  app_ble.o(i.ble_app_default_init)
+    i.ble_app_init                           0x0002b540   Section        0  app_ble.o(i.ble_app_init)
+    i.ble_msg_proc                           0x0002b58c   Section        0  app_ble.o(i.ble_msg_proc)
+    i.ble_profile_init                       0x0002b698   Section        0  app_main.o(i.ble_profile_init)
+    i.dly_cycles                             0x0002b6a4   Section        0  utility.o(i.dly_cycles)
+    i.dly_us                                 0x0002b6b4   Section        0  utility.o(i.dly_us)
+    i.gpio_config_hw_type                    0x0002b6c0   Section        0  mxd2660_gpio.o(i.gpio_config_hw_type)
+    i.gpio_init_function                     0x0002b6fc   Section        0  mxd2660_gpio.o(i.gpio_init_function)
+    i.gpio_init_input                        0x0002b72c   Section        0  mxd2660_gpio.o(i.gpio_init_input)
+    i.gpio_read_input_bit                    0x0002b75c   Section        0  mxd2660_gpio.o(i.gpio_read_input_bit)
+    i.gpio_wakeup_enable_gpios               0x0002b770   Section        0  mxd2660_gpio.o(i.gpio_wakeup_enable_gpios)
+    i.is_log_canbe_sleep                     0x0002b7c0   Section        0  debug.o(i.is_log_canbe_sleep)
+    i.le_bond_device_db_add                  0x0002b7d8   Section        0  app_ble.o(i.le_bond_device_db_add)
+    i.le_bond_device_db_find_info            0x0002b830   Section        0  app_ble.o(i.le_bond_device_db_find_info)
+    i.little_endian_read_32bit               0x0002b874   Section        0  utility.o(i.little_endian_read_32bit)
+    i.main                                   0x0002b88a   Section        0  sys.o(i.main)
+    i.main_process                           0x0002b8a6   Section        0  app_main.o(i.main_process)
+    i.os_stack_overflow                      0x0002b8b2   Section        0  err_debug.o(i.os_stack_overflow)
+    i.ota_init                               0x0002b8c4   Section        0  app_ota.o(i.ota_init)
+    i.peripheral_init                        0x0002b8e0   Section        0  app_main.o(i.peripheral_init)
+    i.power_manage_init                      0x0002b910   Section        0  app_main.o(i.power_manage_init)
+    i.recover_info_after_wakeup_cb           0x0002b938   Section        0  app_main.o(i.recover_info_after_wakeup_cb)
+    i.save_info_before_sleep_cb              0x0002b948   Section        0  app_main.o(i.save_info_before_sleep_cb)
+    i.sys_debug_en                           0x0002b974   Section        0  debug.o(i.sys_debug_en)
+    i.sys_debug_init                         0x0002b980   Section        0  debug.o(i.sys_debug_init)
+    i.system_assert_debug                    0x0002b990   Section        0  err_debug.o(i.system_assert_debug)
+    i.system_pins_wakeup_enable              0x0002b9b4   Section        0  sys.o(i.system_pins_wakeup_enable)
+    i.trx_get_attrLenCB                      0x0002b9c4   Section        0  mxd_trx_service.o(i.trx_get_attrLenCB)
+    i.trx_init_service                       0x0002b9d8   Section        0  mxd_trx_service.o(i.trx_init_service)
+    i.trx_read_attrCB                        0x0002ba44   Section        0  mxd_trx_service.o(i.trx_read_attrCB)
+    i.trx_write_attrCB                       0x0002ba68   Section        0  mxd_trx_service.o(i.trx_write_attrCB)
+    i.uart1_Log_output                       0x0002ba88   Section        0  debug.o(i.uart1_Log_output)
+    i.uart1_Log_print                        0x0002bab4   Section        0  debug.o(i.uart1_Log_print)
+    i.uart1_init                             0x0002bafc   Section        0  mxd2660_uart1.o(i.uart1_init)
+    i.user_call_back_register                0x0002bb1c   Section        0  sys.o(i.user_call_back_register)
+    i.user_flash_nvr_read                    0x0002bb68   Section        0  mxd2660_flash.o(i.user_flash_nvr_read)
+    i.user_irq_register                      0x0002bbb0   Section        0  sys.o(i.user_irq_register)
+    i.watch_dog_feed                         0x0002bc50   Section        0  mxd2660_watch_dog.o(i.watch_dog_feed)
+    .constdata                               0x0002bc5c   Section       20  app_ble.o(.constdata)
+    .constdata                               0x0002bc70   Section       28  app_task.o(.constdata)
+    .data                                    0x20003f00   Section       20  mxd_trx_service.o(.data)
+    .data                                    0x20003f14   Section       14  ancs_service.o(.data)
+    .data                                    0x20003f22   Section        6  debug.o(.data)
+    .data                                    0x20003f28   Section       45  app_ble.o(.data)
+    .data                                    0x20003f58   Section        8  app_task.o(.data)
+    .bss                                     0x20003f60   Section     1024  debug.o(.bss)
+    .bss                                     0x20004360   Section      232  app_ble.o(.bss)
+    .bss                                     0x20004448   Section       92  app_task.o(.bss)
+    .bss                                     0x200044a4   Section       12  mxd2660_gpio.o(.bss)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$ROPI$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __ARM_use_no_argv                        0x00000000   Number         0  sys.o ABSOLUTE
+    __cpp_initialize__aeabi_                  - Undefined Weak Reference
+    __cxa_finalize                            - Undefined Weak Reference
+    __decompress                              - Undefined Weak Reference
+    _clock_init                               - Undefined Weak Reference
+    _microlib_exit                            - Undefined Weak Reference
+    __Vectors_Size                           0x000000c0   Number         0  cm0plus_startup.o ABSOLUTE
+    flash_nvr_read                           0x0000033d   Thumb Code     0  symbol.lib ABSOLUTE
+    flash_nvr_sector_erase                   0x00000385   Thumb Code     0  symbol.lib ABSOLUTE
+    flash_nvr_write                          0x000003c1   Thumb Code     0  symbol.lib ABSOLUTE
+    flash_ota_read                           0x0000040d   Thumb Code     0  symbol.lib ABSOLUTE
+    flash_read                               0x00000441   Thumb Code     0  symbol.lib ABSOLUTE
+    flash_read_direct                        0x00000475   Thumb Code     0  symbol.lib ABSOLUTE
+    __RL_RTX_VER                             0x00000480   Number         0  symbol.lib ABSOLUTE
+    flash_sector_erase                       0x0000048d   Thumb Code     0  symbol.lib ABSOLUTE
+    flash_write                              0x000004bd   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_genFun                               0x000004fd   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_info_update                          0x0000051f   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_key_get                              0x0000054d   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_write_flash                          0x0000057d   Thumb Code     0  symbol.lib ABSOLUTE
+    root_app_update                          0x000005d1   Thumb Code     0  symbol.lib ABSOLUTE
+    root_crc32                               0x00000695   Thumb Code     0  symbol.lib ABSOLUTE
+    root_sec_boot_update                     0x000006bd   Thumb Code     0  symbol.lib ABSOLUTE
+    root_stack_update                        0x00000721   Thumb Code     0  symbol.lib ABSOLUTE
+    root_system_reset                        0x000007e5   Thumb Code     0  symbol.lib ABSOLUTE
+    root_update_check                        0x00000819   Thumb Code     0  symbol.lib ABSOLUTE
+    root_update_code_check                   0x00000859   Thumb Code     0  symbol.lib ABSOLUTE
+    system_init                              0x000008bd   Thumb Code     0  symbol.lib ABSOLUTE
+    crc32_tab                                0x000008d4   Data           0  symbol.lib ABSOLUTE
+    BLE_LL_int_IRQHandler                    0x000021f1   Thumb Code     0  symbol.lib ABSOLUTE
+    GAPRole_SendSecurityReq                  0x000022d9   Thumb Code     0  symbol.lib ABSOLUTE
+    GAPRole_StartDevice                      0x000022dd   Thumb Code     0  symbol.lib ABSOLUTE
+    GAPRole_TerminateConnection              0x000022ed   Thumb Code     0  symbol.lib ABSOLUTE
+    GAPRole_reset                            0x000022ef   Thumb Code     0  symbol.lib ABSOLUTE
+    GATTS_addChar                            0x000022f1   Thumb Code     0  symbol.lib ABSOLUTE
+    GATTS_addCharDescrip                     0x00002313   Thumb Code     0  symbol.lib ABSOLUTE
+    GATTS_addCharDescrip_client_config       0x0000231b   Thumb Code     0  symbol.lib ABSOLUTE
+    GATTS_addServiceEnd                      0x00002325   Thumb Code     0  symbol.lib ABSOLUTE
+    GATTS_addServiceStart                    0x00002359   Thumb Code     0  symbol.lib ABSOLUTE
+    GATTS_send_indicate                      0x0000239d   Thumb Code     0  symbol.lib ABSOLUTE
+    GATTS_send_notify                        0x000023ad   Thumb Code     0  symbol.lib ABSOLUTE
+    MxdRfInit                                0x000023c1   Thumb Code     0  symbol.lib ABSOLUTE
+    RTC_int_IRQHandler                       0x00002481   Thumb Code     0  symbol.lib ABSOLUTE
+    Vaidate_Access_Address                   0x00002511   Thumb Code     0  symbol.lib ABSOLUTE
+    __ARM_common_switch8                     0x000025b5   Thumb Code     0  symbol.lib ABSOLUTE
+    adv_scan_para_init                       0x000025d1   Thumb Code     0  symbol.lib ABSOLUTE
+    after_wkup_check                         0x0000264d   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_chunk_parser_handle_byte            0x0000265d   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_chunk_parser_init                   0x000026d5   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_client_attribute_name_for_id        0x000026e9   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_connected_handler                   0x000026fd   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_data_report                         0x00002711   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_discover_again                      0x00002769   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_discover_service                    0x00002785   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_encrypt_chg_handler                 0x000027a5   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_gatt_query_complete                 0x000027cd   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_little_read_16                      0x00002939   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_little_read_32                      0x00002945   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_little_store_32                     0x0000295b   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_notification_dispatch               0x00002971   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_onoff_notify                        0x000029f5   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_service_init                        0x00002a21   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_write_get_data                      0x00002a39   Thumb Code     0  symbol.lib ABSOLUTE
+    ancs_write_get_message_data              0x00002a79   Thumb Code     0  symbol.lib ABSOLUTE
+    att_auto_exchange_mtu_onoff              0x00002aad   Thumb Code     0  symbol.lib ABSOLUTE
+    att_clear_transaction_queue              0x00002ab9   Thumb Code     0  symbol.lib ABSOLUTE
+    att_confirmation                         0x00002acd   Thumb Code     0  symbol.lib ABSOLUTE
+    att_copy_value                           0x00002b51   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_add_attribute_uuid128        0x00002b81   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_add_attribute_uuid16         0x00002c11   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_add_characteristic_descrip_client_cfg 0x00002c95   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_add_characteristic_uuid128   0x00002cb1   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_add_characteristic_uuid16    0x00002d05   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_add_service_uuid128          0x00002d55   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_add_service_uuid16           0x00002d67   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_assert_space                 0x00002d85   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_get_last_handle              0x00002da1   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_get_size                     0x00002db5   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_init                         0x00002dc5   Thumb Code     0  symbol.lib ABSOLUTE
+    att_db_util_set_end_tag                  0x00002e05   Thumb Code     0  symbol.lib ABSOLUTE
+    att_exchange_mtu_request                 0x00002e21   Thumb Code     0  symbol.lib ABSOLUTE
+    att_exchange_mtu_request_api             0x00002e2d   Thumb Code     0  symbol.lib ABSOLUTE
+    att_execute_write_request                0x00002eb9   Thumb Code     0  symbol.lib ABSOLUTE
+    att_find_by_type_value_request           0x00002f45   Thumb Code     0  symbol.lib ABSOLUTE
+    att_find_handle                          0x00003011   Thumb Code     0  symbol.lib ABSOLUTE
+    att_find_information_request             0x00003041   Thumb Code     0  symbol.lib ABSOLUTE
+    att_indication_timeout_handler           0x000030e1   Thumb Code     0  symbol.lib ABSOLUTE
+    att_indication_timeout_start             0x000030e5   Thumb Code     0  symbol.lib ABSOLUTE
+    att_indication_timeout_stop              0x0000310d   Thumb Code     0  symbol.lib ABSOLUTE
+    att_iterator_fetch_next                  0x00003125   Thumb Code     0  symbol.lib ABSOLUTE
+    att_iterator_has_next                    0x00003183   Thumb Code     0  symbol.lib ABSOLUTE
+    att_iterator_init                        0x0000318d   Thumb Code     0  symbol.lib ABSOLUTE
+    att_iterator_match_uuid                  0x00003199   Thumb Code     0  symbol.lib ABSOLUTE
+    att_iterator_match_uuid16                0x000031f7   Thumb Code     0  symbol.lib ABSOLUTE
+    att_packet_handler                       0x0000322d   Thumb Code     0  symbol.lib ABSOLUTE
+    att_prepare_handle_value_indication      0x000033b1   Thumb Code     0  symbol.lib ABSOLUTE
+    att_prepare_handle_value_notification    0x000033c1   Thumb Code     0  symbol.lib ABSOLUTE
+    att_prepare_write_request                0x000033d1   Thumb Code     0  symbol.lib ABSOLUTE
+    att_prepare_write_reset                  0x00003489   Thumb Code     0  symbol.lib ABSOLUTE
+    att_prepare_write_update_errors          0x00003499   Thumb Code     0  symbol.lib ABSOLUTE
+    att_read_blob_request                    0x000034b9   Thumb Code     0  symbol.lib ABSOLUTE
+    att_read_by_type_or_group_request_for_uuid128 0x00003559   Thumb Code     0  symbol.lib ABSOLUTE
+    att_read_by_type_or_group_request_for_uuid16 0x00003605   Thumb Code     0  symbol.lib ABSOLUTE
+    att_read_multiple_request                0x000036ad   Thumb Code     0  symbol.lib ABSOLUTE
+    att_read_request                         0x00003761   Thumb Code     0  symbol.lib ABSOLUTE
+    att_server_indicate                      0x000037f5   Thumb Code     0  symbol.lib ABSOLUTE
+    att_server_notify                        0x000038cd   Thumb Code     0  symbol.lib ABSOLUTE
+    att_signed_write_handle_cmac_result      0x000039d5   Thumb Code     0  symbol.lib ABSOLUTE
+    att_signed_write_request                 0x00003aa1   Thumb Code     0  symbol.lib ABSOLUTE
+    att_update_value_len                     0x00003af5   Thumb Code     0  symbol.lib ABSOLUTE
+    att_uuid_for_handle                      0x00003b09   Thumb Code     0  symbol.lib ABSOLUTE
+    att_validate_security                    0x00003b31   Thumb Code     0  symbol.lib ABSOLUTE
+    att_wakeup_during_latency_onoff          0x00003b85   Thumb Code     0  symbol.lib ABSOLUTE
+    att_write_request                        0x00003b91   Thumb Code     0  symbol.lib ABSOLUTE
+    bd_addr_cmp                              0x00003c35   Thumb Code     0  symbol.lib ABSOLUTE
+    before_sleep_check                       0x00003c41   Thumb Code     0  symbol.lib ABSOLUTE
+    betacyDcocCali                           0x00003c51   Thumb Code     0  symbol.lib ABSOLUTE
+    betacyFdPoutInit                         0x00003de9   Thumb Code     0  symbol.lib ABSOLUTE
+    betacyLoLock                             0x00004051   Thumb Code     0  symbol.lib ABSOLUTE
+    betacyMXDDebug                           0x00004085   Thumb Code     0  symbol.lib ABSOLUTE
+    betacyModeGainInit                       0x000040e9   Thumb Code     0  symbol.lib ABSOLUTE
+    betacyRetentionInit                      0x000042f5   Thumb Code     0  symbol.lib ABSOLUTE
+    betacySetMode                            0x00004715   Thumb Code     0  symbol.lib ABSOLUTE
+    bleDisable                               0x00004799   Thumb Code     0  symbol.lib ABSOLUTE
+    bleEnable                                0x000047b1   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_adv_set_para                     0x000047c1   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_adv_start                        0x000047d9   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_adv_state                        0x00004811   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_adv_stop                         0x00004819   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_adv_use_new_param_and_restart    0x00004829   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_append_whitelist                 0x00004831   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_att_auto_exchange_mtu_onoff      0x0000485d   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_att_exchange_mtu_request         0x00004865   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_check_sleep_status_flash_can_earse 0x00004875   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_clear_whitelist                  0x000048b1   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_conn_update                      0x000048b9   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_creat_conn                       0x000048c1   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_device_config_appearance_get     0x000048ed   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_device_config_appearance_set     0x000048f9   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_device_config_device_name        0x00004905   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_encrypt_enable                   0x00004915   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_encrypt_oob                      0x00004917   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_encrypt_passkey                  0x00004919   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_exchange_mtu                     0x0000491b   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_get_con_para                     0x00004923   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_get_con_rssi                     0x0000492b   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_get_device_addr                  0x00004933   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_get_irk                          0x0000493b   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_get_mtu                          0x00004943   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_input_passkey_during_pair        0x0000494b   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_linklayer_1m2m_phy_updata        0x00004953   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_linklayer_start_long_length_packet_req 0x00004973   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_linklayer_version_req            0x00004983   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_long_term_key_request_negative_replay 0x00004993   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_long_term_key_request_reply      0x000049a5   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_notify_flag_set                  0x000049d1   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_privacy_mode_enable              0x000049dd   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_remove_whitelist                 0x000049e1   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_scan_set_para                    0x00004a0d   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_scan_start                       0x00004a25   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_scan_state                       0x00004a51   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_scan_stop                        0x00004a59   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_send_security_req                0x00004a69   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_set_device_addr                  0x00004a71   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_set_tx_power                     0x00004a9d   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_sm_bond_info_save_by_app_config  0x00004a9f   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_terminate_conn                   0x00004aa7   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_update_conn_para                 0x00004ab7   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_update_irk                       0x00004ac3   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_update_pair_para                 0x00004acb   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_api_wakeup_during_latency_onoff      0x00004ad3   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_msg_AppSendToBle                     0x00004add   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_msg_api_init                         0x00004b39   Thumb Code     0  symbol.lib ABSOLUTE
+    ble_sendMsgToApp                         0x00004b95   Thumb Code     0  symbol.lib ABSOLUTE
+    characteristic_end_found                 0x00004bdd   Thumb Code     0  symbol.lib ABSOLUTE
+    characteristic_start_found               0x00004c89   Thumb Code     0  symbol.lib ABSOLUTE
+    connection_disconnect                    0x00004cf5   Thumb Code     0  symbol.lib ABSOLUTE
+    delete_data_ptr_list                     0x00004d35   Thumb Code     0  symbol.lib ABSOLUTE
+    dkg_next_state                           0x00004d89   Thumb Code     0  symbol.lib ABSOLUTE
+    encrypt_task                             0x00004d99   Thumb Code     0  symbol.lib ABSOLUTE
+    extract_service                          0x00004f4d   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_add_white_list                       0x00004f91   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_advertisements_enable                0x00004fb9   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_advertisements_get_address           0x00004fcd   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_aes_encryption                       0x00004ff9   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_clear_white_list                     0x00005029   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_create_connection                    0x00005035   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_discovery_enable                     0x0000503d   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_get_adv_state                        0x00005051   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_get_con_para                         0x00005061   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_get_con_rssi                         0x0000507d   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_get_mac_address                      0x00005095   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_get_mtu                              0x000050bd   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_get_scan_state                       0x000050d1   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_notify_to_app                        0x000050e1   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_random_address_get_mode              0x000050e5   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_random_address_set                   0x000050f1   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_random_address_set_update_period     0x00005121   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_random_address_timer                 0x0000512d   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_random_address_update_start          0x0000512f   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_random_address_update_stop           0x00005131   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_remove_white_list                    0x00005135   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_scan_adv_report_CB                   0x00005189   Thumb Code     0  symbol.lib ABSOLUTE
+    gap_terminate_connection                 0x00005215   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_cancel_write                 0x0000521d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_deserialize_characteristic   0x0000525d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_deserialize_characteristic_descriptor 0x00005299   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_deserialize_service          0x000052b5   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_discover_characteristic_descriptors 0x000052dd   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_discover_characteristics_for_handle_range_by_uuid128 0x0000533d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_discover_characteristics_for_handle_range_by_uuid16 0x000053a1   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_discover_characteristics_for_service 0x000053fd   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_discover_characteristics_for_service_by_uuid128 0x00005451   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_discover_characteristics_for_service_by_uuid16 0x0000545f   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_discover_primary_services    0x0000546d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_discover_primary_services_by_uuid128 0x000054b9   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_discover_primary_services_by_uuid16 0x00005511   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_execute_write                0x0000555d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_find_included_services_for_service 0x0000559d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_error_response        0x000055e9   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_exchange_mtu_response 0x00005675   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_execute_write_response 0x000056ad   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_find_by_type_value_response 0x000056ed   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_find_information_reply 0x00005781   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_prepare_write_response 0x000057dd   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_read_blob_response    0x0000587d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_read_by_group_type_response 0x000058bd   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_read_by_type_response 0x0000593d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_read_multiple_response 0x00005a79   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_read_response         0x00005ab9   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_transaction_complete  0x00005b59   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_value_indication      0x00005b75   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_value_notification    0x00005b95   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_handle_write_response        0x00005bc1   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_init                         0x00005bfd   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_notification_data_rpt        0x00005c39   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_prepare_write                0x00005c7d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_characteristic_descriptor 0x00005cd1   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_characteristic_descriptor_using_descriptor_handle 0x00005cdd   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_long_characteristic_descriptor 0x00005d21   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_long_characteristic_descriptor_using_descriptor_handle 0x00005d2d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_long_characteristic_descriptor_using_descriptor_handle_with_offset 0x00005d39   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_long_value_of_characteristic 0x00005d81   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_long_value_of_characteristic_using_value_handle 0x00005d8d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_long_value_of_characteristic_using_value_handle_with_offset 0x00005d99   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_multiple_characteristic_values 0x00005de1   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_value_of_characteristic 0x00005e29   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_value_of_characteristic_using_value_handle 0x00005e35   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_value_of_characteristics_by_uuid128 0x00005e7d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_read_value_of_characteristics_by_uuid16 0x00005edd   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_reliable_write_long_value_of_characteristic 0x00005f31   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_report_error_if_pending      0x00005f85   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_run                          0x00005fad   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_signed_write_without_response 0x0000622d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_timeout_start                0x00006285   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_timeout_stop                 0x000062ad   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_write_characteristic_descriptor 0x000062c5   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_write_characteristic_descriptor_using_descriptor_handle 0x000062d1   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_write_client_characteristic_configuration 0x00006325   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_write_long_characteristic_descriptor 0x00006399   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_write_long_characteristic_descriptor_using_descriptor_handle 0x000063a9   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_write_long_characteristic_descriptor_using_descriptor_handle_with_offset 0x000063b9   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_write_long_value_of_characteristic 0x0000640d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_write_long_value_of_characteristic_with_offset 0x0000641d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_write_value_of_characteristic 0x00006471   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_client_write_value_of_characteristic_without_response 0x000064c1   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_complete_event                      0x0000650d   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_event_chara_value_query_result      0x00006689   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_find_server                         0x00006749   Thumb Code     0  symbol.lib ABSOLUTE
+    gatt_timeout_handler                     0x00006779   Thumb Code     0  symbol.lib ABSOLUTE
+    gatts_init                               0x00006799   Thumb Code     0  symbol.lib ABSOLUTE
+    get_avail_data_buffer                    0x000067b9   Thumb Code     0  symbol.lib ABSOLUTE
+    get_avail_data_num                       0x00006825   Thumb Code     0  symbol.lib ABSOLUTE
+    get_data_ptr_list_end                    0x00006851   Thumb Code     0  symbol.lib ABSOLUTE
+    get_free_data_ptr_list                   0x0000686d   Thumb Code     0  symbol.lib ABSOLUTE
+    get_last_result_handle_from_characteristics_list 0x00006899   Thumb Code     0  symbol.lib ABSOLUTE
+    get_last_result_handle_from_included_services_list 0x000068a7   Thumb Code     0  symbol.lib ABSOLUTE
+    get_last_result_handle_from_service_list 0x000068b3   Thumb Code     0  symbol.lib ABSOLUTE
+    get_mic_status                           0x000068c1   Thumb Code     0  symbol.lib ABSOLUTE
+    get_sca                                  0x000068c9   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_exchange_mtu_request              0x000068e9   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_execute_write_request             0x000069a5   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_find_by_type_value_request        0x00006a8d   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_find_information_request          0x00006c41   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_prepare_write_request             0x00006db9   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_read_blob_request                 0x00006ef9   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_read_by_group_type_request        0x00007045   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_read_by_type_request              0x00007249   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_read_multiple_request             0x0000742d   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_read_request                      0x00007579   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_signed_write_command              0x00007699   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_signed_write_command_pre          0x000076ed   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_value_indication                  0x00007775   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_write_command                     0x000077a5   Thumb Code     0  symbol.lib ABSOLUTE
+    handle_write_request                     0x00007805   Thumb Code     0  symbol.lib ABSOLUTE
+    hci_do_connection_para_update            0x00007939   Thumb Code     0  symbol.lib ABSOLUTE
+    hci_le_connection_update                 0x00007a15   Thumb Code     0  symbol.lib ABSOLUTE
+    hci_le_create_connection_cancel          0x00007a49   Thumb Code     0  symbol.lib ABSOLUTE
+    hci_le_long_term_key_request_negative_replay 0x00007a6d   Thumb Code     0  symbol.lib ABSOLUTE
+    hci_le_long_term_key_request_reply       0x00007afd   Thumb Code     0  symbol.lib ABSOLUTE
+    hci_le_start_encryption                  0x00007b61   Thumb Code     0  symbol.lib ABSOLUTE
+    hci_sleep_check                          0x00007c3d   Thumb Code     0  symbol.lib ABSOLUTE
+    insert_data_ptr_list                     0x00007c51   Thumb Code     0  symbol.lib ABSOLUTE
+    is_Bluetooth_Base_UUID                   0x00007c5d   Thumb Code     0  symbol.lib ABSOLUTE
+    is_query_done                            0x00007c8d   Thumb Code     0  symbol.lib ABSOLUTE
+    is_ready                                 0x00007c9b   Thumb Code     0  symbol.lib ABSOLUTE
+    is_value_valid                           0x00007ca9   Thumb Code     0  symbol.lib ABSOLUTE
+    l2cap_conn_para_update_req               0x00007ce9   Thumb Code     0  symbol.lib ABSOLUTE
+    l2cap_signaling_handler                  0x00007db5   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_add                         0x00007ef5   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_clear                       0x00007f45   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_count                       0x00007f59   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_encryption_get              0x00007f79   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_encryption_set              0x00007fe1   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_info                        0x00008025   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_init                        0x00008069   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_local_counter_get           0x0000807d   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_local_counter_set           0x0000808d   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_local_csrk_get              0x0000809d   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_local_csrk_set              0x000080c1   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_remote_counter_get          0x000080e1   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_remote_counter_set          0x000080f1   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_remote_csrk_get             0x00008101   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_remote_csrk_set             0x00008125   Thumb Code     0  symbol.lib ABSOLUTE
+    le_device_db_remove                      0x00008145   Thumb Code     0  symbol.lib ABSOLUTE
+    little_endian_read_16                    0x00008155   Thumb Code     0  symbol.lib ABSOLUTE
+    little_endian_read_24                    0x00008161   Thumb Code     0  symbol.lib ABSOLUTE
+    little_endian_read_32                    0x0000816f   Thumb Code     0  symbol.lib ABSOLUTE
+    little_endian_store_16                   0x00008185   Thumb Code     0  symbol.lib ABSOLUTE
+    little_endian_store_32                   0x0000818f   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_adv_enable                            0x000081a5   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_adv_goto_slv                          0x000081f5   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_adv_set_continuous_mode               0x000083d5   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_adv_start                             0x00008409   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_adv_state_ctrl                        0x000084a1   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_check_exist_enough_time_for_more_data 0x00008575   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_check_event_closed               0x000085ad   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_get_rx_addr                      0x00008625   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_get_wide_window                  0x00008635   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_goto_idle                        0x000086cd   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_mst_configure                    0x00008765   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_mst_phy_config                   0x00008c71   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_rx_crc_error_process             0x00008ce5   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_rx_lost_process                  0x00008da1   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_slv_configure                    0x00008e3d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_slv_rx_phy_config                0x00008f99   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_slv_tx_ccm_config                0x0000900d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_slv_tx_phy_config                0x00009049   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_slv_tx_prepare                   0x00009059   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_some_para_init                   0x000093f1   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_tx_ctrl_acked_process            0x0000943d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_update_phy_ccm_para              0x0000956d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_conn_update_process                   0x0000957d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_ctrl_out_buf_commit                   0x00009695   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_ctrl_start_length_exchange            0x000096ad   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_ctrl_start_ll_version_req             0x0000971d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_ctrl_start_phy_update                 0x00009775   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_ctrl_task                             0x000097d5   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_dispatch_adv_rx                       0x00009a41   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_dispatch_cnnct_rx                     0x00009c1d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_dispatch_ctrl_pdu                     0x0000a0e1   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_dispatch_reject_ind                   0x0000a831   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_dispatch_unknown_rsp                  0x0000a915   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_dtm_pesuedo_generate                  0x0000aa1d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_dtm_start                             0x0000aa49   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_dtm_stop                              0x0000aa71   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_get_avail_ctrl_out_buf                0x0000aa89   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_get_idx_from_conn_hdl                 0x0000aad5   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_get_idx_in_task                       0x0000ab05   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_get_llc_control_ltc_en                0x0000ab09   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_get_sch_timer_cnt                     0x0000ab19   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_hop_channel                           0x0000ab25   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_init                                  0x0000ab91   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_init_enable                           0x0000acad   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_init_goto_mst                         0x0000acc9   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_init_phy_config                       0x0000ae51   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_init_wl_dispatch                      0x0000aec5   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_instant_left                          0x0000af25   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_lsn_end_dispatch                      0x0000af39   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_master_init                           0x0000af65   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_1m2m_set                          0x0000b049   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_ccm_aes128                        0x0000b07d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_ccm_config                        0x0000b0c9   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_ccm_config_revert                 0x0000b14d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_ccm_debug_trig                    0x0000b175   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_ccm_done_status                   0x0000b181   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_ccm_mic_status                    0x0000b191   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_ccm_set_bypass_mode               0x0000b1a1   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_config                            0x0000b1b1   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_debug_set0                        0x0000b26d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_debug_trig                        0x0000b279   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_doze                              0x0000b285   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_dtm_config                        0x0000b291   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_get_anchor_delta                  0x0000b2f9   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_get_llc_mode                      0x0000b305   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_get_llc_rx_header                 0x0000b315   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_get_llc_tx_header                 0x0000b321   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_get_lsn_bgn                       0x0000b32d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_get_sch_timer_count               0x0000b339   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_get_slp_count                     0x0000b355   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_init                              0x0000b361   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_lsn_bgn                           0x0000b409   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_lsn_end                           0x0000b415   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_ltc_trig_cfg                      0x0000b421   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_printf_mic                        0x0000b42d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_set_fake_acccode                  0x0000b439   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_set_idle                          0x0000b449   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_set_ltc_timer_cycles              0x0000b459   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_set_mode                          0x0000b465   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_set_slp_length                    0x0000b47d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_stop_trx_state_machine            0x0000b489   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_stop_tx                           0x0000b495   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_update_config                     0x0000b4a1   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_update_part_adv_para              0x0000b52d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_phy_update_reload_cnt                 0x0000b53d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_refresh_init_pdu                      0x0000b551   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_release_buff_rx_fail                  0x0000b669   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_release_ctrl_rx_buffer                0x0000b6b9   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_release_ctrl_tx_buffer                0x0000b6e1   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_rx_crc_err_dispatch                   0x0000b715   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_rx_crc_ok_dispatch                    0x0000b759   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_rx_lost_dispatch                      0x0000b7f9   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_scan_enable                           0x0000b84d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_scan_phy_config                       0x0000b955   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_scan_rx_error_process                 0x0000b9ad   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_arbitrate                         0x0000ba09   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_arbitrate_core                    0x0000c231   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_check_critical_event              0x0000c541   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_check_latency_available           0x0000c581   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_check_timeout                     0x0000c5e1   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_check_timer_timeout               0x0000c6b1   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_clr_timeout                       0x0000c6cd   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_config_reload_cnt                 0x0000c6f5   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_get_resided_sleep_time            0x0000c739   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_main                              0x0000c789   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_set_timeout                       0x0000ce71   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_sch_update_overlap_link               0x0000cea9   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_set_adv_para                          0x0000cf75   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_set_dtm_para                          0x0000d101   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_set_idx_in_task                       0x0000d1d9   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_set_intv                              0x0000d1db   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_set_scan_para                         0x0000d1f9   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_set_winsize_and_offset                0x0000d279   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_start_encryption_set_sk               0x0000d2bd   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_tx_end_dispatch                       0x0000d345   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_tx_second_ctrl_pdu                    0x0000d38d   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_update_random_addr                    0x0000d495   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_wakeup_during_latency                 0x0000d4f5   Thumb Code     0  symbol.lib ABSOLUTE
+    ll_white_filter                          0x0000d661   Thumb Code     0  symbol.lib ABSOLUTE
+    log_output_cb                            0x0000d69d   Thumb Code     0  symbol.lib ABSOLUTE
+    log_sleep_check                          0x0000d6ad   Thumb Code     0  symbol.lib ABSOLUTE
+    main_idle_process                        0x0000d6c1   Thumb Code     0  symbol.lib ABSOLUTE
+    memcmp2                                  0x0000d6d1   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_add_a_char                           0x0000d6ed   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_add_a_char_des                       0x0000d749   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_add_a_serv                           0x0000d81d   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_att_get_attribute_length_callback    0x0000d845   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_att_read_callback                    0x0000d895   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_att_write_callback                   0x0000d931   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_calc_dbm_from_read_rssi              0x0000d9ad   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_dcoc_dispatch                        0x0000d9e5   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_get_client_char_des_next             0x0000da4d   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_get_client_char_next                 0x0000dad9   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_get_client_init                      0x0000db29   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_read_rssi                            0x0000db4d   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_read_tempreture                      0x0000db61   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_rssi_db_length                       0x0000dc6d   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_save_dcoc_clbr                       0x0000dcbd   Thumb Code     0  symbol.lib ABSOLUTE
+    mxd_update_dcoc_clbr                     0x0000dd21   Thumb Code     0  symbol.lib ABSOLUTE
+    os_error_handler                         0x0000dd81   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_default_para                         0x0000ddad   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_get_attrLenCB                        0x0000ddd9   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_init_service                         0x0000dded   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_read_attrCB                          0x0000de59   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_write_attrCB                         0x0000de81   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_write_cccd                           0x0000deb9   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_write_ota_ctrl                       0x0000df35   Thumb Code     0  symbol.lib ABSOLUTE
+    ota_write_ota_data                       0x0000e135   Thumb Code     0  symbol.lib ABSOLUTE
+    prepare_handle_value                     0x0000e375   Thumb Code     0  symbol.lib ABSOLUTE
+    rau_next_state                           0x0000e3b1   Thumb Code     0  symbol.lib ABSOLUTE
+    regBitsGet                               0x0000e3c1   Thumb Code     0  symbol.lib ABSOLUTE
+    release_data_buffer                      0x0000e3e5   Thumb Code     0  symbol.lib ABSOLUTE
+    release_data_ptr_list                    0x0000e42d   Thumb Code     0  symbol.lib ABSOLUTE
+    report_gatt_all_characteristic_descriptors 0x0000e465   Thumb Code     0  symbol.lib ABSOLUTE
+    report_gatt_characteristics              0x0000e4a5   Thumb Code     0  symbol.lib ABSOLUTE
+    rf_mem_read                              0x0000e509   Thumb Code     0  symbol.lib ABSOLUTE
+    rf_reg_read                              0x0000e531   Thumb Code     0  symbol.lib ABSOLUTE
+    rf_reg_write                             0x0000e579   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_clear_count                          0x0000e5c9   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_clr_wakeup_int                       0x0000e5dd   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_config_prescal                       0x0000e5e9   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_disable_ch                           0x0000e619   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_disable_overflow                     0x0000e62d   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_disable_tick                         0x0000e63d   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_disable_wakeup                       0x0000e64d   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_enable_ch                            0x0000e65d   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_enable_overflow                      0x0000e67d   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_enable_tick                          0x0000e695   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_enable_wakeup                        0x0000e6ad   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_get_compare                          0x0000e6c1   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_get_current_count                    0x0000e6f9   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_get_power_on_sec                     0x0000e725   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_set_compare                          0x0000e741   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_set_compare_offset                   0x0000e7a5   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_set_timerout                         0x0000e7e1   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_start                                0x0000e81d   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_stop                                 0x0000e849   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_timer_handler                        0x0000e869   Thumb Code     0  symbol.lib ABSOLUTE
+    setup_error                              0x0000e8cd   Thumb Code     0  symbol.lib ABSOLUTE
+    setup_error_atribute_not_found           0x0000e8e7   Thumb Code     0  symbol.lib ABSOLUTE
+    setup_error_invalid_handle               0x0000e8f1   Thumb Code     0  symbol.lib ABSOLUTE
+    setup_error_invalid_offset               0x0000e8fb   Thumb Code     0  symbol.lib ABSOLUTE
+    setup_error_invalid_value_length         0x0000e905   Thumb Code     0  symbol.lib ABSOLUTE
+    setup_error_read_not_permitted           0x0000e90f   Thumb Code     0  symbol.lib ABSOLUTE
+    setup_error_write_not_permitted          0x0000e919   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_address_resolution_handle_event       0x0000e925   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_address_resolution_idle               0x0000e9d9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_address_resolution_start_lookup       0x0000e9ed   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_aes128_start                          0x0000ea19   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_ah_r_prime                            0x0000ea6d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_authenticated                         0x0000ea89   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_authorization_decline                 0x0000eaa9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_authorization_grant                   0x0000eac1   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_authorization_state                   0x0000ead9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_bond_info_save_by_app_config          0x0000eafd   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_bonding_decline                       0x0000eb09   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_c1_t1                                 0x0000eb55   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_c1_t3                                 0x0000eb91   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_calc_actual_encryption_key_size       0x0000ebcd   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_cmac_general_start                    0x0000ebe9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_cmac_handle_aes_engine_ready          0x0000ec29   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_cmac_handle_encryption_result         0x0000ecad   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_cmac_last_block_complete              0x0000ed91   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_cmac_next_state                       0x0000eda9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_cmac_ready                            0x0000edb9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_cmac_run                              0x0000edcd   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_cmac_signed_write_start               0x0000ee0d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_csrk_run                              0x0000ee29   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_d1_d_prime                            0x0000ef29   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_dhk_init                              0x0000ef51   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_dkg_run                               0x0000ef75   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_dm_r_prime                            0x0000f029   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_done_for_handle                       0x0000f045   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_ecdh_run                              0x0000f055   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_encryption_key_size                   0x0000f059   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_event_conn_complete                   0x0000f079   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_event_disconn_complete                0x0000f0e5   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_event_encrypt_change                  0x0000f129   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_event_key_refresh                     0x0000f1a5   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_event_long_term_key                   0x0000f1f9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_get_idx_from_sm_conn                  0x0000f2bd   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_get_irk                               0x0000f2f1   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_handle_encryption_result              0x0000f2f9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_init                                  0x0000f461   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_init_setup                            0x0000f4d5   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_is_null                               0x0000f575   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_is_null_key                           0x0000f58d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_is_null_random                        0x0000f597   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_just_works_confirm                    0x0000f5a1   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_key_distribution_all_received         0x0000f5d1   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_key_distribution_flags_for_auth_req   0x0000f601   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_key_distribution_flags_for_set        0x0000f615   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_key_distribution_handle_all_received  0x0000f631   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_keypress_notification                 0x0000f785   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_le_device_index                       0x0000f7ad   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_load_security_info                    0x0000f7c1   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_next_responding_state                 0x0000f801   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_numeric_comparison_confirm            0x0000f809   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_error                         0x0000f811   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_get_auth_req           0x0000f821   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_get_initiator_key_distribution 0x0000f825   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_get_io_capability      0x0000f829   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_get_max_encryption_key_size 0x0000f82d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_get_oob_data_flag      0x0000f831   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_get_responder_key_distribution 0x0000f835   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_set_auth_req           0x0000f839   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_set_code               0x0000f83d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_set_initiator_key_distribution 0x0000f841   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_set_io_capability      0x0000f845   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_set_max_encryption_key_size 0x0000f849   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_set_oob_data_flag      0x0000f84d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pairing_packet_set_responder_key_distribution 0x0000f851   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_para_update                           0x0000f855   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_passkey_input                         0x0000f869   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pdu_handler                           0x0000f8ad   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_pdu_received_in_wrong_state           0x0000fbe9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_rau_run                               0x0000fbf5   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_register_oob_data_callback            0x0000fcb5   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_request_pairing                       0x0000fcc1   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_reset_setup                           0x0000fd41   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_reset_tk                              0x0000fd5d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_run                                   0x0000fd75   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_run_core                              0x0000fd95   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_s1_r_prime                            0x00010371   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_sc_calculate_dhkey                    0x0001038d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_send_pkt                              0x00010391   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_send_security_request                 0x00010431   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_send_security_request_for_connection  0x00010449   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_set_accepted_stk_generation_methods   0x0001046d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_set_authentication_requirements       0x00010479   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_set_encryption_key_size_range         0x00010485   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_set_er                                0x00010491   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_set_io_capabilities                   0x000104c9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_set_ir                                0x000104d5   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_set_request_security                  0x000104ed   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_setup_key_distribution                0x000104f9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_setup_tk                              0x00010515   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_shift_left_by_one_bit_inplace         0x00010571   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_start_calculating_ltk_from_ediv_and_rand 0x0001058d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_stk_generation_init                   0x000105c9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_test_set_irk                          0x00010621   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_test_use_fixed_local_csrk             0x0001063d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_timeout_handler                       0x00010649   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_timeout_reset                         0x00010671   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_timeout_start                         0x00010689   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_timeout_stop                          0x000106a9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_trigger_csrk_run                      0x000106b9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_trigger_user_response                 0x000106e9   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_truncate_key                          0x0001077d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_update_irk                            0x0001078d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_use_fixed_ec_keypair                  0x0001079d   Thumb Code     0  symbol.lib ABSOLUTE
+    sm_validate_stk_generation_method        0x000107a1   Thumb Code     0  symbol.lib ABSOLUTE
+    soft_reset                               0x000107dd   Thumb Code     0  symbol.lib ABSOLUTE
+    st_acl_handler                           0x00010809   Thumb Code     0  symbol.lib ABSOLUTE
+    st_app_msg_proc                          0x00010879   Thumb Code     0  symbol.lib ABSOLUTE
+    st_conn_handler                          0x00010c35   Thumb Code     0  symbol.lib ABSOLUTE
+    st_ctrl_task                             0x00010c75   Thumb Code     0  symbol.lib ABSOLUTE
+    st_disconn_handler                       0x00010ed5   Thumb Code     0  symbol.lib ABSOLUTE
+    st_dummy_app_sche                        0x00010edd   Thumb Code     0  symbol.lib ABSOLUTE
+    st_get_signal_idx                        0x00010eef   Thumb Code     0  symbol.lib ABSOLUTE
+    st_init                                  0x00010ef5   Thumb Code     0  symbol.lib ABSOLUTE
+    stack_task_init                          0x00010f3d   Thumb Code     0  symbol.lib ABSOLUTE
+    trigger_next_blob_query                  0x00010f71   Thumb Code     0  symbol.lib ABSOLUTE
+    trigger_next_prepare_write_query         0x00010fad   Thumb Code     0  symbol.lib ABSOLUTE
+    trigger_next_query                       0x00010fe1   Thumb Code     0  symbol.lib ABSOLUTE
+    use_public_pts_address                   0x00011011   Thumb Code     0  symbol.lib ABSOLUTE
+    uuid16_from_uuid                         0x00011035   Thumb Code     0  symbol.lib ABSOLUTE
+    uuid_add_bluetooth_prefix                0x00011055   Thumb Code     0  symbol.lib ABSOLUTE
+    uuid_has_bluetooth_prefix                0x00011075   Thumb Code     0  symbol.lib ABSOLUTE
+    write_blob_length                        0x00011091   Thumb Code     0  symbol.lib ABSOLUTE
+    bluetooth_base_uuid                      0x000110d4   Data           0  symbol.lib ABSOLUTE
+    g_db                                     0x000110e4   Data           0  symbol.lib ABSOLUTE
+    g_rssi_value                             0x000110e8   Data           0  symbol.lib ABSOLUTE
+    gap_gatt_profile_data                    0x000110ee   Data           0  symbol.lib ABSOLUTE
+    os_messageQ_def_app_msg                  0x0001114c   Data           0  symbol.lib ABSOLUTE
+    os_messageQ_def_ble_msg                  0x00011154   Data           0  symbol.lib ABSOLUTE
+    os_pool_def_ble_msg_pool                 0x0001115c   Data           0  symbol.lib ABSOLUTE
+    os_pool_def_ble_pool                     0x00011168   Data           0  symbol.lib ABSOLUTE
+    ANCS_ATTRBUTE_NAMES_COUNT                0x00011174   Data           0  symbol.lib ABSOLUTE
+    ancs_service_uuid                        0x00011178   Data           0  symbol.lib ABSOLUTE
+    ancs_notification_source_uuid            0x00011188   Data           0  symbol.lib ABSOLUTE
+    ancs_control_point_uuid                  0x00011198   Data           0  symbol.lib ABSOLUTE
+    ancs_data_source_uuid                    0x000111a8   Data           0  symbol.lib ABSOLUTE
+    gChMapLl2Rf                              0x0001120a   Data           0  symbol.lib ABSOLUTE
+    gap_format_type_len                      0x00011232   Data           0  symbol.lib ABSOLUTE
+    stk_generation_method                    0x0001124b   Data           0  symbol.lib ABSOLUTE
+    $$RTX$$version                           0x00011265   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_set_PSP                               0x00011265   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_get_PSP                               0x0001126b   Thumb Code     0  symbol.lib ABSOLUTE
+    os_set_env                               0x00011271   Thumb Code     0  symbol.lib ABSOLUTE
+    _alloc_box                               0x00011295   Thumb Code     0  symbol.lib ABSOLUTE
+    _free_box                                0x000112b5   Thumb Code     0  symbol.lib ABSOLUTE
+    SVC_IRQ_Handler                          0x000112d5   Thumb Code     0  symbol.lib ABSOLUTE
+    PendSV_IRQ_Handler                       0x00011369   Thumb Code     0  symbol.lib ABSOLUTE
+    SysTick_IRQ_Handler                      0x000113b5   Thumb Code     0  symbol.lib ABSOLUTE
+    OS_Tick_Handler                          0x000113bd   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___13_RTX_Conf_CM_c_79201571____REV16 0x000113c9   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___10_rt_CMSIS_c_8216d75d____REV16  0x000113cd   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___13_RTX_Conf_CM_c_79201571____REVSH 0x000113d1   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___10_rt_CMSIS_c_8216d75d____REVSH  0x000113d5   Thumb Code     0  symbol.lib ABSOLUTE
+    SVC_Count                                0x000113d8   Data           0  symbol.lib ABSOLUTE
+    SVC_Table                                0x000113dc   Data           0  symbol.lib ABSOLUTE
+    __ARM_common_ll_muluu                    0x000113dd   Thumb Code     0  symbol.lib ABSOLUTE
+    _calloc_box                              0x0001140d   Thumb Code     0  symbol.lib ABSOLUTE
+    _init_box                                0x0001142d   Thumb Code     0  symbol.lib ABSOLUTE
+    isrMessageGet                            0x00011475   Thumb Code     0  symbol.lib ABSOLUTE
+    isrMessagePut                            0x000114a3   Thumb Code     0  symbol.lib ABSOLUTE
+    isrSemaphoreRelease                      0x000114d5   Thumb Code     0  symbol.lib ABSOLUTE
+    isrSignalSet                             0x00011501   Thumb Code     0  symbol.lib ABSOLUTE
+    isr_evt_set                              0x00011529   Thumb Code     0  symbol.lib ABSOLUTE
+    isr_mbx_receive                          0x0001154d   Thumb Code     0  symbol.lib ABSOLUTE
+    isr_mbx_send                             0x00011593   Thumb Code     0  symbol.lib ABSOLUTE
+    isr_sem_send                             0x0001159f   Thumb Code     0  symbol.lib ABSOLUTE
+    main_lib_init                            0x000115ad   Thumb Code     0  symbol.lib ABSOLUTE
+    osDelay                                  0x000115c9   Thumb Code     0  symbol.lib ABSOLUTE
+    osKernelInitialize                       0x000115e5   Thumb Code     0  symbol.lib ABSOLUTE
+    osKernelRunning                          0x0001160d   Thumb Code     0  symbol.lib ABSOLUTE
+    osKernelStart                            0x00011635   Thumb Code     0  symbol.lib ABSOLUTE
+    osKernelSysTick                          0x0001169d   Thumb Code     0  symbol.lib ABSOLUTE
+    osMailAlloc                              0x000116b9   Thumb Code     0  symbol.lib ABSOLUTE
+    osMailCAlloc                             0x000116d9   Thumb Code     0  symbol.lib ABSOLUTE
+    osMailCreate                             0x0001170d   Thumb Code     0  symbol.lib ABSOLUTE
+    osMailFree                               0x00011741   Thumb Code     0  symbol.lib ABSOLUTE
+    osMailGet                                0x00011761   Thumb Code     0  symbol.lib ABSOLUTE
+    osMailPut                                0x00011779   Thumb Code     0  symbol.lib ABSOLUTE
+    osMessageCreate                          0x00011795   Thumb Code     0  symbol.lib ABSOLUTE
+    osMessageGet                             0x000117c9   Thumb Code     0  symbol.lib ABSOLUTE
+    osMessagePut                             0x000117e5   Thumb Code     0  symbol.lib ABSOLUTE
+    osMutexCreate                            0x00011801   Thumb Code     0  symbol.lib ABSOLUTE
+    osMutexDelete                            0x00011835   Thumb Code     0  symbol.lib ABSOLUTE
+    osMutexRelease                           0x00011851   Thumb Code     0  symbol.lib ABSOLUTE
+    osMutexWait                              0x0001186d   Thumb Code     0  symbol.lib ABSOLUTE
+    osPoolAlloc                              0x00011889   Thumb Code     0  symbol.lib ABSOLUTE
+    osPoolCAlloc                             0x000118ad   Thumb Code     0  symbol.lib ABSOLUTE
+    osPoolCreate                             0x000118e5   Thumb Code     0  symbol.lib ABSOLUTE
+    osPoolFree                               0x00011919   Thumb Code     0  symbol.lib ABSOLUTE
+    osSemaphoreCreate                        0x0001193d   Thumb Code     0  symbol.lib ABSOLUTE
+    osSemaphoreDelete                        0x00011971   Thumb Code     0  symbol.lib ABSOLUTE
+    osSemaphoreRelease                       0x0001198d   Thumb Code     0  symbol.lib ABSOLUTE
+    osSemaphoreWait                          0x000119a9   Thumb Code     0  symbol.lib ABSOLUTE
+    osSignalClear                            0x000119c5   Thumb Code     0  symbol.lib ABSOLUTE
+    osSignalSet                              0x000119e1   Thumb Code     0  symbol.lib ABSOLUTE
+    osSignalWait                             0x000119fd   Thumb Code     0  symbol.lib ABSOLUTE
+    osThreadCreate                           0x00011a19   Thumb Code     0  symbol.lib ABSOLUTE
+    osThreadExit                             0x00011a4d   Thumb Code     0  symbol.lib ABSOLUTE
+    osThreadGetId                            0x00011a65   Thumb Code     0  symbol.lib ABSOLUTE
+    osThreadGetPriority                      0x00011a81   Thumb Code     0  symbol.lib ABSOLUTE
+    osThreadSetPriority                      0x00011a9d   Thumb Code     0  symbol.lib ABSOLUTE
+    osThreadTerminate                        0x00011ab9   Thumb Code     0  symbol.lib ABSOLUTE
+    osThreadYield                            0x00011ad5   Thumb Code     0  symbol.lib ABSOLUTE
+    osTimerCall                              0x00011af1   Thumb Code     0  symbol.lib ABSOLUTE
+    osTimerCreate                            0x00011b01   Thumb Code     0  symbol.lib ABSOLUTE
+    osTimerDelete                            0x00011b35   Thumb Code     0  symbol.lib ABSOLUTE
+    osTimerStart                             0x00011b51   Thumb Code     0  symbol.lib ABSOLUTE
+    osTimerStop                              0x00011b6d   Thumb Code     0  symbol.lib ABSOLUTE
+    osTimerThread                            0x00011b89   Thumb Code     0  symbol.lib ABSOLUTE
+    osWait                                   0x00011bb5   Thumb Code     0  symbol.lib ABSOLUTE
+    os_error                                 0x00011bb9   Thumb Code     0  symbol.lib ABSOLUTE
+    os_idle_demon                            0x00011bc5   Thumb Code     0  symbol.lib ABSOLUTE
+    os_resume                                0x00011bd5   Thumb Code     0  symbol.lib ABSOLUTE
+    os_suspend                               0x00011be5   Thumb Code     0  symbol.lib ABSOLUTE
+    os_tick_init                             0x00011bf5   Thumb Code     0  symbol.lib ABSOLUTE
+    os_tick_irqack                           0x00011c29   Thumb Code     0  symbol.lib ABSOLUTE
+    os_tick_ovf                              0x00011c2d   Thumb Code     0  symbol.lib ABSOLUTE
+    os_tick_val                              0x00011c41   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_alloc_box                             0x00011c59   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_alloc_mem                             0x00011c77   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_block                                 0x00011cb9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_chk_robin                             0x00011cf1   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_dec_dly                               0x00011d55   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_dispatch                              0x00011dc9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_dly_wait                              0x00011e09   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_evt_clr                               0x00011e15   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_evt_get                               0x00011e31   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_evt_psh                               0x00011e3d   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_evt_set                               0x00011e8d   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_evt_wait                              0x00011ee9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_free_box                              0x00011f29   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_free_mem                              0x00011f4f   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_get_first                             0x00011f7f   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_get_same_rdy_prio                     0x00011fa9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_init_mem                              0x00011fd5   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_init_robin                            0x00011ff1   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_init_stack                            0x0001200d   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_itv_set                               0x00012085   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_itv_wait                              0x0001209d   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_mbx_check                             0x000120c9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_mbx_init                              0x000120d1   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_mbx_psh                               0x000120f5   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_mbx_send                              0x000121c5   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_mbx_wait                              0x00012259   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_mut_delete                            0x0001234d   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_mut_init                              0x00012401   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_mut_release                           0x00012411   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_mut_wait                              0x000124e9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_pop_req                               0x00012559   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_psh_req                               0x000125c9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_psq_enq                               0x000125e9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_put_dly                               0x00012629   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_put_prio                              0x00012679   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_put_rdy_first                         0x000126b5   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_resort_prio                           0x000126c9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_resume                                0x000126f9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_ret_val                               0x00012781   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_ret_val2                              0x00012787   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_rmv_dly                               0x0001278f   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_rmv_list                              0x000127b9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_sem_delete                            0x000127ed   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_sem_init                              0x0001284d   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_sem_psh                               0x00012859   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_sem_send                              0x0001288d   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_sem_wait                              0x000128b9   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_stk_check                             0x000128fd   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_suspend                               0x00012925   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_switch_req                            0x0001294d   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_sys_init                              0x0001295d   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_sys_start                             0x00012a51   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_systick                               0x00012ab5   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_time_get                              0x00012b05   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_tsk_create                            0x00012b8d   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_tsk_delete                            0x00012c39   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_tsk_lock                              0x00012d91   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_tsk_pass                              0x00012de5   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_tsk_prio                              0x00012e11   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_tsk_self                              0x00012e91   Thumb Code     0  symbol.lib ABSOLUTE
+    rt_tsk_unlock                            0x00012ea1   Thumb Code     0  symbol.lib ABSOLUTE
+    svcDelay                                 0x00012ef5   Thumb Code     0  symbol.lib ABSOLUTE
+    svcKernelInitialize                      0x00012f09   Thumb Code     0  symbol.lib ABSOLUTE
+    svcKernelRunning                         0x00012f81   Thumb Code     0  symbol.lib ABSOLUTE
+    svcKernelStart                           0x00012f8d   Thumb Code     0  symbol.lib ABSOLUTE
+    svcKernelSysTick                         0x00012fd9   Thumb Code     0  symbol.lib ABSOLUTE
+    svcMailCreate                            0x00013015   Thumb Code     0  symbol.lib ABSOLUTE
+    svcMessageCreate                         0x00013063   Thumb Code     0  symbol.lib ABSOLUTE
+    svcMessageGet                            0x0001308d   Thumb Code     0  symbol.lib ABSOLUTE
+    svcMessagePut                            0x000130c9   Thumb Code     0  symbol.lib ABSOLUTE
+    svcMutexCreate                           0x00013101   Thumb Code     0  symbol.lib ABSOLUTE
+    svcMutexDelete                           0x00013121   Thumb Code     0  symbol.lib ABSOLUTE
+    svcMutexRelease                          0x0001313d   Thumb Code     0  symbol.lib ABSOLUTE
+    svcMutexWait                             0x00013161   Thumb Code     0  symbol.lib ABSOLUTE
+    svcPoolCreate                            0x00013199   Thumb Code     0  symbol.lib ABSOLUTE
+    svcSemaphoreCreate                       0x000131c9   Thumb Code     0  symbol.lib ABSOLUTE
+    svcSemaphoreDelete                       0x000131f5   Thumb Code     0  symbol.lib ABSOLUTE
+    svcSemaphoreRelease                      0x00013211   Thumb Code     0  symbol.lib ABSOLUTE
+    svcSemaphoreWait                         0x0001323d   Thumb Code     0  symbol.lib ABSOLUTE
+    svcSignalClear                           0x00013271   Thumb Code     0  symbol.lib ABSOLUTE
+    svcSignalSet                             0x00013297   Thumb Code     0  symbol.lib ABSOLUTE
+    svcSignalWait                            0x000132bd   Thumb Code     0  symbol.lib ABSOLUTE
+    svcThreadCreate                          0x00013319   Thumb Code     0  symbol.lib ABSOLUTE
+    svcThreadGetId                           0x00013391   Thumb Code     0  symbol.lib ABSOLUTE
+    svcThreadGetPriority                     0x000133ad   Thumb Code     0  symbol.lib ABSOLUTE
+    svcThreadSetPriority                     0x000133c1   Thumb Code     0  symbol.lib ABSOLUTE
+    svcThreadTerminate                       0x000133f1   Thumb Code     0  symbol.lib ABSOLUTE
+    svcThreadYield                           0x0001342d   Thumb Code     0  symbol.lib ABSOLUTE
+    svcTimerCall                             0x00013437   Thumb Code     0  symbol.lib ABSOLUTE
+    svcTimerCreate                           0x00013455   Thumb Code     0  symbol.lib ABSOLUTE
+    svcTimerDelete                           0x00013495   Thumb Code     0  symbol.lib ABSOLUTE
+    svcTimerStart                            0x000134bd   Thumb Code     0  symbol.lib ABSOLUTE
+    svcTimerStop                             0x00013529   Thumb Code     0  symbol.lib ABSOLUTE
+    sysMailAlloc                             0x00013551   Thumb Code     0  symbol.lib ABSOLUTE
+    sysMailFree                              0x000135b5   Thumb Code     0  symbol.lib ABSOLUTE
+    sysPoolAlloc                             0x0001361f   Thumb Code     0  symbol.lib ABSOLUTE
+    sysPoolFree                              0x0001362b   Thumb Code     0  symbol.lib ABSOLUTE
+    sysTimerTick                             0x00013641   Thumb Code     0  symbol.lib ABSOLUTE
+    sysUserTimerUpdate                       0x00013699   Thumb Code     0  symbol.lib ABSOLUTE
+    sysUserTimerWakeupTime                   0x000136c9   Thumb Code     0  symbol.lib ABSOLUTE
+    os_maxtaskrun                            0x000136e0   Data           0  symbol.lib ABSOLUTE
+    os_stackinfo                             0x000136e4   Data           0  symbol.lib ABSOLUTE
+    os_rrobin                                0x000136e8   Data           0  symbol.lib ABSOLUTE
+    os_tickfreq                              0x000136ec   Data           0  symbol.lib ABSOLUTE
+    os_tickus_i                              0x000136f0   Data           0  symbol.lib ABSOLUTE
+    os_tickus_f                              0x000136f2   Data           0  symbol.lib ABSOLUTE
+    os_trv                                   0x000136f4   Data           0  symbol.lib ABSOLUTE
+    os_flags                                 0x000136f8   Data           0  symbol.lib ABSOLUTE
+    CMSIS_RTOS_API_Version                   0x000136fc   Data           0  symbol.lib ABSOLUTE
+    CMSIS_RTOS_RTX_Version                   0x00013700   Data           0  symbol.lib ABSOLUTE
+    os_clockrate                             0x00013704   Data           0  symbol.lib ABSOLUTE
+    os_timernum                              0x00013708   Data           0  symbol.lib ABSOLUTE
+    mp_tcb_size                              0x0001370c   Data           0  symbol.lib ABSOLUTE
+    mp_stk_size                              0x00013710   Data           0  symbol.lib ABSOLUTE
+    os_stack_sz                              0x00013714   Data           0  symbol.lib ABSOLUTE
+    os_fifo_size                             0x00013718   Data           0  symbol.lib ABSOLUTE
+    os_messageQ_def_osTimerMessageQ          0x0001371c   Data           0  symbol.lib ABSOLUTE
+    mp_tmr_size                              0x00013724   Data           0  symbol.lib ABSOLUTE
+    os_thread_def_ll_ctrl_task               0x00013728   Data           0  symbol.lib ABSOLUTE
+    os_thread_def_st_ctrl_task               0x00013738   Data           0  symbol.lib ABSOLUTE
+    os_thread_def_encrypt_task               0x00013748   Data           0  symbol.lib ABSOLUTE
+    __asm___5_mem_c_d485bf6b____REV16        0x00013759   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___6_rand_c_3182465e____REV16       0x0001375d   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___10_pmu_ctrl_c_a96b3922____REV16  0x00013761   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___9_pmu_phy_c_192fd7dc____REV16    0x00013765   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___12_stack_main_c_53a58a3d____REV16 0x00013769   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___7_timer_c_04967113____REV16      0x0001376d   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___9_pmu_clk_c_711fc7bf____REV16    0x00013771   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___5_mem_c_d485bf6b____REVSH        0x00013775   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___6_rand_c_3182465e____REVSH       0x00013779   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___10_pmu_ctrl_c_a96b3922____REVSH  0x0001377d   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___9_pmu_phy_c_192fd7dc____REVSH    0x00013781   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___12_stack_main_c_53a58a3d____REVSH 0x00013785   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___7_timer_c_04967113____REVSH      0x00013789   Thumb Code     0  symbol.lib ABSOLUTE
+    __asm___9_pmu_clk_c_711fc7bf____REVSH    0x0001378d   Thumb Code     0  symbol.lib ABSOLUTE
+    PMU_int_IRQHandler                       0x000137d5   Thumb Code     0  symbol.lib ABSOLUTE
+    _PMU_REGBSS                              0x00013841   Thumb Code     0  symbol.lib ABSOLUTE
+    data_mem_init                            0x00013871   Thumb Code     0  symbol.lib ABSOLUTE
+    delay_cycles                             0x00013909   Thumb Code     0  symbol.lib ABSOLUTE
+    delay_us                                 0x00013919   Thumb Code     0  symbol.lib ABSOLUTE
+    get_rand                                 0x00013925   Thumb Code     0  symbol.lib ABSOLUTE
+    get_rand_128                             0x00013935   Thumb Code     0  symbol.lib ABSOLUTE
+    get_rand_192                             0x0001395b   Thumb Code     0  symbol.lib ABSOLUTE
+    get_rand_256                             0x00013981   Thumb Code     0  symbol.lib ABSOLUTE
+    get_rand_r                               0x000139a9   Thumb Code     0  symbol.lib ABSOLUTE
+    mem_ctrl_init                            0x000139e1   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_16m_rc_clk_calibration               0x00013a35   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_32k_rc_clk_calibration               0x00013b89   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_32m_48m_pll_clk_calibration          0x00013c55   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_change_to_32k_count                  0x00013cfd   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_check_current_32k_clk_source         0x00013d49   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_check_current_clock_source           0x00013d59   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_check_sleep                          0x00013d81   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_clear_peri_status                    0x00013f21   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_clk_16m_sel_get                      0x00013f3d   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_clk_16m_sel_set                      0x00013f4d   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_clk_gate                             0x00013f61   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_clk_high_divider                     0x00013f6d   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_clk_switch                           0x0001402d   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_clk_trig                             0x000140cd   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_clk_turn_off                         0x000140e1   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_clk_turn_on_curr                     0x00014121   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_clk_turn_on_des                      0x00014199   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_clk_wait_stable                      0x00014205   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_init                                 0x00014279   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_lower_power_manage                   0x0001431d   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_phy_get_pmu_state                    0x000143b5   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_phy_set_16m_schmitt_disable          0x000143c1   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_phy_set_16mrc_cap                    0x000143d1   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_phy_sleep_level                      0x000143e1   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_set_peri_status                      0x000143f5   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_shutdown_proc                        0x00014411   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_switch_to_32k_rc                     0x0001441d   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_switch_to_32k_xo                     0x00014469   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_switch_to_dcxo                       0x000144f5   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_switch_to_pll                        0x00014527   Thumb Code     0  symbol.lib ABSOLUTE
+    pmu_switch_to_rc                         0x0001455d   Thumb Code     0  symbol.lib ABSOLUTE
+    rand_init                                0x00014599   Thumb Code     0  symbol.lib ABSOLUTE
+    rtc_check_big_compare                    0x000145a5   Thumb Code     0  symbol.lib ABSOLUTE
+    sleep                                    0x000145e5   Thumb Code     0  symbol.lib ABSOLUTE
+    software_reset                           0x00014639   Thumb Code     0  symbol.lib ABSOLUTE
+    stack_embeded_adv_init                   0x0001464d   Thumb Code     0  symbol.lib ABSOLUTE
+    stack_embeded_is_advertising             0x000146b9   Thumb Code     0  symbol.lib ABSOLUTE
+    sys_chip_id_get                          0x000146d5   Thumb Code     0  symbol.lib ABSOLUTE
+    sys_irq_init                             0x00014731   Thumb Code     0  symbol.lib ABSOLUTE
+    sys_irq_register                         0x0001476d   Thumb Code     0  symbol.lib ABSOLUTE
+    system_32k_clk_select                    0x000147ad   Thumb Code     0  symbol.lib ABSOLUTE
+    system_assert                            0x000147e5   Thumb Code     0  symbol.lib ABSOLUTE
+    system_clk_gate                          0x000147fd   Thumb Code     0  symbol.lib ABSOLUTE
+    system_dcxo_clk_check_for_ltc            0x00014811   Thumb Code     0  symbol.lib ABSOLUTE
+    system_flash_clk_sel                     0x00014831   Thumb Code     0  symbol.lib ABSOLUTE
+    system_get_reset_source                  0x00014845   Thumb Code     0  symbol.lib ABSOLUTE
+    system_high_clk_select                   0x00014855   Thumb Code     0  symbol.lib ABSOLUTE
+    system_high_clk_set_xo_source            0x00014949   Thumb Code     0  symbol.lib ABSOLUTE
+    system_power_dcdc_mode_set               0x00014981   Thumb Code     0  symbol.lib ABSOLUTE
+    system_reset                             0x00014991   Thumb Code     0  symbol.lib ABSOLUTE
+    system_set_32kxo_ppm                     0x000149c5   Thumb Code     0  symbol.lib ABSOLUTE
+    system_set_cpu_clk                       0x000149e5   Thumb Code     0  symbol.lib ABSOLUTE
+    system_set_freq_accuracy                 0x000149e9   Thumb Code     0  symbol.lib ABSOLUTE
+    system_set_low_power_mode                0x00014a19   Thumb Code     0  symbol.lib ABSOLUTE
+    system_set_radio_mode                    0x00014a31   Thumb Code     0  symbol.lib ABSOLUTE
+    system_set_radio_tx_power                0x00014a49   Thumb Code     0  symbol.lib ABSOLUTE
+    system_set_rf_tx_power                   0x00014a55   Thumb Code     0  symbol.lib ABSOLUTE
+    timer_add                                0x00014a61   Thumb Code     0  symbol.lib ABSOLUTE
+    timer_create                             0x00014a65   Thumb Code     0  symbol.lib ABSOLUTE
+    timer_delete                             0x00014aa3   Thumb Code     0  symbol.lib ABSOLUTE
+    timer_find_smallest                      0x00014aa9   Thumb Code     0  symbol.lib ABSOLUTE
+    timer_init                               0x00014aed   Thumb Code     0  symbol.lib ABSOLUTE
+    timer_list_manage                        0x00014b3d   Thumb Code     0  symbol.lib ABSOLUTE
+    timer_set_compare                        0x00014b81   Thumb Code     0  symbol.lib ABSOLUTE
+    timer_start                              0x00014b99   Thumb Code     0  symbol.lib ABSOLUTE
+    timer_stop                               0x00014c45   Thumb Code     0  symbol.lib ABSOLUTE
+    timer_update_compare                     0x00014c4d   Thumb Code     0  symbol.lib ABSOLUTE
+    timerout_handler                         0x00014cad   Thumb Code     0  symbol.lib ABSOLUTE
+    timeroverflow_handler                    0x00014d49   Thumb Code     0  symbol.lib ABSOLUTE
+    user_app_header                          0x0002aff0   Data          16  app_main.o(.user.app.header)
+    reset_handler                            0x0002b001   Thumb Code     4  cm0plus_startup.o(.text)
+    DMA_int_IRQ0Handler                      0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    DMA_int_IRQ1Handler                      0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    I2C0_int_IRQHandler                      0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    I2C1_int_IRQHandler                      0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    I2S_int_IRQHandler                       0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    KEYBOARD_int_IRQHandler                  0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    SPI0_int_IRQHandler                      0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    SPI1_int_IRQHandler                      0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    TMR0_int_IRQHandler                      0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    TMR1_int_IRQHandler                      0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    TMR2_int_IRQHandler                      0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    UART0_int_IRQHandler                     0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    _7816_int_IRQHandler                     0x0002b005   Thumb Code     0  cm0plus_startup.o(.text)
+    __user_initial_stackheap                 0x0002b007   Thumb Code     0  cm0plus_startup.o(.text)
+    __aeabi_memcpy                           0x0002b00d   Thumb Code    36  memcpya.o(.text)
+    __aeabi_memcpy4                          0x0002b00d   Thumb Code     0  memcpya.o(.text)
+    __aeabi_memcpy8                          0x0002b00d   Thumb Code     0  memcpya.o(.text)
+    __aeabi_uread4                           0x0002b031   Thumb Code    20  uread4.o(.text)
+    __rt_uread4                              0x0002b031   Thumb Code     0  uread4.o(.text)
+    _uread4                                  0x0002b031   Thumb Code     0  uread4.o(.text)
+    __scatterload                            0x0002b045   Thumb Code    28  init.o(.text)
+    __scatterload_rt2                        0x0002b045   Thumb Code     0  init.o(.text)
+    app_main                                 0x0002b101   Thumb Code    42  app_main.o(.ARM.__at_0x2B100)
+    __Vectors                                0x0002b130   Data           4  cm0plus_startup.o(RESET)
+    __Vectors_End                            0x0002b1f0   Data           0  cm0plus_startup.o(RESET)
+    __main                                   0x0002b1f1   Thumb Code     0  entry.o(.ARM.Collect$$$$00000000)
+    _main_stk                                0x0002b1f1   Thumb Code     0  entry2.o(.ARM.Collect$$$$00000001)
+    _main_scatterload                        0x0002b1f5   Thumb Code     0  entry5.o(.ARM.Collect$$$$00000004)
+    __main_after_scatterload                 0x0002b1f9   Thumb Code     0  entry5.o(.ARM.Collect$$$$00000004)
+    _main_clock                              0x0002b1f9   Thumb Code     0  entry7b.o(.ARM.Collect$$$$00000008)
+    _main_cpp_init                           0x0002b1f9   Thumb Code     0  entry8b.o(.ARM.Collect$$$$0000000A)
+    _main_init                               0x0002b1f9   Thumb Code     0  entry9a.o(.ARM.Collect$$$$0000000B)
+    __rt_final_cpp                           0x0002b201   Thumb Code     0  entry10a.o(.ARM.Collect$$$$0000000D)
+    __rt_final_exit                          0x0002b201   Thumb Code     0  entry11a.o(.ARM.Collect$$$$0000000F)
+    __asm___10_app_task_c_57459531____REV16  0x0002b205   Thumb Code     4  app_task.o(.rev16_text)
+    __asm___10_app_task_c_57459531____REVSH  0x0002b209   Thumb Code     4  app_task.o(.revsh_text)
+    GPIO_0_int_IRQHandler                    0x0002b20d   Thumb Code    38  mxd2660_gpio.o(i.GPIO_0_int_IRQHandler)
+    GPIO_1_int_IRQHandler                    0x0002b241   Thumb Code    38  mxd2660_gpio.o(i.GPIO_1_int_IRQHandler)
+    GPIO_2_int_IRQHandler                    0x0002b275   Thumb Code    38  mxd2660_gpio.o(i.GPIO_2_int_IRQHandler)
+    HardFault_IRQ_Handler                    0x0002b2a9   Thumb Code    16  err_debug.o(i.HardFault_IRQ_Handler)
+    UART1_int_IRQHandler                     0x0002b325   Thumb Code    38  mxd2660_uart1.o(i.UART1_int_IRQHandler)
+    __scatterload_copy                       0x0002b355   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x0002b363   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x0002b365   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    ancs_all_characteristic_found_handler    0x0002b375   Thumb Code    30  ancs_service.o(i.ancs_all_characteristic_found_handler)
+    ancs_data_ntf_handler                    0x0002b399   Thumb Code     2  ancs_service.o(i.ancs_data_ntf_handler)
+    ancs_discover_svc_by_uuid                0x0002b39b   Thumb Code     8  ancs_service.o(i.ancs_discover_svc_by_uuid)
+    ancs_init                                0x0002b3a3   Thumb Code     8  ancs_service.o(i.ancs_init)
+    ancs_server_config_notify                0x0002b3ab   Thumb Code     8  ancs_service.o(i.ancs_server_config_notify)
+    ancs_source_ntf_handler                  0x0002b3b3   Thumb Code    14  ancs_service.o(i.ancs_source_ntf_handler)
+    ancs_timeout_handler                     0x0002b3c1   Thumb Code    36  app_ble.o(i.ancs_timeout_handler)
+    ancs_write_get_data_ntf                  0x0002b3ed   Thumb Code    14  ancs_service.o(i.ancs_write_get_data_ntf)
+    app_irq_init                             0x0002b401   Thumb Code   104  app_main.o(i.app_irq_init)
+    app_task                                 0x0002b469   Thumb Code    68  app_task.o(i.app_task)
+    app_task_init                            0x0002b4b9   Thumb Code    26  app_task.o(i.app_task_init)
+    ble_app_default_init                     0x0002b4dd   Thumb Code    80  app_ble.o(i.ble_app_default_init)
+    ble_app_init                             0x0002b541   Thumb Code    60  app_ble.o(i.ble_app_init)
+    ble_msg_proc                             0x0002b58d   Thumb Code   254  app_ble.o(i.ble_msg_proc)
+    ble_profile_init                         0x0002b699   Thumb Code    12  app_main.o(i.ble_profile_init)
+    dly_cycles                               0x0002b6a5   Thumb Code    16  utility.o(i.dly_cycles)
+    dly_us                                   0x0002b6b5   Thumb Code    10  utility.o(i.dly_us)
+    gpio_config_hw_type                      0x0002b6c1   Thumb Code    54  mxd2660_gpio.o(i.gpio_config_hw_type)
+    gpio_init_function                       0x0002b6fd   Thumb Code    42  mxd2660_gpio.o(i.gpio_init_function)
+    gpio_init_input                          0x0002b72d   Thumb Code    44  mxd2660_gpio.o(i.gpio_init_input)
+    gpio_read_input_bit                      0x0002b75d   Thumb Code    16  mxd2660_gpio.o(i.gpio_read_input_bit)
+    gpio_wakeup_enable_gpios                 0x0002b771   Thumb Code    76  mxd2660_gpio.o(i.gpio_wakeup_enable_gpios)
+    is_log_canbe_sleep                       0x0002b7c1   Thumb Code    18  debug.o(i.is_log_canbe_sleep)
+    le_bond_device_db_add                    0x0002b7d9   Thumb Code    82  app_ble.o(i.le_bond_device_db_add)
+    le_bond_device_db_find_info              0x0002b831   Thumb Code    62  app_ble.o(i.le_bond_device_db_find_info)
+    little_endian_read_32bit                 0x0002b875   Thumb Code    22  utility.o(i.little_endian_read_32bit)
+    main                                     0x0002b88b   Thumb Code    28  sys.o(i.main)
+    main_process                             0x0002b8a7   Thumb Code    12  app_main.o(i.main_process)
+    os_stack_overflow                        0x0002b8b3   Thumb Code    16  err_debug.o(i.os_stack_overflow)
+    ota_init                                 0x0002b8c5   Thumb Code    18  app_ota.o(i.ota_init)
+    peripheral_init                          0x0002b8e1   Thumb Code    42  app_main.o(i.peripheral_init)
+    power_manage_init                        0x0002b911   Thumb Code    36  app_main.o(i.power_manage_init)
+    recover_info_after_wakeup_cb             0x0002b939   Thumb Code    16  app_main.o(i.recover_info_after_wakeup_cb)
+    save_info_before_sleep_cb                0x0002b949   Thumb Code    42  app_main.o(i.save_info_before_sleep_cb)
+    sys_debug_en                             0x0002b975   Thumb Code     6  debug.o(i.sys_debug_en)
+    sys_debug_init                           0x0002b981   Thumb Code    10  debug.o(i.sys_debug_init)
+    system_assert_debug                      0x0002b991   Thumb Code    32  err_debug.o(i.system_assert_debug)
+    system_pins_wakeup_enable                0x0002b9b5   Thumb Code    14  sys.o(i.system_pins_wakeup_enable)
+    trx_get_attrLenCB                        0x0002b9c5   Thumb Code    16  mxd_trx_service.o(i.trx_get_attrLenCB)
+    trx_init_service                         0x0002b9d9   Thumb Code    98  mxd_trx_service.o(i.trx_init_service)
+    trx_read_attrCB                          0x0002ba45   Thumb Code    32  mxd_trx_service.o(i.trx_read_attrCB)
+    trx_write_attrCB                         0x0002ba69   Thumb Code    26  mxd_trx_service.o(i.trx_write_attrCB)
+    uart1_Log_output                         0x0002ba89   Thumb Code    34  debug.o(i.uart1_Log_output)
+    uart1_Log_print                          0x0002bab5   Thumb Code    60  debug.o(i.uart1_Log_print)
+    uart1_init                               0x0002bafd   Thumb Code    18  mxd2660_uart1.o(i.uart1_init)
+    user_call_back_register                  0x0002bb1d   Thumb Code    36  sys.o(i.user_call_back_register)
+    user_flash_nvr_read                      0x0002bb69   Thumb Code    58  mxd2660_flash.o(i.user_flash_nvr_read)
+    user_irq_register                        0x0002bbb1   Thumb Code    78  sys.o(i.user_irq_register)
+    watch_dog_feed                           0x0002bc51   Thumb Code     8  mxd2660_watch_dog.o(i.watch_dog_feed)
+    os_thread_def_app_task                   0x0002bc70   Data          16  app_task.o(.constdata)
+    os_pool_def_app_msg_pool                 0x0002bc80   Data          12  app_task.o(.constdata)
+    Region$$Table$$Base                      0x0002bc8c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0002bcac   Number         0  anon$$obj.o(Region$$Table)
+    g_code_num                               0x20000000   Data           0  symbol.lib ABSOLUTE
+    g_code_addr                              0x20000004   Data           0  symbol.lib ABSOLUTE
+    g_update_local_info                      0x20000008   Data           0  symbol.lib ABSOLUTE
+    g_update_header                          0x20000010   Data           0  symbol.lib ABSOLUTE
+    user_irq_func_table                      0x20000030   Data           0  symbol.lib ABSOLUTE
+    sys_irq_func_table                       0x200000b0   Data           0  symbol.lib ABSOLUTE
+    os_tmr                                   0x20000100   Data           0  symbol.lib ABSOLUTE
+    m_tmr                                    0x20000104   Data           0  symbol.lib ABSOLUTE
+    os_thread_def_main                       0x20000108   Data           0  symbol.lib ABSOLUTE
+    osThreadId_osTimerThread                 0x20000118   Data           0  symbol.lib ABSOLUTE
+    osMessageQId_osTimerMessageQ             0x2000011c   Data           0  symbol.lib ABSOLUTE
+    os_tick_irqn                             0x20000124   Data           0  symbol.lib ABSOLUTE
+    tc_state                                 0x20000128   Data           0  symbol.lib ABSOLUTE
+    chunk_parser_state                       0x20000129   Data           0  symbol.lib ABSOLUTE
+    ancs_attribute_id                        0x2000012a   Data           0  symbol.lib ABSOLUTE
+    g_ancs_handle                            0x2000012c   Data           0  symbol.lib ABSOLUTE
+    g_ancs_notify_config                     0x2000012e   Data           0  symbol.lib ABSOLUTE
+    ancs_bytes_received                      0x20000130   Data           0  symbol.lib ABSOLUTE
+    ancs_bytes_needed                        0x20000132   Data           0  symbol.lib ABSOLUTE
+    ancs_attribute_len                       0x20000134   Data           0  symbol.lib ABSOLUTE
+    ancs_service_found                       0x20000138   Data           0  symbol.lib ABSOLUTE
+    ancs_service                             0x2000013c   Data           0  symbol.lib ABSOLUTE
+    ancs_notification_source_characteristic  0x20000140   Data           0  symbol.lib ABSOLUTE
+    ancs_control_point_characteristic        0x20000144   Data           0  symbol.lib ABSOLUTE
+    ancs_data_source_characteristic          0x20000148   Data           0  symbol.lib ABSOLUTE
+    ancs_characteristcs                      0x2000014c   Data           0  symbol.lib ABSOLUTE
+    get_notification_attributes_message      0x20000150   Data           0  symbol.lib ABSOLUTE
+    ancs_attribute_names                     0x20000158   Data           0  symbol.lib ABSOLUTE
+    _rtc_current_counter_high                0x20000170   Data           0  symbol.lib ABSOLUTE
+    _rtc_comp_current_counter_high           0x20000171   Data           0  symbol.lib ABSOLUTE
+    _rtc_compare0_high                       0x20000172   Data           0  symbol.lib ABSOLUTE
+    _rtc_current_counter_low                 0x20000174   Data           0  symbol.lib ABSOLUTE
+    _rtc_comp_current_counter_low            0x20000178   Data           0  symbol.lib ABSOLUTE
+    _rtc_compare0_low                        0x2000017c   Data           0  symbol.lib ABSOLUTE
+    os_initialized                           0x20000180   Data           0  symbol.lib ABSOLUTE
+    os_running                               0x20000181   Data           0  symbol.lib ABSOLUTE
+    os_timer_head                            0x20000184   Data           0  symbol.lib ABSOLUTE
+    os_rdy                                   0x20000188   Data           0  symbol.lib ABSOLUTE
+    os_dly                                   0x200001a0   Data           0  symbol.lib ABSOLUTE
+    os_robin                                 0x200001b8   Data           0  symbol.lib ABSOLUTE
+    os_tsk                                   0x200001c0   Data           0  symbol.lib ABSOLUTE
+    os_idle_TCB                              0x200001c8   Data           0  symbol.lib ABSOLUTE
+    os_time                                  0x200001fc   Data           0  symbol.lib ABSOLUTE
+    ll_ctrl_taskId                           0x20000200   Data           0  symbol.lib ABSOLUTE
+    st_ctrl_taskId                           0x20000204   Data           0  symbol.lib ABSOLUTE
+    encrypt_taskId                           0x20000208   Data           0  symbol.lib ABSOLUTE
+    att_prepare_write_error_code             0x2000020c   Data           0  symbol.lib ABSOLUTE
+    att_prepare_write_error_handle           0x2000020e   Data           0  symbol.lib ABSOLUTE
+    att_db                                   0x20000210   Data           0  symbol.lib ABSOLUTE
+    att_ir_le_device_db_index                0x20000214   Data           0  symbol.lib ABSOLUTE
+    att_handle_value_indication_handle       0x20000218   Data           0  symbol.lib ABSOLUTE
+    att_suppress_mtu_exchange_auto           0x2000021c   Data           0  symbol.lib ABSOLUTE
+    att_ble_wakeup_during_latency            0x20000220   Data           0  symbol.lib ABSOLUTE
+    att_ir_lookup_active                     0x20000224   Data           0  symbol.lib ABSOLUTE
+    gap_random_adress_type                   0x20000228   Data           0  symbol.lib ABSOLUTE
+    gap_random_adress_update_period          0x2000022c   Data           0  symbol.lib ABSOLUTE
+    central_state                            0x20000230   Data           0  symbol.lib ABSOLUTE
+    g_client_serv_state                      0x20000232   Data           0  symbol.lib ABSOLUTE
+    g_client_serv_cnt                        0x20000234   Data           0  symbol.lib ABSOLUTE
+    ui_value_pos                             0x20000238   Data           0  symbol.lib ABSOLUTE
+    public_pts_address_type                  0x2000023c   Data           0  symbol.lib ABSOLUTE
+    reconnection_address_set                 0x20000240   Data           0  symbol.lib ABSOLUTE
+    public_pts_address                       0x20000244   Data           0  symbol.lib ABSOLUTE
+    todos                                    0x2000024a   Data           0  symbol.lib ABSOLUTE
+    con_handle                               0x2000024c   Data           0  symbol.lib ABSOLUTE
+    gatt_ser_chg_client_configuration        0x20000250   Data           0  symbol.lib ABSOLUTE
+    pGapRoles_AppCGs                         0x20000254   Data           0  symbol.lib ABSOLUTE
+    advertisements_enabled                   0x20000258   Data           0  symbol.lib ABSOLUTE
+    sm_auth_req                              0x2000025c   Data           0  symbol.lib ABSOLUTE
+    sm_io_capabilities                       0x2000025d   Data           0  symbol.lib ABSOLUTE
+    sm_persistent_irk_ready                  0x2000025e   Data           0  symbol.lib ABSOLUTE
+    sm_timer_para                            0x2000025f   Data           0  symbol.lib ABSOLUTE
+    sm_min_key_size                          0x20000260   Data           0  symbol.lib ABSOLUTE
+    setup                                    0x20000264   Data           0  symbol.lib ABSOLUTE
+    sm_get_oob_data                          0x20000268   Data           0  symbol.lib ABSOLUTE
+    sm_timer_instance                        0x2000026c   Data           0  symbol.lib ABSOLUTE
+    app_msg_id                               0x20000284   Data           0  symbol.lib ABSOLUTE
+    ble_msg_id                               0x20000288   Data           0  symbol.lib ABSOLUTE
+    ble_msg_pool_id                          0x2000028c   Data           0  symbol.lib ABSOLUTE
+    ble_pool_id                              0x20000290   Data           0  symbol.lib ABSOLUTE
+    g_write_addr                             0x20000294   Data           0  symbol.lib ABSOLUTE
+    g_crc32                                  0x20000298   Data           0  symbol.lib ABSOLUTE
+    g_ota_write_crc32                        0x2000029c   Data           0  symbol.lib ABSOLUTE
+    otaCBs                                   0x200002a0   Data           0  symbol.lib ABSOLUTE
+    scan_data                                0x200002ac   Data           0  symbol.lib ABSOLUTE
+    adv_data                                 0x200002b8   Data           0  symbol.lib ABSOLUTE
+    timer_head                               0x200002c8   Data           0  symbol.lib ABSOLUTE
+    _rtc_prescal                             0x200002e0   Data           0  symbol.lib ABSOLUTE
+    _rtc_int_handler                         0x200002e4   Data           0  symbol.lib ABSOLUTE
+    os_thread_def_osTimerThread              0x200002fc   Data           0  symbol.lib ABSOLUTE
+    os_messageQ_q_osTimerMessageQ            0x2000030c   Data           0  symbol.lib ABSOLUTE
+    mp_tcb                                   0x2000031c   Data           0  symbol.lib ABSOLUTE
+    mp_stk                                   0x20000498   Data           0  symbol.lib ABSOLUTE
+    mp_idle_os_stk                           0x200004a8   Data           0  symbol.lib ABSOLUTE
+    os_stack_mem                             0x20000a98   Data           0  symbol.lib ABSOLUTE
+    os_fifo                                  0x20001680   Data           0  symbol.lib ABSOLUTE
+    os_active_TCB                            0x20001704   Data           0  symbol.lib ABSOLUTE
+    os_messageQ_q_app_msg                    0x20001720   Data           0  symbol.lib ABSOLUTE
+    os_messageQ_q_ble_msg                    0x20001758   Data           0  symbol.lib ABSOLUTE
+    os_pool_m_ble_msg_pool                   0x20001790   Data           0  symbol.lib ABSOLUTE
+    os_pool_m_ble_pool                       0x200017ec   Data           0  symbol.lib ABSOLUTE
+    ancs_notification_buffer                 0x20001ff8   Data           0  symbol.lib ABSOLUTE
+    g_adv_cfg                                0x200020f8   Data           0  symbol.lib ABSOLUTE
+    g_scan_cfg                               0x20002138   Data           0  symbol.lib ABSOLUTE
+    g_init_cfg                               0x2000215c   Data           0  symbol.lib ABSOLUTE
+    g_conn_cfg                               0x20002190   Data           0  symbol.lib ABSOLUTE
+    g_common_cfg                             0x20002390   Data           0  symbol.lib ABSOLUTE
+    g_dtm_cfg                                0x200025d4   Data           0  symbol.lib ABSOLUTE
+    g_conn_new_itv                           0x200025e0   Data           0  symbol.lib ABSOLUTE
+    curr_cnnct_idx                           0x200025e1   Data           0  symbol.lib ABSOLUTE
+    g_llc_can_sleep                          0x200025e2   Data           0  symbol.lib ABSOLUTE
+    data_pool                                0x200025e4   Data           0  symbol.lib ABSOLUTE
+    Ctrl_PDU_Data                            0x20002d30   Data           0  symbol.lib ABSOLUTE
+    Data_PDU_Data                            0x20002d48   Data           0  symbol.lib ABSOLUTE
+    Adv_Data                                 0x20002dcc   Data           0  symbol.lib ABSOLUTE
+    att_db_size                              0x20002ddc   Data           0  symbol.lib ABSOLUTE
+    att_db_max_size                          0x20002dde   Data           0  symbol.lib ABSOLUTE
+    att_db_next_handle                       0x20002de0   Data           0  symbol.lib ABSOLUTE
+    att_db_storage                           0x20002de2   Data           0  symbol.lib ABSOLUTE
+    att_gatt_client_db_storage               0x200031e2   Data           0  symbol.lib ABSOLUTE
+    att_client_addr_type                     0x200034e2   Data           0  symbol.lib ABSOLUTE
+    att_client_address                       0x200034e3   Data           0  symbol.lib ABSOLUTE
+    att_client_waiting_for_can_send          0x200034e9   Data           0  symbol.lib ABSOLUTE
+    pts_privacy_flag                         0x200034ec   Data           0  symbol.lib ABSOLUTE
+    ui_attribute_handle                      0x200034ee   Data           0  symbol.lib ABSOLUTE
+    ui_aggregate_handle                      0x200034f0   Data           0  symbol.lib ABSOLUTE
+    ui_handles_count                         0x200034f4   Data           0  symbol.lib ABSOLUTE
+    ui_handles_index                         0x200034f8   Data           0  symbol.lib ABSOLUTE
+    current_pts_address_type                 0x200034fc   Data           0  symbol.lib ABSOLUTE
+    current_pts_address                      0x20003500   Data           0  symbol.lib ABSOLUTE
+    our_private_address                      0x20003506   Data           0  symbol.lib ABSOLUTE
+    ui_presentation_format                   0x2000350c   Data           0  symbol.lib ABSOLUTE
+    gap_scan_result                          0x20003513   Data           0  symbol.lib ABSOLUTE
+    ui_handles                               0x20003610   Data           0  symbol.lib ABSOLUTE
+    ui_value_data                            0x20003624   Data           0  symbol.lib ABSOLUTE
+    gap_name_characteristic                  0x20003656   Data           0  symbol.lib ABSOLUTE
+    gap_reconnection_address_characteristic  0x20003670   Data           0  symbol.lib ABSOLUTE
+    gap_peripheral_privacy_flag_characteristic 0x2000368a   Data           0  symbol.lib ABSOLUTE
+    signed_write_characteristic              0x200036a4   Data           0  symbol.lib ABSOLUTE
+    service                                  0x200036be   Data           0  symbol.lib ABSOLUTE
+    g_client_serv                            0x200036d4   Data           0  symbol.lib ABSOLUTE
+    le_device_db_index                       0x200036e0   Data           0  symbol.lib ABSOLUTE
+    gapRole_state                            0x200036e4   Data           0  symbol.lib ABSOLUTE
+    master_addr_type                         0x200036e8   Data           0  symbol.lib ABSOLUTE
+    master_address                           0x200036ec   Data           0  symbol.lib ABSOLUTE
+    gatt_ser_chg                             0x200036f4   Data           0  symbol.lib ABSOLUTE
+    gatt_serv_info                           0x200036f8   Data           0  symbol.lib ABSOLUTE
+    le_devices                               0x20003758   Data           0  symbol.lib ABSOLUTE
+    test_use_fixed_local_csrk                0x200038d8   Data           0  symbol.lib ABSOLUTE
+    sm_accepted_stk_generation_methods       0x200038d9   Data           0  symbol.lib ABSOLUTE
+    sm_max_encryption_key_size               0x200038da   Data           0  symbol.lib ABSOLUTE
+    sm_min_encryption_key_size               0x200038db   Data           0  symbol.lib ABSOLUTE
+    sm_slave_request_security                0x200038dc   Data           0  symbol.lib ABSOLUTE
+    dkg_state                                0x200038dd   Data           0  symbol.lib ABSOLUTE
+    rau_state                                0x200038de   Data           0  symbol.lib ABSOLUTE
+    sm_cmac_state                            0x200038df   Data           0  symbol.lib ABSOLUTE
+    sm_cmac_message_idx                      0x200038e0   Data           0  symbol.lib ABSOLUTE
+    sm_cmac_block_current                    0x200038e1   Data           0  symbol.lib ABSOLUTE
+    sm_cmac_block_count                      0x200038e2   Data           0  symbol.lib ABSOLUTE
+    sm_address_resolution_addr_type          0x200038e3   Data           0  symbol.lib ABSOLUTE
+    sm_address_resolution_mode               0x200038e4   Data           0  symbol.lib ABSOLUTE
+    sm_aes128_state                          0x200038e5   Data           0  symbol.lib ABSOLUTE
+    g_cmac_needed                            0x200038e6   Data           0  symbol.lib ABSOLUTE
+    sm_cmac_message_len                      0x200038e8   Data           0  symbol.lib ABSOLUTE
+    sm_cmac_done_handler                     0x200038ec   Data           0  symbol.lib ABSOLUTE
+    sm_cmac_message                          0x200038f0   Data           0  symbol.lib ABSOLUTE
+    sm_address_resolution_test               0x200038f4   Data           0  symbol.lib ABSOLUTE
+    sm_address_resolution_ah_calculation_active 0x200038f8   Data           0  symbol.lib ABSOLUTE
+    sm_bond_info_save_by_app                 0x200038fc   Data           0  symbol.lib ABSOLUTE
+    sm_address_resolution_address            0x20003900   Data           0  symbol.lib ABSOLUTE
+    sm_random_address                        0x20003906   Data           0  symbol.lib ABSOLUTE
+    g_tx_temp_buffer                         0x2000390c   Data           0  symbol.lib ABSOLUTE
+    sm_persistent_er                         0x20003950   Data           0  symbol.lib ABSOLUTE
+    sm_persistent_ir                         0x20003960   Data           0  symbol.lib ABSOLUTE
+    sm_persistent_dhk                        0x20003970   Data           0  symbol.lib ABSOLUTE
+    sm_persistent_irk                        0x20003980   Data           0  symbol.lib ABSOLUTE
+    sm_cmac_k                                0x20003990   Data           0  symbol.lib ABSOLUTE
+    sm_cmac_x                                0x200039a0   Data           0  symbol.lib ABSOLUTE
+    sm_cmac_m_last                           0x200039b0   Data           0  symbol.lib ABSOLUTE
+    sm_random_context                        0x200039c0   Data           0  symbol.lib ABSOLUTE
+    the_setup                                0x200039c4   Data           0  symbol.lib ABSOLUTE
+    g_notify_flag                            0x20003ae4   Data           0  symbol.lib ABSOLUTE
+    gap_appearance                           0x20003ae6   Data           0  symbol.lib ABSOLUTE
+    g_gap_scan_para                          0x20003ae8   Data           0  symbol.lib ABSOLUTE
+    g_gap_adv_para                           0x20003af0   Data           0  symbol.lib ABSOLUTE
+    gap_device_name                          0x20003b10   Data           0  symbol.lib ABSOLUTE
+    g_gap_connect_para                       0x20003b24   Data           0  symbol.lib ABSOLUTE
+    gap_fetuer                               0x20003b3a   Data           0  symbol.lib ABSOLUTE
+    gap_function                             0x20003b3c   Data           0  symbol.lib ABSOLUTE
+    g_flash_erase_flag                       0x20003b40   Data           0  symbol.lib ABSOLUTE
+    g_ota_client_cfg                         0x20003b42   Data           0  symbol.lib ABSOLUTE
+    g_buf_size                               0x20003b44   Data           0  symbol.lib ABSOLUTE
+    g_ota_receive_size                       0x20003b48   Data           0  symbol.lib ABSOLUTE
+    g_erase_addr                             0x20003b4c   Data           0  symbol.lib ABSOLUTE
+    g_write_size                             0x20003b50   Data           0  symbol.lib ABSOLUTE
+    ota_buffer                               0x20003b54   Data           0  symbol.lib ABSOLUTE
+    ota_server_hdl                           0x20003d54   Data           0  symbol.lib ABSOLUTE
+    rand_seed                                0x20003d60   Data           0  symbol.lib ABSOLUTE
+    chip_id                                  0x20003d64   Data           0  symbol.lib ABSOLUTE
+    g_pmu_ctrl                               0x20003d68   Data           0  symbol.lib ABSOLUTE
+    g_die_id                                 0x20003d90   Data           0  symbol.lib ABSOLUTE
+    g4_flag                                  0x20003da0   Data           0  symbol.lib ABSOLUTE
+    rf_db_sel                                0x20003da1   Data           0  symbol.lib ABSOLUTE
+    g2_clrb                                  0x20003da2   Data           0  symbol.lib ABSOLUTE
+    g4_clrb                                  0x20003dc6   Data           0  symbol.lib ABSOLUTE
+    hci_aes_data                             0x20003dec   Data           0  symbol.lib ABSOLUTE
+    hci_aes_key                              0x20003dfc   Data           0  symbol.lib ABSOLUTE
+    hci_aes_encryped_data                    0x20003e0c   Data           0  symbol.lib ABSOLUTE
+    _rtc_timer_in_handler                    0x20003e1c   Data           0  symbol.lib ABSOLUTE
+    g_image_key                              0x20003e20   Data           0  symbol.lib ABSOLUTE
+    fp_decrypt_func                          0x20003e24   Data           0  symbol.lib ABSOLUTE
+    call_back_func_table                     0x20003e28   Data           0  symbol.lib ABSOLUTE
+    system_assert_cb                         0x20003e30   Data           0  symbol.lib ABSOLUTE
+    call_back_check_table                    0x20003e38   Data           0  symbol.lib ABSOLUTE
+    g_rtc_overflow_flag                      0x20003e48   Data           0  symbol.lib ABSOLUTE
+    g_rtc_comp0int_flag                      0x20003e49   Data           0  symbol.lib ABSOLUTE
+    _rtc_start_flag                          0x20003e4a   Data           0  symbol.lib ABSOLUTE
+    rxClientCharCfg                          0x20003f00   Data           1  mxd_trx_service.o(.data)
+    txrx_server_hdl                          0x20003f02   Data           6  mxd_trx_service.o(.data)
+    txrxCBs                                  0x20003f08   Data          12  mxd_trx_service.o(.data)
+    get_notification_attributes              0x20003f14   Data          14  ancs_service.o(.data)
+    g_log_pattern                            0x20003f22   Data           1  debug.o(.data)
+    g_log_ctrl                               0x20003f24   Data           4  debug.o(.data)
+    ancs_discover_flag                       0x20003f28   Data           1  app_ble.o(.data)
+    ancs_cnt                                 0x20003f29   Data           1  app_ble.o(.data)
+    ancs_hdl                                 0x20003f2a   Data           1  app_ble.o(.data)
+    g_ble_Status                             0x20003f2b   Data           2  app_ble.o(.data)
+    g_flag_write_to_flash                    0x20003f30   Data           4  app_ble.o(.data)
+    scanData                                 0x20003f34   Data          20  app_ble.o(.data)
+    advData                                  0x20003f48   Data          13  app_ble.o(.data)
+    app_taskid                               0x20003f58   Data           4  app_task.o(.data)
+    app_msg_pool_id                          0x20003f5c   Data           4  app_task.o(.data)
+    log_buffer                               0x20003f60   Data        1024  debug.o(.bss)
+    le_bond_devices                          0x20004360   Data         208  app_ble.o(.bss)
+    ancs_timer                               0x20004430   Data          24  app_ble.o(.bss)
+    os_pool_m_app_msg_pool                   0x20004448   Data          92  app_task.o(.bss)
+    _gpio_interrupt_cb_                      0x200044a4   Data          12  mxd2660_gpio.o(.bss)
+    __heap_base                              0x20007e00   Data           0  symbol.lib ABSOLUTE
+    __heap_limit                             0x20007e00   Data           0  symbol.lib ABSOLUTE
+    __initial_sp                             0x20008000   Data           0  symbol.lib ABSOLUTE
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x0002b001
+
+  Load Region LOAD_APP (Base: 0x0002aff0, Size: 0x00000d1c, Max: 0x00014c10, ABSOLUTE)
+
+    Execution Region APP (Base: 0x0002aff0, Size: 0x00000010, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0002aff0   0x00000010   Data   RO          824    .user.app.header    app_main.o
+
+
+    Execution Region APP_BEGIN (Base: 0x0002b000, Size: 0x00000068, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0002b000   0x0000000c   Code   RO            2  * .text               cm0plus_startup.o
+    0x0002b00c   0x00000024   Code   RO         1105    .text               mc_p.l(memcpya.o)
+    0x0002b030   0x00000014   Code   RO         1109    .text               mc_p.l(uread4.o)
+    0x0002b044   0x00000024   Code   RO         1142    .text               mc_p.l(init.o)
+
+
+    Execution Region APP_STARTUP (Base: 0x0002b068, Size: 0x00000188, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0002b068   0x00000098   PAD
+    0x0002b100   0x00000030   Code   RO          813    .ARM.__at_0x2B100   app_main.o
+    0x0002b130   0x000000c0   Data   RO            1    RESET               cm0plus_startup.o
+
+
+    Execution Region APP_CODE (Base: 0x0002b1f0, Size: 0x00000abc, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0002b1f0   0x00000000   Code   RO         1100  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x0002b1f0   0x00000004   Code   RO         1117    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x0002b1f4   0x00000004   Code   RO         1120    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x0002b1f8   0x00000000   Code   RO         1122    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x0002b1f8   0x00000000   Code   RO         1124    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x0002b1f8   0x00000008   Code   RO         1125    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x0002b200   0x00000000   Code   RO         1127    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x0002b200   0x00000000   Code   RO         1129    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x0002b200   0x00000004   Code   RO         1118    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x0002b204   0x00000004   Code   RO          917    .rev16_text         app_task.o
+    0x0002b208   0x00000004   Code   RO          918    .revsh_text         app_task.o
+    0x0002b20c   0x00000034   Code   RO          991    i.GPIO_0_int_IRQHandler  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002b240   0x00000034   Code   RO          992    i.GPIO_1_int_IRQHandler  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002b274   0x00000034   Code   RO          993    i.GPIO_2_int_IRQHandler  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002b2a8   0x00000010   Code   RO          471    i.HardFault_IRQ_Handler  err_debug.o
+    0x0002b2b8   0x00000014   Code   RO          814    i.NVIC_ClearPendingIRQ  app_main.o
+    0x0002b2cc   0x00000014   Code   RO          815    i.NVIC_EnableIRQ    app_main.o
+    0x0002b2e0   0x00000044   Code   RO          816    i.NVIC_SetPriority  app_main.o
+    0x0002b324   0x00000030   Code   RO         1080    i.UART1_int_IRQHandler  peripheral_lib.lib(mxd2660_uart1.o)
+    0x0002b354   0x0000000e   Code   RO         1146    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x0002b362   0x00000002   Code   RO         1147    i.__scatterload_null  mc_p.l(handlers.o)
+    0x0002b364   0x0000000e   Code   RO         1148    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x0002b372   0x00000002   PAD
+    0x0002b374   0x00000024   Code   RO          209    i.ancs_all_characteristic_found_handler  ancs_service.o
+    0x0002b398   0x00000002   Code   RO          210    i.ancs_data_ntf_handler  ancs_service.o
+    0x0002b39a   0x00000008   Code   RO          211    i.ancs_discover_svc_by_uuid  ancs_service.o
+    0x0002b3a2   0x00000008   Code   RO          212    i.ancs_init         ancs_service.o
+    0x0002b3aa   0x00000008   Code   RO          213    i.ancs_server_config_notify  ancs_service.o
+    0x0002b3b2   0x0000000e   Code   RO          214    i.ancs_source_ntf_handler  ancs_service.o
+    0x0002b3c0   0x0000002c   Code   RO          687    i.ancs_timeout_handler  app_ble.o
+    0x0002b3ec   0x00000014   Code   RO          215    i.ancs_write_get_data_ntf  ancs_service.o
+    0x0002b400   0x00000068   Code   RO          817    i.app_irq_init      app_main.o
+    0x0002b468   0x00000050   Code   RO          919    i.app_task          app_task.o
+    0x0002b4b8   0x00000024   Code   RO          920    i.app_task_init     app_task.o
+    0x0002b4dc   0x00000064   Code   RO          688    i.ble_app_default_init  app_ble.o
+    0x0002b540   0x0000004c   Code   RO          689    i.ble_app_init      app_ble.o
+    0x0002b58c   0x0000010c   Code   RO          690    i.ble_msg_proc      app_ble.o
+    0x0002b698   0x0000000c   Code   RO          818    i.ble_profile_init  app_main.o
+    0x0002b6a4   0x00000010   Code   RO          371    i.dly_cycles        utility.o
+    0x0002b6b4   0x0000000a   Code   RO          372    i.dly_us            utility.o
+    0x0002b6be   0x00000002   PAD
+    0x0002b6c0   0x0000003c   Code   RO          997    i.gpio_config_hw_type  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002b6fc   0x00000030   Code   RO         1005    i.gpio_init_function  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002b72c   0x00000030   Code   RO         1007    i.gpio_init_input   peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002b75c   0x00000014   Code   RO         1013    i.gpio_read_input_bit  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002b770   0x00000050   Code   RO         1019    i.gpio_wakeup_enable_gpios  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002b7c0   0x00000018   Code   RO          413    i.is_log_canbe_sleep  debug.o
+    0x0002b7d8   0x00000058   Code   RO          692    i.le_bond_device_db_add  app_ble.o
+    0x0002b830   0x00000044   Code   RO          695    i.le_bond_device_db_find_info  app_ble.o
+    0x0002b874   0x00000016   Code   RO          374    i.little_endian_read_32bit  utility.o
+    0x0002b88a   0x0000001c   Code   RO           10    i.main              sys.o
+    0x0002b8a6   0x0000000c   Code   RO          819    i.main_process      app_main.o
+    0x0002b8b2   0x00000010   Code   RO          472    i.os_stack_overflow  err_debug.o
+    0x0002b8c2   0x00000002   PAD
+    0x0002b8c4   0x0000001c   Code   RO          962    i.ota_init          app_ota.o
+    0x0002b8e0   0x00000030   Code   RO          820    i.peripheral_init   app_main.o
+    0x0002b910   0x00000028   Code   RO          821    i.power_manage_init  app_main.o
+    0x0002b938   0x00000010   Code   RO          822    i.recover_info_after_wakeup_cb  app_main.o
+    0x0002b948   0x0000002a   Code   RO          823    i.save_info_before_sleep_cb  app_main.o
+    0x0002b972   0x00000002   PAD
+    0x0002b974   0x0000000c   Code   RO          414    i.sys_debug_en      debug.o
+    0x0002b980   0x00000010   Code   RO          415    i.sys_debug_init    debug.o
+    0x0002b990   0x00000024   Code   RO          473    i.system_assert_debug  err_debug.o
+    0x0002b9b4   0x0000000e   Code   RO           12    i.system_pins_wakeup_enable  sys.o
+    0x0002b9c2   0x00000002   PAD
+    0x0002b9c4   0x00000014   Code   RO          129    i.trx_get_attrLenCB  mxd_trx_service.o
+    0x0002b9d8   0x0000006c   Code   RO          130    i.trx_init_service  mxd_trx_service.o
+    0x0002ba44   0x00000024   Code   RO          131    i.trx_read_attrCB   mxd_trx_service.o
+    0x0002ba68   0x00000020   Code   RO          132    i.trx_write_attrCB  mxd_trx_service.o
+    0x0002ba88   0x0000002c   Code   RO          416    i.uart1_Log_output  debug.o
+    0x0002bab4   0x00000048   Code   RO          417    i.uart1_Log_print   debug.o
+    0x0002bafc   0x00000020   Code   RO         1084    i.uart1_init        peripheral_lib.lib(mxd2660_uart1.o)
+    0x0002bb1c   0x0000004c   Code   RO           13    i.user_call_back_register  sys.o
+    0x0002bb68   0x00000048   Code   RO         1068    i.user_flash_nvr_read  peripheral_lib.lib(mxd2660_flash.o)
+    0x0002bbb0   0x000000a0   Code   RO           14    i.user_irq_register  sys.o
+    0x0002bc50   0x0000000c   Code   RO         1059    i.watch_dog_feed    peripheral_lib.lib(mxd2660_watch_dog.o)
+    0x0002bc5c   0x00000014   Data   RO          702    .constdata          app_ble.o
+    0x0002bc70   0x0000001c   Data   RO          922    .constdata          app_task.o
+    0x0002bc8c   0x00000020   Data   RO         1144    Region$$Table       anon$$obj.o
+
+
+    Execution Region APP_ACT_RAM_RW (Base: 0x20003f00, Size: 0x000005b0, Max: 0x00003f00, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20003f00   0x00000014   Data   RW          135    .data               mxd_trx_service.o
+    0x20003f14   0x0000000e   Data   RW          216    .data               ancs_service.o
+    0x20003f22   0x00000006   Data   RW          419    .data               debug.o
+    0x20003f28   0x0000002d   Data   RW          703    .data               app_ble.o
+    0x20003f55   0x00000003   PAD
+    0x20003f58   0x00000008   Data   RW          923    .data               app_task.o
+    0x20003f60   0x00000400   Zero   RW          418    .bss                debug.o
+    0x20004360   0x000000e8   Zero   RW          701    .bss                app_ble.o
+    0x20004448   0x0000005c   Zero   RW          921    .bss                app_task.o
+    0x200044a4   0x0000000c   Zero   RW         1021    .bss                peripheral_lib.lib(mxd2660_gpio.o)
+
+
+    Execution Region SYS_STACK_RAM_RW (Base: 0x20007e00, Size: 0x00000000, Max: 0x00000200, ABSOLUTE, UNINIT)
+
+    **** No section assigned to this execution region ****
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+        96         12          0         14          0       4841   ancs_service.o
+       644         70         20         45        232       7027   app_ble.o
+       430         36         16          0          0      12951   app_main.o
+        28         10          0          0          0        483   app_ota.o
+       124         22         28          8         92       3287   app_task.o
+         0          0          0          0          0       1048   calendar.o
+        12          4        192          0          0        484   cm0plus_startup.o
+       168         40          0          6       1024       4764   debug.o
+        68          4          0          0          0       1602   err_debug.o
+         0          0          0          0          0      18600   hci_cmd.o
+       196         24          0         20          0      11063   mxd_trx_service.o
+       278        122          0          0          0      26098   sys.o
+        48          0          0          0          0       2209   utility.o
+
+    ----------------------------------------------------------------------
+      2100        344        288         96       1348      94457   Object Totals
+         0          0         32          0          0          0   (incl. Generated)
+         8          0          0          3          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+         0          0          0          0          0          0   entry.o
+         0          0          0          0          0          0   entry10a.o
+         0          0          0          0          0          0   entry11a.o
+         8          4          0          0          0          0   entry2.o
+         4          0          0          0          0          0   entry5.o
+         0          0          0          0          0          0   entry7b.o
+         0          0          0          0          0          0   entry8b.o
+         8          4          0          0          0          0   entry9a.o
+        30          0          0          0          0          0   handlers.o
+        36          8          0          0          0         68   init.o
+        36          0          0          0          0         60   memcpya.o
+        20          0          0          0          0         60   uread4.o
+        72         14          0          0          0         76   mxd2660_flash.o
+       412         66          0          0         12        556   mxd2660_gpio.o
+        80         24          0          0          0        120   mxd2660_uart1.o
+        12          4          0          0          0         60   mxd2660_watch_dog.o
+
+    ----------------------------------------------------------------------
+       872        276          0          0         12       1000   Library Totals
+       154        152          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+       142         16          0          0          0        188   mc_p.l
+       576        108          0          0         12        812   peripheral_lib.lib
+
+    ----------------------------------------------------------------------
+       872        276          0          0         12       1000   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+      2972        620        288         96       1360      93085   Grand Totals
+      2972        620        288         96       1360      93085   ELF Image Totals
+      2972        620        288         96          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                 3260 (   3.18kB)
+    Total RW  Size (RW Data + ZI Data)              1456 (   1.42kB)
+    Total ROM Size (Code + RO Data + RW Data)       3356 (   3.28kB)
+
+==============================================================================
+

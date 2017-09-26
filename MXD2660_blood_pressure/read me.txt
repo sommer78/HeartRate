@@ -1,0 +1,24 @@
+
+docu\SDK文档
+    包括SDK使用手册，外设API，Low power以及Profile与BLE API文档
+docu\MXD2660 PCB LAYOUT
+    位号图
+docu\MXD2660_EVB原理图
+    原理图
+docu\
+    硬件说明：包括 引脚、封装、参考设计、硬件debug、硬件测试及说明等
+docu\MXD2660 Datasheet
+    Package description, Controller Interface等
+docu\MXD2660 Application Note
+    软件说明：包括 工作状态，控制器接口，CMD，固件升级流程等
+docu\MXD2660 EVB Guide
+    EVB使用说明：包括 EVB接线，Tools使用，透传测试等
+
+\tools\MxdBleTools
+    测试和升级patch的PC工具，用于测试CMD，升级IRAM/EEPROM，debug等
+\tools\config.ini
+    config for MxdBleTools
+\tools\Android APK\Mxdconfig
+    透传测试中用到的 Android APK
+\\tools\bleStack
+    用于透传测试的PC工具

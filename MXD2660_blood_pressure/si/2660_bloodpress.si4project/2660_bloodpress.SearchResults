@@ -1,0 +1,3 @@
+---- SamplePointMax Matches (2 in 2 files) ----
+getHeartRateWaveInfo in Lts1303m.c (src\ts1303) : 	if(pointCount>=SamplePointMax){
+Lts1303m.h (src\ts1303) line 31 : #define  SamplePointMax     10000			

@@ -1,0 +1,427 @@
+1213:
+version: mxd2660_trunk_2016.12.13(SVN:290)
+1,hid ok
+2,透传ok
+3,OTA ok
+
+1221:
+version: mxd2660_trunk_2016.12.21(SVN:300)
+1, ota data encrypt 功能（default KEY：12345678）
+2，support ancs service
+3，uuid128 support
+4，修改API接口
+5，expand hci cmd and event 
+6，gap 接口完成adv、scan、init等ble api。
+
+1226：
+version:SDK_release_1226_1230(SVN307)
+History modify:
+1，去掉多余.c
+2，全局变量分段存储。
+3,support ancs service, stack timeout scheme, uuid128 support
+4,added OTA 数据加密功能。
+5, 添加 keyboard ir pwm 模块文件
+6,修改API接口
+7,添加手环工程
+8,expand hci cmd and event to adapt to support pc tool, and adjust some buffer sizes to increase interface capability, delete aci cmd
+9,增加adv/scan/init 等ble api 。
+10，gap 接口update。
+11，merge pc tool api interface, increase baud rate to 921600
+12，ota data encrypt 功能（default KEY：12345678）
+13，gap 接口完成adv、scan、init等ble api。
+14, peri buff data改为1024修改bie_api .h 移动到inc里
+15, 将flash.c放置到sec boot段中
+16, 将uart.c分为uart0和uart1，并将uart1放置到sec boot段中
+17, 将底层与sec boot和stack相关的初始化放置到lib中，APP层的初始化则在main_func函数中
+18, 根据方案将app_ble.c独立放置在每个方案中
+19, list.c和timer.c作为APP开放
+20, 增加了对手环支持的函数接口，增加了对手环支持的消息定义
+21, 修改了message相关结构及变量定义的名字
+22, 去掉了isr_flag 参数，改为自动识别
+23, 将st init中的部分代码移动到APP层
+24, 手环功能完善
+
+
+1228:
+version: mxd2660_trunk_2016.12.28 (SVN:314)
+1，函数层次修改，部分函数移动。
+2，msg去掉了isr_flag 参数，改为自动识别。
+3，wanli新增手环工程。
+4，dma 的几个bug 修改。
+5，wenjie merge dtm modification, solve some bugs
+6，移除hid，修改随机种子。
+7，ota 异常升级app再升级app错误的bug。
+
+20170103:
+version: SDK_release_20170103(SVN:324)
+1) increase event buffer size, notify app task with hci mem pool, not ble mem pool, change msg and mem pool number
+2) reslove bug of stack update finish but can't run in normal mode
+3) resolve bug of system reset sometimes are not stable
+4) reslove bug of ota_buffer[512] can't access correct during uint8 convert to uint32
+5) added judgement when stack/app/sec boot section version changed into new version
+6) use crc32 instead data compare one by one when verify flash writing.
+7) add ota/peri/reg read/write/addr name set/cmd
+8) 加入修改dev name和addr 的cmd
+9) 新增ota 加密不加密，key 的cmd
+10)allow external report reference characteristic can read,solve hid bugs 922/921
+11)use GATTS_addChar() function instead call att_db_util_add_characteristic_uuid16() directly
+
+20170104：
+version: SDK_release_20170104(SVN:332)
+1)increase hci rx task stack size to 500, avoid stack overflow
+
+
+0105:
+version: mxd2660_trunk_2017.01.05 (SVN:339)
+1) increase event buffer size, notify app task with hci mem pool, not ble mem pool, change msg and mem pool number
+2) reslove bug of stack update finish but can't run in normal mode
+3) resolve bug of system reset sometimes are not stable
+4) reslove bug of ota_buffer[512] can't access correct during uint8 convert to uint32
+5) added judgement when stack/app/sec boot section version changed into new version
+6) use crc32 instead data compare one by one when verify flash writing.
+7) add ota/peri/reg read/write/addr name set/cmd
+8) 加入修改dev name和addr 的cmd
+9) 新增ota 加密不加密，key 的cmd
+10)allow external report reference characteristic can read,solve hid bugs 922/921
+11)use GATTS_addChar() function instead call att_db_util_add_characteristic_uuid16() directly
+12)increase hci rx task stack size to 500, avoid stack overflow
+13) solve peri buffer endless issue, when 4 data packet burst at one time
+
+
+20170118:
+1, default open sleep。
+2，sleep 后dma 配置重新配置。
+3，ll idle，默认sleep
+1）OTA update, sec boot and stack and app are all OK
+2) split sec/stack/app and use three main function, the main main is in sec boot section
+3) split task to stack task and app_task
+rf 参数更新
+1，去掉多余pmu 的宏。
+2，pum regbss宏有中间态，修改为函数。
+3，ll 中断中clear llc sleep status，防止llc状态切换，sleep异常问题。
+4，16M schmitt disable，防止60℃ sleep llc 无法唤醒问题。
+5，sleep 前关闭多余外设，唤醒后还原，优化功耗问题。
+6, IRQn list update
+7, betacy,根据宏 BETACY_SS_QFN40V1 区分封装导致的参数区别。默认关闭，40pinV1的需要打开。
+
+20170120：
+1）default open sleep。
+2）sleep 后dma 配置重新配置。
+3）ll idle，默认sleep
+4）app段和stack段代码隔离
+5）modify keyboard to use EVB board
+6) 将root main移除，sec boot完全独立与其他段
+7) main main移动到stack main.c
+8) OTA代码可进行三段分别测试
+9) 增加没有app的情况下stack继续OTA升级
+10)增加utility.c文件
+11）增加一部分key remap
+
+
+20170208:
+1)app stack 隔离
+2)modify keyboard to use EVB board
+3)将root main移除，sec boot完全独立与其他段
+4)main main移动到stack main.c
+5)OTA代码可进行三段分别测试
+6)增加没有app的情况下stack继续OTA升级
+7)增加utility.c文件
+8）增加一部分key remap
+9)add pll calibration function；
+10)update pmu ctrl code；
+11)add pmu api 
+12)隐藏pmu.h和pmu phy.h
+13)修改几个wakeup的接口函数。
+14)modify gpio api; add keyboard api; BEL memery not enough bug
+
+
+20170209：
+1)4s interval的时候，会导致时序异常。
+2)pts相关修改，包括接口，代码bug，以及ancs功能放开（主要是adv data需要更改），adv广播包异常bug，配套工具也需升级到最新
+3)解决coolpad手机连接不上问题，主要原因是ifs多了2us不够准确，调整后问题解决
+4)码中在计划参数是否正确时，单位弄错了，导致错误的回了reject，修改好验证通过
+5)buff 不够return，不assert 3 read rssi （还未换成db）
+6)modify gpio rtc 7816 keybaord api
+7)修复日历时间同步错误
+8)优化cpu act的时候，判定是否为dcxo再切换。
+9)gpio 10 default pull down。
+10)优化第一次连接的时候，窗口会出现当前时间小于lsn_bgn，导致在sche调度一直while 1.
+11)attribute为dynamic write时，在判断length有效性时增加相应判断条件
+12)flash 板子不兼容问题改回128k
+13)add 7816 dma code; modity 7816 rx bug
+14)ble_api.c移动到APP层
+15)新增ble_msg_api.c放置底层，将app_ble.c中ble相关定义与消息发送函数移动到该文件
+16)将app_hci.c改名为hci_api.c移动到底层
+17)将main移动到app层
+18)将串口初始化相关函数移动到APP层
+19)新增sys_debug_en()函数，发布到客户的代码将会关闭dsp log
+20)新增APP_DBG定义，APP层或者客户可使用该宏定义进行log打印
+21)将app task的定义由底层移动到APP层
+22)将timer.c由APP层移动到底层
+23)新增power_manage_init函数
+24)改动startup.s将APP段定义到APP层
+25)修改scatter file
+
+
+20170215:
+add 7816 dma code; modity 7816 rx bug
+iic read write error, fix it
+中断优先级，ll lsn窗口参数以及sch timer调度保护阈值优化
+增加连接参数检查，避免手机的连接参数错误时出现死机
+没有control source notification的情况下来了data source notification，参数未及时初始化，导致数据越界，死机
+
+20170219：
+1）提供ancs api接口
+2）完善timer api/spi/uart api！ modify calendar function add ms support
+3) 提供ble get addr api
+4) delete redundancy ble_api.h
+5) pmu api update。提供sleep相关部分的API，一部分clk相关的API
+6) pmu clk switch update。验证32K切换功能
+
+20170222：
+1) RTC timer 解决异常中止问题
+2) 更新high clk 切换函数。
+3）加入非sleep即idle 控制，达到错峰效果。
+4）解决anchor point太提前的情况下，lsn begin提前到上个event开始处理的情况
+5）每1s 读一次温度。
+6）优化16M Rc校准函数，并使用rc校准。
+7）新增pmu clk 测试相关code
+
+20170226：
+1)将tx_rx_transfer & tx_rx_receive 函数移到hci.c，且将涉及到的全局变量移到hci.c，加上hci_前缀
+2)将mxd_betacy_sdk.c中的1.032浮点数定点化
+3)修正scatter file，手环和keyboard以及trunk
+4)增加symbol.lib文件，该文件后由trunk编译自动生成，开发方案的时候需要由trunk发布该lib
+5)移植weike对keyboard方案增加的代码
+6)修正OTA测试代码
+
+20170305：
+1）inc目录从lib目录下移除
+2）将手环和keyboard中的notify消息改为直接notify的方式
+3）更新flash下载算法
+4）增加自动生成symbol.lib的可执行文件lib_gen.exe
+5)scatter file调整
+6)stack_main改为main， main改为app_main
+7)keyboard方案将HCI相关初始化函数去除
+8)utility.c中增加little_endian_read_32bit函数，避免底层和APP层冲突
+9）ble api  addr/white list/conn update 等接口更新
+10）pmu sleep 相关优化，以及新增callback 函数接口。
+11）modify api function!7816 timer rtc gpio!
+12）消息修改，规范消息REQ、RSP、IND等加入类型
+13）pmu 新增wakeup cle gpio_pins
+14）keyboard can not work well! delete row_pins and line_pins check!
+15）add a aes API:uint8 gap_aes_encryption(uint8 * key, uint8 * aes_data)  
+16）add ble api send security request
+
+
+20170312：
+1）编译生成的三个bin文件，stack和app两个文件在文件的开始位置增加了版本信息，boot bin文件则在0xC0地址处增加了16字节的版本信息
+2）修正OTA中判断升级的方式，版本不相等就升级
+3）开辟system space空间供内部使用，起始地址为0x19000, 大小为0x1000
+4）改变要存储在flash中uint8类型变量指定地址的方式，改为4字节对齐的新写法
+5）code和ram空间通过scatter file重新划分，OTA space放在了stack和APP两段之间，APP地址开始到结束全部开放给客户
+6）增加hardfault call back代码，去掉以前的地址定位方式
+7）将timer init和hci init放置到app main
+8）flash.h的整理
+9）uart1相关函数从uart0移动到uart1
+10）RTC timer fRTC config wrong! modify it!
+11）fixed bug1042 and 1038
+12）增加防止某些特定变量被优化的命令配置
+13）keyboard use direct adv if has paired host device, after 1.28s normal adv will continue if not goto connection
+14）modify timer ; open watch dog function
+15）HCI中增加debug控制代码，使用user define cmd，当使用PC工具user define cmd的时候，发送55 00 00 55命令可开启OTA debug调试(secondary boot)，当发送AA 00 00 AA命令时开启dsp log调试
+16）对开放的ble API代码，尤其是msg收发相关的api，增加了err返回值
+17）stack升级OK，解决了code size改为32bit后引起的相关问题
+18）调试串口IO更改为GPIO11/GPIO10，请注意，最开始是GPIO3/2,yanping改为GPIO9/2,现统一使用EVB板上另一个串口接口。
+19)解决手环透传问题bug，APP文件头和main函数地址冲突所致
+20）keyboard 30s设置问题，现在API函数已经改为单位为ms，因此参数需要重新设置
+
+
+20170313：
+1）解决listen窗口不够导致的rx lost问题
+2）增加了debug disable命令
+
+
+20170326：
+1）手环增加ancs服务支持
+2）adc读取电压函数修改
+3）去掉一些冗余代码
+4）增加lod disable
+5）uart口设为GPIO11
+6）ANCS API 修改，将获取notification attribute详细信息的API单独提出，由用户选择
+7）CODE空间从56KB优化至64KB
+8）系统内部FLASH 空间大小依然为4KB，地址由0x19000改为0x18800
+9）BLE MAC地址获取改为唯一以及真正的随机地址，唯一地址在ll_init()函数中改为获取chip id作为MAC地址
+10）增加APP层控制是否ll tx buf发完发消息到APP的逻辑
+11）调整scatter file
+12）修改蜂鸣器控制时间，匹配新的timer接口！
+13）timer API调整，调用部分需要做对应的修改
+14）dcxo快启动
+15）不同rf_radio低功耗模式（radio_low_power_mode）
+16）低功耗版本测试code
+17）conn tx 功耗错峰问题。
+18）sleep 后，使用dcdc 模式。
+19)改变获得BLE MAC唯一地址算法
+20)添加新的OTA APK，解决了OTA版本不等不升级的问题
+21)修改ADC代码，解决客户提出的ADC问题，ADC API验证通过
+22)修改scatter file，为了更方便的自动生成symbol lib工具
+23)修改生成symbol lib工具代码，将会在下一版实现两次加载机制
+24)将低功耗相关代码添加至SDK手环和keyboard方案
+25)将全局变量控制rf前初始化的代码放至函数中控制
+
+20170412:
+1.调整手环服务消息处理，移动到task中处理
+2.bug：关闭log 无法进入sleep
+3.32K xo 电流，default 3档不起振，改为6
+4.i2c内部寄存器寻址时，如果为word寻址，高低字节顺序反了！调整顺序
+5.OTA BUG已经解决，解决方法，更新scatter file
+6.更新APK/ota_crc.exe
+7.加入配置自动生成ota bin文件
+8.更新hid keyboard文件，解决配对不连接的问题
+9.更新release note
+10.关闭watch dog
+11.调整TRUNK和SDK的关系，调整scatter file以满足lib生成要求
+12.更新生成lib的perl代码
+13.timer config error! TIME0 can not use
+14.ch_map upd issue and disconnect return 22 and add mac address to dev name       
+15.默认关闭自动读温度，开放接口给app层
+16.trunk 版本默认开log
+17.新增sleep前查app 状态，如果app 当前不需要sleep，可在sleepCB中return 非0 值
+18.sleep前检查状态时候关闭中断（llc和pmu 中断除外）。
+19.更新读温度函数，解决wakeup后第一包不收发问题
+20. min_win 500->80, lost_num>3 改为125，sca按最大计算扩展窗口
+21.优化广播rx timer，修改ifs len 为175，win 为32us
+22.唤醒时间有30cycle改为35。sleep计算统一换算cnt，优化误差。
+23.UART TX sometime only send packet header or writie cross-border of uart tx buffer 
+24.DTM和正常模式 自适应ontime 参数
+25.pmu pin wakeup api 修改，单个多个都可以。
+26.llc 参数优化
+27.多个通道切换的时候因为采样OK的状态不是硬件自动清零也没有给软件留清零接口，因此会造成切换后采样错误
+28.ADC通道打开后因为内部设计原因导致有一个电阻，当外部采样分压电阻和其接近时，会将外部电压直接拉低，这个电阻约等于400K，接近客户电阻分压值
+29.为了解决这两个问题，软件打了补丁，第一个问题采用复位的方式让状态寄存器清零，第二个问题采用降低采样频率的方式增大内阻
+30.rf 参数更新，已经测过DTM
+31新增 控制发送功率接口 默认0dbm
+32.正常工作模式用buck，之前是act。
+33.默认rx 用性能模式，这样客户测试我们性能会比较好。
+34.方案的发布代码目前都在SDK，trunk附带的方案代码目前是从SDK移植过来，因为新的lib还没发布，需要在这边继续调试
+35.增加的功能都是SDK方案的功能
+36.add timer allow to sleep function
+37.测试code 调整。
+38.wakeup pin移到app
+39.app sleep callback 修改为底层判定sleep后再调用
+40.llc 参数优化，金立手机速率提升。
+
+0426:
+1.优化了广播间隔时间，400us->150us
+2.:modify timer config lost after wakeup; modify keyboard support wakgeup; modify RTC wakgeup function
+3.add IIC SLAVE API support
+4.UART 增加修改波特率接口。
+5，pmu 新增接口宏定义，方便客户使用。
+6，32K XO电流6->3
+7.解决OTA相关bug
+8.移植了SDK的应用层代码
+9.task size优化
+10，自动根据adv和conn配置不同参数优化功耗(ontime/wakeup time)。
+11.为读rssi，将rf关闭时间延长16us。
+
+0705：
+1）将hci部分代码放到APP层
+2）将外设代码放到APP层
+3）喂狗代码放到APP层
+4）debug方式调整，底层保持log，去掉root debug，app层保持app debug
+
+20170710：
+1）	HCI over uart部分代码全部开放到APP层
+2）	底层库和APP层全部隔离，仅以消息机制通讯
+3）	Debug.c挪移至APP层，底层使用dsplog调试，APP层使用APP_DBG调试
+4）	外设代码除了RTC外，全部开放到APP层
+5）	建立了中断注册表机制以及普通call back表机制
+6）	调整了包括透传和ancs服务的代码细节
+7）	解决了OTA在iOS系统的升级问题以及某些手机引起的消息机制问题
+
+20170724：
+1）hci消息机制移除，增加4DB/7DB宏控制
+2）解决提供给客户的API flash读写不对的问题
+3）增加了set adv data的API
+4）adc驱动更新，将延迟缩短，解决timeout问题
+5）解决io唤醒清除问题
+6）增加IIC直接读 API支持
+
+20170808：
+1）before sleep cb & after wkup cb调整统一
+2）LDO & DCDC模式区分问题
+3）中断注册机制调整
+4）sleep机制check CB增加
+5）增加系统系统复位和软复位API
+6）增加外设低功耗管理枚举
+7）解决stack升级bug
+8）hci相关mem从mem.c挪移至hci层
+9）interrupt.c挪移至boot
+10）dsp log信息调整，增加cb到app层
+11）解决字节对齐问题
+12）ota service初始化放置在APP层
+13）解决不自动发广播后lib升级问题
+
+20170817：
+1）APK与手环服务的发现连接问题
+2）解决mem 拷贝导致死机的问题
+3）解决ble发消息导致死机的问题
+4）解决RTC多线程调用死机的问题
+5）解决rtc获取当前值和设置compare值不正确导致死机的问题
+6）解决io作为唤醒源没有消抖导致死机的问题
+7）解决低功耗问题
+
+更新文件：
+1）库（lib+axf）
+2）pmu_clk.h
+3)stack_task.h
+4)pmu_api.h
+
+20170829：
+1）更新了RTC算法，解决多线程调用问题
+2）更新了timer.h
+3)更新了pwm.h
+4)更新了ir.h
+
+20170903：
+1）更新lib_gen_20KB_RAM.exe，将库的加载注释掉
+2）将BOOT size和stack的起始地址从0x1FF0改为0x2000
+3）统一debug系统，将log信息开放到APP层
+4）增加DCDC模式trim值配置
+5）ADV 漏包问题解决
+6）整理了ota升级部分的log信息
+7）解决ios升级otabug
+
+更新文件：
+1）ll_phy.h
+2) log_descriptor.h
+
+20170906：
+1) 增加sm配对信息存储API
+2) 增加加密的不同模式
+3）增加Exchange MTU 功能
+
+
+更新文件：
+1）stack_task.h
+2) sm.h
+3）ll_ctrl.h
+4) gap.h
+5) ble_api.h
+6) system_config.h
+7) app_message.h
+8) app_ble.h
+
+
+20170914：
+1）解决rtc timer create多次同一个timer失败的问题
+2）解决多链路引起的1311的bug问题
+3）解决由扩展地址空间引起的OTA功能问题
+
+
+需要更新文件：
+1）sct file
+2）symbol lib
+3） axf
+4）app_main.c
+5)app_ble.c
