@@ -32,12 +32,15 @@
 
 
 #define RATE_NUM_MAX                        16
-#define PLUSE_SAMPLE_MAX					32
-#define WAVE_INDEX_MAX					16
+#define PLUSE_SAMPLE_MAX					8
 
 #define AD_SMOOTH_MAX					16
 
 #define ADSMOOTH	1
+
+
+#define MAXLEVEL	840
+#define MINLEVEL	40
 
 
 
@@ -52,14 +55,12 @@ uint8_t  heartRateIndex  =0;
 
 uint16_t adSmoothStack[AD_SMOOTH_MAX];
 
-
-
 uint16_t heartRateStack[RATE_NUM_MAX];
 uint16_t heartRateTemp[RATE_NUM_MAX];
 
 
 
-uint16_t peakIndexs[PLUSE_SAMPLE_MAX];
+uint16_t pluseIndexs[PLUSE_SAMPLE_MAX];
 
 
 uint8_t wavePulseState;
@@ -85,6 +86,7 @@ int slope;
 int top;
 int bottom;
 int middle;
+int totolPoint = 0;
 
 
 //static HEART_RATE_PARAM_T HeartRateParam;
@@ -114,28 +116,30 @@ void heartRateInit(void){
 	top = 0;
 	bottom = 0;
 	middle = 0;
+	memset(adSmoothStack,0x00,AD_SMOOTH_MAX);
 
 }
+
+
+
 /**
   *	1: bottom 2 peak 0 other
  **/
-
-
 int isPeakBottom(uint16_t adData){
 	
 	uint16_t tmp;
 	
 	tmp = adData;
-	if(tmp<40){
+	if(tmp<MINLEVEL){
 		return 1;
 		}
 	//tmp= adData-40;
 	
-	if(tmp>840){
+	if(tmp>MAXLEVEL){
 		return 2;
 		}else {
 		return 0;
-		}	
+	}	
 }
 
 HRState getHeartRateWaveState(uint16_t adData){
@@ -143,8 +147,10 @@ HRState getHeartRateWaveState(uint16_t adData){
 	int peak;
 	state = HRInit;
 		// APP_DBG(("adData = %d\r\n",adData));
-		
+	adData =	adValueFilter(adData);	
 	peak = isPeakBottom( adData);
+	
+	APP_DBG(("%d,",adData));
 		pointCount++;
 
 		
@@ -215,7 +221,7 @@ int getArrayMinIndex(uint16_t *array,int len){
     return iMin;
 }
 
-uint16_t getHeartAverage(uint16_t *array,int length){
+uint16_t getArrayAverage(uint16_t *array,int length){
 	int i = 0;
 	int total = 0;
 	for(i=0;i<length;i++){
@@ -223,6 +229,32 @@ uint16_t getHeartAverage(uint16_t *array,int length){
 		}
 	return total/length;
 }
+
+
+
+/**
+  * @brief  This function get ad value avager
+  * @param uint16_t adValue
+  * @retval adAvergerValue
+  */
+
+uint16_t adValueFilter(uint16_t adValue){
+	int i = 0;
+	uint16_t adAvergerValue;
+	for(i=0;i<AD_SMOOTH_MAX-1;i++){
+	//	APP_DBG(("b heart = %d\r\n",heartRateStack[i] ));
+		adSmoothStack[i]=adSmoothStack[i+1];
+		//APP_DBG(("a heart = %d\r\n",heartRateStack[i] ));
+		//nrf_delay_ms(100);
+		}
+	adSmoothStack[AD_SMOOTH_MAX-1] = adValue;
+	adAvergerValue = getArrayAverage(adSmoothStack,AD_SMOOTH_MAX);
+	
+	//APP_DBG((" smooth ad  = %d\r\n",adAvergerValue ));
+	
+	return adAvergerValue;
+}
+
 
 
 uint16_t getHeartAverageWithoutPeak(uint16_t *array,int length){
@@ -247,7 +279,7 @@ uint16_t getHeartRateSmooth(uint16_t tmpHeartRate){
 	
 	if(heartRateIndex<9){
 			heartRateStack[heartRateIndex++]=tmpHeartRate;
-			heartRate = getHeartAverage(heartRateStack,heartRateIndex);
+			heartRate = getArrayAverage(heartRateStack,heartRateIndex);
 	}else {
 	for(i=0;i<7;i++){
 	//	APP_DBG(("b heart = %d\r\n",heartRateStack[i] ));
@@ -256,7 +288,7 @@ uint16_t getHeartRateSmooth(uint16_t tmpHeartRate){
 		//nrf_delay_ms(100);
 		}
 	heartRateStack[7] = tmpHeartRate;
-	heartRate = getHeartAverage(heartRateStack,8);
+	heartRate = getArrayAverage(heartRateStack,8);
 	}
 	APP_DBG((" smooth heart  = %d\r\n",heartRate ));
 	
@@ -269,8 +301,8 @@ uint16_t getHeartRateDetection(void){
 	uint16_t tmpHeartRate;
 	int count = 0;
 	for(i=0;i<(pulseIndex-2);i++){
-		//APP_DBG(("getHeartRateDetection[%d] = %d  \r\n ",i,peakIndexs[i+1]-peakIndexs[i]));	
-		tmpHeartRate = SamplePointTotal/ (peakIndexs[i+1]-peakIndexs[i]);
+		//APP_DBG(("getHeartRateDetection[%d] = %d  \r\n ",i,pluseIndexs[i+1]-peakIndexs[i]));	
+		tmpHeartRate = SamplePointTotal/ (pluseIndexs[i+1]-pluseIndexs[i]);
 		// APP_DBG((" heart [%d]= %d\r\n",i,tmpHeartRate ));
 		// nrf_delay_ms(100);
 		if(tmpHeartRate<=HeartRateMAX&&tmpHeartRate>=HeartRateMIN){
@@ -298,14 +330,14 @@ void heartDealLoop(uint16_t adc){
 	 HRState bpmState;
 	 int size ;
 	 heartRateInit();
-	 size =  sizeof(wave_2660_1)/sizeof(uint16_t);
+	 size =  sizeof(wave_2660_2)/sizeof(uint16_t);
 	  APP_DBG(("size = %d \r\n ",size));		  
-	  for (i = 0; i < size; i++){
+	  for (i = 0; i < 3000; i++){
        
-		
+		totolPoint++;
 		// APP_DBG(("s[%d] = %d \r\n ",i,wave_2660[i]));		  
-		 bpmState = 	 getHeartRateWaveState(wave_2660_1[i]);  
-		
+		 bpmState = 	 getHeartRateWaveState(wave_2660_2[i]);  
+	//	 APP_DBG(("%d,",wave_2660_2[i]));		  
 		if(bpmState==HRFinish){
 		
 		heartRate =	getHeartRateDetection();
@@ -330,7 +362,7 @@ void adc_read_callback(void)
 	uint16		adc=0;
  
 	adc=adc_io_read(ADC_CH1);
-	heartDealLoop(adc);
+	//heartDealLoop(adc);
 	//APP_DBG(("%d,",adc));
 #ifdef debug_gpio	
 	if(gpio_read_output_bit(GPIO_19)){
@@ -373,6 +405,7 @@ void bsp_ts1303_init(void)
 	gpio_init_output(GPIO_21,GPIO_PULL_NONE,1);
 	hw_timer_start(TIME1);
 	heartRateInit();
+	heartDealLoop(0);
 }
 
 

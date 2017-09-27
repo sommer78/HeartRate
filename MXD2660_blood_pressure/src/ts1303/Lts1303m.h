@@ -91,6 +91,9 @@ uint16_t getHeartRateSmooth(uint16_t tmpHeartRate);
 void hw_timer_config(void);
 void bsp_ts1303_init(void);
 
+uint16_t adValueFilter(uint16_t adValue);
+
+
 
 
 #ifdef __cplusplus
