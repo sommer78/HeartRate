@@ -55,7 +55,6 @@ typedef enum
     HRErrPointOut = 5,/*BPM error */	
     HRErrTopLong = 6,/*BPM error */	
 	HRErrBottomLong = 7,/*BPM error */ 
-	HRErrPulseLength = 8,/*BPM error */ 
 
 	
 } HRState;

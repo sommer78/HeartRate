@@ -51,13 +51,7 @@ typedef enum
     HRFinish = 1,	 /*BPM finish */		
     HRError = 2,/*BPM error */	
     HRErrShortWave = 3,/*BPM error */	
-    HRErrLongWave = 4,/*BPM error */	
-    HRErrPointOut = 5,/*BPM error */	
-    HRErrTopLong = 6,/*BPM error */	
-	HRErrBottomLong = 7,/*BPM error */ 
-	HRErrPulseLength = 8,/*BPM error */ 
-
-	
+    HRErrLongWave = 4,/*BPM error */		
 } HRState;
 
 

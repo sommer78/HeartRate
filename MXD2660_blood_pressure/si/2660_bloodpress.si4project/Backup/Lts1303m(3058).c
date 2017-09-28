@@ -84,6 +84,7 @@ int firstWave;
 int bottomIndex;
 int  waveType;
 int isTypeRect;
+int isTypeSine;
 int isDetectStart;
 int slope;
 
@@ -92,11 +93,6 @@ int bottom;
 int middle;
 int totolPoint = 0;
 int lastPulseLocal;
-int topCount;
-int bottomCount;
-int topStart;
-
-
 
 //static HEART_RATE_PARAM_T HeartRateParam;
 
@@ -141,9 +137,7 @@ void heartRateInit(void){
 	bottom = 0;
 	middle = 0;
 	isTypeRect = 0;
-	topCount = 0;
-	bottomCount = 0;
-	topStart = 0;
+	isTypeSine = 0;
 	memset(plusePeakStack,0x00,PLUSE_SAMPLE_MAX);
 	memset(adSmoothStack,0x00,AD_SMOOTH_MAX*2);
 
@@ -176,7 +170,6 @@ int pushPulsePeakStack(int pulsePeakLocation){
 	int posiLength =0;
 	isTypeRect = 0;
 	if(firstWave==0){
-		APP_DBG((" first lastPulseLocal: %d \r\n",lastPulseLocal));
 		lastPulseLocal = pulsePeakLocation;
 		firstWave=1;
 		}else {
@@ -185,10 +178,8 @@ int pushPulsePeakStack(int pulsePeakLocation){
 		if(posiLength<1000&&posiLength>100){
 			plusePeakStack[pulseIndex]= posiLength;
 	    	pulseIndex++;
-			}else {
-				return -1;
-				}
-		APP_DBG(("next lastPulseLocal: %d \r\n",lastPulseLocal));
+			}
+		
 		}
 	
 	return posiLength;
@@ -202,7 +193,7 @@ HRState getHeartRateWaveState(uint16_t adData){
 	adData =	adValueFilter(adData);	
 	peak = isPeakBottom( adData);
 	
-	//APP_DBG(("%d,",adData));
+	//APP_DBG((" P:%d ,",adData));
 	pointCount++;
 	
 		
@@ -213,15 +204,15 @@ HRState getHeartRateWaveState(uint16_t adData){
 		bottom++;
 
 		
-		if(bottom>20){
+		if(bottom>10){
 			isTypeRect =1;
 			if(isDetectStart==0){
 				isDetectStart =1;
 				APP_DBG(("start rec detect: %d \r\n",totolPoint));
-				if(firstWave==0){
+				if(pulseIndex==0){
 					pointCount=0;
 					bottomStart = 0;
-
+	
 					}else {
 						bottomStart = pointCount;
 						}
@@ -241,13 +232,9 @@ HRState getHeartRateWaveState(uint16_t adData){
 		if(isDetectStart){
 			isDetectStart=0;
 			pulsePeakLocal= bottomStart+bottom/2;
+		    isTypeRect = 0;
 			posiLength = pushPulsePeakStack(pulsePeakLocal);
 			APP_DBG(("pulse   pulsePeakLocal: %d posiLength : %d \r\n",pulsePeakLocal,posiLength));
-			if(posiLength<0){
-					state = HRErrPulseLength;	
-				}
-	
-			
 			if(pulseIndex>PLUSE_SAMPLE_MAX){
 			state = HRFinish;	
 				}
@@ -265,61 +252,18 @@ HRState getHeartRateWaveState(uint16_t adData){
 		}
 		
 	}else if(peak ==0){					// middle value
-
-	if(isTypeRect ){
-		return state;
-		}
-	//	bottom =0;
-		if(slope==0){				// 下降沿判断
-			if(adData<minValue){
+	
+		if(adData<minValue){
 			minValue = adData;
-		//	APP_DBG(("MIN: %d\r\n",adData));
-			topCount=0;
-
 			if(firstWave==0){
 			//	APP_DBG(("count = %d\r\n",pointCount));
-				pointCount = 0;
-				bottomStart = 0;
-				}else {
-				bottomStart = pointCount;
-					}
+			//	pointCount = 0;
+				}
 			
 			
-			}else {
-			topCount++;
-			if(topCount>10){
-			//	APP_DBG(("pulse Peak  totolPoint: %d  \r\n",totolPoint));
-				APP_DBG(("bottom start point: %d minvalue:%d\r\n",bottomStart,minValue));
-
-				firstWave = 1;
-				slope = 1;
-				maxValue = 0;
-	
-				}
-			}
-		}else {
-
-		if(adData>maxValue){
-			maxValue = adData;
-		//	APP_DBG(("MAX: %d\r\n",adData));
-			bottomCount=0;
-			topStart = pointCount;
-			}else {
-			bottomCount++;
-			if(bottomCount>10){
-				APP_DBG(("top start point: %d\r\n",topStart));
-				slope = 0;
-			minValue = 1024;
-	
-				}
 			}
 		
 		}
-
-		
-		
-		
-	}
 
 	if(pointCount>60000){
 		pointCount = 0;
@@ -514,14 +458,14 @@ void heartDealLoop(uint16_t adc){
 	 HRState bpmState;
 	 int size ;
 	
-	 size =  sizeof(wave_2660_2)/sizeof(uint16_t);
+//	 size =  sizeof(wave_2660_2)/sizeof(uint16_t);
 //	  APP_DBG(("size = %d \r\n ",size));		  
-  for (i = 0; i < size/2; i++){
+//	  for (i = 0; i < size; i++){
        
 		totolPoint++;
 		// APP_DBG(("s[%d] = %d \r\n ",i,wave_2660[i]));		  
-		 bpmState = 	 getHeartRateWaveState(wave_2660_2[i]);  
-		// bpmState = 	 getHeartRateWaveState(adc);  
+		// bpmState = 	 getHeartRateWaveState(wave_2660_2[i]);  
+		 bpmState = 	 getHeartRateWaveState(adc);  
 	//	 APP_DBG(("%d,",wave_2660_2[i]));		  
 		if(bpmState==HRFinish){
 		
@@ -533,18 +477,15 @@ void heartDealLoop(uint16_t adc){
 		//
 		}
 		
-		
-		if(bpmState==HRErrBottomLong
-			||bpmState==HRErrTopLong
-			||bpmState==HRErrPointOut
-			||bpmState==HRErrPulseLength
-			||bpmState==HRError
-			||bpmState==HRErrShortWave
-			||bpmState==HRErrLongWave){
+		if(bpmState==HRError||bpmState==HRErrShortWave||bpmState==HRErrLongWave){
 			 APP_DBG(("HRError:%d \r\n", bpmState));		
 			heartRateInit();
 			}
-	  	}
+		if(bpmState==HRErrBottomLong||bpmState==HRErrTopLong||bpmState==HRErrPointOut){
+			 APP_DBG(("HRError:%d \r\n", bpmState));		
+			heartRateInit();
+			}
+//	  	}
 	//  APP_DBG(("top  = %d bottom=%d middle=%d  \r\n",top,bottom,middle));		
 }
 
@@ -554,8 +495,8 @@ void adc_read_callback(void)
 	uint16		adc=0;
  
 	adc=adc_io_read(ADC_CH1);
-	APP_DBG(("%d,",adc));
-	//heartDealLoop(adc);
+//	APP_DBG(("%d,",adc));
+	heartDealLoop(adc);
 	
 	debubGpioChange();
 
@@ -592,7 +533,7 @@ void bsp_ts1303_init(void)
 	gpio_init_output(GPIO_21,GPIO_PULL_NONE,1);
 	hw_timer_start(TIME1);
 	heartRateInit();
-//	heartDealLoop(0);
+	//heartDealLoop(0);
 }
 
 
