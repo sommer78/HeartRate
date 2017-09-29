@@ -32,18 +32,20 @@
 
 
 #define RATE_NUM_MAX                        16
-#define PLUSE_SAMPLE_MAX					8
+#define PLUSE_SAMPLE_MAX					32
 
-#define AD_SMOOTH_MAX					8
+#define AD_SMOOTH_MAX					64
 
-#define ADSMOOTH	1
+//#define ADSMOOTH	1
+#define AD_SAMPLE_MAX	2000
 
 
 #define MAXLEVEL	820
 #define MINLEVEL	40
-#define MAXTOPLEVEL	1000
-#define MAXBOTTOMLEVEL	1000
+#define MAXTOPLEVEL	400
+#define MAXBOTTOMLEVEL	400
 
+#define  SamplePointTotal 30000		
 
 
 
@@ -60,9 +62,14 @@ uint16_t adSmoothStack[AD_SMOOTH_MAX];
 uint16_t heartRateStack[RATE_NUM_MAX];
 uint16_t heartRateTemp[RATE_NUM_MAX];
 
+uint16_t adValues[AD_SAMPLE_MAX];
 
 
-int plusePeakStack[PLUSE_SAMPLE_MAX*2];
+
+
+
+int plusePeakLocStack[PLUSE_SAMPLE_MAX];
+int plusePeakValStack[PLUSE_SAMPLE_MAX];
 
 
 uint8_t wavePulseState;
@@ -74,7 +81,7 @@ int bottomStart;
 int bottomStop;
 int pointCount;	
 int peakAve;
-int pulsePeakLocal; 
+int currentPosition; 
 int bottomValue;
 uint16_t maxValue;
 uint16_t lastAdData;
@@ -85,16 +92,18 @@ int bottomIndex;
 int  waveType;
 int isTypeRect;
 int isDetectStart;
-int slope;
+WaveSLope slope;
 
 int top;
 int bottom;
 int middle;
-int totolPoint = 0;
+int totalPoint = 0;
 int lastPulseLocal;
 int topCount;
 int bottomCount;
 int topStart;
+int slopeUp;
+int slopeDown;
 
 
 
@@ -130,13 +139,13 @@ void heartRateInit(void){
 	wavePulseState = 0;
 	peakCount= 0;
 	pulseIndex = 0;
-	pulsePeakLocal = 0;
+	currentPosition = 0;
 	maxValue = 0;
 	minValue = 1024;
 	firstWave = 0;
 	bottomValue = 0;
 	waveType = 0;
-	slope = 0;
+	slope = SlopeBottom;
 	top = 0;
 	bottom = 0;
 	middle = 0;
@@ -144,11 +153,18 @@ void heartRateInit(void){
 	topCount = 0;
 	bottomCount = 0;
 	topStart = 0;
-	memset(plusePeakStack,0x00,PLUSE_SAMPLE_MAX);
-	memset(adSmoothStack,0x00,AD_SMOOTH_MAX*2);
-
+	slopeUp=0;
+	slopeDown=0;
+	memset(plusePeakLocStack,0x00,PLUSE_SAMPLE_MAX);
+	memset(plusePeakValStack,0x00,PLUSE_SAMPLE_MAX);
+	
 }
 
+void heartRateStackInit(void){
+
+	memset(heartRateStack,75,RATE_NUM_MAX);
+	
+}
 
 
 /**
@@ -170,8 +186,8 @@ int isPeakBottom(uint16_t adData){
 		return 0;
 	}	
 }
-
-int pushPulsePeakStack(int pulsePeakLocation){
+#if 0
+int pushPulsePeakStack(int pulsePeakLocation,int minValue){
 	
 	int posiLength =0;
 	isTypeRect = 0;
@@ -183,7 +199,7 @@ int pushPulsePeakStack(int pulsePeakLocation){
 		posiLength =  pulsePeakLocation-lastPulseLocal;
 		lastPulseLocal = pulsePeakLocation;
 		if(posiLength<1000&&posiLength>100){
-			plusePeakStack[pulseIndex]= posiLength;
+			plusePeakLocStack[pulseIndex]= posiLength;
 	    	pulseIndex++;
 			}else {
 				return -1;
@@ -193,141 +209,282 @@ int pushPulsePeakStack(int pulsePeakLocation){
 	
 	return posiLength;
 }
-
-HRState getHeartRateWaveState(uint16_t adData){
-	HRState state= HRInit;
-	int peak;
-	int posiLength;
-		// APP_DBG(("adData = %d\r\n",adData));
-	adData =	adValueFilter(adData);	
-	peak = isPeakBottom( adData);
+#endif
+int pushPulsePeakStack(int pulsePeakLocation,int minValue){
 	
+	
+	if(pulseIndex<PLUSE_SAMPLE_MAX){
+	plusePeakLocStack[pulseIndex]= pulsePeakLocation;
+	plusePeakValStack[pulseIndex]= pulsePeakLocation;
+	}
+	pulseIndex++;
+	if(pulseIndex>=PLUSE_SAMPLE_MAX){
+		pulseIndex = PLUSE_SAMPLE_MAX-1;
+		}
+	
+	
+	return pulseIndex;
+}
+
+
+int regularPulseWave(){
+	int i=0;
+	int distance;
+	int plusePeakTemp[PLUSE_SAMPLE_MAX];
+	int plusePeakTempIndex = 0;
+	//for(i=0;i<pulseIndex-1;i++){
+		while (i<pulseIndex){
+			
+		distance = plusePeakLocStack[i+1]-plusePeakLocStack[i];
+		APP_DBG(("distantce [%d] = %d\r\n",i,distance));
+		if(distance<200){
+			if((plusePeakValStack[i+1]-plusePeakValStack[i])>0){
+				plusePeakTemp[plusePeakTempIndex++]=plusePeakLocStack[i+1];
+				}else {
+				plusePeakTemp[plusePeakTempIndex++]=plusePeakLocStack[i];
+					}
+			i+=2;
+			}else {
+			plusePeakTemp[plusePeakTempIndex++]=plusePeakLocStack[i];
+			i++;
+				}
+			
+		}
+	for(i=0;i<plusePeakTempIndex;i++){
+		APP_DBG(("plusePeakTemp[%d] = %d\r\n",i,plusePeakTemp[i]));
+		}
+	
+	return pulseIndex;
+}
+
+
+
+
+#define DEBUG_MODE
+HRState getHeartRateWave(){
+	int peak;
+	int i;
+	uint16_t adData;
+	uint16_t lastAdData=0;
+	int lastAdPeak=0;
+	int hasSlopeDown=0;
+	int outBottom =0;
+	int lastPosition = 0;
+	int distance=0;
+	int lastMinValue=0;
+	
+	WaveSLope currentDirect;
+		// APP_DBG(("adData = %d\r\n",adData));
+	pointCount=0;
+	isTypeRect =0;
+	currentPosition = 0;
+	bottomStart = 0;
+	bottom = 0;
+	isDetectStart = 0;
+	slope = SlopeBottom;
+	pulseIndex = 0;
+	
+	 for (i = 0; i < AD_SMOOTH_MAX; i++){
+  	adSmoothStack[i] = wave_2660_2[i];
+  	}
+    for (i = AD_SMOOTH_MAX; i < AD_SAMPLE_MAX; i++){
+	 adValues[i]=adValueFilter (wave_2660_2[i]);
+	 }
+
+	for (i = AD_SMOOTH_MAX; i < AD_SAMPLE_MAX; i++){
+	//	adData =	wave_2660_2[i];
+
+//	for (i = AD_SMOOTH_MAX; i < AD_SAMPLE_MAX; i++){
+			adData =	adValues[i];
+
+
+
+		//
+	//	APP_DBG(("V:%d P:%d ",adData,pointCount));
+
 	//APP_DBG(("%d,",adData));
+
+		
+		peak = isPeakBottom( adData);
+
+
+		if(peak==2){					//  波峰平
+			
+			bottom=0;
+			top++;
+			if(top>MAXTOPLEVEL){
+				return HRErrTopLong;
+				}
+			if(isTypeRect ){
+				outBottom++;
+				if(outBottom>10){
+					currentPosition = bottomStart+bottom/2;
+				APP_DBG(("TOP  lastPosition: %d \r\n",lastPosition));
+					if(lastPosition>0){
+					distance=	currentPosition-lastPosition;
+					APP_DBG(("TOP  distance: %d heart: %d \r\n",distance,SamplePointTotal/distance));
+						if(distance>100&&distance<750){
+							heartRate = SamplePointTotal/distance;
+							return HRFinish;
+						}
+					}
+					lastPosition= currentPosition;
+					isDetectStart =0;
+					isTypeRect = 0;
+					bottom = 0;
+					}
+				}
+		hasSlopeDown = 1;
+
+
+		slope = SlopeTop;
+		currentDirect = SlopeTop;
+		
+		}else if(peak==1){				//波谷平
+			bottom++;
+			top =0;
+			
+			if(bottom>MAXBOTTOMLEVEL){
+				return HRErrBottomLong;
+				}
+			if(hasSlopeDown==1){
+				
+				if(bottom>30){					// 方波判断
+			//	APP_DBG(("start rec bottomStart: %d \r\n",pointCount));
+					isTypeRect =1;					
+					if(isDetectStart==0){
+						isDetectStart =1;
+						bottomStart = pointCount-30;
+					    outBottom=0;
+						APP_DBG(("\r\n start rec detect: %d \r\n",bottomStart));
+
+					
+					}
+				}
+			}
+
+		slope = SlopeBottom;
+	currentDirect = SlopeBottom;
+
+			
+		}else {							//中间值
+	//	APP_DBG(("middle  : %d type: %d \r\n",pointCount,isTypeRect));	
+		lastAdPeak = isPeakBottom( lastAdData);
+		if(lastAdPeak==1){
+			slopeUp++;
+			slopeDown=0;
+		}else if(lastAdPeak==2) {
+			slopeDown++;
+			slopeUp=0;
+		}else {
+			if(lastAdData<adData){
+			slopeUp++;
+			slopeDown=0;
+			}else {
+			slopeDown++;
+			slopeUp=0;
+			}	
+		}
+		if(slopeUp>15){					//上升沿	
+			slope= SlopeUP;
+			maxValue =0;
+			if(currentDirect!=SlopeUP){
+					currentDirect = SlopeUP;
+					currentPosition = bottomStart;
+				
+					
+					APP_DBG(("  bottom: %d  minValue: %d current : %d distance:%d \r\n",bottomStart,minValue,pointCount,distance));
+					pushPulsePeakStack(currentPosition,minValue);
+					if(pulseIndex>7){
+						regularPulseWave();
+						}
+					lastPosition = currentPosition;
+					lastMinValue = minValue;
+				}
+			
+			}
+
+		if(slopeDown>15){			//下降沿
+			slope = SlopeDown;
+			hasSlopeDown = 1;
+	    	minValue =1024;
+			if(currentDirect!=SlopeDown){
+					currentDirect = SlopeDown;
+				
+			
+					//APP_DBG(("sloop down  top: %d  maxValue: %d current : %d\r\n",topStart,maxValue,pointCount));
+				}
+		
+			
+			
+		//	APP_DBG(("sloop down  point: %d \r\n",pointCount));
+			}
+			
+		if(isTypeRect ){
+				
+			outBottom++;
+			if(outBottom>10){
+				currentPosition = bottomStart+bottom/2;
+		
+				if(lastPosition>0){
+				distance=	currentPosition-lastPosition;
+				APP_DBG(("distance: %d heart: %d \r\n",distance,SamplePointTotal/distance));
+					if(distance>100&&distance<750){
+						heartRate = SamplePointTotal/distance;
+						return HRFinish;
+					}
+				}
+				APP_DBG(("lastPosition: %d cur: %d \r\n",lastPosition,currentPosition));
+				lastPosition= currentPosition;
+				isDetectStart=0;
+				isTypeRect = 0;
+				bottom = 0;
+				}
+			}else {			
+			// sine wave detection
+		//	APP_DBG(("NORMAL DETECT: %d Posi: %d\r\n",adData,pointCount));
+			
+			if(slope==SlopeDown){				
+				if(adData<minValue){
+				minValue = adData;
+		//		APP_DBG(("MIN[]: %d Posi: %d\r\n",adData,pointCount));
+				
+				bottomStart = pointCount;
+				
+				}
+			}else if(slope==SlopeUP) {
+
+			if(adData>maxValue){
+				maxValue = adData;
+		//	APP_DBG(("MAX**: %d Posi: %d\r\n",adData,pointCount));
+				topStart = pointCount;
+				}
+			}
+			
+		}
+
+
+
+
+
+	//	top =0;
+	//	bottom=0;
+		
+			
+		}
+		
+	lastAdData = adData;
+		
 	pointCount++;
 	
-		
-	if(peak==1){			// bottom value
-	//APP_DBG(("bottom: %d \r\n",bottom));
-	//	APP_DBG(("peak = %d\r\n",peak));
-		top=0;
-		bottom++;
+  }
+  //APP_DBG(("size = %d \r\n ",sizeof(wave_2660_2)/sizeof(uint16_t)));	
+	//APP_DBG(("T:%d B:%d M:%d \r\n",top,bottom,middle));
 
-		
-		if(bottom>20){
-			isTypeRect =1;
-			if(isDetectStart==0){
-				isDetectStart =1;
-				APP_DBG(("start rec detect: %d \r\n",totolPoint));
-				if(firstWave==0){
-					pointCount=0;
-					bottomStart = 0;
-
-					}else {
-						bottomStart = pointCount;
-						}
-				}
-			
-			}
-	if(bottom>MAXBOTTOMLEVEL){
-	//	APP_DBG(("HRErrBottomLong : %d \r\n",totolPoint));
-		bottom=0;
-		state = HRErrBottomLong;
-		}	
-	}else if(peak ==2){							// peak value
-	//APP_DBG(("top: %d \r\n",top));
-	top++;
-		
-	if(isTypeRect){
-		if(isDetectStart){
-			isDetectStart=0;
-			pulsePeakLocal= bottomStart+bottom/2;
-			posiLength = pushPulsePeakStack(pulsePeakLocal);
-			APP_DBG(("pulse   pulsePeakLocal: %d posiLength : %d \r\n",pulsePeakLocal,posiLength));
-			if(posiLength<0){
-					state = HRErrPulseLength;	
-				}
 	
-			
-			if(pulseIndex>PLUSE_SAMPLE_MAX){
-			state = HRFinish;	
-				}
-			
-			//APP_DBG(("finish rec detect: %d  \r\n",totolPoint));
-			}
-		
-		}
-	//	APP_DBG(("peak = %d\r\n",peak));
-	bottom =0;
-	if(top>MAXTOPLEVEL){
-		top = 0;
-		//APP_DBG(("HRErrTopLong : %d\r\n",totolPoint));
-		state = HRErrTopLong;
-		}
-		
-	}else if(peak ==0){					// middle value
-
-	if(isTypeRect ){
-		return state;
-		}
-	//	bottom =0;
-		if(slope==0){				// 下降沿判断
-			if(adData<minValue){
-			minValue = adData;
-		//	APP_DBG(("MIN: %d\r\n",adData));
-			topCount=0;
-
-			if(firstWave==0){
-			//	APP_DBG(("count = %d\r\n",pointCount));
-				pointCount = 0;
-				bottomStart = 0;
-				}else {
-				bottomStart = pointCount;
-					}
-			
-			
-			}else {
-			topCount++;
-			if(topCount>10){
-			//	APP_DBG(("pulse Peak  totolPoint: %d  \r\n",totolPoint));
-				APP_DBG(("bottom start point: %d minvalue:%d\r\n",bottomStart,minValue));
-
-				firstWave = 1;
-				slope = 1;
-				maxValue = 0;
-	
-				}
-			}
-		}else {
-
-		if(adData>maxValue){
-			maxValue = adData;
-		//	APP_DBG(("MAX: %d\r\n",adData));
-			bottomCount=0;
-			topStart = pointCount;
-			}else {
-			bottomCount++;
-			if(bottomCount>10){
-				APP_DBG(("top start point: %d\r\n",topStart));
-				slope = 0;
-			minValue = 1024;
-	
-				}
-			}
-		
-		}
-
-		
-		
-		
-	}
-
-	if(pointCount>60000){
-		pointCount = 0;
-		state = HRErrPointOut;
-		}
 
 
-	return state;
+	return HRErrPointOut;
 
 }
 
@@ -441,110 +598,53 @@ uint16_t getHeartRateSmooth(uint16_t tmpHeartRate){
 	return heartRate;
 }
 
-uint16_t getHeartRateDetection(void){
-	int i = 0;
-	uint16_t tmpHeartRate;
-	int count = 0;
-	for(i=0;i<PLUSE_SAMPLE_MAX;i++){
-	
-		tmpHeartRate = SamplePointTotal/ plusePeakStack[i];
-		 APP_DBG((" heart [%d]= %d\r\n",i,tmpHeartRate ));
-
-		if(tmpHeartRate<=HeartRateMAX&&tmpHeartRate>=HeartRateMIN){
-			heartRateTemp[count++]=tmpHeartRate;
-		
-			}
-	}
-	if(count!=0){
-	tmpHeartRate =	getHeartAverageWithoutPeak(heartRateTemp,count);
-	if(tmpHeartRate>HeartRateMAX||tmpHeartRate<HeartRateMIN){
-		tmpHeartRate = lastHeartRate;
-		lastHeartRate=60;
-		}
-	}else {
-	tmpHeartRate = lastHeartRate;
-	}
-	
-	APP_DBG(("  before heart = %d\r\n",tmpHeartRate ));
-	heartRate = tmpHeartRate;
-	
-	
-	 
-
-	return heartRate;
-}
-#if 0
-uint16_t getHeartRateDetection(void){
-	int i = 0;
-	uint16_t tmpHeartRate;
-	int count = 0;
-	for(i=0;i<PLUSE_SAMPLE_MAX-1;i++){
-		APP_DBG(("getHeartRateDetection[%d] = %d  \r\n ",i,plusePeakStack[i+1]-plusePeakStack[i]));	
-		tmpHeartRate = SamplePointTotal/ (plusePeakStack[i+1]-plusePeakStack[i]);
-		 APP_DBG((" heart [%d]= %d\r\n",i,tmpHeartRate ));
-
-		if(tmpHeartRate<=HeartRateMAX&&tmpHeartRate>=HeartRateMIN){
-			heartRateTemp[count++]=tmpHeartRate;
-		
-			}
-	}
-	if(count!=0){
-	tmpHeartRate =	getHeartAverageWithoutPeak(heartRateTemp,count);
-	if(tmpHeartRate>HeartRateMAX||tmpHeartRate<HeartRateMIN){
-		tmpHeartRate = lastHeartRate;
-		lastHeartRate=60;
-		}
-	}else {
-	tmpHeartRate = lastHeartRate;
-	}
-	
-	APP_DBG(("  before heart = %d\r\n",tmpHeartRate ));
-	heartRate = tmpHeartRate;
-	
-	
-	 
-
-	return heartRate;
-}
-#endif 
 
 
-void heartDealLoop(uint16_t adc){
+
+void heartDealLoop(void){
 	 uint16_t i;
 	 HRState bpmState;
-	 int size ;
+	 	
+//	 size =  sizeof(wave_2660_2)/sizeof(uint16_t);
+//	  APP_DBG(("size = %d \r\n ",size));	
+  APP_DBG(("\r\n***********************heartdealloop*********************** \r\n ")); 
+
+	/* 滤波函数 得到均值滤波的值*/
+  for (i = 0; i < AD_SMOOTH_MAX; i++){
+  	adSmoothStack[i] = adValues[i];
+  	}
+  for (i = AD_SMOOTH_MAX; i < AD_SAMPLE_MAX; i++){
+	 adValues[i]=adValueFilter (adValues[i]);
+	 }
+
+
+  	/* 心跳处理 得到心跳间隔周期  */
+	bpmState = 	 getHeartRateWave();  
+  
+	if(bpmState==HRFinish){
 	
-	 size =  sizeof(wave_2660_2)/sizeof(uint16_t);
-//	  APP_DBG(("size = %d \r\n ",size));		  
-  for (i = 0; i < size/2; i++){
-       
-		totolPoint++;
-		// APP_DBG(("s[%d] = %d \r\n ",i,wave_2660[i]));		  
-		 bpmState = 	 getHeartRateWaveState(wave_2660_2[i]);  
-		// bpmState = 	 getHeartRateWaveState(adc);  
-	//	 APP_DBG(("%d,",wave_2660_2[i]));		  
-		if(bpmState==HRFinish){
-		
-		heartRate =	getHeartRateDetection();
-	//	heartRate =	getHeartRateSmooth(heartRate); 
-		 APP_DBG(("heartRate = %d\r\n",heartRate));		
+	//heartRate =	getHeartRateDetection();
+//	heartRate =	getHeartRateSmooth(heartRate); 
+	 APP_DBG(("heartRate = %d\r\n",heartRate));		
+	heartRateInit();
+	
+	//
+	}
+	
+	
+	if(bpmState==HRErrBottomLong
+		||bpmState==HRErrTopLong
+		||bpmState==HRErrPointOut
+		||bpmState==HRErrPulseLength
+		||bpmState==HRError
+		||bpmState==HRErrShortWave
+		||bpmState==HRErrLongWave){
+		 APP_DBG(("HRError:%d \r\n", bpmState));		
 		heartRateInit();
-		
-		//
 		}
-		
-		
-		if(bpmState==HRErrBottomLong
-			||bpmState==HRErrTopLong
-			||bpmState==HRErrPointOut
-			||bpmState==HRErrPulseLength
-			||bpmState==HRError
-			||bpmState==HRErrShortWave
-			||bpmState==HRErrLongWave){
-			 APP_DBG(("HRError:%d \r\n", bpmState));		
-			heartRateInit();
-			}
-	  	}
+
+   totalPoint= 0;
+	 APP_DBG(("\r\n***********************finish*********************** \r\n ")); 
 	//  APP_DBG(("top  = %d bottom=%d middle=%d  \r\n",top,bottom,middle));		
 }
 
@@ -555,9 +655,10 @@ void adc_read_callback(void)
  
 	adc=adc_io_read(ADC_CH1);
 	APP_DBG(("%d,",adc));
+	adValues[totalPoint++]=adc;
 	//heartDealLoop(adc);
 	
-	debubGpioChange();
+//	debubGpioChange();
 
 	
 
@@ -565,7 +666,12 @@ void adc_read_callback(void)
 
 void hw_timer1_handler(void)
 {
+	if(totalPoint<AD_SAMPLE_MAX){
 	adc_read_callback();
+	}else {
+	//hw_timer_stop(TIME1);
+	heartDealLoop();
+		}
 }
 
 void hw_timer_config(void)
@@ -590,9 +696,10 @@ void bsp_ts1303_init(void)
     adc_init(7);
 	
 	gpio_init_output(GPIO_21,GPIO_PULL_NONE,1);
-	hw_timer_start(TIME1);
-	heartRateInit();
-//	heartDealLoop(0);
+	//hw_timer_start(TIME1);
+	heartRateStackInit();
+	heartDealLoop();
+//	heartDealLoop();
 }
 
 

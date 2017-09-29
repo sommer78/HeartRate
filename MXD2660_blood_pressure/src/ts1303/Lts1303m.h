@@ -26,7 +26,7 @@
 #define  HeartRateMAX	160			
 #define  HeartRateMIN   40			
 #define  SampleRate     10				
-#define  SamplePointTotal 31200		
+
 #define  TriggerPeriodPoint 10				
 #define  SamplePointMax     10000			
 #define  SmoothMax 		800		
@@ -60,6 +60,16 @@ typedef enum
 	
 } HRState;
 
+typedef enum
+{
+    SlopeUP = 0,  
+    SlopeDown = 1,	 	
+    SlopeTop = 2,
+    SlopeBottom = 3,
+
+} WaveSLope;
+
+
 
 
 /* ram define ------------------------------------------------------------------*/
@@ -89,8 +99,6 @@ uint16_t getHeartRateDetection(void);
  */
 void heartRateInit(void);
 
-
-HRState getHeartRateWaveInfo(uint16_t adData,int count);
 
 uint16_t getHeartRateSmooth(uint16_t tmpHeartRate);
 

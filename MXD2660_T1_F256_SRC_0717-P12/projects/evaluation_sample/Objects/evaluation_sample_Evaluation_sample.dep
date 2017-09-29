@@ -1,428 +1,0 @@
-Dependencies for Project 'evaluation_sample', Target 'Evaluation_sample': (DO NOT MODIFY !)
-F (..\..\src\common\startup\cm0plus_startup.s)(0x59C47903)(--cpu Cortex-M0+ --li -g --16 --apcs=interwork --pd "__MICROLIB SETA 1"-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 517" --pd "ARMCM0P SETA 1"--list .\listings\cm0plus_startup.lst --xref -o .\objects\cm0plus_startup.o --depend .\objects\cm0plus_startup.d)
-F (..\..\src\common\startup\sys.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\sys.o --omf_browse .\objects\sys.crf --depend .\objects\sys.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\system\pmu_api.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_gpio.h)(0x59C47904)
-I (..\..\inc\stack\hci_api.h)(0x59C47904)
-I (..\..\inc\application\app_message.h)(0x59C47904)
-I (..\..\inc\stack\hci.h)(0x59C47904)
-I (..\..\inc\system\call_back.h)(0x59C47904)
-I (..\..\inc\system\interrupt.h)(0x59C47904)
-I (..\..\inc\application\utility.h)(0x59C47904)
-I (..\..\inc\application\sys.h)(0x59C47904)
-F (..\..\lib\symbol.lib)(0x59C48762)()
-F (..\..\lib\peripheral_lib.lib)(0x59C47902)()
-F (..\..\src\profiles\mxd_trx_service.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\mxd_trx_service.o --omf_browse .\objects\mxd_trx_service.crf --depend .\objects\mxd_trx_service.d)
-I (..\..\inc\stack\gatts_api.h)(0x59C47904)
-I (..\..\inc\profile\gatt_profile_uuid.h)(0x59C47904)
-I (..\..\inc\stack\gap_api.h)(0x59C47904)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\profile\mxd_trx_service.h)(0x59C47904)
-I (..\..\inc\system\mem.h)(0x59C47904)
-I (..\..\inc\stack\hci_event.h)(0x59C47904)
-I (..\..\inc\stack\hci_api.h)(0x59C47904)
-I (..\..\inc\application\app_message.h)(0x59C47904)
-I (..\..\inc\stack\hci.h)(0x59C47904)
-I (..\..\inc\stack\ll_struct.h)(0x59C47904)
-F (..\..\src\profiles\ancs_service.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\ancs_service.o --omf_browse .\objects\ancs_service.crf --depend .\objects\ancs_service.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\stack\ancs.h)(0x59C47904)
-I (..\..\inc\profile\ancs_service.h)(0x59C47904)
-I (..\..\inc\application\utility.h)(0x59C47904)
-F (..\..\src\common\calendar.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\calendar.o --omf_browse .\objects\calendar.crf --depend .\objects\calendar.d)
-I (..\..\src\common\calendar.h)(0x59C47903)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\system\timer.h)(0x59C47904)
-I (..\..\inc\system\list.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_rtc.h)(0x59C47904)
-F (..\..\src\application\common\utility.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\utility.o --omf_browse .\objects\utility.crf --depend .\objects\utility.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\application\utility.h)(0x59C47904)
-F (..\..\src\application\common\debug.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\debug.o --omf_browse .\objects\debug.crf --depend .\objects\debug.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_uart.h)(0x59C47904)
-F (..\..\src\common\err_debug.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\err_debug.o --omf_browse .\objects\err_debug.crf --depend .\objects\err_debug.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_flash.h)(0x59C47904)
-F (..\..\src\hci_app\hci_cmd.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\hci_cmd.o --omf_browse .\objects\hci_cmd.crf --depend .\objects\hci_cmd.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\stack\ll_struct.h)(0x59C47904)
-I (..\..\inc\stack\ll_ctrl.h)(0x59C47904)
-I (..\..\inc\stack\ll_data.h)(0x59C47904)
-I (..\..\inc\system\mem.h)(0x59C47904)
-I (..\..\inc\stack\stack_ctrl.h)(0x59C47904)
-I (..\..\inc\stack\sm.h)(0x59C47904)
-I (..\..\inc\stack\gap.h)(0x59C47904)
-I (..\..\inc\stack\ll_security.h)(0x59C47904)
-I (..\..\inc\stack\gatt_client.h)(0x59C47904)
-I (..\..\inc\stack\hci.h)(0x59C47904)
-I (..\..\inc\system\timer.h)(0x59C47904)
-I (..\..\inc\system\list.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_rtc.h)(0x59C47904)
-I (..\..\inc\stack\hci_api.h)(0x59C47904)
-I (..\..\inc\application\app_message.h)(0x59C47904)
-I (..\..\inc\stack\gatts_api.h)(0x59C47904)
-I (..\..\inc\profile\gatt_profile_uuid.h)(0x59C47904)
-I (..\..\inc\stack\gap_api.h)(0x59C47904)
-I (..\..\inc\stack\ble_api.h)(0x59C47904)
-I (..\..\inc\stack\ble_msg_api.h)(0x59C47904)
-I (..\..\inc\stack\ble_err.h)(0x59C47904)
-I (..\..\inc\stack\hci_cmd.h)(0x59C47904)
-I (..\..\inc\profile\mxd_trx_service.h)(0x59C47904)
-F (..\..\src\hci_app\hci_msg_api.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\hci_msg_api.o --omf_browse .\objects\hci_msg_api.crf --depend .\objects\hci_msg_api.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\application\app_message.h)(0x59C47904)
-I (..\..\inc\application\app_task.h)(0x59C47904)
-I (..\..\inc\stack\hci.h)(0x59C47904)
-I (..\..\inc\application\app_ble.h)(0x59C47904)
-I (..\..\inc\stack\ble_err.h)(0x59C47904)
-I (..\..\inc\stack\stack_ctrl.h)(0x59C47904)
-I (..\..\inc\system\mem.h)(0x59C47904)
-I (..\..\inc\stack\sm.h)(0x59C47904)
-I (..\..\inc\stack\ble_api.h)(0x59C47904)
-I (..\..\inc\stack\ll_struct.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_uart.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_gpio.h)(0x59C47904)
-I (..\..\inc\stack\gatts_api.h)(0x59C47904)
-I (..\..\inc\profile\gatt_profile_uuid.h)(0x59C47904)
-I (..\..\inc\stack\gap_api.h)(0x59C47904)
-I (..\..\inc\stack\stack_task.h)(0x59C47904)
-I (..\..\inc\stack\ble_msg_api.h)(0x59C47904)
-I (..\..\inc\stack\hci_api.h)(0x59C47904)
-F (..\..\src\hci_app\hci_api.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\hci_api.o --omf_browse .\objects\hci_api.crf --depend .\objects\hci_api.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\application\app_message.h)(0x59C47904)
-I (..\..\inc\application\app_task.h)(0x59C47904)
-I (..\..\inc\stack\hci_api.h)(0x59C47904)
-I (..\..\inc\stack\hci.h)(0x59C47904)
-I (..\..\inc\system\mem.h)(0x59C47904)
-I (..\..\inc\stack\ll_ctrl.h)(0x59C47904)
-I (..\..\inc\stack\ll_data.h)(0x59C47904)
-I (..\..\inc\stack\ll_struct.h)(0x59C47904)
-I (..\..\inc\stack\stack_ctrl.h)(0x59C47904)
-I (..\..\inc\stack\sm.h)(0x59C47904)
-I (..\..\inc\stack\gap.h)(0x59C47904)
-I (..\..\inc\stack\ll_security.h)(0x59C47904)
-I (..\..\inc\stack\gatt_client.h)(0x59C47904)
-I (..\..\inc\system\timer.h)(0x59C47904)
-I (..\..\inc\system\list.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_rtc.h)(0x59C47904)
-I (..\..\inc\stack\ll_phy.h)(0x59C47904)
-I (..\..\inc\application\app_ble.h)(0x59C47904)
-I (..\..\inc\stack\ble_err.h)(0x59C47904)
-I (..\..\inc\stack\ble_api.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_uart.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_gpio.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_dma.h)(0x59C47904)
-I (..\..\inc\stack\gatts_api.h)(0x59C47904)
-I (..\..\inc\profile\gatt_profile_uuid.h)(0x59C47904)
-I (..\..\inc\stack\gap_api.h)(0x59C47904)
-I (..\..\inc\stack\stack_task.h)(0x59C47904)
-I (..\..\inc\stack\ble_msg_api.h)(0x59C47904)
-I (..\..\inc\profile\mxd_trx_service.h)(0x59C47904)
-I (..\..\inc\stack\hci_event.h)(0x59C47904)
-F (..\..\src\hci_app\hci_event.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\hci_event.o --omf_browse .\objects\hci_event.crf --depend .\objects\hci_event.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\stack\hci_event.h)(0x59C47904)
-I (..\..\inc\stack\hci_api.h)(0x59C47904)
-I (..\..\inc\application\app_message.h)(0x59C47904)
-I (..\..\inc\stack\hci.h)(0x59C47904)
-I (..\..\inc\stack\ble_msg_api.h)(0x59C47904)
-I (..\..\inc\stack\ble_err.h)(0x59C47904)
-I (..\..\inc\stack\gatts_api.h)(0x59C47904)
-I (..\..\inc\profile\gatt_profile_uuid.h)(0x59C47904)
-I (..\..\inc\stack\gap_api.h)(0x59C47904)
-I (..\..\inc\stack\ll_ctrl.h)(0x59C47904)
-I (..\..\inc\stack\ll_data.h)(0x59C47904)
-I (..\..\inc\system\mem.h)(0x59C47904)
-I (..\..\inc\stack\ll_struct.h)(0x59C47904)
-I (..\..\inc\stack\stack_ctrl.h)(0x59C47904)
-I (..\..\inc\stack\sm.h)(0x59C47904)
-I (..\..\inc\stack\gap.h)(0x59C47904)
-I (..\..\inc\stack\ll_security.h)(0x59C47904)
-I (..\..\inc\stack\gatt_client.h)(0x59C47904)
-I (..\..\inc\system\timer.h)(0x59C47904)
-I (..\..\inc\system\list.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_rtc.h)(0x59C47904)
-F (..\..\src\application\evaluation_sample\led.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\led.o --omf_browse .\objects\led.crf --depend .\objects\led.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_gpio.h)(0x59C47904)
-I (..\..\inc\application\led.h)(0x59C47904)
-F (..\..\src\application\evaluation_sample\app_ble.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\app_ble.o --omf_browse .\objects\app_ble.crf --depend .\objects\app_ble.d)
-I (d:\Keil_v5\ARM\ARMCC\include\string.h)(0x55DB2B78)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_flash.h)(0x59C47904)
-I (..\..\inc\application\app_message.h)(0x59C47904)
-I (..\..\inc\application\app_ble.h)(0x59C47904)
-I (..\..\inc\stack\ble_err.h)(0x59C47904)
-I (..\..\inc\stack\stack_ctrl.h)(0x59C47904)
-I (..\..\inc\system\mem.h)(0x59C47904)
-I (..\..\inc\stack\sm.h)(0x59C47904)
-I (..\..\inc\stack\hci_api.h)(0x59C47904)
-I (..\..\inc\stack\hci.h)(0x59C47904)
-I (..\..\inc\stack\hci_event.h)(0x59C47904)
-I (..\..\inc\stack\gatts_api.h)(0x59C47904)
-I (..\..\inc\profile\gatt_profile_uuid.h)(0x59C47904)
-I (..\..\inc\stack\gap_api.h)(0x59C47904)
-I (..\..\inc\stack\gatt_client.h)(0x59C47904)
-I (..\..\inc\profile\hid_service.h)(0x59C47904)
-I (..\..\inc\stack\stack_task.h)(0x59C47904)
-I (..\..\inc\application\app_task.h)(0x59C47904)
-I (..\..\inc\profile\ancs_service.h)(0x59C47904)
-I (..\..\inc\stack\ancs.h)(0x59C47904)
-I (..\..\inc\stack\ble_msg_api.h)(0x59C47904)
-I (..\..\inc\stack\ble_api.h)(0x59C47904)
-I (..\..\inc\stack\ll_struct.h)(0x59C47904)
-I (..\..\inc\application\utility.h)(0x59C47904)
-I (..\..\inc\profile\wristband_service.h)(0x59C47904)
-I (..\..\inc\system\timer.h)(0x59C47904)
-I (..\..\inc\system\list.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_rtc.h)(0x59C47904)
-I (..\..\inc\application\sys.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_gpio.h)(0x59C47904)
-F (..\..\src\application\evaluation_sample\app_main.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\app_main.o --omf_browse .\objects\app_main.crf --depend .\objects\app_main.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_uart.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_flash.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_gpio.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_rtc.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_dma.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_adc.h)(0x59C47904)
-I (..\..\inc\peripheral\mxd2660_watch_dog.h)(0x59C47904)
-I (..\..\inc\system\timer.h)(0x59C47904)
-I (..\..\inc\system\list.h)(0x59C47904)
-I (..\..\inc\profile\scan_para_service.h)(0x59C47904)
-I (..\..\inc\profile\hid_service.h)(0x59C47904)
-I (..\..\inc\profile\mxd_trx_service.h)(0x59C47904)
-I (..\..\inc\stack\stack_task.h)(0x59C47904)
-I (..\..\inc\application\app_task.h)(0x59C47904)
-I (..\..\inc\application\app_ble.h)(0x59C47904)
-I (..\..\inc\application\app_message.h)(0x59C47904)
-I (..\..\inc\stack\ble_err.h)(0x59C47904)
-I (..\..\inc\stack\stack_ctrl.h)(0x59C47904)
-I (..\..\inc\system\mem.h)(0x59C47904)
-I (..\..\inc\stack\sm.h)(0x59C47904)
-I (..\..\inc\stack\hci_api.h)(0x59C47904)
-I (..\..\inc\stack\hci.h)(0x59C47904)
-I (..\..\inc\stack\ble_api.h)(0x59C47904)
-I (..\..\inc\stack\ll_struct.h)(0x59C47904)
-I (..\..\inc\application\app_ota.h)(0x59C47904)
-I (..\..\inc\system\pmu_api.h)(0x59C47904)
-I (..\..\inc\system\pmu_clk.h)(0x59C47904)
-I (..\..\inc\application\utility.h)(0x59C47904)
-I (..\..\inc\system\version.h)(0x59C47904)
-I (..\..\inc\application\app_uart_update.h)(0x59C47904)
-I (..\..\inc\system\call_back.h)(0x59C47904)
-I (..\..\inc\application\sys.h)(0x59C47904)
-F (..\..\src\application\evaluation_sample\app_task.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\app_task.o --omf_browse .\objects\app_task.crf --depend .\objects\app_task.d)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\application\app_message.h)(0x59C47904)
-I (..\..\inc\stack\stack_task.h)(0x59C47904)
-I (..\..\inc\application\app_task.h)(0x59C47904)
-I (..\..\inc\application\app_ble.h)(0x59C47904)
-I (..\..\inc\stack\ble_err.h)(0x59C47904)
-I (..\..\inc\stack\stack_ctrl.h)(0x59C47904)
-I (..\..\inc\system\mem.h)(0x59C47904)
-I (..\..\inc\stack\sm.h)(0x59C47904)
-I (..\..\inc\stack\hci_api.h)(0x59C47904)
-I (..\..\inc\stack\hci.h)(0x59C47904)
-I (..\..\inc\stack\ble_msg_api.h)(0x59C47904)
-F (..\..\src\application\common\app_ota.c)(0x59C47903)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I D:\Users\jiangs\Desktop\MXD2660_T1_F256_SRC_0717-P12\projects\evaluation_sample\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_EVALUATION_EN-o .\objects\app_ota.o --omf_browse .\objects\app_ota.crf --depend .\objects\app_ota.d)
-I (..\..\inc\application\system_config.h)(0x59C47904)
-I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (..\..\inc\system\mxdaqua.h)(0x59C47904)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cm0plus.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5937A5AF)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x531FBF2A)
-I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include\system_ARMCM0plus.h)(0x58984992)
-I (..\..\inc\rtos\cmsis_os.h)(0x59C47903)
-I (d:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB2B7E)
-I (..\..\inc\application\device_cfg.h)(0x59C47904)
-I (..\..\inc\application\log_descriptor.h)(0x59C47904)
-I (..\..\inc\stack\ble_api.h)(0x59C47904)
-I (..\..\inc\stack\ll_struct.h)(0x59C47904)
-I (..\..\inc\application\app_ota.h)(0x59C47904)
-I (..\..\inc\system\call_back.h)(0x59C47904)
