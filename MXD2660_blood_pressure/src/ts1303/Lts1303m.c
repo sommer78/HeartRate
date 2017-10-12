@@ -60,16 +60,13 @@ uint8_t  heartRateIndex  =0;
 uint16_t adSmoothStack[AD_SMOOTH_MAX];
 
 uint16_t heartRateStack[RATE_NUM_MAX];
-uint16_t heartRateTemp[RATE_NUM_MAX];
+
 
 uint16_t adValues[AD_SAMPLE_MAX];
 
 
-
-
-
 int plusePeakLocStack[PLUSE_SAMPLE_MAX];
-int plusePeakValStack[PLUSE_SAMPLE_MAX];
+
 
 
 uint8_t wavePulseState;
@@ -156,7 +153,6 @@ void heartRateInit(void){
 	slopeUp=0;
 	slopeDown=0;
 	memset(plusePeakLocStack,0x00,PLUSE_SAMPLE_MAX);
-	memset(plusePeakValStack,0x00,PLUSE_SAMPLE_MAX);
 	
 }
 
@@ -210,12 +206,12 @@ int pushPulsePeakStack(int pulsePeakLocation,int minValue){
 	return posiLength;
 }
 #endif
-int pushPulsePeakStack(int pulsePeakLocation,int minValue){
+int pushPulsePeakStack(int pulsePeakLocation){
 	
 	
 	if(pulseIndex<PLUSE_SAMPLE_MAX){
 	plusePeakLocStack[pulseIndex]= pulsePeakLocation;
-	plusePeakValStack[pulseIndex]= pulsePeakLocation;
+	//plusePeakValStack[pulseIndex]= minValue;
 	}
 	pulseIndex++;
 	if(pulseIndex>=PLUSE_SAMPLE_MAX){
@@ -225,38 +221,100 @@ int pushPulsePeakStack(int pulsePeakLocation,int minValue){
 	
 	return pulseIndex;
 }
+int updatePulsePeakStack(int pulsePeakLocation){
+	
+	
+	
+	plusePeakLocStack[pulseIndex-1]= pulsePeakLocation;
+	
+	
+	
+	return pulseIndex;
+}
 
+/**
+  * @brief  This function getArrayMaxIndex
+  * @param uint16_t  array[], int len
+  * @retval array max index
+  */
+int getArrayMaxIndex(uint16_t *array,int len){
+	int i,iMax;
+
+    for(i=iMax=0;i<len;i++){
+        if(array[iMax]<array[i]){
+			  iMax=i;
+        	}
+          
+    	}
+    return iMax;
+}
+
+int getArrayMinIndex(uint16_t *array,int len){
+	int i,iMin;
+
+    for(i=iMin=0;i<len;i++)
+        if(array[iMin]>array[i])
+            iMin=i;
+  
+    return iMin;
+}
+
+uint16_t getArrayAverage(uint16_t *array,int length){
+	int i = 0;
+	uint32_t total = 0;
+	for(i=0;i<length;i++){
+		total +=array[i];
+		}
+	return total/length;
+}
 
 int regularPulseWave(){
 	int i=0;
-	int distance;
-	int plusePeakTemp[PLUSE_SAMPLE_MAX];
-	int plusePeakTempIndex = 0;
-	//for(i=0;i<pulseIndex-1;i++){
-		while (i<pulseIndex){
-			
-		distance = plusePeakLocStack[i+1]-plusePeakLocStack[i];
-		APP_DBG(("distantce [%d] = %d\r\n",i,distance));
-		if(distance<200){
-			if((plusePeakValStack[i+1]-plusePeakValStack[i])>0){
-				plusePeakTemp[plusePeakTempIndex++]=plusePeakLocStack[i+1];
-				}else {
-				plusePeakTemp[plusePeakTempIndex++]=plusePeakLocStack[i];
-					}
-			i+=2;
-			}else {
-			plusePeakTemp[plusePeakTempIndex++]=plusePeakLocStack[i];
-			i++;
-				}
-			
-		}
-	for(i=0;i<plusePeakTempIndex;i++){
-		APP_DBG(("plusePeakTemp[%d] = %d\r\n",i,plusePeakTemp[i]));
+
+	
+	
+	for(i=0;i<pulseIndex;i++){
+		APP_DBG(("plusePeakTemp[%d] = %d\r\n",i,plusePeakLocStack[i]));
 		}
 	
 	return pulseIndex;
 }
 
+#if 1
+uint16_t getHeartRateDetection(void){
+	int i = 0;
+	uint16_t tmpHeartRate;
+	int count = 0;
+	uint16_t heartRateTemp[RATE_NUM_MAX];
+	for(i=0;i<pulseIndex-1;i++){
+		APP_DBG(("getHeartRateDetection[%d] = %d  \r\n ",i,plusePeakLocStack[i+1]-plusePeakLocStack[i]));	
+		tmpHeartRate = SamplePointTotal/ (plusePeakLocStack[i+1]-plusePeakLocStack[i]);
+		 APP_DBG((" heart [%d]= %d\r\n",i,tmpHeartRate ));
+
+		if(tmpHeartRate<=HeartRateMAX&&tmpHeartRate>=HeartRateMIN){
+			heartRateTemp[count++]=tmpHeartRate;
+		
+			}
+	}
+	if(count!=0){
+		
+	tmpHeartRate =	getArrayAverage(heartRateTemp,count);
+	if(tmpHeartRate>HeartRateMAX||tmpHeartRate<HeartRateMIN){
+		return 2;
+		}
+	
+	}else {
+	return 1;
+	}
+	
+	heartRate = tmpHeartRate;
+	
+	
+	 
+
+	return 0;
+}
+#endif 
 
 
 
@@ -272,6 +330,7 @@ HRState getHeartRateWave(){
 	int lastPosition = 0;
 	int distance=0;
 	int lastMinValue=0;
+	int ret;
 	
 	WaveSLope currentDirect;
 		// APP_DBG(("adData = %d\r\n",adData));
@@ -283,24 +342,17 @@ HRState getHeartRateWave(){
 	isDetectStart = 0;
 	slope = SlopeBottom;
 	pulseIndex = 0;
-	
+	#if 0
 	 for (i = 0; i < AD_SMOOTH_MAX; i++){
   	adSmoothStack[i] = wave_2660_2[i];
   	}
     for (i = AD_SMOOTH_MAX; i < AD_SAMPLE_MAX; i++){
 	 adValues[i]=adValueFilter (wave_2660_2[i]);
 	 }
-
+	#endif
 	for (i = AD_SMOOTH_MAX; i < AD_SAMPLE_MAX; i++){
 	//	adData =	wave_2660_2[i];
-
-//	for (i = AD_SMOOTH_MAX; i < AD_SAMPLE_MAX; i++){
-			adData =	adValues[i];
-
-
-
-		//
-	//	APP_DBG(("V:%d P:%d ",adData,pointCount));
+		adData =	adValues[i];
 
 	//APP_DBG(("%d,",adData));
 
@@ -391,11 +443,29 @@ HRState getHeartRateWave(){
 			if(currentDirect!=SlopeUP){
 					currentDirect = SlopeUP;
 					currentPosition = bottomStart;
-				
+					distance = currentPosition-lastPosition;
 					
 					APP_DBG(("  bottom: %d  minValue: %d current : %d distance:%d \r\n",bottomStart,minValue,pointCount,distance));
-					pushPulsePeakStack(currentPosition,minValue);
-					if(pulseIndex>7){
+					if(pulseIndex==0){
+						APP_DBG((" push \r\n"));
+						pushPulsePeakStack(currentPosition);
+						}else {
+							if(distance>200){
+								APP_DBG((" push \r\n"));
+								
+							pushPulsePeakStack(currentPosition);
+							}else {
+								if((lastMinValue-minValue)>0){
+									APP_DBG((" update \r\n"));
+									updatePulsePeakStack(currentPosition);
+									}else {
+										}
+								}
+						}
+					
+					
+					
+					if(pulseIndex>10){
 						regularPulseWave();
 						}
 					lastPosition = currentPosition;
@@ -463,8 +533,7 @@ HRState getHeartRateWave(){
 			
 		}
 
-
-
+		
 
 
 	//	top =0;
@@ -482,6 +551,14 @@ HRState getHeartRateWave(){
 	//APP_DBG(("T:%d B:%d M:%d \r\n",top,bottom,middle));
 
 	
+	if(pulseIndex>2){
+	ret  = getHeartRateDetection();
+	if(ret ==0){
+		return HRFinish;
+		}else {
+		return HRError;
+		}
+	}
 
 
 	return HRErrPointOut;
@@ -489,41 +566,6 @@ HRState getHeartRateWave(){
 }
 
 
-/**
-  * @brief  This function getArrayMaxIndex
-  * @param uint16_t  array[], int len
-  * @retval array max index
-  */
-int getArrayMaxIndex(uint16_t *array,int len){
-	int i,iMax;
-
-    for(i=iMax=0;i<len;i++){
-        if(array[iMax]<array[i]){
-			  iMax=i;
-        	}
-          
-    	}
-    return iMax;
-}
-
-int getArrayMinIndex(uint16_t *array,int len){
-	int i,iMin;
-
-    for(i=iMin=0;i<len;i++)
-        if(array[iMin]>array[i])
-            iMin=i;
-  
-    return iMin;
-}
-
-uint16_t getArrayAverage(uint16_t *array,int length){
-	int i = 0;
-	uint32_t total = 0;
-	for(i=0;i<length;i++){
-		total +=array[i];
-		}
-	return total/length;
-}
 
 
 
@@ -551,7 +593,7 @@ uint16_t adValueFilter(uint16_t adValue){
 
 
 
-uint16_t getHeartAverageWithoutPeak(uint16_t *array,int length){
+uint16_t getArrayAverageWithoutPeak(uint16_t *array,int length){
 	int i = 0;
 	int total = 0;
 	int maxIndex,minIndex;
@@ -624,7 +666,7 @@ void heartDealLoop(void){
 	if(bpmState==HRFinish){
 	
 	//heartRate =	getHeartRateDetection();
-//	heartRate =	getHeartRateSmooth(heartRate); 
+	heartRate =	getHeartRateSmooth(heartRate); 
 	 APP_DBG(("heartRate = %d\r\n",heartRate));		
 	heartRateInit();
 	
@@ -669,8 +711,8 @@ void hw_timer1_handler(void)
 	if(totalPoint<AD_SAMPLE_MAX){
 	adc_read_callback();
 	}else {
-	//hw_timer_stop(TIME1);
-	heartDealLoop();
+	hw_timer_stop(TIME1);
+	//heartDealLoop();
 		}
 }
 
@@ -696,9 +738,9 @@ void bsp_ts1303_init(void)
     adc_init(7);
 	
 	gpio_init_output(GPIO_21,GPIO_PULL_NONE,1);
-	//hw_timer_start(TIME1);
+	hw_timer_start(TIME1);
 	heartRateStackInit();
-	heartDealLoop();
+//	heartDealLoop();
 //	heartDealLoop();
 }
 
