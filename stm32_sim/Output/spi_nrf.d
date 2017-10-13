@@ -1,0 +1,14 @@
+..\..\output\spi_nrf.o: ..\..\User\SPI_NRF.c
+..\..\output\spi_nrf.o: ..\..\User\SPI_NRF.h
+..\..\output\spi_nrf.o: ..\..\Libraries\CMSIS\stm32f10x.h
+..\..\output\spi_nrf.o: ..\..\Libraries\CMSIS\core_cm3.h
+..\..\output\spi_nrf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\spi_nrf.o: ..\..\Libraries\CMSIS\system_stm32f10x.h
+..\..\output\spi_nrf.o: ..\..\User\stm32f10x_conf.h
+..\..\output\spi_nrf.o: ..\..\Libraries\FWlib\inc\stm32f10x_gpio.h
+..\..\output\spi_nrf.o: ..\..\Libraries\CMSIS\stm32f10x.h
+..\..\output\spi_nrf.o: ..\..\Libraries\FWlib\inc\stm32f10x_rcc.h
+..\..\output\spi_nrf.o: ..\..\Libraries\FWlib\inc\stm32f10x_tim.h
+..\..\output\spi_nrf.o: ..\..\Libraries\FWlib\inc\stm32f10x_usart.h
+..\..\output\spi_nrf.o: ..\..\Libraries\FWlib\inc\misc.h
+..\..\output\spi_nrf.o: ..\..\Libraries\FWlib\inc\stm32f10x_spi.h

@@ -34,25 +34,25 @@
 #define RATE_NUM_MAX                        16
 #define PLUSE_SAMPLE_MAX					32
 
-#define AD_SMOOTH_MAX					64
+#define AD_SMOOTH_MAX					32
 
 //#define ADSMOOTH	1
-#define AD_SAMPLE_MAX	2000
+#define AD_SAMPLE_MAX	1000
 
 
 #define MAXLEVEL	820
 #define MINLEVEL	40
-#define MAXTOPLEVEL	400
-#define MAXBOTTOMLEVEL	400
+#define MAXTOPLEVEL	100
+#define MAXBOTTOMLEVEL	100
 
-#define  SamplePointTotal 30000		
+#define  SamplePointTotal 6000		
 
 
 
 /* ram define ------------------------------------------------------------------*/
 uint16_t heartRate;   
 
-uint16_t lastHeartRate = 60;
+uint16_t lastHeartRate = 75;
 
 uint8_t  heartRateIndex  =0;
 
@@ -156,12 +156,41 @@ void heartRateInit(void){
 	
 }
 
+
+int isSamliarValue(uint16_t first ,uint16_t second){
+	
+	int Similar = 10;
+	if((first-second)>Similar){
+		return 0;
+		}
+	if((second-first)>Similar){
+		return 0;
+		}
+	return 1;
+}
+
+
+
+
+
 void heartRateStackInit(void){
 
 	memset(heartRateStack,75,RATE_NUM_MAX);
 	
 }
 
+
+int isHeartRateValid(uint16_t heartRate){
+	if(heartRate>HeartRateMAX){
+		APP_DBG(("HeartRateMAX = %d\r\n",heartRate));
+		return 1;
+		}
+	if(heartRate<HeartRateMIN){
+		APP_DBG(("HeartRateMIN = %d\r\n",heartRate));
+		return 2;
+		}
+	return 0;
+}
 
 /**
   *	1: bottom 2 peak 0 other
@@ -360,7 +389,7 @@ HRState getHeartRateWave(){
 		peak = isPeakBottom( adData);
 
 
-		if(peak==2){					//  波峰平
+		if(peak==2){					//  波峰    平
 			
 			bottom=0;
 			top++;
@@ -368,15 +397,19 @@ HRState getHeartRateWave(){
 				return HRErrTopLong;
 				}
 			if(isTypeRect ){
+				APP_DBG(("TOP  \r\n"));
 				outBottom++;
 				if(outBottom>10){
 					currentPosition = bottomStart+bottom/2;
-				APP_DBG(("TOP  lastPosition: %d \r\n",lastPosition));
+				APP_DBG(("TOP  currentPosition: %d \r\n",currentPosition));
 					if(lastPosition>0){
+						
 					distance=	currentPosition-lastPosition;
+					APP_DBG(("TOP  currentPosition: %d lastPosition: %d \r\n",currentPosition,lastPosition));
 					APP_DBG(("TOP  distance: %d heart: %d \r\n",distance,SamplePointTotal/distance));
-						if(distance>100&&distance<750){
-							heartRate = SamplePointTotal/distance;
+						heartRate = SamplePointTotal/distance;
+					if(heartRate>40&&heartRate<160){
+									
 							return HRFinish;
 						}
 					}
@@ -392,7 +425,7 @@ HRState getHeartRateWave(){
 		slope = SlopeTop;
 		currentDirect = SlopeTop;
 		
-		}else if(peak==1){				//波谷平
+		}else if(peak==1){				//波谷     平
 			bottom++;
 			top =0;
 			
@@ -401,12 +434,12 @@ HRState getHeartRateWave(){
 				}
 			if(hasSlopeDown==1){
 				
-				if(bottom>30){					// 方波判断
+				if(bottom>10){					// 方波判断
 			//	APP_DBG(("start rec bottomStart: %d \r\n",pointCount));
 					isTypeRect =1;					
 					if(isDetectStart==0){
 						isDetectStart =1;
-						bottomStart = pointCount-30;
+						bottomStart = pointCount-10;
 					    outBottom=0;
 						APP_DBG(("\r\n start rec detect: %d \r\n",bottomStart));
 
@@ -437,6 +470,7 @@ HRState getHeartRateWave(){
 			slopeUp=0;
 			}	
 		}
+		top = 0;
 		if(slopeUp>15){					//上升沿	
 			slope= SlopeUP;
 			maxValue =0;
@@ -446,12 +480,13 @@ HRState getHeartRateWave(){
 					distance = currentPosition-lastPosition;
 					
 					APP_DBG(("  bottom: %d  minValue: %d current : %d distance:%d \r\n",bottomStart,minValue,pointCount,distance));
+					
 					if(pulseIndex==0){
-						APP_DBG((" push \r\n"));
+						APP_DBG((" push first \r\n"));
 						pushPulsePeakStack(currentPosition);
 						}else {
 							if(distance>200){
-								APP_DBG((" push \r\n"));
+								APP_DBG((" push bottom \r\n"));
 								
 							pushPulsePeakStack(currentPosition);
 							}else {
@@ -468,7 +503,9 @@ HRState getHeartRateWave(){
 					if(pulseIndex>10){
 						regularPulseWave();
 						}
-					lastPosition = currentPosition;
+				
+					//lastPosition = currentPosition;
+						APP_DBG(("F  lastPosition :%d \r\n",lastPosition));
 					lastMinValue = minValue;
 				}
 			
@@ -494,18 +531,21 @@ HRState getHeartRateWave(){
 				
 			outBottom++;
 			if(outBottom>10){
+				APP_DBG(("  bottomStart: %d bottom: %d \r\n",bottomStart,bottom/2));
 				currentPosition = bottomStart+bottom/2;
 		
 				if(lastPosition>0){
 				distance=	currentPosition-lastPosition;
-				APP_DBG(("distance: %d heart: %d \r\n",distance,SamplePointTotal/distance));
+			//	APP_DBG(("  currentPosition: %d lastPosition: %d \r\n",currentPosition,lastPosition));
+			//	APP_DBG(("distance: %d heart: %d \r\n",distance,SamplePointTotal/distance));
 					if(distance>100&&distance<750){
 						heartRate = SamplePointTotal/distance;
 						return HRFinish;
 					}
 				}
-				APP_DBG(("lastPosition: %d cur: %d \r\n",lastPosition,currentPosition));
+			//	APP_DBG(("1 lastPosition: %d cur: %d \r\n",lastPosition,currentPosition));
 				lastPosition= currentPosition;
+				//APP_DBG(("2 lastPosition: %d cur: %d \r\n",lastPosition,currentPosition));
 				isDetectStart=0;
 				isTypeRect = 0;
 				bottom = 0;
@@ -554,7 +594,12 @@ HRState getHeartRateWave(){
 	if(pulseIndex>2){
 	ret  = getHeartRateDetection();
 	if(ret ==0){
-		return HRFinish;
+		if(isHeartRateValid(heartRate)==0){
+				return HRFinish;
+			}else {
+			return HRErrRate;
+				}
+	
 		}else {
 		return HRError;
 		}
@@ -621,7 +666,8 @@ uint16_t getArrayAverageWithoutPeak(uint16_t *array,int length){
 
 uint16_t getHeartRateSmooth(uint16_t tmpHeartRate){
 	int i = 0;
-	
+	APP_DBG(("original heart = %d\r\n",tmpHeartRate));	
+
 	if(heartRateIndex<9){
 			heartRateStack[heartRateIndex++]=tmpHeartRate;
 			heartRate = getArrayAverage(heartRateStack,heartRateIndex);
@@ -641,6 +687,57 @@ uint16_t getHeartRateSmooth(uint16_t tmpHeartRate){
 }
 
 
+void heartDealSimLoop(void){
+	 uint16_t i;
+	 HRState bpmState;
+
+	 
+	 APP_DBG(("\r\n***********************heartDealSimLoop*********************** \r\n ")); 
+
+   for(i=0;i<2000;i++){
+   	adValues[i] = wave_2660_0[i];
+   	}
+
+	/* 滤波函数 得到均值滤波的值*/
+  for (i = 0; i < AD_SMOOTH_MAX; i++){
+  	adSmoothStack[i] = adValues[i];
+  	}
+  for (i = AD_SMOOTH_MAX; i < AD_SAMPLE_MAX; i++){
+	 adValues[i]=adValueFilter (adValues[i]);
+	 }
+
+
+  	/* 心跳处理 得到心跳间隔周期  */
+	bpmState = 	 getHeartRateWave();  
+  
+	if(bpmState==HRFinish){
+	if(isHeartRateValid(heartRate)==0){
+		heartRate =	getHeartRateSmooth(heartRate); 
+	 	APP_DBG(("heartRate = %d\r\n",heartRate));		
+		}
+	//heartRate =	getHeartRateDetection();
+	
+	heartRateInit();
+	
+	//
+	}
+	
+	
+	if(bpmState==HRErrBottomLong
+		||bpmState==HRErrTopLong
+		||bpmState==HRErrPointOut
+		||bpmState==HRErrPulseLength
+		||bpmState==HRError
+		||bpmState==HRErrShortWave
+		||bpmState==HRErrLongWave){
+		 APP_DBG(("HRError:%d \r\n", bpmState));		
+		heartRateInit();
+		}
+
+   totalPoint= 0;
+	 APP_DBG(("\r\n***********************finish*********************** \r\n ")); 
+	//  APP_DBG(("top  = %d bottom=%d middle=%d  \r\n",top,bottom,middle));		
+}
 
 
 void heartDealLoop(void){
@@ -666,6 +763,7 @@ void heartDealLoop(void){
 	if(bpmState==HRFinish){
 	
 	//heartRate =	getHeartRateDetection();
+	
 	heartRate =	getHeartRateSmooth(heartRate); 
 	 APP_DBG(("heartRate = %d\r\n",heartRate));		
 	heartRateInit();
@@ -697,6 +795,7 @@ void adc_read_callback(void)
  
 	adc=adc_io_read(ADC_CH1);
 	APP_DBG(("%d,",adc));
+	//totalPoint++;
 	adValues[totalPoint++]=adc;
 	//heartDealLoop(adc);
 	
@@ -708,11 +807,11 @@ void adc_read_callback(void)
 
 void hw_timer1_handler(void)
 {
-	if(totalPoint<AD_SAMPLE_MAX){
+	if(totalPoint<(AD_SAMPLE_MAX)){
 	adc_read_callback();
 	}else {
-	hw_timer_stop(TIME1);
-	//heartDealLoop();
+	//hw_timer_stop(TIME1);
+	heartDealLoop();
 		}
 }
 
@@ -727,7 +826,7 @@ void hw_timer_config(void)
 	NVIC_ClearPendingIRQ(TMR2_IRQn);
     NVIC_SetPriority(TMR2_IRQn, 0x3);
     NVIC_EnableIRQ(TMR2_IRQn);
-	hw_timer_init(TIME1, TIMER_CLK_8M, 2, TIMER_CHANNEL_0, hw_timer1_handler);
+	hw_timer_init(TIME1, TIMER_CLK_1M, 10, TIMER_CHANNEL_0, hw_timer1_handler);
 
 	APP_DBG(("hw_timer_config done!\r\n"));
 }
@@ -740,8 +839,8 @@ void bsp_ts1303_init(void)
 	gpio_init_output(GPIO_21,GPIO_PULL_NONE,1);
 	hw_timer_start(TIME1);
 	heartRateStackInit();
-//	heartDealLoop();
-//	heartDealLoop();
+	//heartDealSimLoop();
+
 }
 
 

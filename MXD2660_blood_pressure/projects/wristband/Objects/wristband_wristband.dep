@@ -368,7 +368,7 @@ I (..\..\inc\system\version.h)(0x59C47906)
 I (..\..\inc\application\app_uart_update.h)(0x59C47906)
 I (..\..\inc\system\call_back.h)(0x59C47906)
 I (..\..\inc\application\sys.h)(0x59C47906)
-I (..\..\src\ts1303\lts1303m.h)(0x59CDE8E5)
+I (..\..\src\ts1303\lts1303m.h)(0x59E07BED)
 I (..\..\inc\application\led.h)(0x59C47906)
 F (..\..\src\application\common\app_ota.c)(0x59C47904)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -I..\..\src\ts1303 -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I E:\projects\HeartRate\MXD2660_blood_pressure\projects\wristband\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_WRISTBAND_EN-o .\objects\app_ota.o --omf_browse .\objects\app_ota.crf --depend .\objects\app_ota.d)
 I (..\..\inc\application\system_config.h)(0x59C47906)
@@ -388,8 +388,8 @@ I (..\..\inc\stack\ble_api.h)(0x59C47906)
 I (..\..\inc\stack\ll_struct.h)(0x59C47906)
 I (..\..\inc\application\app_ota.h)(0x59C47906)
 I (..\..\inc\system\call_back.h)(0x59C47906)
-F (..\..\src\ts1303\Lts1303m.c)(0x59DF2045)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -I..\..\src\ts1303 -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I E:\projects\HeartRate\MXD2660_blood_pressure\projects\wristband\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_WRISTBAND_EN-o .\objects\lts1303m.o --omf_browse .\objects\lts1303m.crf --depend .\objects\lts1303m.d)
-I (..\..\src\ts1303\lts1303m.h)(0x59CDE8E5)
+F (..\..\src\ts1303\Lts1303m.c)(0x59E07C00)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -I..\..\src\ts1303 -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I E:\projects\HeartRate\MXD2660_blood_pressure\projects\wristband\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_WRISTBAND_EN-o .\objects\lts1303m.o --omf_browse .\objects\lts1303m.crf --depend .\objects\lts1303m.d)
+I (..\..\src\ts1303\lts1303m.h)(0x59E07BED)
 I (..\..\inc\application\system_config.h)(0x59C47906)
 I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)
 I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
@@ -408,7 +408,7 @@ I (..\..\inc\peripheral\mxd2660_adc.h)(0x59C47906)
 I (..\..\inc\peripheral\mxd2660_gpio.h)(0x59C47906)
 I (..\..\inc\peripheral\mxd2660_timer.h)(0x59C47906)
 I (..\..\inc\application\utility.h)(0x59C47906)
-I (..\..\src\ts1303\sample.h)(0x59DF21DE)
+I (..\..\src\ts1303\sample.h)(0x59E003E7)
 F (..\..\src\ts1303\SimPress.c)(0x59C222DA)(-c --cpu Cortex-M0+ -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -IC:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\CMSIS\Include -I..\..\src\application\common -I..\..\src\application\keyboard -I..\..\src\application\trunk -I..\..\src\application\ota -I..\..\inc\application -I..\..\inc\peripheral -I..\..\inc\profile -I..\..\inc\system -I..\..\inc\stack -I..\..\src\application\wrsitband -I..\..\src\common -I..\..\inc\rtos -I..\..\src\ts1303 -D__CORTEX_M0P -D__CMSIS_RTOS -D_RTE_ --gnu-I E:\projects\HeartRate\MXD2660_blood_pressure\projects\wristband\RTE-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="517" -DARMCM0P -DFUNC_WRISTBAND_EN-o .\objects\simpress.o --omf_browse .\objects\simpress.crf --depend .\objects\simpress.d)
 I (..\..\inc\application\system_config.h)(0x59C47906)
 I (d:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB2B76)

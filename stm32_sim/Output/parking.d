@@ -1,0 +1,16 @@
+..\..\output\parking.o: ..\..\user\parking.c
+..\..\output\parking.o: ..\..\user\parking.h
+..\..\output\parking.o: ..\..\Libraries\CMSIS\stm32f10x.h
+..\..\output\parking.o: ..\..\Libraries\CMSIS\core_cm3.h
+..\..\output\parking.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\parking.o: ..\..\Libraries\CMSIS\system_stm32f10x.h
+..\..\output\parking.o: ..\..\User\stm32f10x_conf.h
+..\..\output\parking.o: ..\..\Libraries\FWlib\inc\stm32f10x_gpio.h
+..\..\output\parking.o: ..\..\Libraries\CMSIS\stm32f10x.h
+..\..\output\parking.o: ..\..\Libraries\FWlib\inc\stm32f10x_rcc.h
+..\..\output\parking.o: ..\..\Libraries\FWlib\inc\stm32f10x_tim.h
+..\..\output\parking.o: ..\..\Libraries\FWlib\inc\stm32f10x_usart.h
+..\..\output\parking.o: ..\..\Libraries\FWlib\inc\misc.h
+..\..\output\parking.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\..\output\parking.o: ..\..\User\usart\bsp_usart2.h
+..\..\output\parking.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
