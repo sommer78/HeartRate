@@ -69,6 +69,34 @@ int plusePeakLocStack[PLUSE_SAMPLE_MAX];
 
 
 
+//uint8_t wavePulseState;
+//int peakCount ;
+
+//int peakStart;
+//int peakStop;	
+
+//int bottomStop;
+
+//int peakAve;
+
+//int bottomValue;
+
+//uint16_t lastAdData;
+
+
+//int firstWave;
+//int bottomIndex;
+//int  waveType;
+
+
+
+
+
+//int middle;
+
+//int lastPulseLocal;
+//int topCount;
+//int bottomCount;
 int topStart;
 int slopeUp;
 int slopeDown;
@@ -82,7 +110,7 @@ int isTypeRect;
 int currentPosition; 
 int bottomStart;
 int bottom;
-
+int isDetectStart;
 WaveSLope slope;
 int pulseIndex;
 
@@ -277,7 +305,7 @@ int regularPulseWave(){
 	
 	
 	for(i=0;i<pulseIndex;i++){
-	//	APP_DBG(("plusePeakTemp[%d] = %d\r\n",i,plusePeakLocStack[i]));
+		APP_DBG(("plusePeakTemp[%d] = %d\r\n",i,plusePeakLocStack[i]));
 		}
 	
 	return pulseIndex;
@@ -325,7 +353,7 @@ HRState getHeartRateWave(){
 	uint16_t adData;
 	uint16_t lastAdData=0;
 
-//	int hasSlopeDown=0;
+	int hasSlopeDown=0;
 
 	int lastPosition = 0;
 	int distance=0;
@@ -334,12 +362,13 @@ HRState getHeartRateWave(){
 	int isBottomStart=0;
 	
 	WaveSLope currentDirect;
-	//	 APP_DBG(("adData = %d\r\n",adData));
+		 APP_DBG(("adData = %d\r\n",adData));
 	pointCount=0;
 	isTypeRect =0;
 	currentPosition = 0;
 	bottomStart = 0;
 	bottom = 0;
+	isDetectStart = 0;
 	slope = SlopeBottom;
 	pulseIndex = 0;
 
@@ -347,6 +376,7 @@ HRState getHeartRateWave(){
 		
 		adData =	adValues[pointCount];
 
+		
 		peak = isPeakBottom( adData);
 
 
@@ -358,13 +388,12 @@ HRState getHeartRateWave(){
 				return HRErrTopLong;
 				}
 			
-//		hasSlopeDown = 1;
+		hasSlopeDown = 1;
+
 
 		slope = SlopeTop;
 		currentDirect = SlopeTop;
 		slopeDown=0;
-		slopeUp = 0;
-		maxValue = adData;
 		continue;
 		
 		}else if(peak==1){				//波谷     平
@@ -378,18 +407,21 @@ HRState getHeartRateWave(){
 				bottomStart = pointCount;
 				isTypeRect =1;			
 				}
+			if(hasSlopeDown==1){
+				if(isDetectStart==0){
+						isDetectStart =1;
+					}
 		
-
+			}
 
 		slope = SlopeBottom;
 		currentDirect = SlopeBottom;
 		slopeUp = 0;
-		minValue = adData; 
 		continue;
 
 			
 		}
-	//	 APP_DBG(("normal = %d\r\n",lastAdData));
+		 APP_DBG(("normal = %d\r\n",lastAdData));
 
 		if(lastAdData<adData){
 		slopeUp++;
@@ -400,36 +432,31 @@ HRState getHeartRateWave(){
 		}	
 
 		top = 0;
-
 		if(slopeUp>10){					//上升沿	
 			slope= SlopeUP;
 			maxValue =0;
-		   
 			if(currentDirect!=SlopeUP){
 					currentDirect = SlopeUP;
 					if(isTypeRect==1){
 						currentPosition = bottomStart+bottom/2;
-						APP_DBG((" [rect]  start:%d  len:%d position:%d \r\n",bottomStart,bottom/2,currentPosition));
-						isTypeRect = 0;
 						}else {
-						APP_DBG((" [normal] position:%d \r\n",currentPosition));
-						currentPosition = bottomStart;
+					currentPosition = bottomStart;
 							}
 					distance = currentPosition-lastPosition;
 					
 					APP_DBG(("  bottom: %d  minValue: %d current : %d distance:%d \r\n",bottomStart,minValue,pointCount,distance));
 					
 					if(pulseIndex==0){
-						APP_DBG((" push first %d \r\n" ,currentPosition));
+						APP_DBG((" push first \r\n"));
 						pushPulsePeakStack(currentPosition);
 						}else {
-							if(distance>40){							//AD_SAMPLE_MAX /HeartRateMAX
-								APP_DBG((" push  %d \r\n" ,currentPosition));
+							if(distance>50){
+								APP_DBG((" push  \r\n"));
 								
 							pushPulsePeakStack(currentPosition);
 							}else {
 								if((lastMinValue-minValue)>0){
-								APP_DBG((" update  %d \r\n" ,currentPosition));
+									APP_DBG((" update \r\n"));
 									updatePulsePeakStack(currentPosition);
 									}else {
 										}
@@ -449,14 +476,19 @@ HRState getHeartRateWave(){
 			
 			}
 
-		if(slopeDown>10){			//下降沿
+		if(slopeDown>15){			//下降沿
 			slope = SlopeDown;
-		//	hasSlopeDown = 1;
+			hasSlopeDown = 1;
 	    	minValue =1024;
 			if(currentDirect!=SlopeDown){
 					currentDirect = SlopeDown;
+				
+	
 				}
 		
+			
+			
+		//	APP_DBG(("sloop down  point: %d \r\n",pointCount));
 			}
 			
 				
@@ -734,9 +766,9 @@ void bsp_ts1303_init(void)
     adc_init(7);
 	
 	gpio_init_output(GPIO_21,GPIO_PULL_NONE,1);
-	hw_timer_start(TIME1);
+//	hw_timer_start(TIME1);
 	heartRateStackInit();
-//	heartDealSimLoop();
+	heartDealSimLoop();
 
 }
 

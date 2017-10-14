@@ -313,8 +313,9 @@ Section Cross References
     lts1303m.o(i.getArrayAverageWithoutPeak) refers to lts1303m.o(i.getArrayMinIndex) for getArrayMinIndex
     lts1303m.o(i.getArrayAverageWithoutPeak) refers to lts1303m.o(i.getArrayMaxIndex) for getArrayMaxIndex
     lts1303m.o(i.getArrayAverageWithoutPeak) refers to idiv.o(.text) for __aeabi_idivmod
-    lts1303m.o(i.getHeartRateDetection) refers to printf8.o(i.__0printf$8) for __2printf
     lts1303m.o(i.getHeartRateDetection) refers to idiv.o(.text) for __aeabi_idivmod
+    lts1303m.o(i.getHeartRateDetection) refers to printf8.o(i.__0printf$8) for __2printf
+    lts1303m.o(i.getHeartRateDetection) refers to lts1303m.o(i.isHeartRateValid) for isHeartRateValid
     lts1303m.o(i.getHeartRateDetection) refers to lts1303m.o(i.getArrayAverage) for getArrayAverage
     lts1303m.o(i.getHeartRateDetection) refers to lts1303m.o(.data) for .data
     lts1303m.o(i.getHeartRateDetection) refers to lts1303m.o(.bss) for .bss
@@ -324,7 +325,6 @@ Section Cross References
     lts1303m.o(i.getHeartRateSmooth) refers to lts1303m.o(.bss) for .bss
     lts1303m.o(i.getHeartRateWave) refers to lts1303m.o(i.isPeakBottom) for isPeakBottom
     lts1303m.o(i.getHeartRateWave) refers to printf8.o(i.__0printf$8) for __2printf
-    lts1303m.o(i.getHeartRateWave) refers to idiv.o(.text) for __aeabi_idivmod
     lts1303m.o(i.getHeartRateWave) refers to lts1303m.o(i.pushPulsePeakStack) for pushPulsePeakStack
     lts1303m.o(i.getHeartRateWave) refers to lts1303m.o(i.updatePulsePeakStack) for updatePulsePeakStack
     lts1303m.o(i.getHeartRateWave) refers to lts1303m.o(i.regularPulseWave) for regularPulseWave
@@ -366,9 +366,7 @@ Section Cross References
     lts1303m.o(i.isHeartRateValid) refers to printf8.o(i.__0printf$8) for __2printf
     lts1303m.o(i.pushPulsePeakStack) refers to lts1303m.o(.data) for .data
     lts1303m.o(i.pushPulsePeakStack) refers to lts1303m.o(.bss) for .bss
-    lts1303m.o(i.regularPulseWave) refers to printf8.o(i.__0printf$8) for __2printf
     lts1303m.o(i.regularPulseWave) refers to lts1303m.o(.data) for .data
-    lts1303m.o(i.regularPulseWave) refers to lts1303m.o(.bss) for .bss
     lts1303m.o(i.updatePulsePeakStack) refers to lts1303m.o(.data) for .data
     lts1303m.o(i.updatePulsePeakStack) refers to lts1303m.o(.bss) for .bss
     simpress.o(i.getBloodPress) refers to rand.o(.text) for rand
@@ -886,19 +884,12 @@ Removing Unused input sections from the image.
     Removing lts1303m.o(i.getArrayAverageWithoutPeak), (80 bytes).
     Removing lts1303m.o(i.getArrayMaxIndex), (32 bytes).
     Removing lts1303m.o(i.getArrayMinIndex), (32 bytes).
-    Removing lts1303m.o(i.heartDealSimLoop), (280 bytes).
+    Removing lts1303m.o(i.heartDealSimLoop), (276 bytes).
     Removing lts1303m.o(i.isSamliarValue), (20 bytes).
     Removing lts1303m.o(.constdata), (4000 bytes).
     Removing lts1303m.o(.constdata), (4000 bytes).
-    Removing lts1303m.o(.constdata), (4036 bytes).
+    Removing lts1303m.o(.constdata), (2000 bytes).
     Removing lts1303m.o(.data), (2 bytes).
-    Removing lts1303m.o(.data), (4 bytes).
-    Removing lts1303m.o(.data), (4 bytes).
-    Removing lts1303m.o(.data), (4 bytes).
-    Removing lts1303m.o(.data), (4 bytes).
-    Removing lts1303m.o(.data), (2 bytes).
-    Removing lts1303m.o(.data), (4 bytes).
-    Removing lts1303m.o(.data), (4 bytes).
     Removing simpress.o(.rev16_text), (4 bytes).
     Removing simpress.o(.revsh_text), (4 bytes).
     Removing simpress.o(i.getBloodPress), (396 bytes).
@@ -1031,7 +1022,7 @@ Removing Unused input sections from the image.
     Removing wristband_application.o(i.__ARM_common_switch8), (26 bytes).
     Removing depilogue.o(i.__ARM_clz), (46 bytes).
 
-247 unused section(s) (total 22537 bytes) removed from the image.
+240 unused section(s) (total 20471 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1258,93 +1249,93 @@ Image Symbol Table
     i.dly_us                                 0x0002c6ca   Section        0  utility.o(i.dly_us)
     i.fputc                                  0x0002c6d4   Section        0  debug.o(i.fputc)
     i.getArrayAverage                        0x0002c6f8   Section        0  lts1303m.o(i.getArrayAverage)
-    i.getHeartRateDetection                  0x0002c718   Section        0  lts1303m.o(i.getHeartRateDetection)
-    i.getHeartRateSmooth                     0x0002c7dc   Section        0  lts1303m.o(i.getHeartRateSmooth)
-    i.getHeartRateWave                       0x0002c860   Section        0  lts1303m.o(i.getHeartRateWave)
-    i.get_date_second                        0x0002cc0c   Section        0  calendar.o(i.get_date_second)
-    i.get_system_date                        0x0002cca0   Section        0  calendar.o(i.get_system_date)
-    i.get_system_on_timer                    0x0002ccd0   Section        0  calendar.o(i.get_system_on_timer)
-    i.gpio_clear_bit                         0x0002ccfc   Section        0  mxd2660_gpio.o(i.gpio_clear_bit)
-    i.gpio_config_hw_type                    0x0002cd08   Section        0  mxd2660_gpio.o(i.gpio_config_hw_type)
-    i.gpio_init_function                     0x0002cd44   Section        0  mxd2660_gpio.o(i.gpio_init_function)
-    i.gpio_init_high_impedance               0x0002cd74   Section        0  mxd2660_gpio.o(i.gpio_init_high_impedance)
-    i.gpio_init_input                        0x0002cd9c   Section        0  mxd2660_gpio.o(i.gpio_init_input)
-    i.gpio_init_output                       0x0002cdcc   Section        0  mxd2660_gpio.o(i.gpio_init_output)
-    i.gpio_read_input_bit                    0x0002ce10   Section        0  mxd2660_gpio.o(i.gpio_read_input_bit)
-    i.gpio_set_bit                           0x0002ce24   Section        0  mxd2660_gpio.o(i.gpio_set_bit)
-    i.gpio_wakeup_enable_gpios               0x0002ce30   Section        0  mxd2660_gpio.o(i.gpio_wakeup_enable_gpios)
-    i.heartDealLoop                          0x0002ce80   Section        0  lts1303m.o(i.heartDealLoop)
-    i.heartRateInit                          0x0002cf70   Section        0  lts1303m.o(i.heartRateInit)
-    i.heartRateStackInit                     0x0002cfc8   Section        0  lts1303m.o(i.heartRateStackInit)
-    i.hw_timer1_handler                      0x0002cfdc   Section        0  lts1303m.o(i.hw_timer1_handler)
-    i.hw_timer_clr_cnt                       0x0002cffc   Section        0  mxd2660_timer.o(i.hw_timer_clr_cnt)
-    i.hw_timer_config                        0x0002d01c   Section        0  lts1303m.o(i.hw_timer_config)
-    i.hw_timer_config_clk                    0x0002d08c   Section        0  mxd2660_timer.o(i.hw_timer_config_clk)
-    i.hw_timer_config_compare                0x0002d0c0   Section        0  mxd2660_timer.o(i.hw_timer_config_compare)
-    i.hw_timer_config_timerout               0x0002d0e8   Section        0  mxd2660_timer.o(i.hw_timer_config_timerout)
-    i.hw_timer_handler                       0x0002d114   Section        0  mxd2660_timer.o(i.hw_timer_handler)
-    i.hw_timer_init                          0x0002d154   Section        0  mxd2660_timer.o(i.hw_timer_init)
-    i.hw_timer_set_mask                      0x0002d190   Section        0  mxd2660_timer.o(i.hw_timer_set_mask)
-    i.hw_timer_start                         0x0002d1b0   Section        0  mxd2660_timer.o(i.hw_timer_start)
-    i.i2c0_master_irq_handler                0x0002d238   Section        0  mxd2660_iic.o(i.i2c0_master_irq_handler)
-    i.i2c0_slave_irq_handler                 0x0002d450   Section        0  mxd2660_iic_slave.o(i.i2c0_slave_irq_handler)
-    i.i2c0_write                             0x0002d504   Section        0  mxd2660_iic.o(i.i2c0_write)
-    i.i2c1_master_irq_handler                0x0002d5e0   Section        0  mxd2660_iic.o(i.i2c1_master_irq_handler)
-    i.i2c1_slave_irq_handler                 0x0002d800   Section        0  mxd2660_iic_slave.o(i.i2c1_slave_irq_handler)
-    i.i2c_get_device_conf                    0x0002d8b4   Section        0  mxd2660_iic.o(i.i2c_get_device_conf)
-    i.isHeartRateValid                       0x0002d8d4   Section        0  lts1303m.o(i.isHeartRateValid)
-    i.isPeakBottom                           0x0002d924   Section        0  lts1303m.o(i.isPeakBottom)
-    i.is_log_canbe_sleep                     0x0002d93c   Section        0  debug.o(i.is_log_canbe_sleep)
-    i.lcm_cmd_proc                           0x0002d954   Section        0  lcm_00930.o(i.lcm_cmd_proc)
-    i.led_init                               0x0002d988   Section        0  led.o(i.led_init)
-    i.little_endian_read_32bit               0x0002d9aa   Section        0  utility.o(i.little_endian_read_32bit)
-    i.main                                   0x0002d9c0   Section        0  sys.o(i.main)
-    i.main_process                           0x0002d9dc   Section        0  app_main.o(i.main_process)
-    i.motor_timer_callback                   0x0002d9e8   Section        0  wristband_application.o(i.motor_timer_callback)
-    i.os_stack_overflow                      0x0002d9fc   Section        0  err_debug.o(i.os_stack_overflow)
-    i.ota_init                               0x0002da68   Section        0  app_ota.o(i.ota_init)
-    i.peripheral_init                        0x0002da84   Section        0  app_main.o(i.peripheral_init)
-    i.power_manage_init                      0x0002db20   Section        0  app_main.o(i.power_manage_init)
-    i.pushPulsePeakStack                     0x0002db48   Section        0  lts1303m.o(i.pushPulsePeakStack)
-    i.recover_info_after_wakeup_cb           0x0002db74   Section        0  app_main.o(i.recover_info_after_wakeup_cb)
-    i.regularPulseWave                       0x0002db84   Section        0  lts1303m.o(i.regularPulseWave)
-    i.save_info_before_sleep_cb              0x0002dbc8   Section        0  app_main.o(i.save_info_before_sleep_cb)
-    i.sky1321_msg_proc                       0x0002dbf4   Section        0  wristband_application.o(i.sky1321_msg_proc)
-    i.spi0_master_rx_only                    0x0002dc54   Section        0  mxd2660_spi_master.o(i.spi0_master_rx_only)
-    i.spi0_master_trx                        0x0002dc72   Section        0  mxd2660_spi_master.o(i.spi0_master_trx)
-    i.spi0_master_tx_rx_byte                 0x0002dc90   Section        0  mxd2660_spi_master.o(i.spi0_master_tx_rx_byte)
-    i.spi1_master_init                       0x0002dcdc   Section        0  mxd2660_spi_master.o(i.spi1_master_init)
-    i.spi1_master_trx                        0x0002dd10   Section        0  mxd2660_spi_master.o(i.spi1_master_trx)
-    i.spi1_master_tx_rx_byte                 0x0002dd30   Section        0  mxd2660_spi_master.o(i.spi1_master_tx_rx_byte)
-    i.sys_debug_en                           0x0002dd7c   Section        0  debug.o(i.sys_debug_en)
-    i.sys_debug_init                         0x0002dd88   Section        0  debug.o(i.sys_debug_init)
-    i.system_assert_debug                    0x0002dd98   Section        0  err_debug.o(i.system_assert_debug)
-    i.system_pins_wakeup_enable              0x0002ddf4   Section        0  sys.o(i.system_pins_wakeup_enable)
-    i.uart1_Log_output                       0x0002de04   Section        0  debug.o(i.uart1_Log_output)
-    i.uart1_Log_print                        0x0002de30   Section        0  debug.o(i.uart1_Log_print)
-    i.uart1_init                             0x0002de78   Section        0  mxd2660_uart1.o(i.uart1_init)
-    i.uart1_send                             0x0002de98   Section        0  mxd2660_uart1.o(i.uart1_send)
-    i.updatePulsePeakStack                   0x0002deb8   Section        0  lts1303m.o(i.updatePulsePeakStack)
-    i.update_system_date                     0x0002ded4   Section        0  calendar.o(i.update_system_date)
-    i.user_call_back_register                0x0002df1c   Section        0  sys.o(i.user_call_back_register)
-    i.user_flash_nvr_read                    0x0002df68   Section        0  mxd2660_flash.o(i.user_flash_nvr_read)
-    i.user_irq_register                      0x0002dfb0   Section        0  sys.o(i.user_irq_register)
-    i.watch_dog_feed                         0x0002e050   Section        0  mxd2660_watch_dog.o(i.watch_dog_feed)
-    i.wristband_7816_cmd_proc                0x0002e05c   Section        0  zx_7816.o(i.wristband_7816_cmd_proc)
-    i.wristband_battay_check                 0x0002e072   Section        0  wristband_application.o(i.wristband_battay_check)
-    i.wristband_getAttrLen_CB                0x0002e08c   Section        0  wristband_service.o(i.wristband_getAttrLen_CB)
-    i.wristband_init_service                 0x0002e0a0   Section        0  wristband_service.o(i.wristband_init_service)
-    i.wristband_main_msg_proc                0x0002e10c   Section        0  wristband_application.o(i.wristband_main_msg_proc)
-    i.wristband_motor_proc                   0x0002e218   Section        0  wristband_application.o(i.wristband_motor_proc)
-    i.wristband_msg_handler                  0x0002e274   Section        0  wristband_application.o(i.wristband_msg_handler)
-    i.wristband_notify_AppSendToBle          0x0002e2fc   Section        0  wristband_service.o(i.wristband_notify_AppSendToBle)
-    i.wristband_read_attrCB                  0x0002e33c   Section        0  wristband_service.o(i.wristband_read_attrCB)
-    i.wristband_set_data                     0x0002e35c   Section        0  wristband_application.o(i.wristband_set_data)
-    i.wristband_write_attrCB                 0x0002e3b4   Section        0  wristband_service.o(i.wristband_write_attrCB)
-    i.year_is_leap_year                      0x0002e45c   Section        0  calendar.o(i.year_is_leap_year)
-    .constdata                               0x0002e488   Section       40  app_task.o(.constdata)
-    .constdata                               0x0002e4b0   Section       20  app_ble.o(.constdata)
-    .conststring                             0x0002e4c4   Section       66  lts1303m.o(.conststring)
+    i.getHeartRateDetection                  0x0002c730   Section        0  lts1303m.o(i.getHeartRateDetection)
+    i.getHeartRateSmooth                     0x0002c7bc   Section        0  lts1303m.o(i.getHeartRateSmooth)
+    i.getHeartRateWave                       0x0002c840   Section        0  lts1303m.o(i.getHeartRateWave)
+    i.get_date_second                        0x0002cac0   Section        0  calendar.o(i.get_date_second)
+    i.get_system_date                        0x0002cb54   Section        0  calendar.o(i.get_system_date)
+    i.get_system_on_timer                    0x0002cb84   Section        0  calendar.o(i.get_system_on_timer)
+    i.gpio_clear_bit                         0x0002cbb0   Section        0  mxd2660_gpio.o(i.gpio_clear_bit)
+    i.gpio_config_hw_type                    0x0002cbbc   Section        0  mxd2660_gpio.o(i.gpio_config_hw_type)
+    i.gpio_init_function                     0x0002cbf8   Section        0  mxd2660_gpio.o(i.gpio_init_function)
+    i.gpio_init_high_impedance               0x0002cc28   Section        0  mxd2660_gpio.o(i.gpio_init_high_impedance)
+    i.gpio_init_input                        0x0002cc50   Section        0  mxd2660_gpio.o(i.gpio_init_input)
+    i.gpio_init_output                       0x0002cc80   Section        0  mxd2660_gpio.o(i.gpio_init_output)
+    i.gpio_read_input_bit                    0x0002ccc4   Section        0  mxd2660_gpio.o(i.gpio_read_input_bit)
+    i.gpio_set_bit                           0x0002ccd8   Section        0  mxd2660_gpio.o(i.gpio_set_bit)
+    i.gpio_wakeup_enable_gpios               0x0002cce4   Section        0  mxd2660_gpio.o(i.gpio_wakeup_enable_gpios)
+    i.heartDealLoop                          0x0002cd34   Section        0  lts1303m.o(i.heartDealLoop)
+    i.heartRateInit                          0x0002ce24   Section        0  lts1303m.o(i.heartRateInit)
+    i.heartRateStackInit                     0x0002ce6c   Section        0  lts1303m.o(i.heartRateStackInit)
+    i.hw_timer1_handler                      0x0002ce80   Section        0  lts1303m.o(i.hw_timer1_handler)
+    i.hw_timer_clr_cnt                       0x0002cea0   Section        0  mxd2660_timer.o(i.hw_timer_clr_cnt)
+    i.hw_timer_config                        0x0002cec0   Section        0  lts1303m.o(i.hw_timer_config)
+    i.hw_timer_config_clk                    0x0002cf30   Section        0  mxd2660_timer.o(i.hw_timer_config_clk)
+    i.hw_timer_config_compare                0x0002cf64   Section        0  mxd2660_timer.o(i.hw_timer_config_compare)
+    i.hw_timer_config_timerout               0x0002cf8c   Section        0  mxd2660_timer.o(i.hw_timer_config_timerout)
+    i.hw_timer_handler                       0x0002cfb8   Section        0  mxd2660_timer.o(i.hw_timer_handler)
+    i.hw_timer_init                          0x0002cff8   Section        0  mxd2660_timer.o(i.hw_timer_init)
+    i.hw_timer_set_mask                      0x0002d034   Section        0  mxd2660_timer.o(i.hw_timer_set_mask)
+    i.hw_timer_start                         0x0002d054   Section        0  mxd2660_timer.o(i.hw_timer_start)
+    i.i2c0_master_irq_handler                0x0002d0dc   Section        0  mxd2660_iic.o(i.i2c0_master_irq_handler)
+    i.i2c0_slave_irq_handler                 0x0002d2f4   Section        0  mxd2660_iic_slave.o(i.i2c0_slave_irq_handler)
+    i.i2c0_write                             0x0002d3a8   Section        0  mxd2660_iic.o(i.i2c0_write)
+    i.i2c1_master_irq_handler                0x0002d484   Section        0  mxd2660_iic.o(i.i2c1_master_irq_handler)
+    i.i2c1_slave_irq_handler                 0x0002d6a4   Section        0  mxd2660_iic_slave.o(i.i2c1_slave_irq_handler)
+    i.i2c_get_device_conf                    0x0002d758   Section        0  mxd2660_iic.o(i.i2c_get_device_conf)
+    i.isHeartRateValid                       0x0002d778   Section        0  lts1303m.o(i.isHeartRateValid)
+    i.isPeakBottom                           0x0002d7c8   Section        0  lts1303m.o(i.isPeakBottom)
+    i.is_log_canbe_sleep                     0x0002d7e0   Section        0  debug.o(i.is_log_canbe_sleep)
+    i.lcm_cmd_proc                           0x0002d7f8   Section        0  lcm_00930.o(i.lcm_cmd_proc)
+    i.led_init                               0x0002d82c   Section        0  led.o(i.led_init)
+    i.little_endian_read_32bit               0x0002d84e   Section        0  utility.o(i.little_endian_read_32bit)
+    i.main                                   0x0002d864   Section        0  sys.o(i.main)
+    i.main_process                           0x0002d880   Section        0  app_main.o(i.main_process)
+    i.motor_timer_callback                   0x0002d88c   Section        0  wristband_application.o(i.motor_timer_callback)
+    i.os_stack_overflow                      0x0002d8a0   Section        0  err_debug.o(i.os_stack_overflow)
+    i.ota_init                               0x0002d90c   Section        0  app_ota.o(i.ota_init)
+    i.peripheral_init                        0x0002d928   Section        0  app_main.o(i.peripheral_init)
+    i.power_manage_init                      0x0002d9c4   Section        0  app_main.o(i.power_manage_init)
+    i.pushPulsePeakStack                     0x0002d9ec   Section        0  lts1303m.o(i.pushPulsePeakStack)
+    i.recover_info_after_wakeup_cb           0x0002da18   Section        0  app_main.o(i.recover_info_after_wakeup_cb)
+    i.regularPulseWave                       0x0002da28   Section        0  lts1303m.o(i.regularPulseWave)
+    i.save_info_before_sleep_cb              0x0002da3c   Section        0  app_main.o(i.save_info_before_sleep_cb)
+    i.sky1321_msg_proc                       0x0002da68   Section        0  wristband_application.o(i.sky1321_msg_proc)
+    i.spi0_master_rx_only                    0x0002dac8   Section        0  mxd2660_spi_master.o(i.spi0_master_rx_only)
+    i.spi0_master_trx                        0x0002dae6   Section        0  mxd2660_spi_master.o(i.spi0_master_trx)
+    i.spi0_master_tx_rx_byte                 0x0002db04   Section        0  mxd2660_spi_master.o(i.spi0_master_tx_rx_byte)
+    i.spi1_master_init                       0x0002db50   Section        0  mxd2660_spi_master.o(i.spi1_master_init)
+    i.spi1_master_trx                        0x0002db84   Section        0  mxd2660_spi_master.o(i.spi1_master_trx)
+    i.spi1_master_tx_rx_byte                 0x0002dba4   Section        0  mxd2660_spi_master.o(i.spi1_master_tx_rx_byte)
+    i.sys_debug_en                           0x0002dbf0   Section        0  debug.o(i.sys_debug_en)
+    i.sys_debug_init                         0x0002dbfc   Section        0  debug.o(i.sys_debug_init)
+    i.system_assert_debug                    0x0002dc0c   Section        0  err_debug.o(i.system_assert_debug)
+    i.system_pins_wakeup_enable              0x0002dc68   Section        0  sys.o(i.system_pins_wakeup_enable)
+    i.uart1_Log_output                       0x0002dc78   Section        0  debug.o(i.uart1_Log_output)
+    i.uart1_Log_print                        0x0002dca4   Section        0  debug.o(i.uart1_Log_print)
+    i.uart1_init                             0x0002dcec   Section        0  mxd2660_uart1.o(i.uart1_init)
+    i.uart1_send                             0x0002dd0c   Section        0  mxd2660_uart1.o(i.uart1_send)
+    i.updatePulsePeakStack                   0x0002dd2c   Section        0  lts1303m.o(i.updatePulsePeakStack)
+    i.update_system_date                     0x0002dd48   Section        0  calendar.o(i.update_system_date)
+    i.user_call_back_register                0x0002dd90   Section        0  sys.o(i.user_call_back_register)
+    i.user_flash_nvr_read                    0x0002dddc   Section        0  mxd2660_flash.o(i.user_flash_nvr_read)
+    i.user_irq_register                      0x0002de24   Section        0  sys.o(i.user_irq_register)
+    i.watch_dog_feed                         0x0002dec4   Section        0  mxd2660_watch_dog.o(i.watch_dog_feed)
+    i.wristband_7816_cmd_proc                0x0002ded0   Section        0  zx_7816.o(i.wristband_7816_cmd_proc)
+    i.wristband_battay_check                 0x0002dee6   Section        0  wristband_application.o(i.wristband_battay_check)
+    i.wristband_getAttrLen_CB                0x0002df00   Section        0  wristband_service.o(i.wristband_getAttrLen_CB)
+    i.wristband_init_service                 0x0002df14   Section        0  wristband_service.o(i.wristband_init_service)
+    i.wristband_main_msg_proc                0x0002df80   Section        0  wristband_application.o(i.wristband_main_msg_proc)
+    i.wristband_motor_proc                   0x0002e08c   Section        0  wristband_application.o(i.wristband_motor_proc)
+    i.wristband_msg_handler                  0x0002e0e8   Section        0  wristband_application.o(i.wristband_msg_handler)
+    i.wristband_notify_AppSendToBle          0x0002e170   Section        0  wristband_service.o(i.wristband_notify_AppSendToBle)
+    i.wristband_read_attrCB                  0x0002e1b0   Section        0  wristband_service.o(i.wristband_read_attrCB)
+    i.wristband_set_data                     0x0002e1d0   Section        0  wristband_application.o(i.wristband_set_data)
+    i.wristband_write_attrCB                 0x0002e228   Section        0  wristband_service.o(i.wristband_write_attrCB)
+    i.year_is_leap_year                      0x0002e2d0   Section        0  calendar.o(i.year_is_leap_year)
+    .constdata                               0x0002e2fc   Section       40  app_task.o(.constdata)
+    .constdata                               0x0002e324   Section       20  app_ble.o(.constdata)
+    .conststring                             0x0002e338   Section       66  lts1303m.o(.conststring)
     .data                                    0x20003f00   Section       24  calendar.o(.data)
     .data                                    0x20003f18   Section        6  debug.o(.data)
     .data                                    0x20003f1e   Section       14  ancs_service.o(.data)
@@ -1353,25 +1344,25 @@ Image Symbol Table
     .data                                    0x20003f44   Section        4  wristband_application.o(.data)
     .data                                    0x20003f48   Section       12  app_task.o(.data)
     .data                                    0x20003f54   Section       41  app_ble.o(.data)
-    .data                                    0x20003f80   Section       88  lts1303m.o(.data)
-    .data                                    0x20003fd8   Section       16  mxd2660_7816.o(.data)
-    .data                                    0x20003fe8   Section       12  mxd2660_iic.o(.data)
-    .data                                    0x20003ff4   Section        1  mxd2660_timer.o(.data)
-    .data                                    0x20003ff8   Section        2  mxd2660_adc.o(.data)
-    .data                                    0x20003ffc   Section        4  stdout.o(.data)
-    .bss                                     0x20004000   Section     1024  debug.o(.bss)
-    .bss                                     0x20004400   Section      128  wristband_service.o(.bss)
-    .bss                                     0x20004480   Section       24  wristband_application.o(.bss)
-    .bss                                     0x20004498   Section       92  app_task.o(.bss)
-    .bss                                     0x200044f4   Section      212  app_task.o(.bss)
-    .bss                                     0x200045c8   Section       24  app_ble.o(.bss)
-    .bss                                     0x200045e0   Section     2224  lts1303m.o(.bss)
-    .bss                                     0x20004e90   Section       12  mxd2660_gpio.o(.bss)
-    .bss                                     0x20004e9c   Section       96  mxd2660_iic.o(.bss)
-    .bss                                     0x20004efc   Section      112  mxd2660_timer.o(.bss)
-    .bss                                     0x20004f6c   Section       24  mxd2660_dma.o(.bss)
-    .bss                                     0x20004f84   Section       16  mxd2660_spi_slave.o(.bss)
-    .bss                                     0x20004f94   Section       48  mxd2660_iic_slave.o(.bss)
+    .data                                    0x20003f80   Section       52  lts1303m.o(.data)
+    .data                                    0x20003fb4   Section       16  mxd2660_7816.o(.data)
+    .data                                    0x20003fc4   Section       12  mxd2660_iic.o(.data)
+    .data                                    0x20003fd0   Section        1  mxd2660_timer.o(.data)
+    .data                                    0x20003fd4   Section        2  mxd2660_adc.o(.data)
+    .data                                    0x20003fd8   Section        4  stdout.o(.data)
+    .bss                                     0x20003fdc   Section     1024  debug.o(.bss)
+    .bss                                     0x200043dc   Section      128  wristband_service.o(.bss)
+    .bss                                     0x2000445c   Section       24  wristband_application.o(.bss)
+    .bss                                     0x20004474   Section       92  app_task.o(.bss)
+    .bss                                     0x200044d0   Section      212  app_task.o(.bss)
+    .bss                                     0x200045a4   Section       24  app_ble.o(.bss)
+    .bss                                     0x200045bc   Section     2224  lts1303m.o(.bss)
+    .bss                                     0x20004e6c   Section       12  mxd2660_gpio.o(.bss)
+    .bss                                     0x20004e78   Section       96  mxd2660_iic.o(.bss)
+    .bss                                     0x20004ed8   Section      112  mxd2660_timer.o(.bss)
+    .bss                                     0x20004f48   Section       24  mxd2660_dma.o(.bss)
+    .bss                                     0x20004f60   Section       16  mxd2660_spi_slave.o(.bss)
+    .bss                                     0x20004f70   Section       48  mxd2660_iic_slave.o(.bss)
 
     Global Symbols
 
@@ -2471,96 +2462,96 @@ Image Symbol Table
     dly_cycles                               0x0002c6bb   Thumb Code    16  utility.o(i.dly_cycles)
     dly_us                                   0x0002c6cb   Thumb Code    10  utility.o(i.dly_us)
     fputc                                    0x0002c6d5   Thumb Code    36  debug.o(i.fputc)
-    getArrayAverage                          0x0002c6f9   Thumb Code    30  lts1303m.o(i.getArrayAverage)
-    getHeartRateDetection                    0x0002c719   Thumb Code   126  lts1303m.o(i.getHeartRateDetection)
-    getHeartRateSmooth                       0x0002c7dd   Thumb Code    74  lts1303m.o(i.getHeartRateSmooth)
-    getHeartRateWave                         0x0002c861   Thumb Code   622  lts1303m.o(i.getHeartRateWave)
-    get_date_second                          0x0002cc0d   Thumb Code   126  calendar.o(i.get_date_second)
-    get_system_date                          0x0002cca1   Thumb Code    44  calendar.o(i.get_system_date)
-    get_system_on_timer                      0x0002ccd1   Thumb Code    42  calendar.o(i.get_system_on_timer)
-    gpio_clear_bit                           0x0002ccfd   Thumb Code     6  mxd2660_gpio.o(i.gpio_clear_bit)
-    gpio_config_hw_type                      0x0002cd09   Thumb Code    54  mxd2660_gpio.o(i.gpio_config_hw_type)
-    gpio_init_function                       0x0002cd45   Thumb Code    42  mxd2660_gpio.o(i.gpio_init_function)
-    gpio_init_high_impedance                 0x0002cd75   Thumb Code    36  mxd2660_gpio.o(i.gpio_init_high_impedance)
-    gpio_init_input                          0x0002cd9d   Thumb Code    44  mxd2660_gpio.o(i.gpio_init_input)
-    gpio_init_output                         0x0002cdcd   Thumb Code    62  mxd2660_gpio.o(i.gpio_init_output)
-    gpio_read_input_bit                      0x0002ce11   Thumb Code    16  mxd2660_gpio.o(i.gpio_read_input_bit)
-    gpio_set_bit                             0x0002ce25   Thumb Code     6  mxd2660_gpio.o(i.gpio_set_bit)
-    gpio_wakeup_enable_gpios                 0x0002ce31   Thumb Code    76  mxd2660_gpio.o(i.gpio_wakeup_enable_gpios)
-    heartDealLoop                            0x0002ce81   Thumb Code   132  lts1303m.o(i.heartDealLoop)
-    heartRateInit                            0x0002cf71   Thumb Code    68  lts1303m.o(i.heartRateInit)
-    heartRateStackInit                       0x0002cfc9   Thumb Code    14  lts1303m.o(i.heartRateStackInit)
-    hw_timer1_handler                        0x0002cfdd   Thumb Code    26  lts1303m.o(i.hw_timer1_handler)
-    hw_timer_clr_cnt                         0x0002cffd   Thumb Code    26  mxd2660_timer.o(i.hw_timer_clr_cnt)
-    hw_timer_config                          0x0002d01d   Thumb Code    74  lts1303m.o(i.hw_timer_config)
-    hw_timer_config_clk                      0x0002d08d   Thumb Code    42  mxd2660_timer.o(i.hw_timer_config_clk)
-    hw_timer_config_compare                  0x0002d0c1   Thumb Code    30  mxd2660_timer.o(i.hw_timer_config_compare)
-    hw_timer_config_timerout                 0x0002d0e9   Thumb Code    44  mxd2660_timer.o(i.hw_timer_config_timerout)
-    hw_timer_handler                         0x0002d115   Thumb Code    56  mxd2660_timer.o(i.hw_timer_handler)
-    hw_timer_init                            0x0002d155   Thumb Code    56  mxd2660_timer.o(i.hw_timer_init)
-    hw_timer_set_mask                        0x0002d191   Thumb Code    22  mxd2660_timer.o(i.hw_timer_set_mask)
-    hw_timer_start                           0x0002d1b1   Thumb Code   122  mxd2660_timer.o(i.hw_timer_start)
-    i2c0_master_irq_handler                  0x0002d239   Thumb Code   526  mxd2660_iic.o(i.i2c0_master_irq_handler)
-    i2c0_slave_irq_handler                   0x0002d451   Thumb Code   172  mxd2660_iic_slave.o(i.i2c0_slave_irq_handler)
-    i2c0_write                               0x0002d505   Thumb Code   202  mxd2660_iic.o(i.i2c0_write)
-    i2c1_master_irq_handler                  0x0002d5e1   Thumb Code   536  mxd2660_iic.o(i.i2c1_master_irq_handler)
-    i2c1_slave_irq_handler                   0x0002d801   Thumb Code   172  mxd2660_iic_slave.o(i.i2c1_slave_irq_handler)
-    i2c_get_device_conf                      0x0002d8b5   Thumb Code    28  mxd2660_iic.o(i.i2c_get_device_conf)
-    isHeartRateValid                         0x0002d8d5   Thumb Code    38  lts1303m.o(i.isHeartRateValid)
-    isPeakBottom                             0x0002d925   Thumb Code    24  lts1303m.o(i.isPeakBottom)
-    is_log_canbe_sleep                       0x0002d93d   Thumb Code    18  debug.o(i.is_log_canbe_sleep)
-    lcm_cmd_proc                             0x0002d955   Thumb Code    48  lcm_00930.o(i.lcm_cmd_proc)
-    led_init                                 0x0002d989   Thumb Code    34  led.o(i.led_init)
-    little_endian_read_32bit                 0x0002d9ab   Thumb Code    22  utility.o(i.little_endian_read_32bit)
-    main                                     0x0002d9c1   Thumb Code    28  sys.o(i.main)
-    main_process                             0x0002d9dd   Thumb Code    12  app_main.o(i.main_process)
-    motor_timer_callback                     0x0002d9e9   Thumb Code    16  wristband_application.o(i.motor_timer_callback)
-    os_stack_overflow                        0x0002d9fd   Thumb Code    38  err_debug.o(i.os_stack_overflow)
-    ota_init                                 0x0002da69   Thumb Code    18  app_ota.o(i.ota_init)
-    peripheral_init                          0x0002da85   Thumb Code   114  app_main.o(i.peripheral_init)
-    power_manage_init                        0x0002db21   Thumb Code    36  app_main.o(i.power_manage_init)
-    pushPulsePeakStack                       0x0002db49   Thumb Code    34  lts1303m.o(i.pushPulsePeakStack)
-    recover_info_after_wakeup_cb             0x0002db75   Thumb Code    16  app_main.o(i.recover_info_after_wakeup_cb)
-    regularPulseWave                         0x0002db85   Thumb Code    32  lts1303m.o(i.regularPulseWave)
-    save_info_before_sleep_cb                0x0002dbc9   Thumb Code    42  app_main.o(i.save_info_before_sleep_cb)
-    sky1321_msg_proc                         0x0002dbf5   Thumb Code    88  wristband_application.o(i.sky1321_msg_proc)
-    spi0_master_rx_only                      0x0002dc55   Thumb Code    30  mxd2660_spi_master.o(i.spi0_master_rx_only)
-    spi0_master_trx                          0x0002dc73   Thumb Code    30  mxd2660_spi_master.o(i.spi0_master_trx)
-    spi0_master_tx_rx_byte                   0x0002dc91   Thumb Code    70  mxd2660_spi_master.o(i.spi0_master_tx_rx_byte)
-    spi1_master_init                         0x0002dcdd   Thumb Code    34  mxd2660_spi_master.o(i.spi1_master_init)
-    spi1_master_trx                          0x0002dd11   Thumb Code    30  mxd2660_spi_master.o(i.spi1_master_trx)
-    spi1_master_tx_rx_byte                   0x0002dd31   Thumb Code    70  mxd2660_spi_master.o(i.spi1_master_tx_rx_byte)
-    sys_debug_en                             0x0002dd7d   Thumb Code     6  debug.o(i.sys_debug_en)
-    sys_debug_init                           0x0002dd89   Thumb Code    10  debug.o(i.sys_debug_init)
-    system_assert_debug                      0x0002dd99   Thumb Code    50  err_debug.o(i.system_assert_debug)
-    system_pins_wakeup_enable                0x0002ddf5   Thumb Code    14  sys.o(i.system_pins_wakeup_enable)
-    uart1_Log_output                         0x0002de05   Thumb Code    34  debug.o(i.uart1_Log_output)
-    uart1_Log_print                          0x0002de31   Thumb Code    60  debug.o(i.uart1_Log_print)
-    uart1_init                               0x0002de79   Thumb Code    18  mxd2660_uart1.o(i.uart1_init)
-    uart1_send                               0x0002de99   Thumb Code    28  mxd2660_uart1.o(i.uart1_send)
-    updatePulsePeakStack                     0x0002deb9   Thumb Code    18  lts1303m.o(i.updatePulsePeakStack)
-    update_system_date                       0x0002ded5   Thumb Code    66  calendar.o(i.update_system_date)
-    user_call_back_register                  0x0002df1d   Thumb Code    36  sys.o(i.user_call_back_register)
-    user_flash_nvr_read                      0x0002df69   Thumb Code    58  mxd2660_flash.o(i.user_flash_nvr_read)
-    user_irq_register                        0x0002dfb1   Thumb Code    78  sys.o(i.user_irq_register)
-    watch_dog_feed                           0x0002e051   Thumb Code     8  mxd2660_watch_dog.o(i.watch_dog_feed)
-    wristband_7816_cmd_proc                  0x0002e05d   Thumb Code    22  zx_7816.o(i.wristband_7816_cmd_proc)
-    wristband_battay_check                   0x0002e073   Thumb Code    24  wristband_application.o(i.wristband_battay_check)
-    wristband_getAttrLen_CB                  0x0002e08d   Thumb Code    16  wristband_service.o(i.wristband_getAttrLen_CB)
-    wristband_init_service                   0x0002e0a1   Thumb Code    98  wristband_service.o(i.wristband_init_service)
-    wristband_main_msg_proc                  0x0002e10d   Thumb Code   264  wristband_application.o(i.wristband_main_msg_proc)
-    wristband_motor_proc                     0x0002e219   Thumb Code    84  wristband_application.o(i.wristband_motor_proc)
-    wristband_msg_handler                    0x0002e275   Thumb Code   104  wristband_application.o(i.wristband_msg_handler)
-    wristband_notify_AppSendToBle            0x0002e2fd   Thumb Code    52  wristband_service.o(i.wristband_notify_AppSendToBle)
-    wristband_read_attrCB                    0x0002e33d   Thumb Code    28  wristband_service.o(i.wristband_read_attrCB)
-    wristband_set_data                       0x0002e35d   Thumb Code    88  wristband_application.o(i.wristband_set_data)
-    wristband_write_attrCB                   0x0002e3b5   Thumb Code    82  wristband_service.o(i.wristband_write_attrCB)
-    year_is_leap_year                        0x0002e45d   Thumb Code    42  calendar.o(i.year_is_leap_year)
-    os_thread_def_app_task                   0x0002e488   Data          16  app_task.o(.constdata)
-    os_pool_def_app_msg_pool                 0x0002e498   Data          12  app_task.o(.constdata)
-    os_pool_def_wristband_data_pool          0x0002e4a4   Data          12  app_task.o(.constdata)
-    Region$$Table$$Base                      0x0002e508   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0002e528   Number         0  anon$$obj.o(Region$$Table)
+    getArrayAverage                          0x0002c6f9   Thumb Code    54  lts1303m.o(i.getArrayAverage)
+    getHeartRateDetection                    0x0002c731   Thumb Code   108  lts1303m.o(i.getHeartRateDetection)
+    getHeartRateSmooth                       0x0002c7bd   Thumb Code    74  lts1303m.o(i.getHeartRateSmooth)
+    getHeartRateWave                         0x0002c841   Thumb Code   428  lts1303m.o(i.getHeartRateWave)
+    get_date_second                          0x0002cac1   Thumb Code   126  calendar.o(i.get_date_second)
+    get_system_date                          0x0002cb55   Thumb Code    44  calendar.o(i.get_system_date)
+    get_system_on_timer                      0x0002cb85   Thumb Code    42  calendar.o(i.get_system_on_timer)
+    gpio_clear_bit                           0x0002cbb1   Thumb Code     6  mxd2660_gpio.o(i.gpio_clear_bit)
+    gpio_config_hw_type                      0x0002cbbd   Thumb Code    54  mxd2660_gpio.o(i.gpio_config_hw_type)
+    gpio_init_function                       0x0002cbf9   Thumb Code    42  mxd2660_gpio.o(i.gpio_init_function)
+    gpio_init_high_impedance                 0x0002cc29   Thumb Code    36  mxd2660_gpio.o(i.gpio_init_high_impedance)
+    gpio_init_input                          0x0002cc51   Thumb Code    44  mxd2660_gpio.o(i.gpio_init_input)
+    gpio_init_output                         0x0002cc81   Thumb Code    62  mxd2660_gpio.o(i.gpio_init_output)
+    gpio_read_input_bit                      0x0002ccc5   Thumb Code    16  mxd2660_gpio.o(i.gpio_read_input_bit)
+    gpio_set_bit                             0x0002ccd9   Thumb Code     6  mxd2660_gpio.o(i.gpio_set_bit)
+    gpio_wakeup_enable_gpios                 0x0002cce5   Thumb Code    76  mxd2660_gpio.o(i.gpio_wakeup_enable_gpios)
+    heartDealLoop                            0x0002cd35   Thumb Code   132  lts1303m.o(i.heartDealLoop)
+    heartRateInit                            0x0002ce25   Thumb Code    52  lts1303m.o(i.heartRateInit)
+    heartRateStackInit                       0x0002ce6d   Thumb Code    14  lts1303m.o(i.heartRateStackInit)
+    hw_timer1_handler                        0x0002ce81   Thumb Code    26  lts1303m.o(i.hw_timer1_handler)
+    hw_timer_clr_cnt                         0x0002cea1   Thumb Code    26  mxd2660_timer.o(i.hw_timer_clr_cnt)
+    hw_timer_config                          0x0002cec1   Thumb Code    74  lts1303m.o(i.hw_timer_config)
+    hw_timer_config_clk                      0x0002cf31   Thumb Code    42  mxd2660_timer.o(i.hw_timer_config_clk)
+    hw_timer_config_compare                  0x0002cf65   Thumb Code    30  mxd2660_timer.o(i.hw_timer_config_compare)
+    hw_timer_config_timerout                 0x0002cf8d   Thumb Code    44  mxd2660_timer.o(i.hw_timer_config_timerout)
+    hw_timer_handler                         0x0002cfb9   Thumb Code    56  mxd2660_timer.o(i.hw_timer_handler)
+    hw_timer_init                            0x0002cff9   Thumb Code    56  mxd2660_timer.o(i.hw_timer_init)
+    hw_timer_set_mask                        0x0002d035   Thumb Code    22  mxd2660_timer.o(i.hw_timer_set_mask)
+    hw_timer_start                           0x0002d055   Thumb Code   122  mxd2660_timer.o(i.hw_timer_start)
+    i2c0_master_irq_handler                  0x0002d0dd   Thumb Code   526  mxd2660_iic.o(i.i2c0_master_irq_handler)
+    i2c0_slave_irq_handler                   0x0002d2f5   Thumb Code   172  mxd2660_iic_slave.o(i.i2c0_slave_irq_handler)
+    i2c0_write                               0x0002d3a9   Thumb Code   202  mxd2660_iic.o(i.i2c0_write)
+    i2c1_master_irq_handler                  0x0002d485   Thumb Code   536  mxd2660_iic.o(i.i2c1_master_irq_handler)
+    i2c1_slave_irq_handler                   0x0002d6a5   Thumb Code   172  mxd2660_iic_slave.o(i.i2c1_slave_irq_handler)
+    i2c_get_device_conf                      0x0002d759   Thumb Code    28  mxd2660_iic.o(i.i2c_get_device_conf)
+    isHeartRateValid                         0x0002d779   Thumb Code    38  lts1303m.o(i.isHeartRateValid)
+    isPeakBottom                             0x0002d7c9   Thumb Code    24  lts1303m.o(i.isPeakBottom)
+    is_log_canbe_sleep                       0x0002d7e1   Thumb Code    18  debug.o(i.is_log_canbe_sleep)
+    lcm_cmd_proc                             0x0002d7f9   Thumb Code    48  lcm_00930.o(i.lcm_cmd_proc)
+    led_init                                 0x0002d82d   Thumb Code    34  led.o(i.led_init)
+    little_endian_read_32bit                 0x0002d84f   Thumb Code    22  utility.o(i.little_endian_read_32bit)
+    main                                     0x0002d865   Thumb Code    28  sys.o(i.main)
+    main_process                             0x0002d881   Thumb Code    12  app_main.o(i.main_process)
+    motor_timer_callback                     0x0002d88d   Thumb Code    16  wristband_application.o(i.motor_timer_callback)
+    os_stack_overflow                        0x0002d8a1   Thumb Code    38  err_debug.o(i.os_stack_overflow)
+    ota_init                                 0x0002d90d   Thumb Code    18  app_ota.o(i.ota_init)
+    peripheral_init                          0x0002d929   Thumb Code   114  app_main.o(i.peripheral_init)
+    power_manage_init                        0x0002d9c5   Thumb Code    36  app_main.o(i.power_manage_init)
+    pushPulsePeakStack                       0x0002d9ed   Thumb Code    34  lts1303m.o(i.pushPulsePeakStack)
+    recover_info_after_wakeup_cb             0x0002da19   Thumb Code    16  app_main.o(i.recover_info_after_wakeup_cb)
+    regularPulseWave                         0x0002da29   Thumb Code    16  lts1303m.o(i.regularPulseWave)
+    save_info_before_sleep_cb                0x0002da3d   Thumb Code    42  app_main.o(i.save_info_before_sleep_cb)
+    sky1321_msg_proc                         0x0002da69   Thumb Code    88  wristband_application.o(i.sky1321_msg_proc)
+    spi0_master_rx_only                      0x0002dac9   Thumb Code    30  mxd2660_spi_master.o(i.spi0_master_rx_only)
+    spi0_master_trx                          0x0002dae7   Thumb Code    30  mxd2660_spi_master.o(i.spi0_master_trx)
+    spi0_master_tx_rx_byte                   0x0002db05   Thumb Code    70  mxd2660_spi_master.o(i.spi0_master_tx_rx_byte)
+    spi1_master_init                         0x0002db51   Thumb Code    34  mxd2660_spi_master.o(i.spi1_master_init)
+    spi1_master_trx                          0x0002db85   Thumb Code    30  mxd2660_spi_master.o(i.spi1_master_trx)
+    spi1_master_tx_rx_byte                   0x0002dba5   Thumb Code    70  mxd2660_spi_master.o(i.spi1_master_tx_rx_byte)
+    sys_debug_en                             0x0002dbf1   Thumb Code     6  debug.o(i.sys_debug_en)
+    sys_debug_init                           0x0002dbfd   Thumb Code    10  debug.o(i.sys_debug_init)
+    system_assert_debug                      0x0002dc0d   Thumb Code    50  err_debug.o(i.system_assert_debug)
+    system_pins_wakeup_enable                0x0002dc69   Thumb Code    14  sys.o(i.system_pins_wakeup_enable)
+    uart1_Log_output                         0x0002dc79   Thumb Code    34  debug.o(i.uart1_Log_output)
+    uart1_Log_print                          0x0002dca5   Thumb Code    60  debug.o(i.uart1_Log_print)
+    uart1_init                               0x0002dced   Thumb Code    18  mxd2660_uart1.o(i.uart1_init)
+    uart1_send                               0x0002dd0d   Thumb Code    28  mxd2660_uart1.o(i.uart1_send)
+    updatePulsePeakStack                     0x0002dd2d   Thumb Code    18  lts1303m.o(i.updatePulsePeakStack)
+    update_system_date                       0x0002dd49   Thumb Code    66  calendar.o(i.update_system_date)
+    user_call_back_register                  0x0002dd91   Thumb Code    36  sys.o(i.user_call_back_register)
+    user_flash_nvr_read                      0x0002dddd   Thumb Code    58  mxd2660_flash.o(i.user_flash_nvr_read)
+    user_irq_register                        0x0002de25   Thumb Code    78  sys.o(i.user_irq_register)
+    watch_dog_feed                           0x0002dec5   Thumb Code     8  mxd2660_watch_dog.o(i.watch_dog_feed)
+    wristband_7816_cmd_proc                  0x0002ded1   Thumb Code    22  zx_7816.o(i.wristband_7816_cmd_proc)
+    wristband_battay_check                   0x0002dee7   Thumb Code    24  wristband_application.o(i.wristband_battay_check)
+    wristband_getAttrLen_CB                  0x0002df01   Thumb Code    16  wristband_service.o(i.wristband_getAttrLen_CB)
+    wristband_init_service                   0x0002df15   Thumb Code    98  wristband_service.o(i.wristband_init_service)
+    wristband_main_msg_proc                  0x0002df81   Thumb Code   264  wristband_application.o(i.wristband_main_msg_proc)
+    wristband_motor_proc                     0x0002e08d   Thumb Code    84  wristband_application.o(i.wristband_motor_proc)
+    wristband_msg_handler                    0x0002e0e9   Thumb Code   104  wristband_application.o(i.wristband_msg_handler)
+    wristband_notify_AppSendToBle            0x0002e171   Thumb Code    52  wristband_service.o(i.wristband_notify_AppSendToBle)
+    wristband_read_attrCB                    0x0002e1b1   Thumb Code    28  wristband_service.o(i.wristband_read_attrCB)
+    wristband_set_data                       0x0002e1d1   Thumb Code    88  wristband_application.o(i.wristband_set_data)
+    wristband_write_attrCB                   0x0002e229   Thumb Code    82  wristband_service.o(i.wristband_write_attrCB)
+    year_is_leap_year                        0x0002e2d1   Thumb Code    42  calendar.o(i.year_is_leap_year)
+    os_thread_def_app_task                   0x0002e2fc   Data          16  app_task.o(.constdata)
+    os_pool_def_app_msg_pool                 0x0002e30c   Data          12  app_task.o(.constdata)
+    os_pool_def_wristband_data_pool          0x0002e318   Data          12  app_task.o(.constdata)
+    Region$$Table$$Base                      0x0002e37c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0002e39c   Number         0  anon$$obj.o(Region$$Table)
     g_code_num                               0x20000000   Data           0  symbol.lib ABSOLUTE
     g_code_addr                              0x20000004   Data           0  symbol.lib ABSOLUTE
     g_update_local_info                      0x20000008   Data           0  symbol.lib ABSOLUTE
@@ -2801,60 +2792,51 @@ Image Symbol Table
     scanData                                 0x20003f5c   Data          20  app_ble.o(.data)
     advData                                  0x20003f70   Data          13  app_ble.o(.data)
     heartRateIndex                           0x20003f80   Data           1  lts1303m.o(.data)
-    wavePulseState                           0x20003f81   Data           1  lts1303m.o(.data)
-    slope                                    0x20003f82   Data           1  lts1303m.o(.data)
-    heartRate                                0x20003f84   Data           2  lts1303m.o(.data)
-    maxValue                                 0x20003f86   Data           2  lts1303m.o(.data)
-    minValue                                 0x20003f88   Data           2  lts1303m.o(.data)
-    totalPoint                               0x20003f8c   Data           4  lts1303m.o(.data)
-    peakCount                                0x20003f90   Data           4  lts1303m.o(.data)
-    pulseIndex                               0x20003f94   Data           4  lts1303m.o(.data)
-    bottomStart                              0x20003f98   Data           4  lts1303m.o(.data)
+    slope                                    0x20003f81   Data           1  lts1303m.o(.data)
+    heartRate                                0x20003f82   Data           2  lts1303m.o(.data)
+    maxValue                                 0x20003f84   Data           2  lts1303m.o(.data)
+    minValue                                 0x20003f86   Data           2  lts1303m.o(.data)
+    totalPoint                               0x20003f88   Data           4  lts1303m.o(.data)
+    topStart                                 0x20003f8c   Data           4  lts1303m.o(.data)
+    slopeUp                                  0x20003f90   Data           4  lts1303m.o(.data)
+    slopeDown                                0x20003f94   Data           4  lts1303m.o(.data)
+    top                                      0x20003f98   Data           4  lts1303m.o(.data)
     pointCount                               0x20003f9c   Data           4  lts1303m.o(.data)
-    currentPosition                          0x20003fa0   Data           4  lts1303m.o(.data)
-    bottomValue                              0x20003fa4   Data           4  lts1303m.o(.data)
-    firstWave                                0x20003fa8   Data           4  lts1303m.o(.data)
-    waveType                                 0x20003fac   Data           4  lts1303m.o(.data)
-    isTypeRect                               0x20003fb0   Data           4  lts1303m.o(.data)
-    isDetectStart                            0x20003fb4   Data           4  lts1303m.o(.data)
-    top                                      0x20003fb8   Data           4  lts1303m.o(.data)
-    bottom                                   0x20003fbc   Data           4  lts1303m.o(.data)
-    middle                                   0x20003fc0   Data           4  lts1303m.o(.data)
-    topCount                                 0x20003fc4   Data           4  lts1303m.o(.data)
-    bottomCount                              0x20003fc8   Data           4  lts1303m.o(.data)
-    topStart                                 0x20003fcc   Data           4  lts1303m.o(.data)
-    slopeUp                                  0x20003fd0   Data           4  lts1303m.o(.data)
-    slopeDown                                0x20003fd4   Data           4  lts1303m.o(.data)
-    _7816_isr_flag                           0x20003fd8   Data           1  mxd2660_7816.o(.data)
-    _7816_dma_ch                             0x20003fd9   Data           1  mxd2660_7816.o(.data)
-    _7816_clk_pin                            0x20003fdc   Data           4  mxd2660_7816.o(.data)
-    _7816_rst_pin                            0x20003fe0   Data           4  mxd2660_7816.o(.data)
-    _7816_io_pin                             0x20003fe4   Data           4  mxd2660_7816.o(.data)
-    i2c0OperCnt                              0x20003fe8   Data           2  mxd2660_iic.o(.data)
-    i2c1OperCnt                              0x20003fea   Data           2  mxd2660_iic.o(.data)
-    prtI2c0Oper                              0x20003fec   Data           4  mxd2660_iic.o(.data)
-    prtI2c1Oper                              0x20003ff0   Data           4  mxd2660_iic.o(.data)
-    _timer_busy_map                          0x20003ff4   Data           1  mxd2660_timer.o(.data)
-    adc_trim_offset                          0x20003ff8   Data           2  mxd2660_adc.o(.data)
-    __stdout                                 0x20003ffc   Data           4  stdout.o(.data)
-    log_buffer                               0x20004000   Data        1024  debug.o(.bss)
-    wrist_buffer                             0x20004400   Data         128  wristband_service.o(.bss)
-    wb_motor_timer                           0x20004480   Data          24  wristband_application.o(.bss)
-    os_pool_m_app_msg_pool                   0x20004498   Data          92  app_task.o(.bss)
-    os_pool_m_wristband_data_pool            0x200044f4   Data         212  app_task.o(.bss)
-    ancs_timer                               0x200045c8   Data          24  app_ble.o(.bss)
-    adSmoothStack                            0x200045e0   Data          64  lts1303m.o(.bss)
-    heartRateStack                           0x20004620   Data          32  lts1303m.o(.bss)
-    adValues                                 0x20004640   Data        2000  lts1303m.o(.bss)
-    plusePeakLocStack                        0x20004e10   Data         128  lts1303m.o(.bss)
-    _gpio_interrupt_cb_                      0x20004e90   Data          12  mxd2660_gpio.o(.bss)
-    i2c_cfg_info                             0x20004e9c   Data          96  mxd2660_iic.o(.bss)
-    mxd_timerout_handler                     0x20004efc   Data          28  mxd2660_timer.o(.bss)
-    _gpt_save_stru                           0x20004f18   Data          84  mxd2660_timer.o(.bss)
-    gDMA                                     0x20004f6c   Data          24  mxd2660_dma.o(.bss)
-    spi_slave                                0x20004f84   Data          16  mxd2660_spi_slave.o(.bss)
-    I2C0_SLAVE                               0x20004f94   Data          24  mxd2660_iic_slave.o(.bss)
-    I2C1_SLAVE                               0x20004fac   Data          24  mxd2660_iic_slave.o(.bss)
+    isTypeRect                               0x20003fa0   Data           4  lts1303m.o(.data)
+    currentPosition                          0x20003fa4   Data           4  lts1303m.o(.data)
+    bottomStart                              0x20003fa8   Data           4  lts1303m.o(.data)
+    bottom                                   0x20003fac   Data           4  lts1303m.o(.data)
+    pulseIndex                               0x20003fb0   Data           4  lts1303m.o(.data)
+    _7816_isr_flag                           0x20003fb4   Data           1  mxd2660_7816.o(.data)
+    _7816_dma_ch                             0x20003fb5   Data           1  mxd2660_7816.o(.data)
+    _7816_clk_pin                            0x20003fb8   Data           4  mxd2660_7816.o(.data)
+    _7816_rst_pin                            0x20003fbc   Data           4  mxd2660_7816.o(.data)
+    _7816_io_pin                             0x20003fc0   Data           4  mxd2660_7816.o(.data)
+    i2c0OperCnt                              0x20003fc4   Data           2  mxd2660_iic.o(.data)
+    i2c1OperCnt                              0x20003fc6   Data           2  mxd2660_iic.o(.data)
+    prtI2c0Oper                              0x20003fc8   Data           4  mxd2660_iic.o(.data)
+    prtI2c1Oper                              0x20003fcc   Data           4  mxd2660_iic.o(.data)
+    _timer_busy_map                          0x20003fd0   Data           1  mxd2660_timer.o(.data)
+    adc_trim_offset                          0x20003fd4   Data           2  mxd2660_adc.o(.data)
+    __stdout                                 0x20003fd8   Data           4  stdout.o(.data)
+    log_buffer                               0x20003fdc   Data        1024  debug.o(.bss)
+    wrist_buffer                             0x200043dc   Data         128  wristband_service.o(.bss)
+    wb_motor_timer                           0x2000445c   Data          24  wristband_application.o(.bss)
+    os_pool_m_app_msg_pool                   0x20004474   Data          92  app_task.o(.bss)
+    os_pool_m_wristband_data_pool            0x200044d0   Data         212  app_task.o(.bss)
+    ancs_timer                               0x200045a4   Data          24  app_ble.o(.bss)
+    adSmoothStack                            0x200045bc   Data          64  lts1303m.o(.bss)
+    heartRateStack                           0x200045fc   Data          32  lts1303m.o(.bss)
+    adValues                                 0x2000461c   Data        2000  lts1303m.o(.bss)
+    plusePeakLocStack                        0x20004dec   Data         128  lts1303m.o(.bss)
+    _gpio_interrupt_cb_                      0x20004e6c   Data          12  mxd2660_gpio.o(.bss)
+    i2c_cfg_info                             0x20004e78   Data          96  mxd2660_iic.o(.bss)
+    mxd_timerout_handler                     0x20004ed8   Data          28  mxd2660_timer.o(.bss)
+    _gpt_save_stru                           0x20004ef4   Data          84  mxd2660_timer.o(.bss)
+    gDMA                                     0x20004f48   Data          24  mxd2660_dma.o(.bss)
+    spi_slave                                0x20004f60   Data          16  mxd2660_spi_slave.o(.bss)
+    I2C0_SLAVE                               0x20004f70   Data          24  mxd2660_iic_slave.o(.bss)
+    I2C1_SLAVE                               0x20004f88   Data          24  mxd2660_iic_slave.o(.bss)
     __heap_base                              0x20007e00   Data           0  symbol.lib ABSOLUTE
     __heap_limit                             0x20007e00   Data           0  symbol.lib ABSOLUTE
     __initial_sp                             0x20008000   Data           0  symbol.lib ABSOLUTE
@@ -2867,7 +2849,7 @@ Memory Map of the image
 
   Image Entry point : 0x0002b001
 
-  Load Region LOAD_APP (Base: 0x0002aff0, Size: 0x00003638, Max: 0x00014c10, ABSOLUTE)
+  Load Region LOAD_APP (Base: 0x0002aff0, Size: 0x00003488, Max: 0x00014c10, ABSOLUTE)
 
     Execution Region APP (Base: 0x0002aff0, Size: 0x00000010, Max: 0xffffffff, ABSOLUTE)
 
@@ -2881,17 +2863,17 @@ Memory Map of the image
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x0002b000   0x0000000c   Code   RO            2  * .text               cm0plus_startup.o
-    0x0002b00c   0x0000002c   Code   RO         1959    .text               mc_p.l(uidiv.o)
-    0x0002b038   0x00000028   Code   RO         1961    .text               mc_p.l(idiv.o)
-    0x0002b060   0x00000024   Code   RO         1966    .text               mc_p.l(memcpya.o)
-    0x0002b084   0x00000024   Code   RO         1968    .text               mc_p.l(memseta.o)
-    0x0002b0a8   0x00000014   Code   RO         2233    .text               mc_p.l(uread4.o)
-    0x0002b0bc   0x00000020   Code   RO         2268    .text               mc_p.l(llshl.o)
-    0x0002b0dc   0x00000022   Code   RO         2270    .text               mc_p.l(llushr.o)
+    0x0002b00c   0x0000002c   Code   RO         1951    .text               mc_p.l(uidiv.o)
+    0x0002b038   0x00000028   Code   RO         1953    .text               mc_p.l(idiv.o)
+    0x0002b060   0x00000024   Code   RO         1958    .text               mc_p.l(memcpya.o)
+    0x0002b084   0x00000024   Code   RO         1960    .text               mc_p.l(memseta.o)
+    0x0002b0a8   0x00000014   Code   RO         2225    .text               mc_p.l(uread4.o)
+    0x0002b0bc   0x00000020   Code   RO         2260    .text               mc_p.l(llshl.o)
+    0x0002b0dc   0x00000022   Code   RO         2262    .text               mc_p.l(llushr.o)
     0x0002b0fe   0x00000002   PAD
     0x0002b100   0x00000038   Code   RO         1258    .ARM.__at_0x2B100   app_main.o
-    0x0002b138   0x00000060   Code   RO         2266    .text               mc_p.l(uldiv.o)
-    0x0002b198   0x00000024   Code   RO         2283    .text               mc_p.l(init.o)
+    0x0002b138   0x00000060   Code   RO         2258    .text               mc_p.l(uldiv.o)
+    0x0002b198   0x00000024   Code   RO         2275    .text               mc_p.l(init.o)
 
 
     Execution Region APP_STARTUP (Base: 0x0002b1bc, Size: 0x000000c0, Max: 0xffffffff, ABSOLUTE)
@@ -2901,30 +2883,30 @@ Memory Map of the image
     0x0002b1bc   0x000000c0   Data   RO            1    RESET               cm0plus_startup.o
 
 
-    Execution Region APP_CODE (Base: 0x0002b27c, Size: 0x000032ac, Max: 0xffffffff, ABSOLUTE)
+    Execution Region APP_CODE (Base: 0x0002b27c, Size: 0x00003120, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x0002b27c   0x00000000   Code   RO         1956  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
-    0x0002b27c   0x00000004   Code   RO         2251    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
-    0x0002b280   0x00000004   Code   RO         2254    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
-    0x0002b284   0x00000000   Code   RO         2256    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
-    0x0002b284   0x00000000   Code   RO         2258    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
-    0x0002b284   0x00000008   Code   RO         2259    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
-    0x0002b28c   0x00000000   Code   RO         2261    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
-    0x0002b28c   0x00000000   Code   RO         2263    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
-    0x0002b28c   0x00000004   Code   RO         2252    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x0002b27c   0x00000000   Code   RO         1948  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x0002b27c   0x00000004   Code   RO         2243    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x0002b280   0x00000004   Code   RO         2246    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x0002b284   0x00000000   Code   RO         2248    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x0002b284   0x00000000   Code   RO         2250    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x0002b284   0x00000008   Code   RO         2251    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x0002b28c   0x00000000   Code   RO         2253    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x0002b28c   0x00000000   Code   RO         2255    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x0002b28c   0x00000004   Code   RO         2244    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
     0x0002b290   0x00000004   Code   RO         1129    .rev16_text         app_task.o
     0x0002b294   0x00000004   Code   RO         1130    .revsh_text         app_task.o
-    0x0002b298   0x00000080   Code   RO         1882    i.DMA_int_IRQ0Handler  peripheral_lib.lib(mxd2660_dma.o)
-    0x0002b318   0x00000002   Code   RO         1883    i.DMA_int_IRQ1Handler  peripheral_lib.lib(mxd2660_dma.o)
+    0x0002b298   0x00000080   Code   RO         1874    i.DMA_int_IRQ0Handler  peripheral_lib.lib(mxd2660_dma.o)
+    0x0002b318   0x00000002   Code   RO         1875    i.DMA_int_IRQ1Handler  peripheral_lib.lib(mxd2660_dma.o)
     0x0002b31a   0x00000002   PAD
-    0x0002b31c   0x00000034   Code   RO         1648    i.GPIO_0_int_IRQHandler  peripheral_lib.lib(mxd2660_gpio.o)
-    0x0002b350   0x00000034   Code   RO         1649    i.GPIO_1_int_IRQHandler  peripheral_lib.lib(mxd2660_gpio.o)
-    0x0002b384   0x00000034   Code   RO         1650    i.GPIO_2_int_IRQHandler  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002b31c   0x00000034   Code   RO         1640    i.GPIO_0_int_IRQHandler  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002b350   0x00000034   Code   RO         1641    i.GPIO_1_int_IRQHandler  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002b384   0x00000034   Code   RO         1642    i.GPIO_2_int_IRQHandler  peripheral_lib.lib(mxd2660_gpio.o)
     0x0002b3b8   0x00000170   Code   RO          336    i.HardFault_IRQ_Handler  err_debug.o
-    0x0002b528   0x00000038   Code   RO         1713    i.I2C0_int_IRQHandler  peripheral_lib.lib(mxd2660_iic.o)
-    0x0002b560   0x00000038   Code   RO         1714    i.I2C1_int_IRQHandler  peripheral_lib.lib(mxd2660_iic.o)
+    0x0002b528   0x00000038   Code   RO         1705    i.I2C0_int_IRQHandler  peripheral_lib.lib(mxd2660_iic.o)
+    0x0002b560   0x00000038   Code   RO         1706    i.I2C1_int_IRQHandler  peripheral_lib.lib(mxd2660_iic.o)
     0x0002b598   0x000000a8   Code   RO          535    i.LCM_init_oled     lcm_00930.o
     0x0002b640   0x0000000a   Code   RO          636    i.LIS3DH_ReadReg    lis3dh_driver.o
     0x0002b64a   0x0000000a   Code   RO          665    i.LIS3DH_WriteReg   lis3dh_driver.o
@@ -2934,32 +2916,32 @@ Memory Map of the image
     0x0002b6a4   0x00000014   Code   RO         1260    i.NVIC_EnableIRQ    app_main.o
     0x0002b6b8   0x00000044   Code   RO         1261    i.NVIC_SetPriority  app_main.o
     0x0002b6fc   0x00000044   Code   RO         1399    i.NVIC_SetPriority  lts1303m.o
-    0x0002b740   0x00000050   Code   RO         1907    i.SPI0_SLV_IRQHandler  peripheral_lib.lib(mxd2660_spi_slave.o)
-    0x0002b790   0x00000028   Code   RO         1745    i.SPI0_int_IRQHandler  peripheral_lib.lib(mxd2660_spi_master.o)
-    0x0002b7b8   0x00000050   Code   RO         1908    i.SPI1_SLV_IRQHandler  peripheral_lib.lib(mxd2660_spi_slave.o)
-    0x0002b808   0x00000028   Code   RO         1746    i.SPI1_int_IRQHandler  peripheral_lib.lib(mxd2660_spi_master.o)
+    0x0002b740   0x00000050   Code   RO         1899    i.SPI0_SLV_IRQHandler  peripheral_lib.lib(mxd2660_spi_slave.o)
+    0x0002b790   0x00000028   Code   RO         1737    i.SPI0_int_IRQHandler  peripheral_lib.lib(mxd2660_spi_master.o)
+    0x0002b7b8   0x00000050   Code   RO         1900    i.SPI1_SLV_IRQHandler  peripheral_lib.lib(mxd2660_spi_slave.o)
+    0x0002b808   0x00000028   Code   RO         1738    i.SPI1_int_IRQHandler  peripheral_lib.lib(mxd2660_spi_master.o)
     0x0002b830   0x0000002c   Code   RO          667    i.SPI_Mems_Read_Reg  lis3dh_driver.o
     0x0002b85c   0x0000001a   Code   RO          668    i.SPI_Mems_Write_Reg  lis3dh_driver.o
     0x0002b876   0x00000002   PAD
-    0x0002b878   0x0000008c   Code   RO         1781    i.TMR0_int_IRQHandler  peripheral_lib.lib(mxd2660_timer.o)
-    0x0002b904   0x0000008c   Code   RO         1782    i.TMR1_int_IRQHandler  peripheral_lib.lib(mxd2660_timer.o)
-    0x0002b990   0x0000008c   Code   RO         1783    i.TMR2_int_IRQHandler  peripheral_lib.lib(mxd2660_timer.o)
-    0x0002ba1c   0x00000030   Code   RO         1860    i.UART1_int_IRQHandler  peripheral_lib.lib(mxd2660_uart1.o)
+    0x0002b878   0x0000008c   Code   RO         1773    i.TMR0_int_IRQHandler  peripheral_lib.lib(mxd2660_timer.o)
+    0x0002b904   0x0000008c   Code   RO         1774    i.TMR1_int_IRQHandler  peripheral_lib.lib(mxd2660_timer.o)
+    0x0002b990   0x0000008c   Code   RO         1775    i.TMR2_int_IRQHandler  peripheral_lib.lib(mxd2660_timer.o)
+    0x0002ba1c   0x00000030   Code   RO         1852    i.UART1_int_IRQHandler  peripheral_lib.lib(mxd2660_uart1.o)
     0x0002ba4c   0x00000018   Code   RO          536    i.Write_Command     lcm_00930.o
     0x0002ba64   0x00000018   Code   RO          537    i.Write_Data        lcm_00930.o
-    0x0002ba7c   0x0000001c   Code   RO         1621    i._7816_int_IRQHandler  peripheral_lib.lib(mxd2660_7816.o)
-    0x0002ba98   0x00000068   Code   RO         1623    i._7816_reset       peripheral_lib.lib(mxd2660_7816.o)
-    0x0002bb00   0x00000020   Code   RO         2179    i.__0printf$8       mc_p.l(printf8.o)
-    0x0002bb20   0x0000000e   Code   RO         2287    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x0002bb2e   0x00000002   Code   RO         2288    i.__scatterload_null  mc_p.l(handlers.o)
-    0x0002bb30   0x0000000e   Code   RO         2289    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x0002ba7c   0x0000001c   Code   RO         1613    i._7816_int_IRQHandler  peripheral_lib.lib(mxd2660_7816.o)
+    0x0002ba98   0x00000068   Code   RO         1615    i._7816_reset       peripheral_lib.lib(mxd2660_7816.o)
+    0x0002bb00   0x00000020   Code   RO         2171    i.__0printf$8       mc_p.l(printf8.o)
+    0x0002bb20   0x0000000e   Code   RO         2279    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x0002bb2e   0x00000002   Code   RO         2280    i.__scatterload_null  mc_p.l(handlers.o)
+    0x0002bb30   0x0000000e   Code   RO         2281    i.__scatterload_zeroinit  mc_p.l(handlers.o)
     0x0002bb3e   0x00000002   PAD
-    0x0002bb40   0x00000428   Code   RO         2186    i._printf_core      mc_p.l(printf8.o)
-    0x0002bf68   0x00000020   Code   RO         2187    i._printf_post_padding  mc_p.l(printf8.o)
-    0x0002bf88   0x0000002c   Code   RO         2188    i._printf_pre_padding  mc_p.l(printf8.o)
+    0x0002bb40   0x00000428   Code   RO         2178    i._printf_core      mc_p.l(printf8.o)
+    0x0002bf68   0x00000020   Code   RO         2179    i._printf_post_padding  mc_p.l(printf8.o)
+    0x0002bf88   0x0000002c   Code   RO         2180    i._printf_pre_padding  mc_p.l(printf8.o)
     0x0002bfb4   0x00000024   Code   RO         1400    i.adValueFilter     lts1303m.o
-    0x0002bfd8   0x00000070   Code   RO         1832    i.adc_init          peripheral_lib.lib(mxd2660_adc.o)
-    0x0002c048   0x00000050   Code   RO         1833    i.adc_io_read       peripheral_lib.lib(mxd2660_adc.o)
+    0x0002bfd8   0x00000070   Code   RO         1824    i.adc_init          peripheral_lib.lib(mxd2660_adc.o)
+    0x0002c048   0x00000050   Code   RO         1825    i.adc_io_read       peripheral_lib.lib(mxd2660_adc.o)
     0x0002c098   0x00000030   Code   RO         1401    i.adc_read_callback  lts1303m.o
     0x0002c0c8   0x00000070   Code   RO          375    i.ancs_all_characteristic_found_handler  ancs_service.o
     0x0002c138   0x00000002   Code   RO          376    i.ancs_data_ntf_handler  ancs_service.o
@@ -2981,113 +2963,113 @@ Memory Map of the image
     0x0002c4e6   0x00000002   PAD
     0x0002c4e8   0x00000134   Code   RO          129    i.calc_new_date     calendar.o
     0x0002c61c   0x0000001c   Code   RO          131    i.calendar_init     calendar.o
-    0x0002c638   0x00000010   Code   RO         1835    i.delayCycles       peripheral_lib.lib(mxd2660_adc.o)
-    0x0002c648   0x0000000a   Code   RO         1836    i.delayUs           peripheral_lib.lib(mxd2660_adc.o)
+    0x0002c638   0x00000010   Code   RO         1827    i.delayCycles       peripheral_lib.lib(mxd2660_adc.o)
+    0x0002c648   0x0000000a   Code   RO         1828    i.delayUs           peripheral_lib.lib(mxd2660_adc.o)
     0x0002c652   0x00000034   Code   RO          538    i.display_black     lcm_00930.o
     0x0002c686   0x00000034   Code   RO          539    i.display_white     lcm_00930.o
     0x0002c6ba   0x00000010   Code   RO          224    i.dly_cycles        utility.o
     0x0002c6ca   0x0000000a   Code   RO          225    i.dly_us            utility.o
     0x0002c6d4   0x00000024   Code   RO          267    i.fputc             debug.o
-    0x0002c6f8   0x0000001e   Code   RO         1404    i.getArrayAverage   lts1303m.o
-    0x0002c716   0x00000002   PAD
-    0x0002c718   0x000000c4   Code   RO         1408    i.getHeartRateDetection  lts1303m.o
-    0x0002c7dc   0x00000084   Code   RO         1409    i.getHeartRateSmooth  lts1303m.o
-    0x0002c860   0x000003ac   Code   RO         1410    i.getHeartRateWave  lts1303m.o
-    0x0002cc0c   0x00000094   Code   RO          132    i.get_date_second   calendar.o
-    0x0002cca0   0x00000030   Code   RO          133    i.get_system_date   calendar.o
-    0x0002ccd0   0x0000002a   Code   RO          135    i.get_system_on_timer  calendar.o
-    0x0002ccfa   0x00000002   PAD
-    0x0002ccfc   0x0000000c   Code   RO         1651    i.gpio_clear_bit    peripheral_lib.lib(mxd2660_gpio.o)
-    0x0002cd08   0x0000003c   Code   RO         1654    i.gpio_config_hw_type  peripheral_lib.lib(mxd2660_gpio.o)
-    0x0002cd44   0x00000030   Code   RO         1662    i.gpio_init_function  peripheral_lib.lib(mxd2660_gpio.o)
-    0x0002cd74   0x00000028   Code   RO         1663    i.gpio_init_high_impedance  peripheral_lib.lib(mxd2660_gpio.o)
-    0x0002cd9c   0x00000030   Code   RO         1664    i.gpio_init_input   peripheral_lib.lib(mxd2660_gpio.o)
-    0x0002cdcc   0x00000044   Code   RO         1666    i.gpio_init_output  peripheral_lib.lib(mxd2660_gpio.o)
-    0x0002ce10   0x00000014   Code   RO         1670    i.gpio_read_input_bit  peripheral_lib.lib(mxd2660_gpio.o)
-    0x0002ce24   0x0000000c   Code   RO         1673    i.gpio_set_bit      peripheral_lib.lib(mxd2660_gpio.o)
-    0x0002ce30   0x00000050   Code   RO         1676    i.gpio_wakeup_enable_gpios  peripheral_lib.lib(mxd2660_gpio.o)
-    0x0002ce80   0x000000f0   Code   RO         1411    i.heartDealLoop     lts1303m.o
-    0x0002cf70   0x00000058   Code   RO         1413    i.heartRateInit     lts1303m.o
-    0x0002cfc8   0x00000014   Code   RO         1414    i.heartRateStackInit  lts1303m.o
-    0x0002cfdc   0x00000020   Code   RO         1415    i.hw_timer1_handler  lts1303m.o
-    0x0002cffc   0x00000020   Code   RO         1784    i.hw_timer_clr_cnt  peripheral_lib.lib(mxd2660_timer.o)
-    0x0002d01c   0x00000070   Code   RO         1416    i.hw_timer_config   lts1303m.o
-    0x0002d08c   0x00000034   Code   RO         1785    i.hw_timer_config_clk  peripheral_lib.lib(mxd2660_timer.o)
-    0x0002d0c0   0x00000028   Code   RO         1786    i.hw_timer_config_compare  peripheral_lib.lib(mxd2660_timer.o)
-    0x0002d0e8   0x0000002c   Code   RO         1787    i.hw_timer_config_timerout  peripheral_lib.lib(mxd2660_timer.o)
-    0x0002d114   0x00000040   Code   RO         1791    i.hw_timer_handler  peripheral_lib.lib(mxd2660_timer.o)
-    0x0002d154   0x0000003c   Code   RO         1792    i.hw_timer_init     peripheral_lib.lib(mxd2660_timer.o)
-    0x0002d190   0x00000020   Code   RO         1795    i.hw_timer_set_mask  peripheral_lib.lib(mxd2660_timer.o)
-    0x0002d1b0   0x00000088   Code   RO         1796    i.hw_timer_start    peripheral_lib.lib(mxd2660_timer.o)
-    0x0002d238   0x00000218   Code   RO         1715    i.i2c0_master_irq_handler  peripheral_lib.lib(mxd2660_iic.o)
-    0x0002d450   0x000000b4   Code   RO         1927    i.i2c0_slave_irq_handler  peripheral_lib.lib(mxd2660_iic_slave.o)
-    0x0002d504   0x000000dc   Code   RO         1718    i.i2c0_write        peripheral_lib.lib(mxd2660_iic.o)
-    0x0002d5e0   0x00000220   Code   RO         1719    i.i2c1_master_irq_handler  peripheral_lib.lib(mxd2660_iic.o)
-    0x0002d800   0x000000b4   Code   RO         1935    i.i2c1_slave_irq_handler  peripheral_lib.lib(mxd2660_iic_slave.o)
-    0x0002d8b4   0x00000020   Code   RO         1724    i.i2c_get_device_conf  peripheral_lib.lib(mxd2660_iic.o)
-    0x0002d8d4   0x00000050   Code   RO         1417    i.isHeartRateValid  lts1303m.o
-    0x0002d924   0x00000018   Code   RO         1418    i.isPeakBottom      lts1303m.o
-    0x0002d93c   0x00000018   Code   RO          268    i.is_log_canbe_sleep  debug.o
-    0x0002d954   0x00000034   Code   RO          540    i.lcm_cmd_proc      lcm_00930.o
-    0x0002d988   0x00000022   Code   RO         1092    i.led_init          led.o
-    0x0002d9aa   0x00000016   Code   RO          227    i.little_endian_read_32bit  utility.o
-    0x0002d9c0   0x0000001c   Code   RO           10    i.main              sys.o
-    0x0002d9dc   0x0000000c   Code   RO         1264    i.main_process      app_main.o
-    0x0002d9e8   0x00000014   Code   RO         1010    i.motor_timer_callback  wristband_application.o
-    0x0002d9fc   0x0000006c   Code   RO          337    i.os_stack_overflow  err_debug.o
-    0x0002da68   0x0000001c   Code   RO         1370    i.ota_init          app_ota.o
-    0x0002da84   0x0000009c   Code   RO         1265    i.peripheral_init   app_main.o
-    0x0002db20   0x00000028   Code   RO         1266    i.power_manage_init  app_main.o
-    0x0002db48   0x0000002c   Code   RO         1420    i.pushPulsePeakStack  lts1303m.o
-    0x0002db74   0x00000010   Code   RO         1267    i.recover_info_after_wakeup_cb  app_main.o
-    0x0002db84   0x00000044   Code   RO         1421    i.regularPulseWave  lts1303m.o
-    0x0002dbc8   0x0000002a   Code   RO         1268    i.save_info_before_sleep_cb  app_main.o
-    0x0002dbf2   0x00000002   PAD
-    0x0002dbf4   0x00000060   Code   RO         1011    i.sky1321_msg_proc  wristband_application.o
-    0x0002dc54   0x0000001e   Code   RO         1750    i.spi0_master_rx_only  peripheral_lib.lib(mxd2660_spi_master.o)
-    0x0002dc72   0x0000001e   Code   RO         1751    i.spi0_master_trx   peripheral_lib.lib(mxd2660_spi_master.o)
-    0x0002dc90   0x0000004c   Code   RO         1753    i.spi0_master_tx_rx_byte  peripheral_lib.lib(mxd2660_spi_master.o)
-    0x0002dcdc   0x00000034   Code   RO         1756    i.spi1_master_init  peripheral_lib.lib(mxd2660_spi_master.o)
-    0x0002dd10   0x0000001e   Code   RO         1758    i.spi1_master_trx   peripheral_lib.lib(mxd2660_spi_master.o)
-    0x0002dd2e   0x00000002   PAD
-    0x0002dd30   0x0000004c   Code   RO         1760    i.spi1_master_tx_rx_byte  peripheral_lib.lib(mxd2660_spi_master.o)
-    0x0002dd7c   0x0000000c   Code   RO          269    i.sys_debug_en      debug.o
-    0x0002dd88   0x00000010   Code   RO          270    i.sys_debug_init    debug.o
-    0x0002dd98   0x0000005c   Code   RO          338    i.system_assert_debug  err_debug.o
-    0x0002ddf4   0x0000000e   Code   RO           12    i.system_pins_wakeup_enable  sys.o
-    0x0002de02   0x00000002   PAD
-    0x0002de04   0x0000002c   Code   RO          271    i.uart1_Log_output  debug.o
-    0x0002de30   0x00000048   Code   RO          272    i.uart1_Log_print   debug.o
-    0x0002de78   0x00000020   Code   RO         1864    i.uart1_init        peripheral_lib.lib(mxd2660_uart1.o)
-    0x0002de98   0x00000020   Code   RO         1866    i.uart1_send        peripheral_lib.lib(mxd2660_uart1.o)
-    0x0002deb8   0x0000001c   Code   RO         1422    i.updatePulsePeakStack  lts1303m.o
-    0x0002ded4   0x00000048   Code   RO          136    i.update_system_date  calendar.o
-    0x0002df1c   0x0000004c   Code   RO           13    i.user_call_back_register  sys.o
-    0x0002df68   0x00000048   Code   RO         1848    i.user_flash_nvr_read  peripheral_lib.lib(mxd2660_flash.o)
-    0x0002dfb0   0x000000a0   Code   RO           14    i.user_irq_register  sys.o
-    0x0002e050   0x0000000c   Code   RO         1822    i.watch_dog_feed    peripheral_lib.lib(mxd2660_watch_dog.o)
-    0x0002e05c   0x00000016   Code   RO          967    i.wristband_7816_cmd_proc  zx_7816.o
-    0x0002e072   0x00000018   Code   RO         1012    i.wristband_battay_check  wristband_application.o
-    0x0002e08a   0x00000002   PAD
-    0x0002e08c   0x00000014   Code   RO          442    i.wristband_getAttrLen_CB  wristband_service.o
-    0x0002e0a0   0x0000006c   Code   RO          443    i.wristband_init_service  wristband_service.o
-    0x0002e10c   0x0000010c   Code   RO         1013    i.wristband_main_msg_proc  wristband_application.o
-    0x0002e218   0x0000005c   Code   RO         1014    i.wristband_motor_proc  wristband_application.o
-    0x0002e274   0x00000088   Code   RO         1015    i.wristband_msg_handler  wristband_application.o
-    0x0002e2fc   0x00000040   Code   RO          444    i.wristband_notify_AppSendToBle  wristband_service.o
-    0x0002e33c   0x00000020   Code   RO          445    i.wristband_read_attrCB  wristband_service.o
-    0x0002e35c   0x00000058   Code   RO         1017    i.wristband_set_data  wristband_application.o
-    0x0002e3b4   0x000000a8   Code   RO          446    i.wristband_write_attrCB  wristband_service.o
-    0x0002e45c   0x0000002a   Code   RO          138    i.year_is_leap_year  calendar.o
-    0x0002e486   0x00000002   PAD
-    0x0002e488   0x00000028   Data   RO         1135    .constdata          app_task.o
-    0x0002e4b0   0x00000014   Data   RO         1183    .constdata          app_ble.o
-    0x0002e4c4   0x00000042   Data   RO         1427    .conststring        lts1303m.o
-    0x0002e506   0x00000002   PAD
-    0x0002e508   0x00000020   Data   RO         2285    Region$$Table       anon$$obj.o
+    0x0002c6f8   0x00000036   Code   RO         1404    i.getArrayAverage   lts1303m.o
+    0x0002c72e   0x00000002   PAD
+    0x0002c730   0x0000008c   Code   RO         1408    i.getHeartRateDetection  lts1303m.o
+    0x0002c7bc   0x00000084   Code   RO         1409    i.getHeartRateSmooth  lts1303m.o
+    0x0002c840   0x00000280   Code   RO         1410    i.getHeartRateWave  lts1303m.o
+    0x0002cac0   0x00000094   Code   RO          132    i.get_date_second   calendar.o
+    0x0002cb54   0x00000030   Code   RO          133    i.get_system_date   calendar.o
+    0x0002cb84   0x0000002a   Code   RO          135    i.get_system_on_timer  calendar.o
+    0x0002cbae   0x00000002   PAD
+    0x0002cbb0   0x0000000c   Code   RO         1643    i.gpio_clear_bit    peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002cbbc   0x0000003c   Code   RO         1646    i.gpio_config_hw_type  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002cbf8   0x00000030   Code   RO         1654    i.gpio_init_function  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002cc28   0x00000028   Code   RO         1655    i.gpio_init_high_impedance  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002cc50   0x00000030   Code   RO         1656    i.gpio_init_input   peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002cc80   0x00000044   Code   RO         1658    i.gpio_init_output  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002ccc4   0x00000014   Code   RO         1662    i.gpio_read_input_bit  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002ccd8   0x0000000c   Code   RO         1665    i.gpio_set_bit      peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002cce4   0x00000050   Code   RO         1668    i.gpio_wakeup_enable_gpios  peripheral_lib.lib(mxd2660_gpio.o)
+    0x0002cd34   0x000000f0   Code   RO         1411    i.heartDealLoop     lts1303m.o
+    0x0002ce24   0x00000048   Code   RO         1413    i.heartRateInit     lts1303m.o
+    0x0002ce6c   0x00000014   Code   RO         1414    i.heartRateStackInit  lts1303m.o
+    0x0002ce80   0x00000020   Code   RO         1415    i.hw_timer1_handler  lts1303m.o
+    0x0002cea0   0x00000020   Code   RO         1776    i.hw_timer_clr_cnt  peripheral_lib.lib(mxd2660_timer.o)
+    0x0002cec0   0x00000070   Code   RO         1416    i.hw_timer_config   lts1303m.o
+    0x0002cf30   0x00000034   Code   RO         1777    i.hw_timer_config_clk  peripheral_lib.lib(mxd2660_timer.o)
+    0x0002cf64   0x00000028   Code   RO         1778    i.hw_timer_config_compare  peripheral_lib.lib(mxd2660_timer.o)
+    0x0002cf8c   0x0000002c   Code   RO         1779    i.hw_timer_config_timerout  peripheral_lib.lib(mxd2660_timer.o)
+    0x0002cfb8   0x00000040   Code   RO         1783    i.hw_timer_handler  peripheral_lib.lib(mxd2660_timer.o)
+    0x0002cff8   0x0000003c   Code   RO         1784    i.hw_timer_init     peripheral_lib.lib(mxd2660_timer.o)
+    0x0002d034   0x00000020   Code   RO         1787    i.hw_timer_set_mask  peripheral_lib.lib(mxd2660_timer.o)
+    0x0002d054   0x00000088   Code   RO         1788    i.hw_timer_start    peripheral_lib.lib(mxd2660_timer.o)
+    0x0002d0dc   0x00000218   Code   RO         1707    i.i2c0_master_irq_handler  peripheral_lib.lib(mxd2660_iic.o)
+    0x0002d2f4   0x000000b4   Code   RO         1919    i.i2c0_slave_irq_handler  peripheral_lib.lib(mxd2660_iic_slave.o)
+    0x0002d3a8   0x000000dc   Code   RO         1710    i.i2c0_write        peripheral_lib.lib(mxd2660_iic.o)
+    0x0002d484   0x00000220   Code   RO         1711    i.i2c1_master_irq_handler  peripheral_lib.lib(mxd2660_iic.o)
+    0x0002d6a4   0x000000b4   Code   RO         1927    i.i2c1_slave_irq_handler  peripheral_lib.lib(mxd2660_iic_slave.o)
+    0x0002d758   0x00000020   Code   RO         1716    i.i2c_get_device_conf  peripheral_lib.lib(mxd2660_iic.o)
+    0x0002d778   0x00000050   Code   RO         1417    i.isHeartRateValid  lts1303m.o
+    0x0002d7c8   0x00000018   Code   RO         1418    i.isPeakBottom      lts1303m.o
+    0x0002d7e0   0x00000018   Code   RO          268    i.is_log_canbe_sleep  debug.o
+    0x0002d7f8   0x00000034   Code   RO          540    i.lcm_cmd_proc      lcm_00930.o
+    0x0002d82c   0x00000022   Code   RO         1092    i.led_init          led.o
+    0x0002d84e   0x00000016   Code   RO          227    i.little_endian_read_32bit  utility.o
+    0x0002d864   0x0000001c   Code   RO           10    i.main              sys.o
+    0x0002d880   0x0000000c   Code   RO         1264    i.main_process      app_main.o
+    0x0002d88c   0x00000014   Code   RO         1010    i.motor_timer_callback  wristband_application.o
+    0x0002d8a0   0x0000006c   Code   RO          337    i.os_stack_overflow  err_debug.o
+    0x0002d90c   0x0000001c   Code   RO         1370    i.ota_init          app_ota.o
+    0x0002d928   0x0000009c   Code   RO         1265    i.peripheral_init   app_main.o
+    0x0002d9c4   0x00000028   Code   RO         1266    i.power_manage_init  app_main.o
+    0x0002d9ec   0x0000002c   Code   RO         1420    i.pushPulsePeakStack  lts1303m.o
+    0x0002da18   0x00000010   Code   RO         1267    i.recover_info_after_wakeup_cb  app_main.o
+    0x0002da28   0x00000014   Code   RO         1421    i.regularPulseWave  lts1303m.o
+    0x0002da3c   0x0000002a   Code   RO         1268    i.save_info_before_sleep_cb  app_main.o
+    0x0002da66   0x00000002   PAD
+    0x0002da68   0x00000060   Code   RO         1011    i.sky1321_msg_proc  wristband_application.o
+    0x0002dac8   0x0000001e   Code   RO         1742    i.spi0_master_rx_only  peripheral_lib.lib(mxd2660_spi_master.o)
+    0x0002dae6   0x0000001e   Code   RO         1743    i.spi0_master_trx   peripheral_lib.lib(mxd2660_spi_master.o)
+    0x0002db04   0x0000004c   Code   RO         1745    i.spi0_master_tx_rx_byte  peripheral_lib.lib(mxd2660_spi_master.o)
+    0x0002db50   0x00000034   Code   RO         1748    i.spi1_master_init  peripheral_lib.lib(mxd2660_spi_master.o)
+    0x0002db84   0x0000001e   Code   RO         1750    i.spi1_master_trx   peripheral_lib.lib(mxd2660_spi_master.o)
+    0x0002dba2   0x00000002   PAD
+    0x0002dba4   0x0000004c   Code   RO         1752    i.spi1_master_tx_rx_byte  peripheral_lib.lib(mxd2660_spi_master.o)
+    0x0002dbf0   0x0000000c   Code   RO          269    i.sys_debug_en      debug.o
+    0x0002dbfc   0x00000010   Code   RO          270    i.sys_debug_init    debug.o
+    0x0002dc0c   0x0000005c   Code   RO          338    i.system_assert_debug  err_debug.o
+    0x0002dc68   0x0000000e   Code   RO           12    i.system_pins_wakeup_enable  sys.o
+    0x0002dc76   0x00000002   PAD
+    0x0002dc78   0x0000002c   Code   RO          271    i.uart1_Log_output  debug.o
+    0x0002dca4   0x00000048   Code   RO          272    i.uart1_Log_print   debug.o
+    0x0002dcec   0x00000020   Code   RO         1856    i.uart1_init        peripheral_lib.lib(mxd2660_uart1.o)
+    0x0002dd0c   0x00000020   Code   RO         1858    i.uart1_send        peripheral_lib.lib(mxd2660_uart1.o)
+    0x0002dd2c   0x0000001c   Code   RO         1422    i.updatePulsePeakStack  lts1303m.o
+    0x0002dd48   0x00000048   Code   RO          136    i.update_system_date  calendar.o
+    0x0002dd90   0x0000004c   Code   RO           13    i.user_call_back_register  sys.o
+    0x0002dddc   0x00000048   Code   RO         1840    i.user_flash_nvr_read  peripheral_lib.lib(mxd2660_flash.o)
+    0x0002de24   0x000000a0   Code   RO           14    i.user_irq_register  sys.o
+    0x0002dec4   0x0000000c   Code   RO         1814    i.watch_dog_feed    peripheral_lib.lib(mxd2660_watch_dog.o)
+    0x0002ded0   0x00000016   Code   RO          967    i.wristband_7816_cmd_proc  zx_7816.o
+    0x0002dee6   0x00000018   Code   RO         1012    i.wristband_battay_check  wristband_application.o
+    0x0002defe   0x00000002   PAD
+    0x0002df00   0x00000014   Code   RO          442    i.wristband_getAttrLen_CB  wristband_service.o
+    0x0002df14   0x0000006c   Code   RO          443    i.wristband_init_service  wristband_service.o
+    0x0002df80   0x0000010c   Code   RO         1013    i.wristband_main_msg_proc  wristband_application.o
+    0x0002e08c   0x0000005c   Code   RO         1014    i.wristband_motor_proc  wristband_application.o
+    0x0002e0e8   0x00000088   Code   RO         1015    i.wristband_msg_handler  wristband_application.o
+    0x0002e170   0x00000040   Code   RO          444    i.wristband_notify_AppSendToBle  wristband_service.o
+    0x0002e1b0   0x00000020   Code   RO          445    i.wristband_read_attrCB  wristband_service.o
+    0x0002e1d0   0x00000058   Code   RO         1017    i.wristband_set_data  wristband_application.o
+    0x0002e228   0x000000a8   Code   RO          446    i.wristband_write_attrCB  wristband_service.o
+    0x0002e2d0   0x0000002a   Code   RO          138    i.year_is_leap_year  calendar.o
+    0x0002e2fa   0x00000002   PAD
+    0x0002e2fc   0x00000028   Data   RO         1135    .constdata          app_task.o
+    0x0002e324   0x00000014   Data   RO         1183    .constdata          app_ble.o
+    0x0002e338   0x00000042   Data   RO         1427    .conststring        lts1303m.o
+    0x0002e37a   0x00000002   PAD
+    0x0002e37c   0x00000020   Data   RO         2277    Region$$Table       anon$$obj.o
 
 
-    Execution Region APP_ACT_RAM_RW (Base: 0x20003f00, Size: 0x000010c4, Max: 0x00003f00, ABSOLUTE)
+    Execution Region APP_ACT_RAM_RW (Base: 0x20003f00, Size: 0x000010a0, Max: 0x00003f00, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -3101,27 +3083,27 @@ Memory Map of the image
     0x20003f48   0x0000000c   Data   RW         1136    .data               app_task.o
     0x20003f54   0x00000029   Data   RW         1184    .data               app_ble.o
     0x20003f7d   0x00000003   PAD
-    0x20003f80   0x00000058   Data   RW         1429    .data               lts1303m.o
-    0x20003fd8   0x00000010   Data   RW         1628    .data               peripheral_lib.lib(mxd2660_7816.o)
-    0x20003fe8   0x0000000c   Data   RW         1727    .data               peripheral_lib.lib(mxd2660_iic.o)
-    0x20003ff4   0x00000001   Data   RW         1799    .data               peripheral_lib.lib(mxd2660_timer.o)
-    0x20003ff5   0x00000003   PAD
-    0x20003ff8   0x00000002   Data   RW         1837    .data               peripheral_lib.lib(mxd2660_adc.o)
-    0x20003ffa   0x00000002   PAD
-    0x20003ffc   0x00000004   Data   RW         2265    .data               mc_p.l(stdout.o)
-    0x20004000   0x00000400   Zero   RW          273    .bss                debug.o
-    0x20004400   0x00000080   Zero   RW          447    .bss                wristband_service.o
-    0x20004480   0x00000018   Zero   RW         1018    .bss                wristband_application.o
-    0x20004498   0x0000005c   Zero   RW         1133    .bss                app_task.o
-    0x200044f4   0x000000d4   Zero   RW         1134    .bss                app_task.o
-    0x200045c8   0x00000018   Zero   RW         1182    .bss                app_ble.o
-    0x200045e0   0x000008b0   Zero   RW         1423    .bss                lts1303m.o
-    0x20004e90   0x0000000c   Zero   RW         1678    .bss                peripheral_lib.lib(mxd2660_gpio.o)
-    0x20004e9c   0x00000060   Zero   RW         1726    .bss                peripheral_lib.lib(mxd2660_iic.o)
-    0x20004efc   0x00000070   Zero   RW         1798    .bss                peripheral_lib.lib(mxd2660_timer.o)
-    0x20004f6c   0x00000018   Zero   RW         1892    .bss                peripheral_lib.lib(mxd2660_dma.o)
-    0x20004f84   0x00000010   Zero   RW         1911    .bss                peripheral_lib.lib(mxd2660_spi_slave.o)
-    0x20004f94   0x00000030   Zero   RW         1937    .bss                peripheral_lib.lib(mxd2660_iic_slave.o)
+    0x20003f80   0x00000034   Data   RW         1429    .data               lts1303m.o
+    0x20003fb4   0x00000010   Data   RW         1620    .data               peripheral_lib.lib(mxd2660_7816.o)
+    0x20003fc4   0x0000000c   Data   RW         1719    .data               peripheral_lib.lib(mxd2660_iic.o)
+    0x20003fd0   0x00000001   Data   RW         1791    .data               peripheral_lib.lib(mxd2660_timer.o)
+    0x20003fd1   0x00000003   PAD
+    0x20003fd4   0x00000002   Data   RW         1829    .data               peripheral_lib.lib(mxd2660_adc.o)
+    0x20003fd6   0x00000002   PAD
+    0x20003fd8   0x00000004   Data   RW         2257    .data               mc_p.l(stdout.o)
+    0x20003fdc   0x00000400   Zero   RW          273    .bss                debug.o
+    0x200043dc   0x00000080   Zero   RW          447    .bss                wristband_service.o
+    0x2000445c   0x00000018   Zero   RW         1018    .bss                wristband_application.o
+    0x20004474   0x0000005c   Zero   RW         1133    .bss                app_task.o
+    0x200044d0   0x000000d4   Zero   RW         1134    .bss                app_task.o
+    0x200045a4   0x00000018   Zero   RW         1182    .bss                app_ble.o
+    0x200045bc   0x000008b0   Zero   RW         1423    .bss                lts1303m.o
+    0x20004e6c   0x0000000c   Zero   RW         1670    .bss                peripheral_lib.lib(mxd2660_gpio.o)
+    0x20004e78   0x00000060   Zero   RW         1718    .bss                peripheral_lib.lib(mxd2660_iic.o)
+    0x20004ed8   0x00000070   Zero   RW         1790    .bss                peripheral_lib.lib(mxd2660_timer.o)
+    0x20004f48   0x00000018   Zero   RW         1884    .bss                peripheral_lib.lib(mxd2660_dma.o)
+    0x20004f60   0x00000010   Zero   RW         1903    .bss                peripheral_lib.lib(mxd2660_spi_slave.o)
+    0x20004f70   0x00000030   Zero   RW         1929    .bss                peripheral_lib.lib(mxd2660_iic_slave.o)
 
 
     Execution Region SYS_STACK_RAM_RW (Base: 0x20007e00, Size: 0x00000000, Max: 0x00000200, ABSOLUTE, UNINIT)
@@ -3148,7 +3130,7 @@ Image component sizes
        372         16          0          3          0       4387   lcm_00930.o
         34          0          0          0          0        475   led.o
        148          4          0          0          0      11764   lis3dh_driver.o
-      2224        746         66         88       2224      15957   lts1303m.o
+      1828        570         66         52       2224      14957   lts1303m.o
        278        122          0          0          0      25954   sys.o
         48          0          0          0          0       2145   utility.o
        724         66          0          4         24       6885   wristband_application.o
@@ -3156,7 +3138,7 @@ Image component sizes
         22          0          0          0          0       1266   zx_7816.o
 
     ----------------------------------------------------------------------
-      7214       1838        368        216       3728     144712   Object Totals
+      6818       1662        368        180       3728     143712   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         18          0          2          4          0          0   (incl. Padding)
 
@@ -3218,15 +3200,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     13256       2342        368        256       4036     142772   Grand Totals
-     13256       2342        368        256       4036     142772   ELF Image Totals
-     13256       2342        368        256          0          0   ROM Totals
+     12860       2166        368        220       4036     141772   Grand Totals
+     12860       2166        368        220       4036     141772   ELF Image Totals
+     12860       2166        368        220          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                13624 (  13.30kB)
-    Total RW  Size (RW Data + ZI Data)              4292 (   4.19kB)
-    Total ROM Size (Code + RO Data + RW Data)      13880 (  13.55kB)
+    Total RO  Size (Code + RO Data)                13228 (  12.92kB)
+    Total RW  Size (RW Data + ZI Data)              4256 (   4.16kB)
+    Total ROM Size (Code + RO Data + RW Data)      13448 (  13.13kB)
 
 ==============================================================================
 

@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\wristband.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\wristband.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Fri Oct 13 16:41:58 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Sat Oct 14 11:09:26 2017
 <BR><P>
-<H3>Maximum Stack Usage =        180 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        160 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-hw_timer1_handler &rArr; heartDealLoop &rArr; getHeartRateWave &rArr; getHeartRateDetection &rArr; __aeabi_idivmod &rArr; __aeabi_uidivmod
+hw_timer1_handler &rArr; heartDealLoop &rArr; getHeartRateWave &rArr; getHeartRateDetection &rArr; isHeartRateValid &rArr; __2printf
 <P>
 <H3>
 Functions with no stack information
@@ -309,8 +309,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateDetection
+<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateDetection
 </UL>
 
 <P><STRONG><a name="[79]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text))
@@ -621,12 +620,11 @@ Global Symbols
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_msg_proc
 <LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_task_init
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wristband_msg_handler
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;regularPulseWave
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isHeartRateValid
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isHeartRateValid
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heartRateInit
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heartDealLoop
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateSmooth
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateSmooth
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateDetection
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_read_callback
 </UL>
@@ -884,27 +882,28 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> printf8.o(i.__0printf$8)
 </UL>
-<P><STRONG><a name="[5d]"></a>getArrayAverage</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, lts1303m.o(i.getArrayAverage))
+<P><STRONG><a name="[5d]"></a>getArrayAverage</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, lts1303m.o(i.getArrayAverage))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = getArrayAverage &rArr; __aeabi_uidivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateSmooth
+<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateSmooth
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateDetection
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adValueFilter
 </UL>
 
-<P><STRONG><a name="[96]"></a>getHeartRateDetection</STRONG> (Thumb, 126 bytes, Stack size 56 bytes, lts1303m.o(i.getHeartRateDetection))
-<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = getHeartRateDetection &rArr; __aeabi_idivmod &rArr; __aeabi_uidivmod
+<P><STRONG><a name="[96]"></a>getHeartRateDetection</STRONG> (Thumb, 108 bytes, Stack size 56 bytes, lts1303m.o(i.getHeartRateDetection))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = getHeartRateDetection &rArr; isHeartRateValid &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isHeartRateValid
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getArrayAverage
 <LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
+<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
 </UL>
 
-<P><STRONG><a name="[97]"></a>getHeartRateSmooth</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, lts1303m.o(i.getHeartRateSmooth))
+<P><STRONG><a name="[98]"></a>getHeartRateSmooth</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, lts1303m.o(i.getHeartRateSmooth))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = getHeartRateSmooth &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getArrayAverage
@@ -913,15 +912,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heartDealLoop
 </UL>
 
-<P><STRONG><a name="[98]"></a>getHeartRateWave</STRONG> (Thumb, 622 bytes, Stack size 64 bytes, lts1303m.o(i.getHeartRateWave))
-<BR><BR>[Stack]<UL><LI>Max Depth = 148<LI>Call Chain = getHeartRateWave &rArr; getHeartRateDetection &rArr; __aeabi_idivmod &rArr; __aeabi_uidivmod
+<P><STRONG><a name="[99]"></a>getHeartRateWave</STRONG> (Thumb, 428 bytes, Stack size 40 bytes, lts1303m.o(i.getHeartRateWave))
+<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = getHeartRateWave &rArr; getHeartRateDetection &rArr; isHeartRateValid &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updatePulsePeakStack
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;regularPulseWave
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pushPulsePeakStack
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isPeakBottom
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isHeartRateValid
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updatePulsePeakStack
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;regularPulseWave
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pushPulsePeakStack
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isPeakBottom
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isHeartRateValid
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateDetection
 <LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
@@ -1016,18 +1014,18 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[a5]"></a>heartDealLoop</STRONG> (Thumb, 132 bytes, Stack size 24 bytes, lts1303m.o(i.heartDealLoop))
-<BR><BR>[Stack]<UL><LI>Max Depth = 172<LI>Call Chain = heartDealLoop &rArr; getHeartRateWave &rArr; getHeartRateDetection &rArr; __aeabi_idivmod &rArr; __aeabi_uidivmod
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = heartDealLoop &rArr; getHeartRateWave &rArr; getHeartRateDetection &rArr; isHeartRateValid &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heartRateInit
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateSmooth
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateSmooth
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adValueFilter
 <LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_timer1_handler
 </UL>
 
-<P><STRONG><a name="[a6]"></a>heartRateInit</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, lts1303m.o(i.heartRateInit))
+<P><STRONG><a name="[a6]"></a>heartRateInit</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, lts1303m.o(i.heartRateInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = heartRateInit &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
@@ -1045,7 +1043,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[16]"></a>hw_timer1_handler</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, lts1303m.o(i.hw_timer1_handler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 180<LI>Call Chain = hw_timer1_handler &rArr; heartDealLoop &rArr; getHeartRateWave &rArr; getHeartRateDetection &rArr; __aeabi_idivmod &rArr; __aeabi_uidivmod
+<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = hw_timer1_handler &rArr; heartDealLoop &rArr; getHeartRateWave &rArr; getHeartRateDetection &rArr; isHeartRateValid &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heartDealLoop
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_read_callback
@@ -1161,16 +1159,17 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c0_write
 </UL>
 
-<P><STRONG><a name="[9d]"></a>isHeartRateValid</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, lts1303m.o(i.isHeartRateValid))
+<P><STRONG><a name="[97]"></a>isHeartRateValid</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, lts1303m.o(i.isHeartRateValid))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = isHeartRateValid &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
+<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateDetection
 </UL>
 
-<P><STRONG><a name="[99]"></a>isPeakBottom</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, lts1303m.o(i.isPeakBottom))
-<BR><BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
+<P><STRONG><a name="[9a]"></a>isPeakBottom</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, lts1303m.o(i.isPeakBottom))
+<BR><BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
 </UL>
 
 <P><STRONG><a name="[1c]"></a>is_log_canbe_sleep</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, debug.o(i.is_log_canbe_sleep))
@@ -1276,10 +1275,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_main
 </UL>
 
-<P><STRONG><a name="[9a]"></a>pushPulsePeakStack</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, lts1303m.o(i.pushPulsePeakStack))
+<P><STRONG><a name="[9b]"></a>pushPulsePeakStack</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, lts1303m.o(i.pushPulsePeakStack))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = pushPulsePeakStack
 </UL>
-<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
+<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
 </UL>
 
 <P><STRONG><a name="[1b]"></a>recover_info_after_wakeup_cb</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, app_main.o(i.recover_info_after_wakeup_cb))
@@ -1289,12 +1288,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> sys.o(i.user_call_back_register)
 </UL>
-<P><STRONG><a name="[9c]"></a>regularPulseWave</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, lts1303m.o(i.regularPulseWave))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = regularPulseWave &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-</UL>
-<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
+<P><STRONG><a name="[9d]"></a>regularPulseWave</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, lts1303m.o(i.regularPulseWave))
+<BR><BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
 </UL>
 
 <P><STRONG><a name="[1a]"></a>save_info_before_sleep_cb</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, app_main.o(i.save_info_before_sleep_cb))
@@ -1403,8 +1398,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
 </UL>
 
-<P><STRONG><a name="[9b]"></a>updatePulsePeakStack</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, lts1303m.o(i.updatePulsePeakStack))
-<BR><BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
+<P><STRONG><a name="[9c]"></a>updatePulsePeakStack</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, lts1303m.o(i.updatePulsePeakStack))
+<BR><BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getHeartRateWave
 </UL>
 
 <P><STRONG><a name="[90]"></a>update_system_date</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, calendar.o(i.update_system_date))

@@ -347,6 +347,7 @@ HRState getHeartRateWave(){
 		
 		adData =	adValues[pointCount];
 
+		
 		peak = isPeakBottom( adData);
 
 
@@ -449,14 +450,19 @@ HRState getHeartRateWave(){
 			
 			}
 
-		if(slopeDown>10){			//下降沿
+		if(slopeDown>15){			//下降沿
 			slope = SlopeDown;
 		//	hasSlopeDown = 1;
 	    	minValue =1024;
 			if(currentDirect!=SlopeDown){
 					currentDirect = SlopeDown;
+				
+	
 				}
 		
+			
+			
+		//	APP_DBG(("sloop down  point: %d \r\n",pointCount));
 			}
 			
 				
