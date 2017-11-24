@@ -56,6 +56,10 @@ uint16_t lastHeartRate = 75;
 
 uint8_t  heartRateIndex  =0;
 
+uint8_t  heartRateOddIndex=0;
+uint16_t heartRateOddStack[RATE_NUM_MAX];
+
+
 
 uint16_t adSmoothStack[AD_SMOOTH_MAX];
 
@@ -156,9 +160,6 @@ int isSamliarValue(uint16_t first ,uint16_t second){
 		}
 	return 1;
 }
-
-
-
 
 
 void heartRateStackInit(void){
@@ -583,6 +584,68 @@ uint16_t getHeartRateSmooth(uint16_t tmpHeartRate){
 	
 	return heartRate;
 }
+
+
+int compareTwoDatas(uint16_t first ,uint16_t second,int value){
+	
+
+	if((first-second)>value){
+		return 0;
+		}
+	if((second-first)>value){
+		return 0;
+		}
+	return 1;
+}
+
+
+
+uint16_t getHeartRateSmoothData(uint16_t tmpHeartRate){
+	int i = 0;
+	APP_DBG(("original heart = %d\r\n",tmpHeartRate));	
+	if(heartRateIndex==0){
+		heartRateOddIndex = 0;
+		heartRate = tmpHeartRate;
+		lastHeartRate = heartRate;
+		heartRateStack[heartRateIndex++]=tmpHeartRate;
+		return heartRate;
+		}
+	if(compareTwoDatas(lastHeartRate,tmpHeartRate,10)==1){
+		heartRateOddIndex = 0;
+		if(heartRateIndex<9){
+			heartRateStack[heartRateIndex++]=tmpHeartRate;
+			heartRate = getArrayAverage(heartRateStack,heartRateIndex);
+			lastHeartRate = heartRate;
+			return heartRate;
+			}else {
+				for(i=0;i<7;i++){
+				heartRateStack[i]=heartRateStack[i+1];
+				}
+			    heartRateStack[7] = tmpHeartRate;
+				heartRate = getArrayAverage(heartRateStack,8);
+				lastHeartRate = heartRate;
+				return heartRate;
+			}
+		}else {
+			if(heartRateOddIndex<4){
+					heartRateOddStack[heartRateOddIndex++]=tmpHeartRate;
+					heartRate = lastHeartRate;
+					return heartRate;
+				}else{
+					for(i=0;i<2;i++){
+					heartRateStack[i]=heartRateOddStack[i];
+					}
+					heartRate = getArrayAverage(heartRateStack,3);
+					lastHeartRate = heartRate;
+					return heartRate;
+				}
+		}
+	
+	APP_DBG((" smooth heart  = %d\r\n",heartRate ));
+	
+	return heartRate;
+}
+
 
 
 void heartDealSimLoop(void){
