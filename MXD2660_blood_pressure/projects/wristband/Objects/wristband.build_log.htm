@@ -27,19 +27,27 @@ Project File Date:  09/22/2017
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 1 (build 61)', folder: 'd:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'wristband'
+compiling Lts1303m.c...
+..\..\src\ts1303\Lts1303m.c(644): warning:  #111-D: statement is unreachable
+        
+PP_DBG((" smooth heart  = %d\r\n",heartRate ));
+..\..\src\ts1303\Lts1303m.c: 1 warning, 0 errors
+linking...
+Program Size: Code=12860 RO-data=368 RW-data=224 ZI-data=4068  
+FromELF: creating hex file...
 After Build - User command #1: d:\Keil_v5\ARM\ARMCC\bin\fromelf.exe --bin -o ./Objects/wristband.bin  ./Objects/wristband.axf
 After Build - User command #2: ..\..\tools\ota\ota_crc.exe .\Objects\wristband.bin
 .\Objects\wristband.bin
 .\Objects\wristband.bin_ota
-13448
-".\Objects\wristband.axf" - 0 Error(s), 0 Warning(s).
+13452
+".\Objects\wristband.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   E:\projects\HeartRate\MXD2660_blood_pressure\projects\wristband\RTE
   d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM0plus\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>
